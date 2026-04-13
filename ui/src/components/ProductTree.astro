@@ -1,0 +1,87 @@
+---
+import type { ProductTree } from "../data/types";
+import ProductRow from "./ProductRow.astro";
+
+interface Props {
+	tree: ProductTree;
+}
+
+const { tree } = Astro.props;
+---
+
+<div class="product-tree">
+	{tree.map((koodisto) => (
+		<section class="koodisto node" data-node="koodisto">
+			<header class="node-header koodisto-header" role="button" tabindex="0" aria-expanded="false">
+				<span class="caret" aria-hidden="true"></span>
+				<h2>{koodisto.name}</h2>
+				<span class="version">Versio {koodisto.version}</span>
+			</header>
+			<div class="node-body">
+				{koodisto.paaryhmat.map((paa) => (
+					<section class="paaryhma node" data-node="paaryhma">
+						<header class="node-header paaryhma-header" role="button" tabindex="0" aria-expanded="false">
+							<span class="caret" aria-hidden="true"></span>
+							<h3>{paa.name}</h3>
+						</header>
+						<div class="node-body">
+							{paa.alaryhmat.map((ala) => (
+								<section class="alaryhma node" data-node="alaryhma">
+									<header class="node-header alaryhma-header" role="button" tabindex="0" aria-expanded="false">
+										<span class="caret" aria-hidden="true"></span>
+										<h4>{ala.name}</h4>
+										<span class="count">{ala.products.length}</span>
+									</header>
+									<div class="node-body">
+										<table class="product-table">
+											<thead>
+												<tr>
+													<th data-column="name">Tuoteosan nimi</th>
+													<th data-column="generalId">Tunnus</th>
+													<th data-column="version">Versio</th>
+													<th data-column="id">ID</th>
+													<th data-column="uri">Linkki</th>
+													<th data-column="description">Kuvaus</th>
+													<th class="th-actions">Tiedot</th>
+												</tr>
+											</thead>
+											<tbody>
+												{ala.products.map((product) => (
+													<ProductRow product={product} />
+												))}
+											</tbody>
+										</table>
+									</div>
+								</section>
+							))}
+						</div>
+					</section>
+				))}
+			</div>
+		</section>
+	))}
+</div>
+
+<script>
+	// Toggle `open` on the nearest .node when its header is clicked or
+	// activated via keyboard. Keeps aria-expanded in sync.
+	function toggleNode(header: HTMLElement) {
+		const node = header.closest<HTMLElement>(".node");
+		if (!node) return;
+		const isOpen = node.classList.toggle("open");
+		header.setAttribute("aria-expanded", String(isOpen));
+	}
+
+	const headers = document.querySelectorAll<HTMLElement>(
+		".product-tree .node-header",
+	);
+	headers.forEach((header) => {
+		header.addEventListener("click", () => toggleNode(header));
+		header.addEventListener("keydown", (event) => {
+			if (event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+				toggleNode(header);
+			}
+		});
+	});
+</script>

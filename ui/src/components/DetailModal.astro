@@ -1,0 +1,219 @@
+---
+// Single modal instance, populated at click-time from the <template> that
+// each ProductRow renders alongside its Tiedot button.
+---
+
+<div
+	id="detail-modal"
+	class="modal"
+	hidden
+	role="dialog"
+	aria-modal="true"
+	aria-labelledby="detail-title"
+>
+	<div class="modal-backdrop" data-close></div>
+	<div class="modal-panel" role="document">
+		<button
+			type="button"
+			class="modal-close"
+			aria-label="Sulje"
+			data-close
+		>×</button>
+		<div class="modal-content" id="modal-content"></div>
+	</div>
+</div>
+
+<style is:global>
+	body.modal-open {
+		overflow: hidden;
+	}
+
+	.modal[hidden] {
+		display: none;
+	}
+
+	.modal {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+		z-index: 50;
+	}
+
+	.modal-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(8, 8, 20, 0.72);
+		backdrop-filter: blur(2px);
+		cursor: pointer;
+	}
+
+	.modal-panel {
+		position: relative;
+		background: var(--surface);
+		border: 1px solid var(--separator);
+		border-radius: 8px;
+		max-width: 760px;
+		width: 100%;
+		max-height: calc(100vh - 48px);
+		overflow-y: auto;
+		padding: 28px 32px 32px;
+		box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+	}
+
+	.modal-close {
+		position: absolute;
+		top: 10px;
+		right: 12px;
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		border: 1px solid var(--separator);
+		background: transparent;
+		color: var(--text-muted);
+		font-size: 18px;
+		line-height: 1;
+		cursor: pointer;
+		transition: background 120ms, color 120ms;
+	}
+
+	.modal-close:hover {
+		background: var(--surface-raised);
+		color: var(--accent-blue);
+	}
+
+	/* Detail content -------------------------------------------------------- */
+
+	.detail-title {
+		font-size: 20px;
+		margin: 0 0 14px;
+		color: var(--text-strong);
+		letter-spacing: 0.02em;
+	}
+
+	.detail-subtitle {
+		font-size: 11px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin: 20px 0 10px;
+		font-weight: 500;
+	}
+
+	.detail-description {
+		margin: 0;
+		color: var(--text);
+		line-height: 1.55;
+	}
+
+	.detail-empty {
+		color: var(--text-muted);
+		font-style: italic;
+	}
+
+	.property-group {
+		margin-top: 14px;
+	}
+
+	.property-group-name {
+		font-size: 12px;
+		color: var(--accent-teal);
+		letter-spacing: 0.04em;
+		margin: 0 0 8px;
+		font-weight: 600;
+	}
+
+	.property-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.property-row {
+		display: grid;
+		grid-template-columns: 1fr auto auto;
+		gap: 12px;
+		align-items: center;
+		padding: 6px 10px;
+		border-bottom: 1px solid var(--separator);
+		font-size: 13px;
+	}
+
+	.property-row:last-child {
+		border-bottom: none;
+	}
+
+	.property-label {
+		color: var(--text);
+	}
+
+	.property-badge {
+		background: var(--surface-raised);
+		color: var(--accent-blue);
+		font-family: var(--font-mono);
+		font-size: 11px;
+		padding: 3px 8px;
+		border-radius: 4px;
+		letter-spacing: 0.02em;
+	}
+
+	/* Hide empty badges without collapsing the grid column. */
+	.property-badge:empty {
+		background: transparent;
+		padding: 0;
+	}
+
+	.property-unit {
+		color: var(--text-muted);
+		font-family: var(--font-mono);
+		font-size: 12px;
+		min-width: 24px;
+		text-align: right;
+	}
+</style>
+
+<script>
+	const modal = document.getElementById("detail-modal") as HTMLElement | null;
+	const content = document.getElementById("modal-content") as HTMLElement | null;
+
+	if (modal && content) {
+		const open = (row: HTMLElement) => {
+			const tpl = row.querySelector<HTMLTemplateElement>(".product-detail");
+			if (!tpl) return;
+			content.replaceChildren(tpl.content.cloneNode(true));
+			modal.hidden = false;
+			document.body.classList.add("modal-open");
+			// Move focus to the close button so Escape feels natural.
+			modal.querySelector<HTMLButtonElement>(".modal-close")?.focus();
+		};
+
+		const close = () => {
+			modal.hidden = true;
+			content.replaceChildren();
+			document.body.classList.remove("modal-open");
+		};
+
+		document
+			.querySelectorAll<HTMLButtonElement>(".detail-button")
+			.forEach((btn) => {
+				btn.addEventListener("click", (event) => {
+					event.stopPropagation(); // don't bubble into tree-header toggle
+					const row = btn.closest<HTMLElement>(".product-row");
+					if (row) open(row);
+				});
+			});
+
+		modal
+			.querySelectorAll<HTMLElement>("[data-close]")
+			.forEach((el) => el.addEventListener("click", close));
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && !modal.hidden) close();
+		});
+	}
+</script>

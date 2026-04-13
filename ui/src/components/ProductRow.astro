@@ -1,0 +1,60 @@
+---
+import type { Product } from "../data/types";
+import { resolveProductProperties } from "../data/loader";
+
+interface Props {
+	product: Product;
+}
+
+const { product } = Astro.props;
+const groups = resolveProductProperties(product);
+---
+
+<tr class="product-row" data-product-id={product.id || product.generalId}>
+	<td data-column="name" class="cell-name">{product.name}</td>
+	<td data-column="generalId" class="cell-mono">{product.generalId}</td>
+	<td data-column="version" class="cell-mono">{product.version}</td>
+	<td data-column="id" class="cell-mono">{product.id || "—"}</td>
+	<td data-column="uri" class="cell-uri">
+		{product.uri
+			? <a href={product.uri} target="_blank" rel="noopener">{product.uri}</a>
+			: "—"}
+	</td>
+	<td data-column="description" class="cell-description">{product.description || "—"}</td>
+	<td class="cell-actions">
+		<button type="button" class="detail-button" data-product={product.generalId}>
+			Tiedot
+		</button>
+		<template class="product-detail">
+			<h2 class="detail-title">{product.name}</h2>
+			{product.description && (
+				<section class="detail-description-block">
+					<h3 class="detail-subtitle">KUVAUS</h3>
+					<p class="detail-description">{product.description}</p>
+				</section>
+			)}
+			<section class="detail-properties-block">
+				<h3 class="detail-subtitle">
+					TUOTEOSAN VAADITUT OMINAISUUDET (Property Set + Property)
+				</h3>
+				{groups.length === 0 && (
+					<p class="detail-empty">Ei määriteltyjä ominaisuuksia.</p>
+				)}
+				{groups.map((g) => (
+					<section class="property-group">
+						<h4 class="property-group-name">{g.group}</h4>
+						<ul class="property-list">
+							{g.properties.map((prop) => (
+								<li class="property-row">
+									<span class="property-label">{prop.label}</span>
+									<span class="property-badge">{prop.ifcPropertyType}</span>
+									<span class="property-unit">{prop.unit || ""}</span>
+								</li>
+							))}
+						</ul>
+					</section>
+				))}
+			</section>
+		</template>
+	</td>
+</tr>

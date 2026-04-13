@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import ProductTree from "../components/ProductTree.astro";
+import DetailModal from "../components/DetailModal.astro";
+import { tree } from "../data/loader";
+---
+
+<Layout>
+	<div class="app-main">
+		<Sidebar />
+		<section class="tree-pane">
+			<ProductTree tree={tree} />
+		</section>
+	</div>
+	<DetailModal />
+</Layout>

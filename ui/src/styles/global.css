@@ -1,0 +1,348 @@
+/* BETK Precast Browser — dark theme tokens & base styles.
+ * Palette and typography follow plans/superpowers/specs/2026-04-13-precast-browser-design.md. */
+
+:root {
+	--bg: #1a1a2e;
+	--surface: #242442;
+	--surface-raised: #2d2d4a;
+	--text: #e0e0e0;
+	--text-strong: #ffffff;
+	--text-muted: #a5a5c0;
+	--accent-teal: #5eead4;
+	--accent-blue: #93c5fd;
+	--separator: #333355;
+
+	--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+		"Liberation Mono", monospace;
+
+	color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 14px;
+	line-height: 1.5;
+	min-height: 100%;
+}
+
+body {
+	min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	color: var(--text-strong);
+	margin: 0;
+	font-weight: 600;
+}
+
+a {
+	color: var(--accent-blue);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+code,
+kbd,
+samp,
+.mono {
+	font-family: var(--font-mono);
+}
+
+/* Header ------------------------------------------------------------------- */
+
+.app-header {
+	padding: 20px 28px;
+	border-bottom: 1px solid var(--separator);
+	background: var(--surface);
+}
+
+.app-header h1 {
+	font-size: 18px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+/* Shell -------------------------------------------------------------------- */
+
+.app-shell {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.app-body {
+	flex: 1 1 auto;
+	padding: 24px 28px;
+}
+
+/* Product tree ------------------------------------------------------------- */
+
+.product-tree {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.node {
+	display: block;
+}
+
+.node-header {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	cursor: pointer;
+	user-select: none;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--separator);
+}
+
+.node-header .caret {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 5px solid var(--accent-teal);
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	transition: transform 120ms ease-out;
+	transform: rotate(0deg);
+	flex: 0 0 auto;
+	align-self: center;
+}
+
+.node.open > .node-header .caret {
+	transform: rotate(90deg);
+}
+
+.node-header:focus-visible {
+	outline: 2px solid var(--accent-teal);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* Collapsed nodes hide their body. */
+.node:not(.open) > .node-body {
+	display: none;
+}
+
+.node-header h2,
+.node-header h3,
+.node-header h4 {
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.koodisto-header h2 {
+	font-size: 15px;
+	color: var(--text-strong);
+}
+
+.koodisto-header .version {
+	color: var(--text-muted);
+	font-family: var(--font-mono);
+	font-size: 12px;
+}
+
+.paaryhma {
+	margin-left: 18px;
+}
+
+.paaryhma-header h3 {
+	font-size: 13px;
+	color: var(--accent-teal);
+}
+
+.alaryhma {
+	margin-left: 18px;
+	margin-top: 8px;
+}
+
+.alaryhma-header h4 {
+	font-size: 12px;
+	color: var(--accent-blue);
+}
+
+.alaryhma-header .count {
+	color: var(--text-muted);
+	font-family: var(--font-mono);
+	font-size: 11px;
+}
+
+.node-body {
+	padding: 6px 0 12px;
+}
+
+/* Product table ------------------------------------------------------------ */
+
+.product-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: var(--surface);
+	font-size: 13px;
+}
+
+.product-table thead th {
+	text-align: left;
+	padding: 8px 10px;
+	color: var(--text-muted);
+	font-weight: 500;
+	font-size: 11px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	border-bottom: 1px solid var(--separator);
+	background: var(--surface);
+	position: sticky;
+	top: 0;
+}
+
+.product-table tbody td {
+	padding: 8px 10px;
+	border-bottom: 1px solid var(--separator);
+	vertical-align: top;
+}
+
+.product-table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.cell-mono {
+	font-family: var(--font-mono);
+	color: var(--text-muted);
+	white-space: nowrap;
+}
+
+.cell-name {
+	color: var(--text-strong);
+	font-weight: 500;
+}
+
+.cell-uri a {
+	font-family: var(--font-mono);
+	font-size: 12px;
+}
+
+.cell-description {
+	color: var(--text-muted);
+	max-width: 420px;
+}
+
+.cell-actions,
+.th-actions {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.detail-button {
+	background: var(--surface-raised);
+	color: var(--accent-blue);
+	border: 1px solid var(--separator);
+	border-radius: 4px;
+	padding: 4px 10px;
+	font-family: var(--font-sans);
+	font-size: 12px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background 120ms ease-out, color 120ms ease-out;
+}
+
+.detail-button:hover {
+	background: var(--accent-blue);
+	color: var(--bg);
+}
+
+/* Column hiding — the sidebar script adds body.hide-col-<key> when a checkbox
+ * is unchecked. Defaults come from the checkbox `checked` attribute; the
+ * script syncs body classes once on load. */
+
+body.hide-col-name [data-column="name"],
+body.hide-col-generalId [data-column="generalId"],
+body.hide-col-version [data-column="version"],
+body.hide-col-id [data-column="id"],
+body.hide-col-uri [data-column="uri"],
+body.hide-col-description [data-column="description"] {
+	display: none;
+}
+
+/* Layout: sidebar + main --------------------------------------------------- */
+
+.app-main {
+	display: grid;
+	grid-template-columns: 240px 1fr;
+	gap: 28px;
+	align-items: start;
+}
+
+.sidebar {
+	position: sticky;
+	top: 24px;
+	background: var(--surface);
+	border: 1px solid var(--separator);
+	border-radius: 6px;
+	padding: 16px 18px;
+}
+
+.sidebar-heading {
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	color: var(--text-muted);
+	margin-bottom: 12px;
+	font-weight: 500;
+}
+
+.column-filter-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.checkbox-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	padding: 4px 0;
+	font-size: 12px;
+	letter-spacing: 0.04em;
+}
+
+.checkbox-row input[type="checkbox"] {
+	accent-color: var(--accent-teal);
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+}
+
+.always-on .checkbox-row {
+	cursor: default;
+	color: var(--text-muted);
+}
+
+.always-on-indicator {
+	color: var(--accent-teal);
+	font-size: 10px;
+	width: 14px;
+	text-align: center;
+}

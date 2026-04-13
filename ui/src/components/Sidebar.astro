@@ -1,0 +1,66 @@
+---
+// Column filter sidebar. Source of truth for which columns are visible.
+// Each checkbox carries data-column="<product-table key>"; the body class
+// hide-col-<key> is applied when the checkbox is unchecked.
+
+interface ColumnToggle {
+	label: string;
+	column: string;
+	defaultChecked: boolean;
+}
+
+const columns: ColumnToggle[] = [
+	{ label: "TUOTEOSAN NIMI", column: "name", defaultChecked: true },
+	{ label: "TUNNUS", column: "generalId", defaultChecked: true },
+	{ label: "VERSIO", column: "version", defaultChecked: true },
+	{ label: "ID", column: "id", defaultChecked: true },
+	{ label: "LINKKI", column: "uri", defaultChecked: true },
+	{ label: "KUVAUS", column: "description", defaultChecked: false },
+];
+---
+
+<aside class="sidebar">
+	<section class="column-filter">
+		<h2 class="sidebar-heading">SARAKKEIDEN SUODATUS</h2>
+		<ul class="column-filter-list">
+			{columns.map((col) => (
+				<li>
+					<label class="checkbox-row">
+						<input
+							type="checkbox"
+							class="column-toggle"
+							data-column={col.column}
+							checked={col.defaultChecked}
+						/>
+						<span>{col.label}</span>
+					</label>
+				</li>
+			))}
+			<li class="always-on">
+				<span class="checkbox-row">
+					<span class="always-on-indicator" aria-hidden="true">●</span>
+					<span>TIEDOT</span>
+				</span>
+			</li>
+		</ul>
+	</section>
+</aside>
+
+<script>
+	// Keep body.hide-col-<key> in sync with each checkbox. Runs once on load so
+	// the initial render matches the declared defaults (e.g. KUVAUS starts
+	// hidden), then again on every change.
+	function syncColumn(checkbox: HTMLInputElement) {
+		const col = checkbox.dataset.column;
+		if (!col) return;
+		document.body.classList.toggle(`hide-col-${col}`, !checkbox.checked);
+	}
+
+	const checkboxes = document.querySelectorAll<HTMLInputElement>(
+		".column-toggle",
+	);
+	checkboxes.forEach((cb) => {
+		syncColumn(cb);
+		cb.addEventListener("change", () => syncColumn(cb));
+	});
+</script>

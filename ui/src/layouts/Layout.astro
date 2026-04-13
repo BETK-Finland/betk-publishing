@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+}
+
+const { title = "BETK — PROPERTYT" } = Astro.props;
+// BASE_URL is "/betk-publishing/" in production and "/" in dev; trailing slash
+// included, so string concat yields correct asset URLs without double-slashes.
+const base = import.meta.env.BASE_URL;
+---
+
+<html lang="fi">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+		<link rel="icon" href={`${base}favicon.ico`} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="hide-col-description">
+		<div class="app-shell">
+			<header class="app-header">
+				<h1>BETK — PROPERTYT</h1>
+			</header>
+			<main class="app-body">
+				<slot />
+			</main>
+		</div>
+	</body>
+</html>
