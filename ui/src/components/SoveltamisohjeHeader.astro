@@ -1,0 +1,43 @@
+---
+import { documentMeta } from "../data/soveltamisohje-loader";
+const { otsikko, alaotsikko, julkaisija, paivamaara, versio, status, versiohistoria, laatijat } = documentMeta;
+---
+
+<header class="sov-header">
+  <h1 class="sov-title">{otsikko}</h1>
+  <p class="sov-subtitle"><strong>{alaotsikko}</strong></p>
+  <div class="sov-meta">
+    <p>Julkaisija: {julkaisija}</p>
+    <p>Päivämäärä: {paivamaara}</p>
+    <p>Versio: {versio} &middot; Status: {status}</p>
+  </div>
+  <p class="sov-print-date" aria-hidden="true"></p>
+
+  <details class="sov-details">
+    <summary>Asiakirjan versio</summary>
+    <table class="sov-meta-table">
+      <thead>
+        <tr><th>Versio</th><th>Päivämäärä</th><th>Tekijä</th><th>Muutoskuvaus</th></tr>
+      </thead>
+      <tbody>
+        {versiohistoria.map(v => (
+          <tr><td>{v.versio}</td><td>{v.paivamaara}</td><td>{v.tekija}</td><td>{v.kuvaus}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </details>
+
+  <details class="sov-details">
+    <summary>Asiakirjan laatijat</summary>
+    <table class="sov-meta-table">
+      <thead>
+        <tr><th>Nimi</th><th>Organisaatio</th></tr>
+      </thead>
+      <tbody>
+        {laatijat.map(l => (
+          <tr><td>{l.nimi}</td><td>{l.organisaatio}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </details>
+</header>
