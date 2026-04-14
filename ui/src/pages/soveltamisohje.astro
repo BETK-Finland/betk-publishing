@@ -135,4 +135,8 @@ const tableSections = await Promise.all(
       el.textContent = `Tulostettu: ${new Date().toLocaleDateString("fi-FI")}`;
     });
   }
+  // Force all <details> open before print
+  window.addEventListener("beforeprint", () => {
+    document.querySelectorAll("details").forEach(d => d.setAttribute("open", ""));
+  });
 </script>
