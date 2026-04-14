@@ -3,9 +3,10 @@ import "../styles/global.css";
 
 interface Props {
 	title?: string;
+	bodyClass?: string;
 }
 
-const { title = "BETK — PROPERTYT" } = Astro.props;
+const { title = "BETK — PROPERTYT", bodyClass = "" } = Astro.props;
 // BASE_URL is "/betk-publishing/" in production and "/" in dev; trailing slash
 // included, so string concat yields correct asset URLs without double-slashes.
 const base = import.meta.env.BASE_URL;
@@ -20,10 +21,10 @@ const base = import.meta.env.BASE_URL;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="hide-col-description">
+	<body class={bodyClass}>
 		<div class="app-shell">
 			<header class="app-header">
-				<h1>BETK — PROPERTYT</h1>
+				<h1>{title}</h1>
 			</header>
 			<main class="app-body">
 				<slot />
