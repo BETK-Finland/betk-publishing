@@ -1,0 +1,53 @@
+---
+// The section list is static — matches the page assembly order.
+const sections = [
+  { id: "tausta", label: "1 Tausta" },
+  { id: "tarkoitus", label: "2 Tarkoitus ja rajaukset" },
+  { id: "tuotetiedot", label: "3 Tietosisällöt tarjousvaiheessa" },
+  { id: "kokoonpano-tyyppi", label: "3.1.1 Kokoonpanon tyyppi" },
+  { id: "elementtityyppi", label: "3.1.2 Elementtityyppi" },
+  { id: "raudoitus", label: "3.1.3 Raudoitus" },
+  { id: "pintakasittely", label: "3.1.4 Pintakäsittely" },
+  { id: "varibetoni", label: "3.1.5 Väribetoni" },
+  { id: "vahahiilinen", label: "3.1.6 Vähähiilinen" },
+  { id: "tyyppielementti", label: "3.1.7 Tyyppielementti" },
+  { id: "kaantokivi", label: "3.1.8 Kääntökivi" },
+  { id: "toimintaohjeita", label: "4 Toimintaohjeita" },
+  { id: "lyhenteet", label: "Lyhenteet" },
+  { id: "liite-1", label: "Liite 1: Raudoitusesimerkit" },
+  { id: "viittaukset", label: "Viittaukset" },
+];
+---
+
+<nav class="sov-toc" aria-label="Sisällysluettelo">
+  <p class="sidebar-heading">SISÄLLYSLUETTELO</p>
+  <ul class="sov-toc-list">
+    {sections.map(s => (
+      <li><a href={`#${s.id}`} class="sov-toc-link">{s.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>(".sov-toc-link");
+  const sections = Array.from(links).map(link => {
+    const id = link.getAttribute("href")!.slice(1);
+    return { id, link, el: document.getElementById(id) };
+  }).filter(s => s.el);
+
+  const observer = new IntersectionObserver(
+    entries => {
+      for (const entry of entries) {
+        const match = sections.find(s => s.el === entry.target);
+        if (match) {
+          match.link.classList.toggle("active", entry.isIntersecting);
+        }
+      }
+    },
+    { rootMargin: "-80px 0px -60% 0px" }
+  );
+
+  for (const s of sections) {
+    observer.observe(s.el!);
+  }
+</script>
