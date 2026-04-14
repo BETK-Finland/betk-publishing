@@ -1,0 +1,29 @@
+---
+import type { EsimerkkiTaulukko } from "../data/soveltamisohje-types";
+
+interface Props {
+  table: EsimerkkiTaulukko;
+}
+
+const { table } = Astro.props;
+---
+
+<div class="sov-reinforcement">
+  <table class="sov-reinforcement-table">
+    <caption>{table.rakennetyyppi} — {table.kuvaus}</caption>
+    <thead>
+      <tr>
+        <th>{table.rakennetyyppi}</th>
+        {table.sarakkeet.map(col => <th>{col}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {table.rivit.map(rivi => (
+        <tr>
+          <td><strong>{rivi.ominaisuus}</strong></td>
+          {rivi.arvot.map(arvo => <td>{arvo}</td>)}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
