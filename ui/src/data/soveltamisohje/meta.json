@@ -1,0 +1,34 @@
+{
+  "otsikko": "BETK soveltamisohje: Tarjousvaiheen tietomääritykset ja toteutusvaiheen tietomalliohjeita toimitusketjulle",
+  "alaotsikko": "Tilauksesta suunniteltavat rakennustuotteet",
+  "julkaisija": "Rakennusteollisuus ry",
+  "paivamaara": "2025-12-17",
+  "versio": "1.0",
+  "status": "Luonnos",
+  "versiohistoria": [
+    { "versio": "0.1", "paivamaara": "2024-12-30", "tekija": "AnPekk", "kuvaus": "Luonnos vaihe" },
+    { "versio": "0.2", "paivamaara": "2025-02-25", "tekija": "AnPekk", "kuvaus": "Tekstiosuuksia täydennetty" },
+    { "versio": "0.3", "paivamaara": "2025-05-30", "tekija": "AnPekk", "kuvaus": "Tekstiosuuksia täydennetty" },
+    { "versio": "0.4", "paivamaara": "2025-07-02", "tekija": "AnPekk", "kuvaus": "YIT, NCC ja Consoliksen kommentit huomioitu" },
+    { "versio": "0.5", "paivamaara": "2025-09-12", "tekija": "AnPekk", "kuvaus": "Elementtityyppi-listausta päivitetty" },
+    { "versio": "0.6", "paivamaara": "2025-10-22", "tekija": "AnPekk", "kuvaus": "Propertyjen nimet tarkistettu excelin mukaiseksi" },
+    { "versio": "0.7", "paivamaara": "2025-12-05", "tekija": "AnPekk", "kuvaus": "Pintakäsittely ja väribetonit-kentät muokattu" },
+    { "versio": "1.0", "paivamaara": "2025-12-17", "tekija": "AnPekk", "kuvaus": "Github julkaisu" }
+  ],
+  "laatijat": [
+    { "nimi": "Antti Pekkala", "organisaatio": "Fira Oy" },
+    { "nimi": "Teemu Anttila", "organisaatio": "Ramboll" },
+    { "nimi": "Janne Kihula", "organisaatio": "Rakennustuoteteollisuus RTT ry" },
+    { "nimi": "Teemu Alaluusua", "organisaatio": "Aalto-yliopisto" },
+    { "nimi": "Tom Partanen", "organisaatio": "Consolis Parma Oy" },
+    { "nimi": "Eetu Lahtinen", "organisaatio": "Consolis Parma Oy" },
+    { "nimi": "Satu Parikka", "organisaatio": "Consolis Parma Oy" },
+    { "nimi": "Kari Turunen", "organisaatio": "Lujabetoni Oy" },
+    { "nimi": "Markku Räisänen", "organisaatio": "Betset Oy" },
+    { "nimi": "Jarkko Vitikainen", "organisaatio": "Sitowise Oy" },
+    { "nimi": "Antti Taskinen", "organisaatio": "Fira Oy" },
+    { "nimi": "Riku Laiho", "organisaatio": "NCC Suomi Oy" },
+    { "nimi": "Arto Nieminen", "organisaatio": "NCC Suomi Oy" },
+    { "nimi": "Paula Valkonen", "organisaatio": "Suutarinen / SBS Betoni Oy" }
+  ]
+}
