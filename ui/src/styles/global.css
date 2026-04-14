@@ -81,6 +81,27 @@ samp,
 	text-transform: uppercase;
 }
 
+.app-nav {
+	display: flex;
+	gap: 16px;
+	margin-top: 8px;
+}
+
+.app-nav a {
+	font-size: 12px;
+	letter-spacing: 0.04em;
+	color: var(--text-muted);
+	padding: 4px 0;
+	border-bottom: 2px solid transparent;
+	transition: color 120ms, border-color 120ms;
+}
+
+.app-nav a:hover {
+	color: var(--text-strong);
+	text-decoration: none;
+	border-bottom-color: var(--accent-teal);
+}
+
 /* Shell -------------------------------------------------------------------- */
 
 .app-shell {
