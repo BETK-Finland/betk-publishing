@@ -1,0 +1,28 @@
+{
+  "termit": [
+    {
+      "termi": "Alkuperäisformaatti",
+      "selite": "Mallinnusohjelman oma tallennusformaatti. Alan julkaisuissa käytetään tälle synonyyminä käsitteitä natiivimalli tai natiiviformaatti."
+    },
+    {
+      "termi": "BIM",
+      "selite": "Rakennuskohteen tietomalli tai tietomallinnus, lyhenne englanninkielisestä käsitteestä Building Information Modeling."
+    },
+    {
+      "termi": "IFC",
+      "selite": "Rakennusten mallinnuksessa käytetty tuotetietojen siirron kansainvälinen standardi, lyhenne englanninkielisestä käsitteestä Industry Foundation Classes."
+    },
+    {
+      "termi": "UDA",
+      "selite": "Suunnitteluohjelmistoissa mallin objekteille talletettavaa liitännäistietoa (metatieto), lyhenne englanninkielisestä käsitteestä User Defined Attribute."
+    },
+    {
+      "termi": "Ominaisuusryhmä",
+      "selite": "Rakentamisalalla on yleisesti käytössä \"Property Set\" -termi. Tässä dokumentissa käytetään termiä \"Ominaisuusryhmä\", jotta termi on helpommin ymmärrettävissä ja päästään eroon vieraskielisestä termistä. Ominaisuusryhmien tarkka määrittäminen mahdollistaa ominaisuuksien ryhmittelyn ihmiselle sopiviin kokonaisuuksiin. Usealla ominaisuusryhmällä vältetään myös ominaisuuksien pitkä listaus yhdessä \"kaiken kattavassa\" ominaisuusryhmässä."
+    },
+    {
+      "termi": "Ominaisuus",
+      "selite": "Rakentamisalalle on vakiintunut \"Property\" -termin käyttö. Tässä dokumentissa käytetään termiä \"Ominaisuus\", jotta termi on helpommin ymmärrettävissä ja päästään eroon vieraskielisestä termistä. Ominaisuuksien tarkka määrittäminen mahdollistaa vakioidun tietorakenteen. Ominaisuudet on aina liitetty johonkin ominaisuusryhmään."
+    }
+  ]
+}

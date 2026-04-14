@@ -1,0 +1,11 @@
+{
+  "taulukonNumero": 7,
+  "tietosisalto": "Kääntökivi",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Kääntökivi",
+  "arvot": [
+    { "koodi": "Ei", "kuvaus": "" },
+    { "koodi": "Kyllä", "kuvaus": "Description" }
+  ]
+}
