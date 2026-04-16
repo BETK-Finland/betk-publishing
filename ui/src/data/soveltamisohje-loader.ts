@@ -1,5 +1,7 @@
-// Build-time loader for soveltamisohje data.
-// Imports soveltamisohje JSON + existing precast data, builds cross-reference maps.
+// Build-time loader for soveltamisohje docs.
+// Discovers per-doc folders under ./soveltamisohje/<slug>/ and exposes a
+// getDoc(slug) / listDocs() API so pages and the landing-page nav can be
+// driven from manifests instead of hardcoded imports.
 
 import type { Product, Property } from "./types";
 import type {
@@ -13,24 +15,116 @@ import type {
 import productsJson from "./precast.json";
 import propertiesJson from "./precastProperties.json";
 
-import meta from "./soveltamisohje/meta.json";
-import kokoonpanoTyypit from "./soveltamisohje/kokoonpano-tyypit.json";
-import elementtityypit from "./soveltamisohje/elementtityypit.json";
-import raudoitus from "./soveltamisohje/raudoitus.json";
-import pintakasittely from "./soveltamisohje/pintakasittely.json";
-import varibetoni from "./soveltamisohje/varibetoni.json";
-import vahahiilinen from "./soveltamisohje/vahahiilinen.json";
-import tyyppielementti from "./soveltamisohje/tyyppielementti.json";
-import kaantokivi from "./soveltamisohje/kaantokivi.json";
-import lyhenteet from "./soveltamisohje/lyhenteet.json";
-import raudoitusEsimerkit from "./soveltamisohje/raudoitus-esimerkit.json";
-
 const products = productsJson as Product[];
 const properties = propertiesJson as Property[];
 
-// --- Cross-reference maps ---
+// --- Manifest shape ---
 
-// Maps element type codes (V, S, O, etc.) to products whose generalId matches.
+export type SectionKind =
+  | "prose"
+  | "prose+table"
+  | "prose+pintakasittely"
+  | "glossary"
+  | "reinforcement-annex";
+
+export interface ManifestSection {
+  kind: SectionKind;
+  content?: string; // markdown filename without .md, for prose kinds
+  table?: string;   // JSON filename without .json, for table kinds
+  data?: string;    // JSON filename without .json, for glossary / reinforcement-annex
+  anchor: string;
+  label?: string;   // TOC label for non-prose kinds; prose kinds derive from frontmatter
+}
+
+export interface Manifest {
+  slug: string;
+  nav_title: string;
+  sections: ManifestSection[];
+}
+
+// --- Glob imports (eager, build-time) ---
+
+// Path keys look like: ./soveltamisohje/<slug>/<file>.json
+const metaModules = import.meta.glob<DocumentMeta>(
+  "./soveltamisohje/*/meta.json",
+  { eager: true, import: "default" },
+);
+const manifestModules = import.meta.glob<Manifest>(
+  "./soveltamisohje/*/manifest.json",
+  { eager: true, import: "default" },
+);
+// Everything else under each doc folder — table data, glossary, annex examples.
+const dataModules = import.meta.glob<unknown>(
+  "./soveltamisohje/*/*.json",
+  { eager: true, import: "default" },
+);
+
+function slugFromPath(path: string): string {
+  // ./soveltamisohje/<slug>/<file>.json -> <slug>
+  const parts = path.split("/");
+  return parts[parts.length - 2];
+}
+
+function basenameFromPath(path: string): string {
+  // ./soveltamisohje/<slug>/<file>.json -> <file>
+  const file = path.split("/").pop()!;
+  return file.replace(/\.json$/, "");
+}
+
+// Index everything by slug so lookups are O(1).
+interface DocRecord {
+  slug: string;
+  meta: DocumentMeta;
+  manifest: Manifest;
+  tables: Record<string, ValueTable | PintakasittelyTable | Lyhenteet | RaudoitusEsimerkit>;
+}
+
+const docs: Record<string, DocRecord> = {};
+
+for (const [path, meta] of Object.entries(metaModules)) {
+  const slug = slugFromPath(path);
+  docs[slug] = {
+    slug,
+    meta,
+    // Manifest and tables filled in below.
+    manifest: undefined as unknown as Manifest,
+    tables: {},
+  };
+}
+
+for (const [path, manifest] of Object.entries(manifestModules)) {
+  const slug = slugFromPath(path);
+  if (docs[slug]) {
+    docs[slug].manifest = manifest;
+  }
+}
+
+for (const [path, data] of Object.entries(dataModules)) {
+  const slug = slugFromPath(path);
+  const name = basenameFromPath(path);
+  if (name === "meta" || name === "manifest") continue;
+  if (docs[slug]) {
+    docs[slug].tables[name] = data as ValueTable | PintakasittelyTable | Lyhenteet | RaudoitusEsimerkit;
+  }
+}
+
+// --- Public API ---
+
+export function getDoc(slug: string): DocRecord {
+  const doc = docs[slug];
+  if (!doc) throw new Error(`Unknown soveltamisohje slug: ${slug}`);
+  if (!doc.manifest) throw new Error(`Missing manifest.json for doc: ${slug}`);
+  return doc;
+}
+
+export function listDocs(): Array<{ slug: string; meta: DocumentMeta; manifest: Manifest }> {
+  return Object.values(docs)
+    .filter(d => d.manifest)
+    .map(d => ({ slug: d.slug, meta: d.meta, manifest: d.manifest }));
+}
+
+// --- Cross-reference maps (product-scoped, not doc-scoped) ---
+
 export const elementTypeToProducts: Map<string, Product[]> = new Map();
 for (const product of products) {
   const gid = product.generalId;
@@ -42,7 +136,6 @@ for (const product of products) {
   }
 }
 
-// Maps ominaisuusjoukko (property set) names to properties in that group.
 export const propertySetToProperties: Map<string, Property[]> = new Map();
 for (const prop of properties) {
   const bucket = propertySetToProperties.get(prop.group);
@@ -52,37 +145,3 @@ for (const prop of properties) {
     propertySetToProperties.set(prop.group, [prop]);
   }
 }
-
-// --- Exports ---
-
-export const documentMeta = meta as DocumentMeta;
-
-// Ordered list of value tables for rendering in sequence.
-// pintakasittely has a different shape (nested alavaihtoehdot), handled separately.
-export const valueTables: ValueTable[] = [
-  kokoonpanoTyypit as ValueTable,
-  elementtityypit as ValueTable,
-  raudoitus as ValueTable,
-  varibetoni as ValueTable,
-  vahahiilinen as ValueTable,
-  tyyppielementti as ValueTable,
-  kaantokivi as ValueTable,
-];
-
-export const pintakasittelyTable = pintakasittely as PintakasittelyTable;
-
-export const glossary = lyhenteet as Lyhenteet;
-export const reinforcementExamples = raudoitusEsimerkit as RaudoitusEsimerkit;
-
-// The ordered list of content collection slugs paired with their table data.
-// Used by the page to interleave prose + table for each section.
-export const sectionTableMap: Record<string, ValueTable | PintakasittelyTable | null> = {
-  "03-kokoonpano-tyyppi": kokoonpanoTyypit as ValueTable,
-  "03-elementtityyppi": elementtityypit as ValueTable,
-  "03-raudoitus": raudoitus as ValueTable,
-  "03-pintakasittely": pintakasittely as PintakasittelyTable,
-  "03-varibetoni": varibetoni as ValueTable,
-  "03-vahahiilinen": vahahiilinen as ValueTable,
-  "03-tyyppielementti": tyyppielementti as ValueTable,
-  "03-kaantokivi": kaantokivi as ValueTable,
-};

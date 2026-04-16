@@ -1,0 +1,180 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SoveltamisohjeHeader from "../../components/SoveltamisohjeHeader.astro";
+import SoveltamisohjeToc from "../../components/SoveltamisohjeToc.astro";
+import PrintToc from "../../components/PrintToc.astro";
+import ProseSection from "../../components/ProseSection.astro";
+import DataTable from "../../components/DataTable.astro";
+import ReinforcementTable from "../../components/ReinforcementTable.astro";
+import { getDoc, listDocs } from "../../data/soveltamisohje-loader";
+import type {
+  ValueTable,
+  PintakasittelyTable,
+  Lyhenteet,
+  RaudoitusEsimerkit,
+} from "../../data/soveltamisohje-types";
+
+export async function getStaticPaths() {
+  return listDocs().map(d => ({ params: { slug: d.slug } }));
+}
+
+const { slug } = Astro.params;
+const doc = getDoc(slug!);
+const { meta, manifest, tables } = doc;
+
+// Collection entries for this doc; entry ids are "<slug>/<filename-without-ext>".
+const allEntries = await getCollection("soveltamisohje");
+const entries = allEntries.filter(e => e.id.startsWith(`${slug}/`));
+
+function getEntry(shortName: string) {
+  return entries.find(e => e.id === `${slug}/${shortName}`);
+}
+
+// Resolve each manifest section into a renderable record. Prose sections
+// eagerly render their markdown so Astro can emit components in one pass.
+type Rendered =
+  | {
+      kind: "prose";
+      anchor: string;
+      sectionNumber: string;
+      title: string;
+      Content: any;
+    }
+  | {
+      kind: "prose+table";
+      anchor: string;
+      sectionNumber: string;
+      title: string;
+      Content: any;
+      table: ValueTable;
+    }
+  | {
+      kind: "prose+pintakasittely";
+      anchor: string;
+      sectionNumber: string;
+      title: string;
+      Content: any;
+      table: PintakasittelyTable;
+    }
+  | { kind: "glossary"; anchor: string; label: string; data: Lyhenteet }
+  | { kind: "reinforcement-annex"; anchor: string; label: string; data: RaudoitusEsimerkit };
+
+async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
+  if (section.kind === "prose" || section.kind === "prose+table" || section.kind === "prose+pintakasittely") {
+    const entry = getEntry(section.content!);
+    if (!entry) return null;
+    const { Content } = await render(entry);
+    const base = {
+      anchor: section.anchor,
+      sectionNumber: entry.data.section,
+      title: entry.data.title,
+      Content,
+    };
+    if (section.kind === "prose") return { kind: "prose", ...base };
+    if (section.kind === "prose+table") {
+      const table = tables[section.table!] as ValueTable | undefined;
+      if (!table) return null;
+      return { kind: "prose+table", ...base, table };
+    }
+    const pkTable = tables[section.table!] as PintakasittelyTable | undefined;
+    if (!pkTable) return null;
+    return { kind: "prose+pintakasittely", ...base, table: pkTable };
+  }
+  if (section.kind === "glossary") {
+    const data = tables[section.data!] as Lyhenteet | undefined;
+    if (!data) return null;
+    return { kind: "glossary", anchor: section.anchor, label: section.label ?? "Lyhenteet", data };
+  }
+  if (section.kind === "reinforcement-annex") {
+    const data = tables[section.data!] as RaudoitusEsimerkit | undefined;
+    if (!data) return null;
+    return { kind: "reinforcement-annex", anchor: section.anchor, label: section.label ?? "Liite", data };
+  }
+  return null;
+}
+
+const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filter(
+  (r): r is Rendered => r !== null,
+);
+
+// TOC items: prose sections get "<section> <title>"; others use manifest label.
+const tocItems = resolved.map(r => {
+  if (r.kind === "prose" || r.kind === "prose+table" || r.kind === "prose+pintakasittely") {
+    return { anchor: r.anchor, label: `${r.sectionNumber} ${r.title}` };
+  }
+  return { anchor: r.anchor, label: r.label };
+});
+---
+
+<Layout title={`BETK — ${meta.otsikko}`}>
+  <div class="sov-layout">
+    <SoveltamisohjeToc items={tocItems} />
+    <article class="sov-document">
+      <SoveltamisohjeHeader meta={meta} />
+      <PrintToc />
+
+      {resolved.map(r => {
+        if (r.kind === "prose") {
+          return (
+            <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+              <r.Content />
+            </ProseSection>
+          );
+        }
+        if (r.kind === "prose+table" || r.kind === "prose+pintakasittely") {
+          return (
+            <div>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+                <r.Content />
+              </ProseSection>
+              <DataTable table={r.table} />
+            </div>
+          );
+        }
+        if (r.kind === "glossary") {
+          return (
+            <section id={r.anchor} class="sov-section">
+              <h2>Lyhenteet ja terminologia</h2>
+              <table class="sov-glossary-table">
+                <tbody>
+                  {r.data.termit.map(t => (
+                    <tr>
+                      <td><strong>{t.termi}</strong></td>
+                      <td>{t.selite}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          );
+        }
+        if (r.kind === "reinforcement-annex") {
+          return (
+            <section id={r.anchor} class="sov-section">
+              <h2>Liite 1: Esimerkkejä raudoitustiedosta betonielementti tehtaan tarjouslaskennassa</h2>
+              {r.data.taulukot.map(t => (
+                <ReinforcementTable table={t} />
+              ))}
+            </section>
+          );
+        }
+        return null;
+      })}
+    </article>
+  </div>
+</Layout>
+
+<script>
+  // Print date stamp — set on beforeprint, visible only in print CSS
+  const el = document.querySelector(".sov-print-date");
+  if (el) {
+    window.addEventListener("beforeprint", () => {
+      el.textContent = `Tulostettu: ${new Date().toLocaleDateString("fi-FI")}`;
+    });
+  }
+  // Force all <details> open before print
+  window.addEventListener("beforeprint", () => {
+    document.querySelectorAll("details").forEach(d => d.setAttribute("open", ""));
+  });
+</script>

@@ -10,4 +10,11 @@ const soveltamisohje = defineCollection({
   }),
 });
 
-export const collections = { soveltamisohje };
+const landing = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/landing" }),
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
+export const collections = { soveltamisohje, landing };

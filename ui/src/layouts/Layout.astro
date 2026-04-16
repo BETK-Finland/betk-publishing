@@ -6,7 +6,7 @@ interface Props {
 	bodyClass?: string;
 }
 
-const { title = "BETK — PROPERTYT", bodyClass = "" } = Astro.props;
+const { title = "BETK — Betonielementin toimitusketju", bodyClass = "" } = Astro.props;
 // BASE_URL is "/betk-publishing/" in production and "/" in dev; trailing slash
 // included, so string concat yields correct asset URLs without double-slashes.
 const base = import.meta.env.BASE_URL;
@@ -26,8 +26,8 @@ const base = import.meta.env.BASE_URL;
 			<header class="app-header">
 				<h1>{title}</h1>
 				<nav class="app-nav">
-					<a href={`${base}`}>Propertyt</a>
-					<a href={`${base}soveltamisohje`}>Soveltamisohje</a>
+					<a href={`${base}`}>Etusivu</a>
+					<a href={`${base}properties`}>Properties</a>
 				</nav>
 			</header>
 			<main class="app-body">

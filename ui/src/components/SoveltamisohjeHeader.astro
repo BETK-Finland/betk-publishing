@@ -1,6 +1,12 @@
 ---
-import { documentMeta } from "../data/soveltamisohje-loader";
-const { otsikko, alaotsikko, julkaisija, paivamaara, versio, status, versiohistoria, laatijat } = documentMeta;
+import type { DocumentMeta } from "../data/soveltamisohje-types";
+
+interface Props {
+  meta: DocumentMeta;
+}
+
+const { meta } = Astro.props;
+const { otsikko, alaotsikko, julkaisija, paivamaara, versio, status, versiohistoria, laatijat } = meta;
 ---
 
 <header class="sov-header">
