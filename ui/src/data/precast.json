@@ -4505,7 +4505,7 @@
     "description": "",
     "hierarchy": [
       "BETONIELEMENTIT",
-      "TERÄSBETONI",
+      "JÄNNITETTY",
       "TT-laatat"
     ],
     "requiredPropertyIds": [
