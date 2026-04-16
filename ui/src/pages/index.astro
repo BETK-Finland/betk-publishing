@@ -1,17 +1,72 @@
 ---
+import { getEntry, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import Sidebar from "../components/Sidebar.astro";
-import ProductTree from "../components/ProductTree.astro";
-import DetailModal from "../components/DetailModal.astro";
-import { tree } from "../data/loader";
+import { listDocs } from "../data/soveltamisohje-loader";
+
+const landingEntry = await getEntry("landing", "landing-page");
+const { Content } = landingEntry ? await render(landingEntry) : { Content: null };
+
+const base = import.meta.env.BASE_URL;
+const docs = listDocs();
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const navLinks: NavLink[] = [
+  { href: `${base}properties`, label: "Properties" },
+  ...docs.map(d => ({
+    href: `${base}soveltamisohje/${d.slug}`,
+    label: d.manifest.nav_title,
+  })),
+];
 ---
 
-<Layout>
-	<div class="app-main">
-		<Sidebar />
-		<section class="tree-pane">
-			<ProductTree tree={tree} />
-		</section>
-	</div>
-	<DetailModal />
+<Layout title="BETK — Betonielementin toimitusketju">
+  <div class="app-main">
+    <aside class="sidebar">
+      <section class="column-filter">
+        <h2 class="sidebar-heading">NAVIGAATIO</h2>
+        <ul class="landing-nav-list">
+          {navLinks.map(link => (
+            <li><a class="landing-nav-link" href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </section>
+    </aside>
+    <section class="landing-body">
+      <article class="sov-document">
+        <h1>{landingEntry?.data.title ?? "BETK — Betonielementin toimitusketju"}</h1>
+        {Content && <Content />}
+      </article>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .landing-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .landing-nav-list li {
+    margin-bottom: 0.5rem;
+  }
+  .landing-nav-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: inherit;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background-color 0.1s, border-color 0.1s;
+  }
+  .landing-nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-left-color: currentColor;
+  }
+  .landing-body {
+    padding: 2rem;
+    overflow-y: auto;
+  }
+</style>

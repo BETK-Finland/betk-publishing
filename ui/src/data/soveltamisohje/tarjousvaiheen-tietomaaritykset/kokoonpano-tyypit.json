@@ -1,0 +1,14 @@
+{
+  "taulukonNumero": 1,
+  "tietosisalto": "Kokoonpanon tyyppi",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Tunnistetiedot ja luokittelu",
+  "ominaisuus": "Kokoonpanon tyyppi",
+  "arvot": [
+    { "koodi": "BETONIELEMENTTI", "kuvaus": "" },
+    { "koodi": "PAIKALLAVALU", "kuvaus": "" },
+    { "koodi": "PUUKOKOONPANO", "kuvaus": "" },
+    { "koodi": "TERÄSKOKOONPANO", "kuvaus": "" },
+    { "koodi": "EI ASETETTU", "kuvaus": "" }
+  ]
+}

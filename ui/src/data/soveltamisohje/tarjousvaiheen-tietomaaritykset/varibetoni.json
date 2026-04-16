@@ -1,0 +1,18 @@
+{
+  "taulukonNumero": 5,
+  "tietosisalto": "Väribetoni",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Väribetoni",
+  "arvot": [
+    { "koodi": "01", "kuvaus": "Harmaa, värjätty" },
+    { "koodi": "02", "kuvaus": "MUS-Musta" },
+    { "koodi": "03", "kuvaus": "VAL-Valkoinen" },
+    { "koodi": "04", "kuvaus": "PUN-Punainen" },
+    { "koodi": "05", "kuvaus": "SIN-Sininen" },
+    { "koodi": "06", "kuvaus": "RUS-Ruskea" },
+    { "koodi": "07", "kuvaus": "VIH-Vihreä" },
+    { "koodi": "08", "kuvaus": "KEL-Keltainen" },
+    { "koodi": "Muu", "kuvaus": "" }
+  ]
+}

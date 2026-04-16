@@ -1,0 +1,11 @@
+{
+  "taulukonNumero": 5,
+  "tietosisalto": "Vähähiilinen",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Vähähiilinen",
+  "arvot": [
+    { "koodi": "Ei", "kuvaus": "" },
+    { "koodi": "Kyllä", "kuvaus": "Description" }
+  ]
+}

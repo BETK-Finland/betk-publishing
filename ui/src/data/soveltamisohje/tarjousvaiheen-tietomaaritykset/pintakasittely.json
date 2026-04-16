@@ -1,0 +1,51 @@
+{
+  "taulukonNumero": 4,
+  "tietosisalto": "Elementin pintakäsittely",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Pintakäsittely",
+  "arvot": [
+    {
+      "koodi": "PK1",
+      "kuvaus": "",
+      "alavaihtoehdot": [
+        { "koodi": "01", "kuvaus": "MUO-muottipinta" },
+        { "koodi": "02", "kuvaus": "TIIP-Tiililaatta pinta (poltetut tiilet)" },
+        { "koodi": "03", "kuvaus": "KALV-Valukalvon päälle valettu pesubetoni-pinta" },
+        { "koodi": "04", "kuvaus": "MUK-Kuvioitua muottia vasten valettu pinta" },
+        { "koodi": "05", "kuvaus": "ER-Eristepinta" },
+        { "koodi": "06", "kuvaus": "SEM-Sementtiliiman poisto" },
+        { "koodi": "07", "kuvaus": "PESH-Hienopesubetonipinta" },
+        { "koodi": "08", "kuvaus": "MUU-Muu pinta" }
+      ]
+    },
+    {
+      "koodi": "PK2",
+      "kuvaus": "",
+      "alavaihtoehdot": [
+        { "koodi": "01", "kuvaus": "MUO-muottipinta" },
+        { "koodi": "02", "kuvaus": "TIIP-Tiililaatta pinta (poltetut tiilet)" },
+        { "koodi": "03", "kuvaus": "KALV-Valukalvon päälle valettu pesubetoni-pinta" },
+        { "koodi": "04", "kuvaus": "MUK-Kuvioitua muottia vasten valettu pinta" },
+        { "koodi": "05", "kuvaus": "ER-Eristepinta" },
+        { "koodi": "06", "kuvaus": "SEM-Sementtiliiman poisto" },
+        { "koodi": "07", "kuvaus": "PESH-Hienopesubetonipinta" },
+        { "koodi": "08", "kuvaus": "MUU-Muu pinta" }
+      ]
+    },
+    {
+      "koodi": "PK3–9",
+      "kuvaus": "jos tarvetta",
+      "alavaihtoehdot": [
+        { "koodi": "01", "kuvaus": "MUO-muottipinta" },
+        { "koodi": "02", "kuvaus": "TIIP-Tiililaatta pinta (poltetut tiilet)" },
+        { "koodi": "03", "kuvaus": "KALV-Valukalvon päälle valettu pesubetoni-pinta" },
+        { "koodi": "04", "kuvaus": "MUK-Kuvioitua muottia vasten valettu pinta" },
+        { "koodi": "05", "kuvaus": "ER-Eristepinta" },
+        { "koodi": "06", "kuvaus": "SEM-Sementtiliiman poisto" },
+        { "koodi": "07", "kuvaus": "PESH-Hienopesubetonipinta" },
+        { "koodi": "08", "kuvaus": "MUU-Muu pinta" }
+      ]
+    }
+  ]
+}

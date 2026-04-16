@@ -1,0 +1,26 @@
+---
+const sections = [
+  { label: "1 Tausta" },
+  { label: "2 Soveltamisohjeen tarkoitus ja rajaukset" },
+  { label: "3 Rakentamiskohteen tietomallin tietosisällöt tarjousvaiheessa" },
+  { label: "3.1.1 Kokoonpanon tyyppi" },
+  { label: "3.1.2 Elementtityyppi" },
+  { label: "3.1.3 Raudoitus" },
+  { label: "3.1.4 Pintakäsittely" },
+  { label: "3.1.5 Väribetoni" },
+  { label: "3.1.6 Vähähiilinen" },
+  { label: "3.1.7 Tyyppielementti" },
+  { label: "3.1.8 Työmaalla käännettävä elementti" },
+  { label: "4 Toimintaohjeita hankkeisiin" },
+  { label: "Lyhenteet ja terminologia" },
+  { label: "Liite 1: Esimerkkejä raudoitustiedosta" },
+  { label: "Viittaukset" },
+];
+---
+
+<div class="sov-print-toc">
+  <h2>Sisällysluettelo</h2>
+  <ol class="sov-print-toc-list">
+    {sections.map(s => <li>{s.label}</li>)}
+  </ol>
+</div>

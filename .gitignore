@@ -7,11 +7,8 @@
 
 # Top-level directories not needed
 /.claude/
-/data/
-/mapping/
 /mcp/
 /plans/
-/schema/
 
 # Top-level files not needed
 /CLAUDE.MD

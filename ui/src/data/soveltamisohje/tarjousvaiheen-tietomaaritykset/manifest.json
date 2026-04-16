@@ -1,0 +1,21 @@
+{
+  "slug": "tarjousvaiheen-tietomaaritykset",
+  "nav_title": "Tarjousvaiheen tietomääritykset ja toteutusvaiheen tietomalliohjeita toimitusketjulle",
+  "sections": [
+    { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
+    { "kind": "prose", "content": "02-tarkoitus-ja-rajaukset", "anchor": "tarkoitus" },
+    { "kind": "prose", "content": "03-tuotetiedot-intro", "anchor": "tuotetiedot" },
+    { "kind": "prose+table", "content": "03-kokoonpano-tyyppi", "table": "kokoonpano-tyypit", "anchor": "kokoonpano-tyyppi" },
+    { "kind": "prose+table", "content": "03-elementtityyppi", "table": "elementtityypit", "anchor": "elementtityyppi" },
+    { "kind": "prose+table", "content": "03-raudoitus", "table": "raudoitus", "anchor": "raudoitus" },
+    { "kind": "prose+pintakasittely", "content": "03-pintakasittely", "table": "pintakasittely", "anchor": "pintakasittely" },
+    { "kind": "prose+table", "content": "03-varibetoni", "table": "varibetoni", "anchor": "varibetoni" },
+    { "kind": "prose+table", "content": "03-vahahiilinen", "table": "vahahiilinen", "anchor": "vahahiilinen" },
+    { "kind": "prose+table", "content": "03-tyyppielementti", "table": "tyyppielementti", "anchor": "tyyppielementti" },
+    { "kind": "prose+table", "content": "03-kaantokivi", "table": "kaantokivi", "anchor": "kaantokivi" },
+    { "kind": "prose", "content": "04-toimintaohjeita", "anchor": "toimintaohjeita" },
+    { "kind": "glossary", "data": "lyhenteet", "anchor": "lyhenteet", "label": "Lyhenteet" },
+    { "kind": "reinforcement-annex", "data": "raudoitus-esimerkit", "anchor": "liite-1", "label": "Liite 1: Raudoitusesimerkit" },
+    { "kind": "prose", "content": "05-viittaukset", "anchor": "viittaukset" }
+  ]
+}

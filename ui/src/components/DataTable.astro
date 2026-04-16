@@ -1,0 +1,69 @@
+---
+import type { ValueTable, PintakasittelyTable, PintakasittelyArvo } from "../data/soveltamisohje-types";
+import CrossReferenceLink from "./CrossReferenceLink.astro";
+import { elementTypeToProducts } from "../data/soveltamisohje-loader";
+
+interface Props {
+  table: ValueTable | PintakasittelyTable;
+}
+
+const { table } = Astro.props;
+const isPintakasittely = table.arvot.length > 0 && "alavaihtoehdot" in table.arvot[0];
+---
+
+<div class="sov-datatable">
+  <div class="sov-datatable-header">
+    <table class="sov-envelope">
+      <tbody>
+        <tr><th>Tietosisältötarve</th><td>{table.tietosisalto}</td></tr>
+        <tr><th>Rajaukset</th><td>{table.rajaukset}</td></tr>
+        <tr><th>Ominaisuusjoukko</th><td>
+          <code>{table.ominaisuusjoukko}</code>
+          <CrossReferenceLink type="propertySet" code={table.ominaisuusjoukko} />
+        </td></tr>
+        <tr><th>Ominaisuus</th><td>{table.ominaisuus}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <table class="sov-values-table">
+    <caption class="sr-only">Taulukko {table.taulukonNumero}. {table.tietosisalto} — sallitut arvot</caption>
+    <thead>
+      <tr>
+        <th>Koodi</th>
+        <th>Kuvaus</th>
+        {!isPintakasittely && <th class="sov-xref-col"></th>}
+      </tr>
+    </thead>
+    <tbody>
+      {isPintakasittely ? (
+        (table.arvot as PintakasittelyArvo[]).map(arvo => (
+          <>
+            <tr class="sov-pk-group">
+              <td colspan="2"><strong><code>{arvo.koodi}</code></strong> {arvo.kuvaus}</td>
+            </tr>
+            {arvo.alavaihtoehdot?.map(sub => (
+              <tr class="sov-pk-sub">
+                <td><code>{sub.koodi}</code></td>
+                <td>{sub.kuvaus}</td>
+              </tr>
+            ))}
+          </>
+        ))
+      ) : (
+        (table.arvot as { koodi: string; kuvaus: string }[]).map(arvo => (
+          <tr>
+            <td><code>{arvo.koodi}</code></td>
+            <td>{arvo.kuvaus}</td>
+            <td class="sov-xref-col">
+              {elementTypeToProducts.has(arvo.koodi) && (
+                <CrossReferenceLink type="element" code={arvo.koodi} />
+              )}
+            </td>
+          </tr>
+        ))
+      )}
+    </tbody>
+  </table>
+  <p class="sov-table-number">Taulukko {table.taulukonNumero}.</p>
+</div>

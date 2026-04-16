@@ -1,0 +1,43 @@
+{
+  "taulukot": [
+    {
+      "rakennetyyppi": "V",
+      "kuvaus": "Betonirakenteiden paksuudet, lujuudet ja raudoitukset kerrosluvun mukaan",
+      "sarakkeet": ["1.krs 20%", "2.krs 50%", "3–4.krs", "5.krs", "6–9.krs", "10–14.krs", "15–16.krs"],
+      "rivit": [
+        { "ominaisuus": "Paksuus (mm)", "arvot": ["250", "200 / 240 / 250", "200 / 240 / 250", "200 / 220 / 250", "200 / 220 / 250", "200 / 220 / 250", "200 / 220 / 250"] },
+        { "ominaisuus": "Bet. lujuus", "arvot": ["C35/45", "C35/45", "C35/45", "C35/45", "C35/45", "C35/45", "C35/45"] },
+        { "ominaisuus": "Pääteräs", "arvot": ["#10-k200 MP", "#10-k150 MP", "#10-k150 MP", "#10-k150 MP", "#8-k150 MP", "ei verkoraud.", "ei verkoraud."] },
+        { "ominaisuus": "Lisäraudoitus, vaaka", "arvot": ["–", "4+4T16 (VSP)", "–", "–", "–", "–", "–"] },
+        { "ominaisuus": "Haat elem. ymp.", "arvot": ["T10-k200", "T10-k150", "T10-k150", "T10-k150", "T8-k150", "–", "–"] },
+        { "ominaisuus": "Reunaraud. ymp.", "arvot": ["2T12", "2T12", "2T12", "2T12", "2T12", "2T10", "2T10"] },
+        { "ominaisuus": "Pilariosat PT", "arvot": ["–", "4+4T16", "4+4T16", "4+4T16", "4+4T16", "4+4T10", "2+2T10"] },
+        { "ominaisuus": "Pilariosat UH", "arvot": ["–", "T10-k125", "T10-k150", "T10-k150", "T10-k150", "T8-k200", "T8-k200"] },
+        { "ominaisuus": "Palkkiosat PT", "arvot": ["2+2T16", "2+2T20", "2+2T20", "2+2T16", "2+2T16", "2+2T16", "2+2T12"] },
+        { "ominaisuus": "Palkkiosat UH", "arvot": ["T10-k200", "T10-k100", "T10-k100", "T10-k100", "T10-k100", "T10-k150", "T10-k200"] }
+      ]
+    },
+    {
+      "rakennetyyppi": "S, SK (ei parv)",
+      "kuvaus": "Betonirakenteiden paksuudet, lujuudet ja raudoitukset kerrosluvun mukaan",
+      "sarakkeet": ["1.krs", "2.krs", "3–4.krs", "5.krs", "6–9.krs", "10–14.krs", "15–16.krs", "Vesikatto"],
+      "rivit": [
+        { "ominaisuus": "Paksuus (SK), mm", "arvot": ["–", "250", "250", "200", "200", "180", "180", "180"] },
+        { "ominaisuus": "Paksuus (UK), mm", "arvot": ["–", "0", "0", "0 / 135", "0 / 135", "0 / 135", "0 / 135", "135"] },
+        { "ominaisuus": "Bet. lujuus (SK)", "arvot": ["–", "C35/45", "C35/45", "C35/45", "C35/45", "C35/45", "C35/45", "C35/45"] },
+        { "ominaisuus": "Bet. lujuus (UK)", "arvot": ["–", "–", "–", "C30/37 säänkest.", "C30/37 säänkest.", "C30/37 säänkest.", "C30/37 säänkest.", "C30/37 säänkest."] },
+        { "ominaisuus": "Reunaraudoitus ymp. (SK)", "arvot": ["–", "2T12", "2T12", "2T12", "2T12", "2T12", "2T10", "2T12"] },
+        { "ominaisuus": "Reunaraudoitus ymp. (UK)", "arvot": ["–", "–", "–", "1E7", "1E7", "1E7", "1E7", "1E7"] },
+        { "ominaisuus": "Pääteräs (SK)", "arvot": ["–", "#10-K150 MP", "#10-K150 MP", "#8-K150 MP", "#8-K150 MP", "#8-K200 MP (50%)", "#8-K200 MP", "#8-K200 MP"] },
+        { "ominaisuus": "Pääteräs (UK)", "arvot": ["–", "–", "–", "#E5-150", "#E5-150", "#E5-150", "#E5-150", "#E5-150"] },
+        { "ominaisuus": "Haat elem. ymp.", "arvot": ["–", "T10-K150", "T10-K150", "T8-K150", "T8-K150", "T8-K200", "–", "T8-K200"] },
+        { "ominaisuus": "Pilariosat >980 mm (PT)", "arvot": ["–", "2×8T20", "2×8T16", "2×6T20", "2×6T16", "2×6T12", "2×4T10", "–"] },
+        { "ominaisuus": "Pilariosat >980 mm (UH)", "arvot": ["–", "T10-K150", "T10-K150", "T8-K150", "T8-K150", "T8-K150", "T8-K150", "–"] },
+        { "ominaisuus": "Palkkiosat, ikkuna – yläosa (PT)", "arvot": ["–", "2×2T20", "2×2T16", "2×2T16", "2×2T16", "2×2T16", "2×2T12", "–"] },
+        { "ominaisuus": "Palkkiosat, ikkuna – yläosa (UH)", "arvot": ["–", "T10-K100", "T10-K100", "T10-K100", "T10-K125", "T10-K150", "T10-K150", "–"] },
+        { "ominaisuus": "Palkkiosat, ikkuna – alaosa (PT)", "arvot": ["–", "2×2T16", "2×2T16", "2×2T16", "2×2T16", "2×2T16", "2×2T12", "–"] },
+        { "ominaisuus": "Palkkiosat, ikkuna – alaosa (UH)", "arvot": ["–", "T10-K150", "T10-K200", "T10-K200", "T10-K200", "T10-K200", "T10-K200", "–"] }
+      ]
+    }
+  ]
+}

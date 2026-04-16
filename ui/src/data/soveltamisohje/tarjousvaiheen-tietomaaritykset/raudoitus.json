@@ -1,0 +1,19 @@
+{
+  "taulukonNumero": 3,
+  "tietosisalto": "Raudoitusmäärä",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Raudoitus 1, koodi / Raudoitus 1, kuvaus / Raudoitus 2, koodi / Raudoitus 2, kuvaus",
+  "arvot": [
+    { "koodi": "R1", "kuvaus": "Description" },
+    { "koodi": "R2", "kuvaus": "Description" },
+    { "koodi": "R3", "kuvaus": "Description" },
+    { "koodi": "R4", "kuvaus": "Description" },
+    { "koodi": "R5", "kuvaus": "Description" },
+    { "koodi": "R6", "kuvaus": "Description" },
+    { "koodi": "R7", "kuvaus": "Description" },
+    { "koodi": "R8", "kuvaus": "Description" },
+    { "koodi": "R9", "kuvaus": "Description" },
+    { "koodi": "Ei asetettu", "kuvaus": "" }
+  ]
+}
