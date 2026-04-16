@@ -16,6 +16,7 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: `${base}properties`, label: "Properties" },
+  { href: `${base}propertysets`, label: "Property-sets" },
   ...docs.map(d => ({
     href: `${base}soveltamisohje/${d.slug}`,
     label: d.manifest.nav_title,

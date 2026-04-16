@@ -34,6 +34,11 @@ export interface PropertyGroup {
   properties: Property[];
 }
 
+export interface PropertySet {
+  group: string;
+  properties: Property[];
+}
+
 export interface AlaryhmaNode {
   name: string;
   products: Product[];

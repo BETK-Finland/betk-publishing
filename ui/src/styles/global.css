@@ -300,8 +300,41 @@ body.hide-col-generalId [data-column="generalId"],
 body.hide-col-version [data-column="version"],
 body.hide-col-id [data-column="id"],
 body.hide-col-uri [data-column="uri"],
-body.hide-col-description [data-column="description"] {
+body.hide-col-description [data-column="description"],
+body.hide-col-label [data-column="label"],
+body.hide-col-ifcType [data-column="ifcType"],
+body.hide-col-dataType [data-column="dataType"],
+body.hide-col-unit [data-column="unit"],
+body.hide-col-requirement [data-column="requirement"],
+body.hide-col-exampleValue [data-column="exampleValue"],
+body.hide-col-allowedValues [data-column="allowedValues"],
+body.hide-col-propId [data-column="propId"],
+body.hide-col-propVersion [data-column="propVersion"] {
 	display: none;
+}
+
+/* Property-set list & table ----------------------------------------------- */
+
+.property-set-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.propertyset-header h2 {
+	font-size: 14px;
+	color: var(--text-strong);
+}
+
+.propertyset-header .count {
+	color: var(--text-muted);
+	font-family: var(--font-mono);
+	font-size: 11px;
+}
+
+.property-set-table .cell-description {
+	max-width: 360px;
+	white-space: normal;
 }
 
 /* Layout: sidebar + main --------------------------------------------------- */

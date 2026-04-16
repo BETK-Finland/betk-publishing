@@ -11,6 +11,7 @@ import type {
   Product,
   Property,
   PropertyGroup,
+  PropertySet,
   ProductTree,
 } from "./types";
 
@@ -82,6 +83,22 @@ export function resolveProductProperties(product: Product): PropertyGroup[] {
     properties: props,
   }));
 }
+
+// Property sets — properties grouped by their `group` field, in first-seen order.
+function buildPropertySets(items: Property[]): PropertySet[] {
+  const sets = new Map<string, Property[]>();
+  for (const prop of items) {
+    const bucket = sets.get(prop.group);
+    if (bucket) {
+      bucket.push(prop);
+    } else {
+      sets.set(prop.group, [prop]);
+    }
+  }
+  return Array.from(sets.entries()).map(([group, props]) => ({ group, properties: props }));
+}
+
+export const propertySets: PropertySet[] = buildPropertySets(properties);
 
 // Exposed for smoke checks / debug pages.
 export const productCount = products.length;
