@@ -1,15 +1,14 @@
-# Minimal repo for GitHub Pages: only `ui/` (source) + `docs/` (served site).
-# Everything else at the root is excluded until it's cleaned up.
+# Repo for GitHub Pages — deployed via GitHub Actions (no build artifacts in git).
 # Patterns starting with `/` are anchored to the repo root so they don't
 # accidentally match nested folders (e.g. ui/src/data/).
 
-# Top-level directories not needed for GitHub Pages
+# Build output (deployed by CI, not committed)
+/docs/
+
+# Top-level directories not needed
 /.claude/
-/data/
-/mapping/
 /mcp/
 /plans/
-/schema/
 
 # Top-level files not needed
 /CLAUDE.MD
