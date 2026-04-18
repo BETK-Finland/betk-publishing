@@ -1,18 +1,11 @@
 # Repo for GitHub Pages — deployed via GitHub Actions (no build artifacts in git).
 # Patterns starting with `/` are anchored to the repo root so they don't
-# accidentally match nested folders (e.g. ui/src/data/).
-
-# Build output (deployed by CI, not committed)
-/docs/
 
 # Top-level directories not needed
 /.claude/
 /mcp/
 /plans/
-
-# Top-level files not needed
-/CLAUDE.MD
-
+/docs/
 # Node / Astro build artifacts
 ui/node_modules/
 ui/dist/
