@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Sidebar, { type ColumnToggle } from "../components/Sidebar.astro";
 import { propertySets } from "../data/loader";
+import IssueTicket from "../components/IssueTicket.astro";
 
 const columns: ColumnToggle[] = [
 	{ label: "LABEL", column: "label", defaultChecked: true },
@@ -75,6 +76,7 @@ const initialHidden = columns
 			</div>
 		</section>
 	</div>
+	<IssueTicket />
 </Layout>
 
 <script>
