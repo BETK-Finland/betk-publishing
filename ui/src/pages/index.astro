@@ -2,6 +2,7 @@
 import { getEntry, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { listDocs } from "../data/soveltamisohje-loader";
+import IssueTicket from "../components/IssueTicket.astro";
 
 const landingEntry = await getEntry("landing", "landing-page");
 const { Content } = landingEntry ? await render(landingEntry) : { Content: null };
@@ -43,6 +44,7 @@ const navLinks: NavLink[] = [
       </article>
     </section>
   </div>
+  <IssueTicket />
 </Layout>
 
 <style>
