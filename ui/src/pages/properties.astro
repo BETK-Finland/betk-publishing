@@ -4,6 +4,7 @@ import Sidebar, { type ColumnToggle } from "../components/Sidebar.astro";
 import ProductTree from "../components/ProductTree.astro";
 import DetailModal from "../components/DetailModal.astro";
 import { tree } from "../data/loader";
+import IssueTicket from "../components/IssueTicket.astro";
 
 const columns: ColumnToggle[] = [
 	{ label: "TUOTEOSAN NIMI", column: "name", defaultChecked: true },
@@ -23,4 +24,5 @@ const columns: ColumnToggle[] = [
 		</section>
 	</div>
 	<DetailModal />
+	<IssueTicket />
 </Layout>
