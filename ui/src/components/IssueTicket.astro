@@ -1,0 +1,176 @@
+---
+const repo = "betk-finland/betk-publishing";
+const issueUrl = `https://github.com/${repo}/issues/new`;
+---
+
+<div class="issue-ticket" data-issue-ticket data-issue-url={issueUrl}>
+  <button class="issue-ticket__open" type="button">
+    Ilmoita virhe / kehitysidea
+  </button>
+
+  <div class="issue-ticket__backdrop" data-issue-close hidden></div>
+
+  <section class="issue-ticket__dialog" role="dialog" aria-modal="true" hidden>
+    <form class="issue-ticket__form">
+      <div class="issue-ticket__header">
+        <h2>Luo GitHub-tiketti</h2>
+        <button class="issue-ticket__close" type="button" data-issue-close>×</button>
+      </div>
+
+      <label>
+        Tyyppi
+        <select name="type">
+          <option value="bug">Virhe</option>
+          <option value="improvement">Kehitysidea</option>
+          <option value="content">Sisältökorjaus</option>
+          <option value="question">Kysymys</option>
+        </select>
+      </label>
+
+      <label>
+        Otsikko
+        <input name="title" type="text" required placeholder="Lyhyt kuvaus" />
+      </label>
+
+      <label>
+        Kuvaus
+        <textarea name="description" rows="6" required placeholder="Mitä huomasit?"></textarea>
+      </label>
+
+      <button class="issue-ticket__submit" type="submit">
+        Avaa tiketti GitHubissa
+      </button>
+    </form>
+  </section>
+</div>
+
+<script>
+  const ticket = document.querySelector<HTMLElement>("[data-issue-ticket]");
+
+  if (ticket) {
+    const issueUrl = ticket.dataset.issueUrl;
+    const openButton = ticket.querySelector<HTMLButtonElement>(".issue-ticket__open");
+    const dialog = ticket.querySelector<HTMLElement>(".issue-ticket__dialog");
+    const backdrop = ticket.querySelector<HTMLElement>(".issue-ticket__backdrop");
+    const form = ticket.querySelector<HTMLFormElement>(".issue-ticket__form");
+    const closeButtons = ticket.querySelectorAll<HTMLElement>("[data-issue-close]");
+
+    const openDialog = () => {
+      dialog?.removeAttribute("hidden");
+      backdrop?.removeAttribute("hidden");
+    };
+
+    const closeDialog = () => {
+      dialog?.setAttribute("hidden", "");
+      backdrop?.setAttribute("hidden", "");
+    };
+
+    openButton?.addEventListener("click", openDialog);
+    closeButtons.forEach(button => button.addEventListener("click", closeDialog));
+
+    form?.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!issueUrl) return;
+
+      const data = new FormData(form);
+      const type = String(data.get("type") || "");
+      const title = String(data.get("title") || "").trim();
+      const description = String(data.get("description") || "").trim();
+
+      const body = [
+        "## Kuvaus",
+        description,
+        "",
+        "## Lisätiedot",
+        `- Tyyppi: ${type}`,
+        `- Sivu: ${window.location.href}`,
+        `- Selain: ${navigator.userAgent}`,
+      ].join("\n");
+
+      const params = new URLSearchParams({
+        title: `[${type}] ${title}`,
+        body,
+        labels: type,
+      });
+
+      window.open(`${issueUrl}?${params.toString()}`, "_blank", "noopener,noreferrer");
+      closeDialog();
+    });
+  }
+</script>
+
+<style>
+  .issue-ticket__open {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.75rem 1rem;
+    font: inherit;
+    font-weight: 700;
+    color: white;
+    background: #24292f;
+    cursor: pointer;
+  }
+
+  .issue-ticket__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .issue-ticket__dialog {
+    position: fixed;
+    right: 1rem;
+    bottom: 5rem;
+    z-index: 70;
+    width: min(32rem, calc(100vw - 2rem));
+    border-radius: 0.75rem;
+    background: white;
+    color: #24292f;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+  }
+
+  .issue-ticket__form {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .issue-ticket__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .issue-ticket__form label {
+    display: grid;
+    gap: 0.35rem;
+    font-weight: 700;
+  }
+
+  .issue-ticket__form input,
+  .issue-ticket__form select,
+  .issue-ticket__form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d0d7de;
+    border-radius: 0.5rem;
+    padding: 0.65rem;
+    font: inherit;
+  }
+
+  .issue-ticket__submit {
+    border: 0;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+    font: inherit;
+    font-weight: 700;
+    color: white;
+    background: #0969da;
+    cursor: pointer;
+  }
+</style>
