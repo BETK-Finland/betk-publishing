@@ -11,12 +11,14 @@ export interface Product {
   description: string;
   hierarchy: [string, string, string];
   requiredPropertyIds: string[];
+  examples?: string;
 }
 
 export interface Property {
   id: string;
   version: string;
   label: string;
+  becProperty: string;
   group: string;
   ifcPropertyType: string;
   dataType: string;

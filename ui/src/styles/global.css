@@ -302,6 +302,7 @@ body.hide-col-id [data-column="id"],
 body.hide-col-uri [data-column="uri"],
 body.hide-col-description [data-column="description"],
 body.hide-col-label [data-column="label"],
+body.hide-col-bec [data-column="bec"],
 body.hide-col-ifcType [data-column="ifcType"],
 body.hide-col-dataType [data-column="dataType"],
 body.hide-col-unit [data-column="unit"],
@@ -321,9 +322,24 @@ body.hide-col-propVersion [data-column="propVersion"] {
 	gap: 12px;
 }
 
-.propertyset-header h2 {
-	font-size: 14px;
+.discipline-header h2 {
+	font-size: 15px;
 	color: var(--text-strong);
+}
+
+.discipline-header .count {
+	color: var(--text-muted);
+	font-family: var(--font-mono);
+	font-size: 12px;
+}
+
+.discipline-node > .node-body {
+	margin-left: 18px;
+}
+
+.propertyset-header h3 {
+	font-size: 13px;
+	color: var(--accent-teal);
 }
 
 .propertyset-header .count {

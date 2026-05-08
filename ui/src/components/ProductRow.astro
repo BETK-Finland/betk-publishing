@@ -33,6 +33,12 @@ const groups = resolveProductProperties(product);
 					<p class="detail-description">{product.description}</p>
 				</section>
 			)}
+			{product.examples && (
+				<section class="detail-examples-block">
+					<h3 class="detail-subtitle">ESIMERKIT</h3>
+					<p class="detail-description">{product.examples}</p>
+				</section>
+			)}
 			<section class="detail-properties-block">
 				<h3 class="detail-subtitle">
 					TUOTEOSAN VAADITUT OMINAISUUDET (Property Set + Property)
@@ -46,7 +52,12 @@ const groups = resolveProductProperties(product);
 						<ul class="property-list">
 							{g.properties.map((prop) => (
 								<li class="property-row">
-									<span class="property-label">{prop.label}</span>
+									<span class="property-label">
+										{prop.label}
+										{prop.becProperty && (
+											<span class="property-bec"> · BEC: {prop.becProperty}</span>
+										)}
+									</span>
 									<span class="property-badge">{prop.ifcPropertyType}</span>
 									<span class="property-unit">{prop.unit || ""}</span>
 								</li>

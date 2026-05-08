@@ -3,7 +3,9 @@
 // renders.
 
 import productsJson from "./precast.json";
-import propertiesJson from "./precastProperties.json";
+import valutarvikeJson from "./valutarvike.json";
+import precastPropertiesJson from "./precastProperties.json";
+import valutarvikePropertiesJson from "./valutarvikeProperties.json";
 import type {
   AlaryhmaNode,
   KoodistoNode,
@@ -15,8 +17,21 @@ import type {
   ProductTree,
 } from "./types";
 
-const products = productsJson as Product[];
-const properties = propertiesJson as Property[];
+const products = [
+  ...(productsJson as Product[]),
+  ...(valutarvikeJson as unknown as Product[]),
+];
+
+const precastProperties = precastPropertiesJson as Property[];
+const valutarvikeProperties = valutarvikePropertiesJson as Property[];
+
+// Union of all property catalogs — valutarvike's IDs overlap with precast,
+// so duplicates collapse to one entry (later inserts win, but content is shared).
+const properties: Property[] = Array.from(
+  new Map(
+    [...precastProperties, ...valutarvikeProperties].map((p) => [p.id, p]),
+  ).values(),
+);
 
 export const propertyMap: Map<string, Property> = new Map(
   properties.map((p) => [p.id, p]),
@@ -63,13 +78,16 @@ function buildTree(items: Product[]): ProductTree {
 
 export const tree: ProductTree = buildTree(products);
 
-export function resolveProductProperties(product: Product): PropertyGroup[] {
-  // Preserve the order ids appear in the product, but collapse into groups.
-  const groups = new Map<string, Property[]>();
+// Discipline-level catalogs. Used for products whose requiredPropertyIds
+// is empty — the discipline's catalog defines the applicable property set.
+const disciplineCatalogs: Record<string, Property[]> = {
+  PRECAST: precastProperties,
+  VALUTARVIKE: valutarvikeProperties,
+};
 
-  for (const id of product.requiredPropertyIds) {
-    const prop = propertyMap.get(id);
-    if (!prop) continue; // missing ids are silently skipped; surface in a log if needed
+function groupProperties(items: Property[]): PropertyGroup[] {
+  const groups = new Map<string, Property[]>();
+  for (const prop of items) {
     const bucket = groups.get(prop.group);
     if (bucket) {
       bucket.push(prop);
@@ -77,11 +95,25 @@ export function resolveProductProperties(product: Product): PropertyGroup[] {
       groups.set(prop.group, [prop]);
     }
   }
-
   return Array.from(groups.entries()).map(([group, props]) => ({
     group,
     properties: props,
   }));
+}
+
+export function resolveProductProperties(product: Product): PropertyGroup[] {
+  if (product.requiredPropertyIds.length === 0) {
+    const catalog = disciplineCatalogs[product.discipline];
+    return catalog ? groupProperties(catalog) : [];
+  }
+
+  // Preserve the order ids appear in the product, but collapse into groups.
+  const resolved: Property[] = [];
+  for (const id of product.requiredPropertyIds) {
+    const prop = propertyMap.get(id);
+    if (prop) resolved.push(prop);
+  }
+  return groupProperties(resolved);
 }
 
 // Property sets — properties grouped by their `group` field, in first-seen order.
@@ -99,6 +131,26 @@ function buildPropertySets(items: Property[]): PropertySet[] {
 }
 
 export const propertySets: PropertySet[] = buildPropertySets(properties);
+
+export interface DisciplinePropertySets {
+  discipline: string;
+  label: string;
+  sets: PropertySet[];
+}
+
+// Per-discipline property catalogs for the /propertysets view.
+export const propertySetsByDiscipline: DisciplinePropertySets[] = [
+  {
+    discipline: "PRECAST",
+    label: "Betonielementit",
+    sets: buildPropertySets(precastProperties),
+  },
+  {
+    discipline: "VALUTARVIKE",
+    label: "Valutarvikkeet",
+    sets: buildPropertySets(valutarvikeProperties),
+  },
+];
 
 // Exposed for smoke checks / debug pages.
 export const productCount = products.length;
