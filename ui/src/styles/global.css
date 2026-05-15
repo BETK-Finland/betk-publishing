@@ -557,6 +557,13 @@ body.hide-col-propVersion [data-column="propVersion"] {
   margin: 0 0 12px;
 }
 
+.sov-prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 16px 0;
+}
+
 /* Data tables */
 
 .sov-datatable {

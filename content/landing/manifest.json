@@ -1,0 +1,9 @@
+{
+  "slug": "landing",
+  "nav_title": "Etusivu",
+  "sections": [
+    { "kind": "prose", "content": "01-tervetuloa", "anchor": "tervetuloa" },
+    { "kind": "prose", "content": "02-mita-on-betk", "anchor": "mita-on-betk" },
+    { "kind": "prose", "content": "03-aineisto", "anchor": "aineisto" }
+  ]
+}

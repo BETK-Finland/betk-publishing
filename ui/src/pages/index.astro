@@ -1,12 +1,13 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { listDocs } from "../data/soveltamisohje-loader";
+import ProseSection from "../components/ProseSection.astro";
 import IssueTicket from "../components/IssueTicket.astro";
+import { listDocs } from "../data/soveltamisohje-loader";
+import { getLandingMeta, getLandingManifest } from "../data/landing-loader";
 
-const landingEntry = await getEntry("landing", "landing-page");
-const { Content } = landingEntry ? await render(landingEntry) : { Content: null };
-
+const meta = getLandingMeta();
+const manifest = getLandingManifest();
 const base = import.meta.env.BASE_URL;
 const docs = listDocs();
 
@@ -23,9 +24,35 @@ const navLinks: NavLink[] = [
     label: d.manifest.nav_title,
   })),
 ];
+
+const entries = await getCollection("landing");
+const byId = new Map(entries.map(e => [e.id, e]));
+
+type Rendered = {
+  anchor: string;
+  sectionNumber: string;
+  title: string;
+  Content: any;
+};
+
+async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
+  const entry = byId.get(section.content);
+  if (!entry) return null;
+  const { Content } = await render(entry);
+  return {
+    anchor: section.anchor,
+    sectionNumber: entry.data.section,
+    title: entry.data.title,
+    Content,
+  };
+}
+
+const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filter(
+  (r): r is Rendered => r !== null,
+);
 ---
 
-<Layout title="BETK — Betonielementin toimitusketju">
+<Layout title={meta.otsikko}>
   <div class="app-main">
     <aside class="sidebar">
       <section class="column-filter">
@@ -39,8 +66,13 @@ const navLinks: NavLink[] = [
     </aside>
     <section class="landing-body">
       <article class="sov-document">
-        <h1>{landingEntry?.data.title ?? "BETK — Betonielementin toimitusketju"}</h1>
-        {Content && <Content />}
+        <h1>{meta.otsikko}</h1>
+        {meta.alaotsikko && <p class="sov-subtitle">{meta.alaotsikko}</p>}
+        {resolved.map(r => (
+          <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+            <r.Content />
+          </ProseSection>
+        ))}
       </article>
     </section>
   </div>
@@ -71,5 +103,11 @@ const navLinks: NavLink[] = [
   .landing-body {
     padding: 2rem;
     overflow-y: auto;
+  }
+  .sov-subtitle {
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--muted, #666);
+    font-style: italic;
   }
 </style>

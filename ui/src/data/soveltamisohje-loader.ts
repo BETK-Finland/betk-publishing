@@ -1,7 +1,7 @@
 // Build-time loader for soveltamisohje docs.
-// Discovers per-doc folders under ./soveltamisohje/<slug>/ and exposes a
-// getDoc(slug) / listDocs() API so pages and the landing-page nav can be
-// driven from manifests instead of hardcoded imports.
+// Discovers per-doc folders under /content/soveltamisohje/<slug>/ (repo root)
+// and exposes a getDoc(slug) / listDocs() API so pages and the landing-page
+// nav can be driven from manifests instead of hardcoded imports.
 
 import type { Product, Property } from "./types";
 import type {
@@ -44,29 +44,31 @@ export interface Manifest {
 
 // --- Glob imports (eager, build-time) ---
 
-// Path keys look like: ./soveltamisohje/<slug>/<file>.json
+// Path keys look like: ../../../content/soveltamisohje/<slug>/(meta|manifest).json
+// and ../../../content/soveltamisohje/<slug>/tables/<file>.json
 const metaModules = import.meta.glob<DocumentMeta>(
-  "./soveltamisohje/*/meta.json",
+  "../../../content/soveltamisohje/*/meta.json",
   { eager: true, import: "default" },
 );
 const manifestModules = import.meta.glob<Manifest>(
-  "./soveltamisohje/*/manifest.json",
+  "../../../content/soveltamisohje/*/manifest.json",
   { eager: true, import: "default" },
 );
-// Everything else under each doc folder — table data, glossary, annex examples.
+// Table data, glossary, annex examples — co-located under each doc's tables/ folder.
 const dataModules = import.meta.glob<unknown>(
-  "./soveltamisohje/*/*.json",
+  "../../../content/soveltamisohje/*/tables/*.json",
   { eager: true, import: "default" },
 );
 
 function slugFromPath(path: string): string {
-  // ./soveltamisohje/<slug>/<file>.json -> <slug>
-  const parts = path.split("/");
-  return parts[parts.length - 2];
+  // Captures <slug> from any path containing soveltamisohje/<slug>/...
+  const m = path.match(/soveltamisohje\/([^/]+)\//);
+  if (!m) throw new Error(`Cannot extract slug from path: ${path}`);
+  return m[1];
 }
 
 function basenameFromPath(path: string): string {
-  // ./soveltamisohje/<slug>/<file>.json -> <file>
+  // <something>/<file>.json -> <file>
   const file = path.split("/").pop()!;
   return file.replace(/\.json$/, "");
 }
@@ -102,7 +104,6 @@ for (const [path, manifest] of Object.entries(manifestModules)) {
 for (const [path, data] of Object.entries(dataModules)) {
   const slug = slugFromPath(path);
   const name = basenameFromPath(path);
-  if (name === "meta" || name === "manifest") continue;
   if (docs[slug]) {
     docs[slug].tables[name] = data as ValueTable | PintakasittelyTable | Lyhenteet | RaudoitusEsimerkit;
   }

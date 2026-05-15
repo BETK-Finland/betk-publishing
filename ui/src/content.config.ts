@@ -2,7 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const soveltamisohje = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/soveltamisohje" }),
+  loader: glob({ pattern: "*/[0-9]*.md", base: "../content/soveltamisohje" }),
   schema: z.object({
     title: z.string(),
     order: z.number(),
@@ -11,9 +11,11 @@ const soveltamisohje = defineCollection({
 });
 
 const landing = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/landing" }),
+  loader: glob({ pattern: "[0-9]*.md", base: "../content/landing" }),
   schema: z.object({
     title: z.string(),
+    order: z.number(),
+    section: z.string(),
   }),
 });
 
