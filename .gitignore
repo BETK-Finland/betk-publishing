@@ -5,15 +5,11 @@
 /.claude/
 /mcp/
 /plans/
-/docs/
-# Node / Astro build artifacts
-ui/node_modules/
-ui/dist/
-ui/.astro/
 
 # OS / editor noise
 .DS_Store
 Thumbs.db
+CLAUDE.MD
 .vscode/
 .idea/
 *.log
