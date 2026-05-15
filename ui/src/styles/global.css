@@ -755,7 +755,9 @@ body.hide-col-propVersion [data-column="propVersion"] {
 
   /* Hide interactive elements */
   .sov-toc,
-  .sov-xref-badge {
+  .sov-xref-badge,
+  .sidebar,
+  .issue-ticket {
     display: none !important;
   }
 
@@ -800,8 +802,14 @@ body.hide-col-propVersion [data-column="propVersion"] {
   /* Force details open via attribute (CSS cannot toggle open; JS handles it) */
 
   /* Layout: single column for print */
-  .sov-layout {
+  .sov-layout,
+  .app-main {
     display: block;
+  }
+
+  .landing-body {
+    padding: 0;
+    overflow: visible;
   }
 
   .sov-document {
@@ -868,7 +876,12 @@ body.hide-col-propVersion [data-column="propVersion"] {
   @page {
     margin: 2cm;
     @bottom-center {
-      content: "BETK Soveltamisohje v1.0 — 17.12.2025";
+      content: "BETK — Betonielementin toimitusketju";
+      font-size: 8pt;
+      color: #666;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
       font-size: 8pt;
       color: #666;
     }

@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProseSection from "../components/ProseSection.astro";
+import PrintToc from "../components/PrintToc.astro";
 import IssueTicket from "../components/IssueTicket.astro";
 import { listDocs } from "../data/soveltamisohje-loader";
 import { getLandingMeta, getLandingManifest } from "../data/landing-loader";
@@ -50,6 +51,8 @@ async function resolveSection(section: typeof manifest.sections[number]): Promis
 const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filter(
   (r): r is Rendered => r !== null,
 );
+
+const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }));
 ---
 
 <Layout title={meta.otsikko}>
@@ -66,8 +69,15 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
     </aside>
     <section class="landing-body">
       <article class="sov-document">
-        <h1>{meta.otsikko}</h1>
-        {meta.alaotsikko && <p class="sov-subtitle">{meta.alaotsikko}</p>}
+        <header class="sov-header">
+          <h1 class="sov-title">{meta.otsikko}</h1>
+          {meta.alaotsikko && <p class="sov-subtitle"><strong>{meta.alaotsikko}</strong></p>}
+          {meta.paivamaara && (
+            <div class="sov-meta"><p>Päivämäärä: {meta.paivamaara}</p></div>
+          )}
+          <p class="sov-print-date" aria-hidden="true"></p>
+        </header>
+        <PrintToc sections={tocItems} />
         {resolved.map(r => (
           <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
             <r.Content />
@@ -78,6 +88,20 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
   </div>
   <IssueTicket />
 </Layout>
+
+<script>
+  // Print date stamp — set on beforeprint, visible only in print CSS
+  const el = document.querySelector(".sov-print-date");
+  if (el) {
+    window.addEventListener("beforeprint", () => {
+      el.textContent = `Tulostettu: ${new Date().toLocaleDateString("fi-FI")}`;
+    });
+  }
+  // Force all <details> open before print
+  window.addEventListener("beforeprint", () => {
+    document.querySelectorAll("details").forEach(d => d.setAttribute("open", ""));
+  });
+</script>
 
 <style>
   .landing-nav-list {
@@ -103,11 +127,5 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
   .landing-body {
     padding: 2rem;
     overflow-y: auto;
-  }
-  .sov-subtitle {
-    margin-top: -0.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--muted, #666);
-    font-style: italic;
   }
 </style>
