@@ -10,7 +10,6 @@ IFC-tietomallistandardissa rakenneosien tunnistamiseksi objekteille voidaan mä�
 Tämä soveltamisohje on tehty osana Rakennusteollisuus RT:n tuotetiedon ja toimitusketjun digitalisoinnin kehityshanketta, BETK-työryhmän toimesta. Kehityshankkeen ensisijainen tavoite on edistää rakennusalan tuotteiden toimitusketjun hallinnan menetelmien siirtymistä manuaalisesta ja rakenteettomasta tiedonvaihdosta täysin rakenteelliseen ja koneluettavaan tiedonvaihtoon. Asiakirja on jatkuvasti päivittyvä ja sitä kehitetään edelleen Rakennusteollisuus RT:n kehityshankkeen havaintojen perusteella. Tätä ohjetta täydentävät muut BETK-hankkeen julkaisut:
 
 - BETK Soveltamisohje: Tuoteyksilöinti ja -tunnistaminen
-- Excel-taulukko muuttujista
 - Esimerkkimalli IFC4x3-muodossa
 - Soveltamisohje tapahtumatiedon  käytöstä (GS1 EPCIS) [työnalla]
 - Keskustelupaperi sijaintitiedoista betonielementtien toimitusketjussa
