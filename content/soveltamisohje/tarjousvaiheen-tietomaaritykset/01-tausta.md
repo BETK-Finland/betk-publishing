@@ -13,5 +13,5 @@ Tämä soveltamisohje on tehty osana Rakennusteollisuus RT:n tuotetiedon ja toim
 - Excel-taulukko muuttujista
 - Esimerkkimalli IFC4x3-muodossa
 - Soveltamisohje tapahtumatiedon  käytöstä (GS1 EPCIS) [työnalla]
-- Keskustelupaperi sijaintitiedoista rakennushankkeessa
+- Keskustelupaperi sijaintitiedoista betonielementtien toimitusketjussa
   
