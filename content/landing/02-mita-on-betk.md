@@ -10,5 +10,6 @@ Aikaisempaan [BEC2012](https://www.elementtisuunnittelu.fi/suunnitteluprosessi/m
 
 - määrittää sallitut arvot tietokentille
 - mahdollistaa elementtityyppien automaattisen tunnistamisen IFC-tietomallista
+- tietokenttien ryhmittely ja päivityksiä nimeämiseen
 
 ![Mörkö](./images/morko.png)
