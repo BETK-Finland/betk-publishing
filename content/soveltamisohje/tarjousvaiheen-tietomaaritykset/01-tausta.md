@@ -11,7 +11,7 @@ Tämä soveltamisohje on tehty osana Rakennusteollisuus RT:n tuotetiedon ja toim
 
 - BETK Soveltamisohje: Tuoteyksilöinti ja -tunnistaminen
 - Excel-taulukko muuttujista
-- Esimerkki malli IFC-muodossa
-- Soveltamisohje GS1 EPCIS (tapahtumatieto) käytöstä [syksyllä tehdään]
+- Esimerkkimalli IFC4x3-muodossa
+- Soveltamisohje tapahtumatiedon  käytöstä (GS1 EPCIS) [työnalla]
 - Keskustelupaperi sijaintitiedoista rakennushankkeessa
-- Huomioita sijaintiedosta betonielementtien toimitusketjussa
+  
