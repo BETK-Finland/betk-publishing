@@ -9,5 +9,6 @@ Sivustolta löytyy tällä hetkellä:
 - **Soveltamisohjeet** — Tarjousvaiheen tietomääritykset ja toteutusvaiheen tietomalliohjeita toimitusketjulle. Sisältää elementtityypit, kokoonpanotyypit, raudoituksen, pintakäsittelyn ja muut tiedonsiirrossa käytettävät ominaisuudet.
 - **Property-selain** — BETK-ominaisuuksien interaktiivinen tutkiminen tuotetyyppikohtaisesti.
 - **Property Sets** — Ominaisuusjoukkojen kuvaukset IFC-kytkennöineen.
-
+- **BETK Esimerkkimalli IFC4x3.ifc** — Esimerkkimalli ifc-muodossa.
+- 
 Aineistoa kehitetään jatkuvasti Rakennusteollisuus RT:n BETK-työryhmän toimesta.
