@@ -8,8 +8,9 @@ BETK (Betonielementin toimitusketju) on Rakennusteollisuus RT:n kehityshankkeen 
 
 Aikaisempaan [BEC2012](https://www.elementtisuunnittelu.fi/suunnitteluprosessi/mallintava-suunnittelu) -malliin verrattuna BETK:
 
-- määrittää sallitut arvot tietokentille
 - mahdollistaa elementtityyppien automaattisen tunnistamisen IFC-tietomallista
+- pintakäsittelytiedon välittämiseen tietokentät ja niille sallitut arvot
+- määrittää sallittuja arvoja  muille tietokentille, kuten esim. rasitusluokat. 
 - tietokenttien ryhmittely ja päivityksiä nimeämiseen
 
 ![Mörkö](./images/morko.png)
