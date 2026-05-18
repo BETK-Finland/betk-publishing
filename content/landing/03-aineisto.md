@@ -10,5 +10,5 @@ Sivustolta löytyy tällä hetkellä:
 - **Property-selain** — BETK-ominaisuuksien interaktiivinen tutkiminen tuotetyyppikohtaisesti.
 - **Property Sets** — Ominaisuusjoukkojen kuvaukset IFC-kytkennöineen.
 - **BETK Esimerkkimalli IFC4x3.ifc** — Esimerkkimalli ifc-muodossa.
-- 
+  
 Aineistoa kehitetään jatkuvasti Rakennusteollisuus RT:n BETK-työryhmän toimesta.
