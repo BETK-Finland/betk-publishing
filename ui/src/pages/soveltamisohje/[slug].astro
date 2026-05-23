@@ -22,6 +22,8 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const doc = getDoc(slug!);
 const { meta, manifest, tables } = doc;
+const allDocs = listDocs();
+const base = import.meta.env.BASE_URL;
 
 // Collection entries for this doc; entry ids are "<slug>/<filename-without-ext>".
 const allEntries = await getCollection("soveltamisohje");
@@ -109,7 +111,22 @@ const tocItems = resolved.map(r => {
 
 <Layout title={`BETK — ${meta.otsikko}`}>
   <div class="sov-layout">
-    <SoveltamisohjeToc items={tocItems} />
+    <div class="sov-sidebar">
+      <nav class="sov-doc-nav" aria-label="Dokumentit">
+        <p class="sidebar-heading">DOKUMENTIT</p>
+        <ul class="sov-toc-list">
+          {allDocs.map(d => (
+            <li>
+              <a
+                href={`${base}soveltamisohje/${d.slug}`}
+                class={`sov-toc-link${d.slug === slug ? " active" : ""}`}
+              >{d.manifest.nav_title}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <SoveltamisohjeToc items={tocItems} />
+    </div>
     <article class="sov-document">
       <SoveltamisohjeHeader meta={meta} />
       <PrintToc sections={tocItems} />
@@ -164,6 +181,7 @@ const tocItems = resolved.map(r => {
     </article>
   </div>
 </Layout>
+
 
 <script>
   // Print date stamp — set on beforeprint, visible only in print CSS
