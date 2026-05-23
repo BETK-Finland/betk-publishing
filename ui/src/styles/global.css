@@ -426,9 +426,25 @@ body.hide-col-propVersion [data-column="propVersion"] {
   align-items: start;
 }
 
-.sov-toc {
+.sov-sidebar {
   position: sticky;
   top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.sov-doc-nav {
+  background: var(--surface);
+  border: 1px solid var(--separator);
+  border-radius: 6px;
+  padding: 16px 18px;
+  flex-shrink: 0;
+}
+
+.sov-toc {
   background: var(--surface);
   border: 1px solid var(--separator);
   border-radius: 6px;
