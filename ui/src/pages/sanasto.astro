@@ -229,6 +229,48 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 
     .sn-view-panel a { color: var(--accent-blue); }
     .sn-view-panel a:hover { color: var(--accent-teal); }
+
+    /* Tablet (641px – 1024px) */
+    @media screen and (max-width: 1024px) {
+      .sn-layout {
+        grid-template-columns: 220px 1fr;
+      }
+    }
+
+    /* Mobile (≤ 640px) */
+    @media screen and (max-width: 640px) {
+      .sn-page {
+        margin: -16px;
+      }
+
+      .sn-toolbar {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 8px 12px;
+      }
+
+      .sn-search {
+        width: 100%;
+        flex: 1 1 100%;
+        order: -1;
+      }
+
+      .sn-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      .sn-list-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--separator);
+        max-height: 38vh;
+      }
+
+      .sn-view-panel {
+        max-height: none;
+        padding: 16px;
+      }
+    }
   </style>
 
   <script define:vars={{ sanastoDataUrl }}>
