@@ -24,6 +24,7 @@ const navLinks: NavLink[] = [
     href: `${base}soveltamisohje/${d.slug}`,
     label: d.manifest.nav_title,
   })),
+  { href: `${base}sanasto`, label: "Digisanasto" },
 ];
 
 const entries = await getCollection("landing");
