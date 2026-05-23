@@ -374,7 +374,7 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
         openFromHash();
       });
 
-    function setLang(l) {
+    window.setLang = function setLang(l) {
       currentLang = l;
       document.getElementById("langBtn").textContent = l.toUpperCase();
       renderList();
@@ -475,7 +475,7 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 </div>`;
     }
 
-    function renderConcept(id) {
+    window.renderConcept = function renderConcept(id) {
       const c = concepts[map[id]];
       if (!c) return;
       const t = UI[currentLang];
@@ -570,7 +570,7 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
     window.addEventListener("hashchange", openFromHash);
     document.getElementById("search").addEventListener("input", renderList);
 
-    function exportJSONLD() {
+    window.exportJSONLD = function exportJSONLD() {
       const a = document.createElement("a");
       a.href = SANASTO_DATA_URL;
       a.download = "sanasto.jsonld";
