@@ -60,7 +60,7 @@ const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }))
   <div class="app-main">
     <aside class="sidebar">
       <section class="column-filter">
-        <h2 class="sidebar-heading">NAVIGAATIO</h2>
+        <h2 class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</h2>
         <ul class="landing-nav-list">
           {navLinks.map(link => (
             <li><a class="landing-nav-link" href={link.href}>{link.label}</a></li>
