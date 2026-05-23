@@ -12,7 +12,7 @@ const { items } = Astro.props;
 ---
 
 <nav class="sov-toc" aria-label="Sisällysluettelo">
-  <p class="sidebar-heading">SISÄLLYSLUETTELO</p>
+  <p class="sidebar-heading" data-i18n="toc.heading">SISÄLLYSLUETTELO</p>
   <ul class="sov-toc-list">
     {items.map(s => (
       <li><a href={`#${s.anchor}`} class="sov-toc-link">{s.label}</a></li>

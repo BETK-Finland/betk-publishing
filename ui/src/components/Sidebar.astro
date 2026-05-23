@@ -8,6 +8,7 @@ export interface ColumnToggle {
 	label: string;
 	column: string;
 	defaultChecked: boolean;
+	i18nKey?: string;
 }
 
 interface Props {
@@ -21,11 +22,15 @@ const {
 	heading = "SARAKKEIDEN SUODATUS",
 	alwaysOnLabel,
 } = Astro.props;
+
+const headingKey = heading === "SARAKKEIDEN SUODATUS" ? "sidebar.columns"
+  : heading === "NAVIGAATIO" ? "sidebar.navigation"
+  : null;
 ---
 
 <aside class="sidebar">
 	<section class="column-filter">
-		<h2 class="sidebar-heading">{heading}</h2>
+		<h2 class="sidebar-heading" data-i18n={headingKey || undefined}>{heading}</h2>
 		<ul class="column-filter-list">
 			{columns.map((col) => (
 				<li>
@@ -36,7 +41,7 @@ const {
 							data-column={col.column}
 							checked={col.defaultChecked}
 						/>
-						<span>{col.label}</span>
+						<span data-i18n={col.i18nKey}>{col.label}</span>
 					</label>
 				</li>
 			))}
@@ -44,7 +49,7 @@ const {
 				<li class="always-on">
 					<span class="checkbox-row">
 						<span class="always-on-indicator" aria-hidden="true">●</span>
-						<span>{alwaysOnLabel}</span>
+						<span data-i18n={alwaysOnLabel === "TIEDOT" ? "sidebar.data" : undefined}>{alwaysOnLabel}</span>
 					</span>
 				</li>
 			)}
