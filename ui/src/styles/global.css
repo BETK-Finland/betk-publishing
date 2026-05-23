@@ -740,6 +740,85 @@ body.hide-col-propVersion [data-column="propVersion"] {
   display: none;
 }
 
+/* Responsive: tablet (641px – 1024px) -------------------------------------- */
+
+@media screen and (max-width: 1024px) {
+  .app-main {
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+  }
+
+  .sov-layout {
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+  }
+}
+
+/* Responsive: mobile (≤ 640px) --------------------------------------------- */
+
+@media screen and (max-width: 640px) {
+  .app-header {
+    padding: 14px 16px;
+  }
+
+  .app-header h1 {
+    font-size: 14px;
+  }
+
+  .app-nav {
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .app-nav a {
+    font-size: 11px;
+  }
+
+  .app-body {
+    padding: 16px;
+  }
+
+  /* Properties / Etusivu: sidebar stacks above content */
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  /* Soveltamisohje: single column */
+  .sov-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sov-sidebar {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .sov-document {
+    max-width: 100%;
+  }
+
+  /* Landing page */
+  .landing-body {
+    padding: 1rem;
+  }
+
+  /* Tables: horizontal scroll on narrow screens */
+  .sov-datatable,
+  .sov-reinforcement-table,
+  .sov-meta-table,
+  .sov-glossary-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Print styles ------------------------------------------------------------- */
 
 @media print {
