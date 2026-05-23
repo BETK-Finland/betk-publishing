@@ -8,14 +8,6 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
     <div class="sn-toolbar">
       <input id="search" class="sn-search" placeholder="Hae käsitettä..." />
       <div class="sn-dropdown">
-        <button id="langBtn" class="sn-dropbtn">FI</button>
-        <div class="sn-dropdown-menu">
-          <button onclick="setLang('fi')">Suomi</button>
-          <button onclick="setLang('sv')">Svenska</button>
-          <button onclick="setLang('en')">English</button>
-        </div>
-      </div>
-      <div class="sn-dropdown">
         <button class="sn-dropbtn">Export</button>
         <div class="sn-dropdown-menu">
           <button onclick="exportJSONLD()">JSON-LD</button>
@@ -351,7 +343,8 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
       sanasto: { fi: "Sanasto", sv: "Terminologi", en: "Vocabulary" }
     };
 
-    let currentLang = "fi";
+    const LANGS = ["fi", "sv", "en"];
+    let currentLang = LANGS.includes(localStorage.getItem("betk-lang")) ? localStorage.getItem("betk-lang") : "fi";
     let concepts = [];
     let map = {};
 
@@ -416,9 +409,8 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
         openFromHash();
       });
 
-    window.setLang = function setLang(l) {
+    function applyLang(l) {
       currentLang = l;
-      document.getElementById("langBtn").textContent = l.toUpperCase();
       renderList();
       const m = location.hash.match(/^#\/concept\/(.+)$/);
       if (m) {
@@ -427,6 +419,8 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
         renderHome();
       }
     }
+
+    window.addEventListener("betk-lang-change", e => applyLang(e.detail));
 
     function term(c) {
       return c.terms.find(t => t.lang === currentLang) || c.terms[0];
