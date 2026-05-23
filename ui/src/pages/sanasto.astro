@@ -252,9 +252,9 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
         homeTitle: "Rakennusalan digisanasto",
         homeAbout: "Tietoa sanastosta",
         homeText1: "Rakennusalan digisanasto kokoaa digitaaliseen rakennettuun ympäristöön liittyviä keskeisiä käsitteitä ja termejä.",
-        homeText2: "Sanasto on epävirallinen ja se on laadittu osana väitöskirjatutkimusta.",
         homeAuthor: "Tekijä",
         homeUsage: "Sanaston käyttö",
+        homeUsageItems: ["Valitse käsite vasemman reunan listasta", "Voit hakea käsitteitä hakukentällä", "Käsitteestä näet termit eri kielillä", "Määritelmät ja huomautukset näkyvät käsitenäkymässä"],
         homeScope: "Sanaston laajuus",
         homeFeedback: "Voit antaa palautetta sanastosta tai ehdottaa uusia käsitteitä.",
         homeFeedbackBtn: "Anna palautetta sanastosta",
@@ -274,9 +274,9 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
         homeTitle: "Byggbranschens digitala ordlista",
         homeAbout: "Om ordlistan",
         homeText1: "Den digitala ordlistan för byggbranschen samlar centrala begrepp och termer kopplade till den digitala byggda miljön.",
-        homeText2: "Ordlistan är informell och har skapats som en del av en doktorsavhandling.",
         homeAuthor: "Författare",
         homeUsage: "Hur ordlistan används",
+        homeUsageItems: ["Välj ett begrepp från listan till vänster", "Du kan söka begrepp i sökfältet", "Se termerna på olika språk i begreppsvyn", "Definitioner och anmärkningar visas i begreppsvyn"],
         homeScope: "Ordlistans omfattning",
         homeFeedback: "Du kan ge respons på ordlistan eller föreslå nya begrepp.",
         homeFeedbackBtn: "Ge respons om ordlistan",
@@ -296,9 +296,9 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
         homeTitle: "Digital Construction Glossary",
         homeAbout: "About the glossary",
         homeText1: "The digital construction glossary collects key concepts and terms related to the digital built environment.",
-        homeText2: "The glossary is informal and created as part of a doctoral research project.",
         homeAuthor: "Author",
         homeUsage: "Using the glossary",
+        homeUsageItems: ["Select a concept from the list on the left", "You can search for concepts using the search field", "See terms in different languages in the concept view", "Definitions and notes are shown in the concept view"],
         homeScope: "Glossary scope",
         homeFeedback: "You can give feedback on the glossary or suggest new concepts.",
         homeFeedbackBtn: "Give feedback on the glossary",
@@ -450,7 +450,6 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 <div class="section">
   <h3>${t.homeAbout}</h3>
   <p>${t.homeText1}</p>
-  <p><b>${t.homeText2}</b></p>
 </div>
 <div class="section">
   <h3>${t.homeAuthor}</h3>
@@ -458,12 +457,7 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 </div>
 <div class="section">
   <h3>${t.homeUsage}</h3>
-  <ul>
-    <li>Valitse käsite vasemman reunan listasta</li>
-    <li>Voit hakea käsitteitä hakukentällä</li>
-    <li>Käsitteestä näet termit eri kielillä</li>
-    <li>Määritelmät ja huomautukset näkyvät käsitenäkymässä</li>
-  </ul>
+  <ul>${t.homeUsageItems.map(item => `<li>${item}</li>`).join("")}</ul>
 </div>
 <div class="section">
   <h3>${t.homeScope}</h3>
