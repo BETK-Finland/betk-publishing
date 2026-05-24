@@ -1,0 +1,13 @@
+{
+  "slug": "tuoteyksiloinnin-yhteentoimivuus",
+  "nav_title": "Tuoteyksilöinnin ja -tunnistamisen yhteentoimivuuden soveltamisohje",
+  "sections": [
+    { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
+    { "kind": "prose", "content": "02-tarkoitus", "anchor": "tarkoitus" },
+    { "kind": "prose", "content": "03-tuoteyksilointi", "anchor": "tuoteyksilointi" },
+    { "kind": "prose", "content": "04-tunnistaminen", "anchor": "tunnistaminen" },
+    { "kind": "prose", "content": "05-lyhenteet", "anchor": "lyhenteet" },
+    { "kind": "prose", "content": "06-viittaukset", "anchor": "viittaukset" },
+    { "kind": "prose", "content": "07-liite", "anchor": "liite-1" }
+  ]
+}
