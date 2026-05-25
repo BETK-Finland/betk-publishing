@@ -89,7 +89,7 @@ async function resolveSection(section: typeof manifest.sections[number]): Promis
       return { kind: "prose+table", ...base, table };
     }
     if (section.kind === "prose+gs1tables") {
-      const data = tables[section.table!] as Gs1AiTaulukot | undefined;
+      const data = tables[section.table!] as unknown as Gs1AiTaulukot | undefined;
       if (!data) return null;
       return { kind: "prose+gs1tables", ...base, data };
     }

@@ -10,7 +10,6 @@ import type {
   PintakasittelyTable,
   Lyhenteet,
   RaudoitusEsimerkit,
-  Gs1AiTaulukot,
 } from "./soveltamisohje-types";
 
 import productsJson from "./precast.json";
