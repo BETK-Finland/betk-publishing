@@ -580,6 +580,30 @@ body.hide-col-propVersion [data-column="propVersion"] {
   margin: 16px 0;
 }
 
+.sov-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--surface);
+  margin: 12px 0 16px;
+}
+
+.sov-prose th {
+  text-align: left;
+  padding: 8px 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--separator);
+}
+
+.sov-prose td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--separator);
+}
+
 /* Data tables */
 
 .sov-datatable {
