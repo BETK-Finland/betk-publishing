@@ -19,4 +19,13 @@ const landing = defineCollection({
   }),
 });
 
-export const collections = { soveltamisohje, landing };
+const peppol = defineCollection({
+  loader: glob({ pattern: "[0-9]*.md", base: "../content/peppol" }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    section: z.string(),
+  }),
+});
+
+export const collections = { soveltamisohje, landing, peppol };

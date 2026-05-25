@@ -1,0 +1,9 @@
+{
+  "slug": "peppol",
+  "nav_title": "Peppol",
+  "sections": [
+    { "kind": "prose", "content": "01-johdanto", "anchor": "johdanto" },
+    { "kind": "prose", "content": "02-miksi", "anchor": "miksi" },
+    { "kind": "prose", "content": "03-raksa", "anchor": "raksa" }
+  ]
+}

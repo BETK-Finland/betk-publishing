@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import ProseSection from "../components/ProseSection.astro";
+import PrintToc from "../components/PrintToc.astro";
+import IssueTicket from "../components/IssueTicket.astro";
+import { getPeppolMeta, getPeppolManifest } from "../data/peppol-loader";
+
+const meta = getPeppolMeta();
+const manifest = getPeppolManifest();
+
+const entries = await getCollection("peppol");
+const byId = new Map(entries.map(e => [e.id, e]));
+
+type Rendered = {
+  anchor: string;
+  sectionNumber: string;
+  title: string;
+  Content: any;
+};
+
+async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
+  const entry = byId.get(section.content);
+  if (!entry) return null;
+  const { Content } = await render(entry);
+  return {
+    anchor: section.anchor,
+    sectionNumber: entry.data.section,
+    title: entry.data.title,
+    Content,
+  };
+}
+
+const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filter(
+  (r): r is Rendered => r !== null,
+);
+
+const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }));
+---
+
+<Layout title={`BETK — ${meta.otsikko}`}>
+  <div class="app-main">
+    <aside class="sidebar">
+      <section class="column-filter">
+        <h2 class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</h2>
+        <ul class="landing-nav-list"></ul>
+      </section>
+    </aside>
+    <section class="landing-body">
+      <article class="sov-document">
+        <header class="sov-header">
+          <h1 class="sov-title">{meta.otsikko}</h1>
+          {meta.alaotsikko && <p class="sov-subtitle"><strong>{meta.alaotsikko}</strong></p>}
+          {meta.paivamaara && (
+            <div class="sov-meta"><p>Päivämäärä: {meta.paivamaara}</p></div>
+          )}
+          <p class="sov-print-date" aria-hidden="true"></p>
+        </header>
+        <PrintToc sections={tocItems} />
+        {resolved.map(r => (
+          <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+            <r.Content />
+          </ProseSection>
+        ))}
+      </article>
+    </section>
+  </div>
+  <IssueTicket />
+</Layout>
+
+<script>
+  // Print date stamp — set on beforeprint, visible only in print CSS
+  const el = document.querySelector(".sov-print-date");
+  if (el) {
+    window.addEventListener("beforeprint", () => {
+      el.textContent = `Tulostettu: ${new Date().toLocaleDateString("fi-FI")}`;
+    });
+  }
+  // Force all <details> open before print
+  window.addEventListener("beforeprint", () => {
+    document.querySelectorAll("details").forEach(d => d.setAttribute("open", ""));
+  });
+</script>
