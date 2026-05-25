@@ -1,0 +1,76 @@
+{
+  "termit": [
+    {
+      "termi": "Aplikaattori",
+      "selite": "Laite, joka tulostaa ja kiinnittää RFID-tunnisteen tuotteeseen"
+    },
+    {
+      "termi": "Electronic Product Code, EPC",
+      "selite": "Sähköinen tuotekoodi."
+    },
+    {
+      "termi": "EPC-muisti",
+      "selite": "RFID-tunnisteen muisti, johon sähköinen tuotekoodi kirjoitetaan, eli tunnisteen perusmuisti"
+    },
+    {
+      "termi": "Engineer-To-Order, ETO",
+      "selite": "Termillä tarkoitetaan tilauksesta suunniteltavien tuotteiden valmistuslogiikkaa."
+    },
+    {
+      "termi": "GS1 DataMatrix",
+      "selite": "GS1-standardin mukainen 2D-koodi, johon voidaan sisällyttää enemmän tietoa kuin perinteiseen EAN-viivakoodiin. ISO/IEC 16022"
+    },
+    {
+      "termi": "GS1 Application Identifier, AI",
+      "selite": "GS1-sovellustunnukset ovat 2–4 numeron pituisia tunnuksia, joita käytetään GS1-128-, GS1 DataMatrix- ja GS1 DataBar -viivakoodeissa sekä EPC/RFID-tunnisteissa."
+    },
+    {
+      "termi": "Global Trade Item Number, GTIN",
+      "selite": "Termillä tarkoitetaan GS1:n tuotetunniste standardia."
+    },
+    {
+      "termi": "GUID",
+      "selite": "GUID (Globally Unique IDentifier) on mallinnusohjelman antama tai muulla tavalla luotu kullekin osalle yksilöllinen tunniste. Kulkee myös nimellä UUID (Universally Unique IDentifier)."
+    },
+    {
+      "termi": "Make-To-Order, MTO",
+      "selite": "Termi tarkoittaa tilausohjautuvaa tuotantoa, jossa tuotteet valmistetaan asiakastilausten mukaisesti valmiiden tuotesuunnitelmien pohjalta."
+    },
+    {
+      "termi": "Make-To-Stock, MTS",
+      "selite": "Termillä tarkoitetaan varasto-ohjautuvien tuotteiden valmistuslogiikkaa."
+    },
+    {
+      "termi": "Radio Frequency Identification, RFID",
+      "selite": "Termillä tarkoitetaan radiotaajuisia etätunnisteita (sisältää antennin ja mikropiirin)."
+    },
+    {
+      "termi": "Serial Global Trade Item Number, SGTIN",
+      "selite": "GTIN-koodin ja sarjanumeron yhdistelmä, jolla voidaan erottaa identtiset tuoteyksilöt toisistaan."
+    },
+    {
+      "termi": "Tag",
+      "selite": "RFID-tunniste, joka sisältää sirun ja antennin. Käytetään objektien yksilölliseen tunnistamiseen."
+    },
+    {
+      "termi": "User memory",
+      "selite": "RFID käyttäjämuisti tai lisämuisti"
+    },
+    {
+      "termi": "UHF tunniste",
+      "selite": "Korkeataajuinen (850–960 MHz) RFID tunniste"
+    },
+    {
+      "termi": "Uniform Resource Identifier, URI",
+      "selite": "URI on tietoverkossa sijaitsevan tiedon tunniste. URL on aina myös URI, mutta URI ei välttämättä ole URL. Esimerkiksi https://rt.fi tai urn:ISBN:952-9842-34-1"
+    },
+    {
+      "termi": "Uniform Resource Locator, URL",
+      "selite": "URL sisältää tiedon hakemiseen tarvittavan tiedon, kuten protokollan (esim. https) ja palvelimen. Esimerkiksi https://rt.fi"
+    },
+    {
+      "termi": "Verkkotunnus",
+      "selite": "Verkkotunnus eli domain-nimi on merkkijono, joka ohjataan internetissä tiettyyn IP-osoitteeseen eli palvelimelle. Esimerkiksi www.iso.org"
+    }
+  ]
+}

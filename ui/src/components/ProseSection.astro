@@ -9,11 +9,11 @@ const headingTag = sectionNumber.includes(".") ? "h4" : "h2";
 ---
 
 <section id={id} class="sov-section">
-  {headingTag === "h2" ? (
+  {(sectionNumber || title) && (headingTag === "h2" ? (
     <h2>{sectionNumber} {title}</h2>
   ) : (
     <h4>{sectionNumber} {title}</h4>
-  )}
+  ))}
   <div class="sov-prose">
     <slot />
   </div>

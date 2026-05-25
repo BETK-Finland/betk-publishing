@@ -24,6 +24,7 @@ export type SectionKind =
   | "prose"
   | "prose+table"
   | "prose+pintakasittely"
+  | "prose+gs1tables"
   | "glossary"
   | "reinforcement-annex";
 

@@ -77,3 +77,19 @@ export interface EsimerkkiTaulukko {
 export interface RaudoitusEsimerkit {
   taulukot: EsimerkkiTaulukko[];
 }
+
+export interface Gs1AiRivi {
+  ai: string;
+  tieto: string;
+  esimerkki: string;
+}
+
+export interface Gs1AiTable {
+  taulukonNumero: number;
+  otsikko: string;
+  rivit: Gs1AiRivi[];
+}
+
+export interface Gs1AiTaulukot {
+  taulukot: Gs1AiTable[];
+}
