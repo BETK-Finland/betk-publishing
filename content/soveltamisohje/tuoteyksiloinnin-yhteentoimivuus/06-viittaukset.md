@@ -1,7 +1,7 @@
 ---
 title: "Viittaukset"
 order: 6
-section: "viittaukset"
+section: ""
 ---
 
 **[1]** GS1 (2022), Recommendation for the use of EPC and ISO RFID symbols
