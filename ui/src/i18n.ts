@@ -3,6 +3,8 @@ export type Lang = "fi" | "sv" | "en";
 export const translations: Record<Lang, Record<string, string>> = {
   fi: {
     "nav.home": "Etusivu",
+    "nav.properties": "Ominaisuudet",
+    "nav.propertysets": "Ominaisuusryhmät",
     "nav.documents": "Soveltamisohjeet",
     "nav.glossary": "Sanasto",
     "sidebar.columns": "SARAKKEIDEN SUODATUS",
@@ -19,6 +21,8 @@ export const translations: Record<Lang, Record<string, string>> = {
   },
   sv: {
     "nav.home": "Startsida",
+    "nav.properties": "Egenskaper",
+    "nav.propertysets": "Egenskapsgrupper",
     "nav.documents": "Tillämpningsanvisningar",
     "nav.glossary": "Ordlista",
     "sidebar.columns": "KOLUMNFILTER",
@@ -35,6 +39,8 @@ export const translations: Record<Lang, Record<string, string>> = {
   },
   en: {
     "nav.home": "Home",
+    "nav.properties": "Properties",
+    "nav.propertysets": "Property-sets",
     "nav.documents": "Implementation Guides",
     "nav.glossary": "Glossary",
     "sidebar.columns": "COLUMN FILTER",
