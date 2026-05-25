@@ -93,3 +93,18 @@ export interface Gs1AiTable {
 export interface Gs1AiTaulukot {
   taulukot: Gs1AiTable[];
 }
+
+export interface GenericRow {
+  cells: string[];
+}
+
+export interface GenericTable {
+  taulukonNumero: number;
+  otsikko: string;
+  sarakkeet: string[];
+  rivit: GenericRow[];
+}
+
+export interface GenericTaulukot {
+  taulukot: GenericTable[];
+}

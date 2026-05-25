@@ -5,8 +5,11 @@
     { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
     { "kind": "prose", "content": "02-tarkoitus", "anchor": "tarkoitus" },
     { "kind": "prose+gs1tables", "content": "03-tuoteyksilointi-intro", "table": "gs1-taulukot", "anchor": "tuoteyksilointi" },
-    { "kind": "prose", "content": "03-tuoteyksilointi-detail", "anchor": "tuoteyksilointi-detail" },
-    { "kind": "prose", "content": "04-tunnistaminen", "anchor": "tunnistaminen" },
+    { "kind": "prose+generictables", "content": "03-detail-a", "table": "gtin-rakenne", "anchor": "tuoteyksilointi-detail" },
+    { "kind": "prose", "content": "03-detail-b", "anchor": "tuoteyksilointi-detail-b" },
+    { "kind": "prose+generictables", "content": "04-intro", "table": "epc-taulukot", "anchor": "tunnistaminen" },
+    { "kind": "prose+generictables", "content": "04-mid", "table": "user-memory", "anchor": "tunnistaminen-mid" },
+    { "kind": "prose", "content": "04-rest", "anchor": "tunnistaminen-rest" },
     { "kind": "glossary", "data": "lyhenteet", "anchor": "lyhenteet", "label": "Lyhenteet ja terminologia" },
     { "kind": "prose", "content": "06-viittaukset", "anchor": "viittaukset" },
     { "kind": "prose", "content": "07-liite", "anchor": "liite-1" }
