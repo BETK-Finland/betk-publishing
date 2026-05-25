@@ -10,6 +10,7 @@ import type {
   PintakasittelyTable,
   Lyhenteet,
   RaudoitusEsimerkit,
+  Gs1AiTaulukot,
 } from "./soveltamisohje-types";
 
 import productsJson from "./precast.json";
@@ -24,6 +25,7 @@ export type SectionKind =
   | "prose"
   | "prose+table"
   | "prose+pintakasittely"
+  | "prose+gs1tables"
   | "glossary"
   | "reinforcement-annex";
 

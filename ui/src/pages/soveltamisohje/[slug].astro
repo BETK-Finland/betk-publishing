@@ -13,6 +13,7 @@ import type {
   PintakasittelyTable,
   Lyhenteet,
   RaudoitusEsimerkit,
+  Gs1AiTaulukot,
 } from "../../data/soveltamisohje-types";
 
 export async function getStaticPaths() {
@@ -59,11 +60,19 @@ type Rendered =
       Content: any;
       table: PintakasittelyTable;
     }
+  | {
+      kind: "prose+gs1tables";
+      anchor: string;
+      sectionNumber: string;
+      title: string;
+      Content: any;
+      data: Gs1AiTaulukot;
+    }
   | { kind: "glossary"; anchor: string; label: string; data: Lyhenteet }
   | { kind: "reinforcement-annex"; anchor: string; label: string; data: RaudoitusEsimerkit };
 
 async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
-  if (section.kind === "prose" || section.kind === "prose+table" || section.kind === "prose+pintakasittely") {
+  if (section.kind === "prose" || section.kind === "prose+table" || section.kind === "prose+pintakasittely" || section.kind === "prose+gs1tables") {
     const entry = getEntry(section.content!);
     if (!entry) return null;
     const { Content } = await render(entry);
@@ -78,6 +87,11 @@ async function resolveSection(section: typeof manifest.sections[number]): Promis
       const table = tables[section.table!] as ValueTable | undefined;
       if (!table) return null;
       return { kind: "prose+table", ...base, table };
+    }
+    if (section.kind === "prose+gs1tables") {
+      const data = tables[section.table!] as Gs1AiTaulukot | undefined;
+      if (!data) return null;
+      return { kind: "prose+gs1tables", ...base, data };
     }
     const pkTable = tables[section.table!] as PintakasittelyTable | undefined;
     if (!pkTable) return null;
@@ -101,11 +115,13 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
 );
 
 // TOC items: prose sections get "<section> <title>"; others use manifest label.
-const tocItems = resolved.map(r => {
-  if (r.kind === "prose" || r.kind === "prose+table" || r.kind === "prose+pintakasittely") {
-    return { anchor: r.anchor, label: `${r.sectionNumber} ${r.title}` };
+// Sections with empty sectionNumber+title (continuation blocks) are excluded from TOC.
+const tocItems = resolved.flatMap(r => {
+  if (r.kind === "prose" || r.kind === "prose+table" || r.kind === "prose+pintakasittely" || r.kind === "prose+gs1tables") {
+    if (!r.sectionNumber && !r.title) return [];
+    return [{ anchor: r.anchor, label: `${r.sectionNumber} ${r.title}`.trim() }];
   }
-  return { anchor: r.anchor, label: r.label };
+  return [{ anchor: r.anchor, label: r.label }];
 });
 ---
 
@@ -146,6 +162,39 @@ const tocItems = resolved.map(r => {
                 <r.Content />
               </ProseSection>
               <DataTable table={r.table} />
+            </div>
+          );
+        }
+        if (r.kind === "prose+gs1tables") {
+          return (
+            <div>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+                <r.Content />
+              </ProseSection>
+              {r.data.taulukot.map(t => (
+                <div class="sov-gs1-table">
+                  <table class="sov-values-table">
+                    <caption>Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
+                    <thead>
+                      <tr>
+                        <th>Sovellustunnus (AI)</th>
+                        <th>Tieto</th>
+                        <th>Esimerkki</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {t.rivit.map(r => (
+                        <tr>
+                          <td><code>{r.ai}</code></td>
+                          <td>{r.tieto}</td>
+                          <td><code>{r.esimerkki}</code></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p class="sov-table-number">Taulukko {t.taulukonNumero}.</p>
+                </div>
+              ))}
             </div>
           );
         }

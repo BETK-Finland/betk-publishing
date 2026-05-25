@@ -1,0 +1,22 @@
+{
+  "taulukot": [
+    {
+      "taulukonNumero": 1,
+      "otsikko": "Tiedonkantajaan lisättävät tilauksesta suunniteltavien (ETO) rakennustuotteen minimitietovaatimukset.",
+      "rivit": [
+        { "ai": "(03)", "tieto": "MTO GTIN-koodi",      "esimerkki": "06400001000247" },
+        { "ai": "(242)", "tieto": "MTO varianttinumero", "esimerkki": "123456" },
+        { "ai": "(21)", "tieto": "Sarjanumero",          "esimerkki": "12345678910" }
+      ]
+    },
+    {
+      "taulukonNumero": 2,
+      "otsikko": "Tiedonkantajaan lisättävät valinnaiset lisätiedot.",
+      "rivit": [
+        { "ai": "(91)", "tieto": "Elementtitunnus", "esimerkki": "V1001" },
+        { "ai": "(92)", "tieto": "GUID",            "esimerkki": "ba34cf17-0c4b-4c6f-9295-cae05aa74ad4" },
+        { "ai": "(99)", "tieto": "Verkkotunnus",    "esimerkki": "id.rt.fi" }
+      ]
+    }
+  ]
+}
