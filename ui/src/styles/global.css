@@ -614,6 +614,15 @@ body.hide-col-propVersion [data-column="propVersion"] {
   text-transform: none;
 }
 
+.sov-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--surface-raised);
+  border: 1px solid var(--separator);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
 /* Data tables */
 
 .sov-datatable {
