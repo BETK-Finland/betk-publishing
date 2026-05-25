@@ -188,6 +188,7 @@ const tocItems = resolved.flatMap(r => {
               </ProseSection>
               {r.data.taulukot.map(t => (
                 <div class="sov-gs1-table">
+                  <p class="sov-table-number">Taulukko {t.taulukonNumero}. {t.otsikko}</p>
                   <table class="sov-values-table">
                     <caption class="sr-only">Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
                     <thead>
@@ -207,7 +208,6 @@ const tocItems = resolved.flatMap(r => {
                       ))}
                     </tbody>
                   </table>
-                  <p class="sov-table-number">Taulukko {t.taulukonNumero}. {t.otsikko}</p>
                 </div>
               ))}
             </div>

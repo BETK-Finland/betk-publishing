@@ -677,7 +677,7 @@ body.hide-col-propVersion [data-column="propVersion"] {
 .sov-table-number {
   font-size: 11px;
   color: var(--text-muted);
-  margin-top: 6px;
+  margin: 16px 0 4px;
   font-style: italic;
 }
 
