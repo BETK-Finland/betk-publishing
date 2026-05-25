@@ -1,7 +1,7 @@
 ---
 title: "Viittaukset"
 order: 5
-section: "viittaukset"
+section: ""
 ---
 
 1. [BEC2012: Mallintava suunnittelu](https://www.elementtisuunnittelu.fi/suunnitteluprosessi/mallintava-suunnittelu)
