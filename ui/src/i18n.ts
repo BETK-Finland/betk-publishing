@@ -35,7 +35,7 @@ export const translations: Record<Lang, Record<string, string>> = {
   },
   en: {
     "nav.home": "Home",
-    "nav.documents": "Application Guides",
+    "nav.documents": "Implementation Guides",
     "nav.glossary": "Glossary",
     "sidebar.columns": "COLUMN FILTER",
     "sidebar.navigation": "NAVIGATION",
