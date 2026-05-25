@@ -10,7 +10,7 @@ const { data } = Astro.props;
 {data.taulukot.map(t => (
   <div class="sov-datatable">
     <table class="sov-values-table">
-      <caption>Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
+      <caption class="sr-only">Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
       <thead>
         <tr>
           {t.sarakkeet.map(s => <th>{s}</th>)}
@@ -24,6 +24,6 @@ const { data } = Astro.props;
         ))}
       </tbody>
     </table>
-    <p class="sov-table-number">Taulukko {t.taulukonNumero}.</p>
+    <p class="sov-table-number">Taulukko {t.taulukonNumero}. {t.otsikko}</p>
   </div>
 ))}

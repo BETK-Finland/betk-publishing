@@ -14,6 +14,3 @@ Betonielementit ovat luonteeltaan tilauksesta valmistettavia (MTO) ja tilauksest
 
 ###### Kuva 1. Tuoteyksilöinnin hierarkia tasot tarkempaan yksilöintiin
 
-GS1-standardissa ei ole kansalliselle Elementtitunnukselle, GUID:lle ja verkkotunnukselle omaa GS1-sovellustunnusta, joten niiden sisällyttämisessä tiedonkantajaan on BETK-projektissa päätetty käytettävän sovellustunnuksia `(91) Company internal information`, `(92) Company internal information` ja `(99) Company internal information`.
-
-> **Huom!** Verkkotunnuksen käsittely RFID-tunnisteissa on tämän ohjeen julkaisuhetkellä käsiteltävänä GS1:n kansainvälisessä standardinkehityksessä. Tuleva standardi ei välttämättä vastaa tässä esitettyä ratkaisua, mutta ohjeistus tullaan päivittämään standardin valmistuessa sen mukaisesti.
