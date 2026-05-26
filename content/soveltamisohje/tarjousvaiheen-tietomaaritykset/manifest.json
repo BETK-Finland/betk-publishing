@@ -1,6 +1,7 @@
 {
   "slug": "tarjousvaiheen-tietomaaritykset",
   "nav_title": "Tarjousvaiheen tietomääritykset ja toteutusvaiheen tietomalliohjeita toimitusketjulle",
+  "lang": "fi",
   "sections": [
     { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
     { "kind": "prose", "content": "02-tarkoitus-ja-rajaukset", "anchor": "tarkoitus" },

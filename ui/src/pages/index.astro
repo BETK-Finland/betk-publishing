@@ -15,6 +15,7 @@ const docs = listDocs();
 interface NavLink {
   href: string;
   label: string;
+  lang?: string;
 }
 
 const navLinks: NavLink[] = [
@@ -23,6 +24,7 @@ const navLinks: NavLink[] = [
   ...docs.map(d => ({
     href: `${base}soveltamisohje/${d.slug}`,
     label: d.manifest.nav_title,
+    lang: d.manifest.lang ?? "fi",
   })),
   { href: `${base}sanasto`, label: "Sanasto" },
   { href: `${base}esimerkkimallit`, label: "Esimerkkimallit" },
@@ -64,7 +66,7 @@ const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }))
         <h2 class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</h2>
         <ul class="landing-nav-list">
           {navLinks.map(link => (
-            <li><a class="landing-nav-link" href={link.href}>{link.label}</a></li>
+            <li data-sov-lang={link.lang}><a class="landing-nav-link" href={link.href}>{link.label}</a></li>
           ))}
         </ul>
       </section>

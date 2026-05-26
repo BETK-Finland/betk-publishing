@@ -1,6 +1,7 @@
 {
   "slug": "tuoteyksiloinnin-yhteentoimivuus",
   "nav_title": "Tuoteyksilöinnin ja -tunnistamisen yhteentoimivuuden soveltamisohje",
+  "lang": "fi",
   "sections": [
     { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
     { "kind": "prose", "content": "02-tarkoitus", "anchor": "tarkoitus" },

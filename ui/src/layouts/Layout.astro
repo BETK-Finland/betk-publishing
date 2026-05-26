@@ -78,6 +78,13 @@ const base = import.meta.env.BASE_URL;
     document.querySelectorAll(".lang-btn").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.lang === lang);
     });
+
+    // Show/hide language-specific document links
+    document.querySelectorAll("[data-sov-lang]").forEach(el => {
+      const docLang = el.getAttribute("data-sov-lang");
+      const show = lang === "en" ? docLang === "en" : docLang !== "en";
+      (el as HTMLElement).style.display = show ? "" : "none";
+    });
   }
 
   function setLang(lang) {

@@ -147,7 +147,7 @@ const tocItems = resolved.flatMap(r => {
         <p class="sidebar-heading" data-i18n="docs.heading">DOKUMENTIT</p>
         <ul class="sov-toc-list">
           {allDocs.map(d => (
-            <li>
+            <li data-sov-lang={d.manifest.lang ?? "fi"}>
               <a
                 href={`${base}soveltamisohje/${d.slug}`}
                 class={`sov-toc-link${d.slug === slug ? " active" : ""}`}

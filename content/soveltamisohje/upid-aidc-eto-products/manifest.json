@@ -1,6 +1,7 @@
 {
   "slug": "upid-aidc-eto-products",
   "nav_title": "Implementation guideline: Unique product identification and data carrier interoperability",
+  "lang": "en",
   "sections": [
     { "kind": "prose", "content": "01-background", "anchor": "background" },
     { "kind": "prose", "content": "02-purpose", "anchor": "purpose" },

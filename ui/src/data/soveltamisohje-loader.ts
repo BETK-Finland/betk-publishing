@@ -41,6 +41,7 @@ export interface ManifestSection {
 export interface Manifest {
   slug: string;
   nav_title: string;
+  lang?: string;   // "fi" | "en" | "sv" — defaults to "fi" if omitted
   sections: ManifestSection[];
 }
 
