@@ -83,7 +83,7 @@ const base = import.meta.env.BASE_URL;
     document.querySelectorAll("[data-sov-lang]").forEach(el => {
       const docLang = el.getAttribute("data-sov-lang");
       const show = lang === "en" ? docLang === "en" : docLang !== "en";
-      (el as HTMLElement).style.display = show ? "" : "none";
+      /** @type {HTMLElement} */ (el).style.display = show ? "" : "none";
     });
   }
 
