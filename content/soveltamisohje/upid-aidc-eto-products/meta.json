@@ -1,0 +1,42 @@
+{
+  "otsikko": "Implementation guideline for unique product identification and data carrier interoperability",
+  "alaotsikko": "Engineer-To-Order Construction products",
+  "julkaisija": "Rakennusteollisuus ry",
+  "paivamaara": "2025-06-27",
+  "versio": "1.4",
+  "status": "Released",
+  "versiohistoria": [
+    { "versio": "1.0", "paivamaara": "2024-12-10", "tekija": "TAla", "kuvaus": "Document released" },
+    { "versio": "1.1", "paivamaara": "2024-12-16", "tekija": "TAla", "kuvaus": "Added missing information and corrected typos" },
+    { "versio": "1.2", "paivamaara": "2025-01-09", "tekija": "TAla", "kuvaus": "Added missing information and corrected typos" },
+    { "versio": "1.3", "paivamaara": "2025-06-17", "tekija": "TAla", "kuvaus": "Corrected typos" },
+    { "versio": "1.4", "paivamaara": "2025-10-13", "tekija": "TAla", "kuvaus": "Changed GS1 Application Identifier (01) GTIN to (03) MTO GTIN" }
+  ],
+  "laatijat": [
+    { "nimi": "Teemu Alaluusua", "organisaatio": "Aalto-yliopisto" },
+    { "nimi": "Juuso Autiosalo", "organisaatio": "Aalto-yliopisto" },
+    { "nimi": "Petri Leppänen", "organisaatio": "GS1 Finland Oy" },
+    { "nimi": "Tom Partanen", "organisaatio": "Consolis Parma Oy" },
+    { "nimi": "Eetu Lahtinen", "organisaatio": "Consolis Parma Oy" },
+    { "nimi": "Janne Kihula", "organisaatio": "Rakennustuoteteollisuus RTT ry" },
+    { "nimi": "Veijo Artoma", "organisaatio": "Consolis Parma Oy" },
+    { "nimi": "Kari Turunen", "organisaatio": "Lujabetoni Oy" },
+    { "nimi": "Ville Retulainen", "organisaatio": "Lujabetoni Oy" },
+    { "nimi": "Markku Räisänen", "organisaatio": "Betset Oy" },
+    { "nimi": "Otto Alhava", "organisaatio": "Fira Oy" },
+    { "nimi": "Tuomas Kekki", "organisaatio": "Fira Oy" },
+    { "nimi": "Hannes Ilveskoski", "organisaatio": "Fira Oy" },
+    { "nimi": "Antti Pekkala", "organisaatio": "Fira Oy" },
+    { "nimi": "Ari Törrönen", "organisaatio": "NCC Suomi Oy" },
+    { "nimi": "Riku Laiho", "organisaatio": "NCC Suomi Oy" },
+    { "nimi": "Arto Nieminen", "organisaatio": "NCC Suomi Oy" },
+    { "nimi": "Janne Makkonen", "organisaatio": "Consti" },
+    { "nimi": "Ville Siikaoja", "organisaatio": "YIT" },
+    { "nimi": "Lassi Saari", "organisaatio": "YIT" },
+    { "nimi": "Klaus Turhanen", "organisaatio": "RFID Lab Finland ry" },
+    { "nimi": "Janne Raitaniemi", "organisaatio": "Riffid Oy" },
+    { "nimi": "Juha Porkka", "organisaatio": "Nordic ID Oyj" },
+    { "nimi": "Sami Saari", "organisaatio": "Rakennustieto Oy" },
+    { "nimi": "Teemu Rantanen", "organisaatio": "Rakennustieto Oy" }
+  ]
+}
