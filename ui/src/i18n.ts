@@ -50,7 +50,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     "sidebar.navigation": "NAVIGATION",
     "sidebar.data": "DATA",
     "toc.heading": "TABLE OF CONTENTS",
-    "docs.heading": "APPLICATION GUIDES",
+    "docs.heading": "IMPLEMENTATION GUIDES",
     "col.name": "ELEMENT TYPE NAME",
     "col.generalId": "CODE",
     "col.version": "VERSION",
