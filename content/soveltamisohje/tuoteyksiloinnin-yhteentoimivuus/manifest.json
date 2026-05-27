@@ -1,12 +1,17 @@
 {
   "slug": "tuoteyksiloinnin-yhteentoimivuus",
   "nav_title": "Tuoteyksilöinnin ja -tunnistamisen yhteentoimivuuden soveltamisohje",
+  "lang": "fi",
   "sections": [
     { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
     { "kind": "prose", "content": "02-tarkoitus", "anchor": "tarkoitus" },
-    { "kind": "prose", "content": "03-tuoteyksilointi", "anchor": "tuoteyksilointi" },
-    { "kind": "prose", "content": "04-tunnistaminen", "anchor": "tunnistaminen" },
-    { "kind": "prose", "content": "05-lyhenteet", "anchor": "lyhenteet" },
+    { "kind": "prose+gs1tables", "content": "03-tuoteyksilointi-intro", "table": "gs1-taulukot", "anchor": "tuoteyksilointi" },
+    { "kind": "prose+generictables", "content": "03-detail-a", "table": "gtin-rakenne", "anchor": "tuoteyksilointi-detail" },
+    { "kind": "prose", "content": "03-detail-b", "anchor": "tuoteyksilointi-detail-b" },
+    { "kind": "prose+generictables", "content": "04-intro", "table": "epc-taulukot", "anchor": "tunnistaminen" },
+    { "kind": "prose+generictables", "content": "04-mid", "table": "user-memory", "anchor": "tunnistaminen-mid" },
+    { "kind": "prose", "content": "04-rest", "anchor": "tunnistaminen-rest" },
+    { "kind": "glossary", "data": "lyhenteet", "anchor": "lyhenteet", "label": "Lyhenteet ja terminologia" },
     { "kind": "prose", "content": "06-viittaukset", "anchor": "viittaukset" },
     { "kind": "prose", "content": "07-liite", "anchor": "liite-1" }
   ]

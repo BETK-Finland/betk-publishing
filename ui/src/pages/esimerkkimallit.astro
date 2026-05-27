@@ -1,0 +1,99 @@
+---
+import Layout from "../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL;
+
+const files = [
+  {
+    name: "BETK Esimerkkimalli IFC4x3.ifc",
+    href: `${base}BETK_Esimerkkimalli_IFC4x3.ifc`,
+    description: "Esimerkkimalli IFC4x3-muodossa. Sisältää BETK-ominaisuudet betonielementtien tietomallintamiseen.",
+    size: "12 Mt",
+  },
+];
+---
+
+<Layout title="Esimerkkimallit — BETK">
+  <div class="em-page">
+    <header class="sov-header">
+      <h1 class="sov-title">Esimerkkimallit</h1>
+    </header>
+    <ul class="em-list">
+      {files.map(f => (
+        <li class="em-item">
+          <a class="em-link" href={f.href} download>
+            <svg class="em-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span class="em-filename">{f.name}</span>
+            <span class="em-size">{f.size}</span>
+          </a>
+          <p class="em-desc">{f.description}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .em-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .em-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .em-item {
+    background: var(--surface);
+    border: 1px solid var(--separator);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+  }
+
+  .em-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent-teal);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .em-link:hover .em-filename {
+    text-decoration: underline;
+  }
+
+  .em-icon {
+    flex-shrink: 0;
+    color: var(--accent-teal);
+  }
+
+  .em-filename {
+    flex: 1;
+  }
+
+  .em-size {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .em-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>

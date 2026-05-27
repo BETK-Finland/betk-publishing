@@ -40,11 +40,11 @@ const base = import.meta.env.BASE_URL;
 				</div>
 				<nav class="app-nav">
 					<a href={`${base}`} data-i18n="nav.home">Etusivu</a>
-					<a href={`${base}properties`}>Properties</a>
-					<a href={`${base}propertysets`}>Property-sets</a>
+					<a href={`${base}properties`} data-i18n="nav.properties">Ominaisuudet</a>
+					<a href={`${base}propertysets`} data-i18n="nav.propertysets">Ominaisuusryhmät</a>
 					<a href={`${base}soveltamisohje/tarjousvaiheen-tietomaaritykset`} data-i18n="nav.documents">Soveltamisohjeet</a>
-					<a href={`${base}peppol`}>Peppol</a>
 					<a href={`${base}sanasto`} data-i18n="nav.glossary">Sanasto</a>
+					<a href={`${base}esimerkkimallit`} data-i18n="nav.examples">Esimerkkimallit</a>
 				</nav>
 			</header>
 			<main class="app-body">
@@ -77,6 +77,13 @@ const base = import.meta.env.BASE_URL;
     // Highlight active lang button
     document.querySelectorAll(".lang-btn").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    // Show/hide language-specific document links
+    document.querySelectorAll("[data-sov-lang]").forEach(el => {
+      const docLang = el.getAttribute("data-sov-lang");
+      const show = lang === "en" ? docLang === "en" : docLang !== "en";
+      /** @type {HTMLElement} */ (el).style.display = show ? "" : "none";
     });
   }
 

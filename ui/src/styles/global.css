@@ -20,6 +20,22 @@
 	color-scheme: dark;
 }
 
+@media (prefers-color-scheme: light) {
+	:root {
+		--bg: #f5f6fa;
+		--surface: #ffffff;
+		--surface-raised: #eef0f7;
+		--text: #2d2d4a;
+		--text-strong: #1a1a2e;
+		--text-muted: #6b6b8a;
+		--accent-teal: #0d9488;
+		--accent-blue: #2563eb;
+		--separator: #d8dae8;
+
+		color-scheme: light;
+	}
+}
+
 *,
 *::before,
 *::after {
@@ -580,6 +596,49 @@ body.hide-col-propVersion [data-column="propVersion"] {
   margin: 16px 0;
 }
 
+.sov-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--surface);
+  margin: 12px 0 16px;
+}
+
+.sov-prose th {
+  text-align: left;
+  padding: 8px 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--separator);
+}
+
+.sov-prose td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--separator);
+}
+
+.sov-prose h6 {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-style: italic;
+  margin: 16px 0 4px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.sov-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--surface-raised);
+  border: 1px solid var(--separator);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
 /* Data tables */
 
 .sov-datatable {
@@ -643,7 +702,7 @@ body.hide-col-propVersion [data-column="propVersion"] {
 .sov-table-number {
   font-size: 11px;
   color: var(--text-muted);
-  margin-top: 6px;
+  margin: 16px 0 4px;
   font-style: italic;
 }
 

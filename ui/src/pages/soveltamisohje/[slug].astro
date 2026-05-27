@@ -7,12 +7,15 @@ import PrintToc from "../../components/PrintToc.astro";
 import ProseSection from "../../components/ProseSection.astro";
 import DataTable from "../../components/DataTable.astro";
 import ReinforcementTable from "../../components/ReinforcementTable.astro";
+import GenericDataTable from "../../components/GenericDataTable.astro";
 import { getDoc, listDocs } from "../../data/soveltamisohje-loader";
 import type {
   ValueTable,
   PintakasittelyTable,
   Lyhenteet,
   RaudoitusEsimerkit,
+  Gs1AiTaulukot,
+  GenericTaulukot,
 } from "../../data/soveltamisohje-types";
 
 export async function getStaticPaths() {
@@ -59,11 +62,27 @@ type Rendered =
       Content: any;
       table: PintakasittelyTable;
     }
+  | {
+      kind: "prose+gs1tables";
+      anchor: string;
+      sectionNumber: string;
+      title: string;
+      Content: any;
+      data: Gs1AiTaulukot;
+    }
+  | {
+      kind: "prose+generictables";
+      anchor: string;
+      sectionNumber: string;
+      title: string;
+      Content: any;
+      data: GenericTaulukot;
+    }
   | { kind: "glossary"; anchor: string; label: string; data: Lyhenteet }
   | { kind: "reinforcement-annex"; anchor: string; label: string; data: RaudoitusEsimerkit };
 
 async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
-  if (section.kind === "prose" || section.kind === "prose+table" || section.kind === "prose+pintakasittely") {
+  if (section.kind === "prose" || section.kind === "prose+table" || section.kind === "prose+pintakasittely" || section.kind === "prose+gs1tables" || section.kind === "prose+generictables") {
     const entry = getEntry(section.content!);
     if (!entry) return null;
     const { Content } = await render(entry);
@@ -78,6 +97,16 @@ async function resolveSection(section: typeof manifest.sections[number]): Promis
       const table = tables[section.table!] as ValueTable | undefined;
       if (!table) return null;
       return { kind: "prose+table", ...base, table };
+    }
+    if (section.kind === "prose+gs1tables") {
+      const data = tables[section.table!] as unknown as Gs1AiTaulukot | undefined;
+      if (!data) return null;
+      return { kind: "prose+gs1tables", ...base, data };
+    }
+    if (section.kind === "prose+generictables") {
+      const data = tables[section.table!] as unknown as GenericTaulukot | undefined;
+      if (!data) return null;
+      return { kind: "prose+generictables", ...base, data };
     }
     const pkTable = tables[section.table!] as PintakasittelyTable | undefined;
     if (!pkTable) return null;
@@ -101,11 +130,13 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
 );
 
 // TOC items: prose sections get "<section> <title>"; others use manifest label.
-const tocItems = resolved.map(r => {
-  if (r.kind === "prose" || r.kind === "prose+table" || r.kind === "prose+pintakasittely") {
-    return { anchor: r.anchor, label: `${r.sectionNumber} ${r.title}` };
+// Sections with empty sectionNumber+title (continuation blocks) are excluded from TOC.
+const tocItems = resolved.flatMap(r => {
+  if (r.kind === "prose" || r.kind === "prose+table" || r.kind === "prose+pintakasittely" || r.kind === "prose+gs1tables" || r.kind === "prose+generictables") {
+    if (!r.sectionNumber && !r.title) return [];
+    return [{ anchor: r.anchor, label: `${r.sectionNumber} ${r.title}`.trim() }];
   }
-  return { anchor: r.anchor, label: r.label };
+  return [{ anchor: r.anchor, label: r.label }];
 });
 ---
 
@@ -116,7 +147,7 @@ const tocItems = resolved.map(r => {
         <p class="sidebar-heading" data-i18n="docs.heading">DOKUMENTIT</p>
         <ul class="sov-toc-list">
           {allDocs.map(d => (
-            <li>
+            <li data-sov-lang={d.manifest.lang ?? "fi"}>
               <a
                 href={`${base}soveltamisohje/${d.slug}`}
                 class={`sov-toc-link${d.slug === slug ? " active" : ""}`}
@@ -146,6 +177,49 @@ const tocItems = resolved.map(r => {
                 <r.Content />
               </ProseSection>
               <DataTable table={r.table} />
+            </div>
+          );
+        }
+        if (r.kind === "prose+gs1tables") {
+          return (
+            <div>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+                <r.Content />
+              </ProseSection>
+              {r.data.taulukot.map(t => (
+                <div class="sov-gs1-table">
+                  <p class="sov-table-number">Taulukko {t.taulukonNumero}. {t.otsikko}</p>
+                  <table class="sov-values-table">
+                    <caption class="sr-only">Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
+                    <thead>
+                      <tr>
+                        <th>Sovellustunnus (AI)</th>
+                        <th>Tieto</th>
+                        <th>Esimerkki</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {t.rivit.map(r => (
+                        <tr>
+                          <td><code>{r.ai}</code></td>
+                          <td>{r.tieto}</td>
+                          <td><code>{r.esimerkki}</code></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </div>
+          );
+        }
+        if (r.kind === "prose+generictables") {
+          return (
+            <div>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+                <r.Content />
+              </ProseSection>
+              <GenericDataTable data={r.data} />
             </div>
           );
         }

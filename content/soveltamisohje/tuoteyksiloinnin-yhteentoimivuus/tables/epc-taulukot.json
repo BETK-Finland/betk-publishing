@@ -1,0 +1,31 @@
+{
+  "taulukot": [
+    {
+      "taulukonNumero": 9,
+      "otsikko": "Käytössä olevat EPC-binäärikoodausjärjestelmät ja niiden rajoitukset. Sovellettava menetelmä määräytyy numeeristen tai alfanumeeristen merkkien määrätarpeen mukaan.",
+      "sarakkeet": ["EPC järjestelmä", "EPC-binaarikoodausjärjestelmä", "EPC + suodatin-bittimäärä", "Sisältää suodatinarvon", "Sarjanumerorajoitus"],
+      "rivit": [
+        { "cells": ["sgtin", "<code>sgtin-96</code>", "96", "Kyllä", "Vain numerot; ei alkavia nollia, desimaaliluvun arvo alle 2³⁸ (eli desimaaliluku enintään 274 877 906 943)."] },
+        { "cells": ["sgtin", "<code>sgtin-198</code>", "198", "Kyllä", "Kaikki GS1 General Specifications -määritysten sallimat arvot (enintään 20 aakkosnumeerista merkkiä)."] }
+      ]
+    },
+    {
+      "taulukonNumero": 10,
+      "otsikko": "Sovellettava menetelmä SGTIN-96. Standardissa TDS 2.1. (EPC Tag Data Standard) löytyy myös muita sovellusmenetelmiä mm. SGTIN-198, joita voidaan käyttää, mikäli on tarve esimerkiksi pidemmälle (tai numeroiden lisäksi myös kirjaimia sisältävälle) sarjanumerolle.",
+      "sarakkeet": ["EPC SGTIN-96", "Arvo", "Kommentti"],
+      "rivit": [
+        { "cells": ["Otsikko (Header)", "<code>48</code>", "Numero SGTIN-96:lle"] },
+        { "cells": ["Filter-arvo (Filter value)", "<code>0</code>", "0 = Soveltuva arvo tuotteelle, jota ei lueta kassapisteellä"] },
+        { "cells": ["Partition-arvo", "<code>1</code>", "1 = 11-numeroinen GS1-yritystunniste ja 2 numeroa tuotenimikkeelle + laajennustunnukselle"] },
+        { "cells": ["Partition-arvo", "<code>2</code>", "2 = 10-numeroinen GS1-yritystunniste ja 3 numeroa tuotenimikkeelle + laajennustunnukselle"] },
+        { "cells": ["Partition-arvo", "<code>3</code>", "3 = 9-numeroinen GS1-yritystunniste ja 4 numeroa tuotenimikkeelle + laajennustunnukselle"] },
+        { "cells": ["Partition-arvo", "<code>4</code>", "4 = 8-numeroinen GS1-yritystunniste ja 5 numeroa tuotenimikkeelle + laajennustunnukselle"] },
+        { "cells": ["Partition-arvo", "<code>5</code>", "5 = 7-numeroinen GS1-yritystunniste ja 6 numeroa tuotenimikkeelle + laajennustunnukselle"] },
+        { "cells": ["Partition-arvo", "<code>6</code>", "6 = 6-numeroinen GS1-yritystunniste ja 7 numeroa tuotenimikkeelle + laajennustunnukselle"] },
+        { "cells": ["GS1-yritystunniste (GS1 GCP)", "<code>N…11</code>", "GS1-yritystunniste: 6, 7, 8, 9, 10 tai 11 numeroa"] },
+        { "cells": ["Tuotenimikkeen numero", "<code>N…7</code>", "Riippuen GS1-yritystunnisteen pituudesta 1–7 numeroa"] },
+        { "cells": ["Sarjanumero", "<code>N…12</code>", "Enintään 12 numeroa (suurin sallittu arvo = 274 877 906 943). Sarjanumeron ei tarvitse olla tasan 12 numeroa. Etunolla ei ole sallittu."] }
+      ]
+    }
+  ]
+}

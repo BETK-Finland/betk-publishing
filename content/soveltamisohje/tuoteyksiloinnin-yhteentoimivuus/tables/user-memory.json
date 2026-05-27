@@ -1,0 +1,14 @@
+{
+  "taulukot": [
+    {
+      "taulukonNumero": 11,
+      "otsikko": "Mahdolliset lisätiedot betonielementtien käyttötapauksessa",
+      "sarakkeet": ["GS1-sovellustunnus (AI)", "Selite", "Arvo (esimerkki)"],
+      "rivit": [
+        { "cells": ["(91) Internal", "Elementtitunnus", "<code>V1001</code>"] },
+        { "cells": ["(92) Internal", "GUID", "<code>ba34cf17-0c4b-4c6f-9295-cae05aa74ad4</code>"] },
+        { "cells": ["(99) Internal", "Verkkotunnus", "<code>id.rt.fi</code>"] }
+      ]
+    }
+  ]
+}

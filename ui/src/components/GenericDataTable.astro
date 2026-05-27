@@ -1,0 +1,29 @@
+---
+import type { GenericTaulukot } from "../data/soveltamisohje-types";
+
+interface Props {
+  data: GenericTaulukot;
+}
+const { data } = Astro.props;
+---
+
+{data.taulukot.map(t => (
+  <div class="sov-datatable">
+    <p class="sov-table-number">Taulukko {t.taulukonNumero}. {t.otsikko}</p>
+    <table class="sov-values-table">
+      <caption class="sr-only">Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
+      <thead>
+        <tr>
+          {t.sarakkeet.map(s => <th>{s}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {t.rivit.map(r => (
+          <tr>
+            {r.cells.map(c => <td set:html={c} />)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+))}
