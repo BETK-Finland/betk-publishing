@@ -4,12 +4,11 @@
 # Top-level directories not needed
 /.claude/
 /mcp/
-/plans/
-
+/.modus
 # OS / editor noise
 .DS_Store
 Thumbs.db
-CLAUDE.MD
+CLAUDE.md
 .vscode/
 .idea/
 *.log
