@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProseSection from "../components/ProseSection.astro";
 import PrintToc from "../components/PrintToc.astro";
+import SoveltamisohjeToc from "../components/SoveltamisohjeToc.astro";
 import IssueTicket from "../components/IssueTicket.astro";
 import { getPeppolMeta, getPeppolManifest } from "../data/peppol-loader";
 
@@ -35,16 +36,43 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
   (r): r is Rendered => r !== null,
 );
 
-const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }));
+const tocItems = resolved.map(r => ({
+  anchor: r.anchor,
+  label: `${r.sectionNumber} ${r.title}`.trim(),
+}));
+
+const externalLinks = [
+  {
+    href: "https://www.valtiokonttori.fi/palvelu/valtiokonttori-on-suomen-peppol-viranomainen/",
+    label: "Valtionkonttori — Peppol viranomainen",
+  },
+  {
+    href: "https://www.valtiokonttori.fi/en/maaraykset-ja-ohjeet/peppol-implementation-guide-for-the-construction-industry-to-engineer-to-order-construction-products/#introduction-to-peppol",
+    label: "ETO Soveltamisohje",
+  },
+  {
+    href: "https://beast.se/",
+    label: "BEAst",
+  },
+];
 ---
 
 <Layout title={`BETK — ${meta.otsikko}`}>
   <div class="app-main">
-    <aside class="sidebar">
-      <section class="column-filter">
-        <h2 class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</h2>
-        <ul class="landing-nav-list"></ul>
-      </section>
+    <aside class="sov-sidebar">
+      <SoveltamisohjeToc items={tocItems} />
+      <nav class="sov-doc-nav" aria-label="Linkit">
+        <p class="sidebar-heading">LINKIT</p>
+        <ul class="sov-toc-list">
+          {externalLinks.map(l => (
+            <li>
+              <a href={l.href} class="sov-toc-link" target="_blank" rel="noreferrer">
+                {l.label}<span class="sov-toc-ext" aria-hidden="true"> ↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </aside>
     <section class="landing-body">
       <article class="sov-document">
@@ -67,6 +95,13 @@ const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }))
   </div>
   <IssueTicket />
 </Layout>
+
+<style>
+  .sov-toc-ext {
+    font-size: 0.85em;
+    opacity: 0.6;
+  }
+</style>
 
 <script>
   // Print date stamp — set on beforeprint, visible only in print CSS

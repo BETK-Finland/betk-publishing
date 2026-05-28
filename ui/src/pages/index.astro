@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProseSection from "../components/ProseSection.astro";
 import PrintToc from "../components/PrintToc.astro";
+import SoveltamisohjeToc from "../components/SoveltamisohjeToc.astro";
 import IssueTicket from "../components/IssueTicket.astro";
 import { listDocs } from "../data/soveltamisohje-loader";
 import { getLandingMeta, getLandingManifest } from "../data/landing-loader";
@@ -56,20 +57,24 @@ const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filt
   (r): r is Rendered => r !== null,
 );
 
-const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }));
+const tocItems = resolved.map(r => ({
+  anchor: r.anchor,
+  label: `${r.sectionNumber} ${r.title}`.trim(),
+}));
 ---
 
 <Layout title={meta.otsikko}>
   <div class="app-main">
-    <aside class="sidebar">
-      <section class="column-filter">
-        <h2 class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</h2>
-        <ul class="landing-nav-list">
+    <aside class="sov-sidebar">
+      <SoveltamisohjeToc items={tocItems} />
+      <nav class="sov-doc-nav" aria-label="Navigaatio">
+        <p class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</p>
+        <ul class="sov-toc-list">
           {navLinks.map(link => (
-            <li data-sov-lang={link.lang}><a class="landing-nav-link" href={link.href}>{link.label}</a></li>
+            <li data-sov-lang={link.lang}><a class="sov-toc-link" href={link.href}>{link.label}</a></li>
           ))}
         </ul>
-      </section>
+      </nav>
     </aside>
     <section class="landing-body">
       <article class="sov-document">
@@ -108,26 +113,6 @@ const tocItems = resolved.map(r => ({ label: `${r.sectionNumber} ${r.title}` }))
 </script>
 
 <style>
-  .landing-nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .landing-nav-list li {
-    margin-bottom: 0.5rem;
-  }
-  .landing-nav-link {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    color: inherit;
-    text-decoration: none;
-    border-left: 3px solid transparent;
-    transition: background-color 0.1s, border-color 0.1s;
-  }
-  .landing-nav-link:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-left-color: currentColor;
-  }
   .landing-body {
     padding: 2rem;
     overflow-y: auto;

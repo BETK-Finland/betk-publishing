@@ -40,8 +40,14 @@ const base = import.meta.env.BASE_URL;
 				</div>
 				<nav class="app-nav">
 					<a href={`${base}`} data-i18n="nav.home">Etusivu</a>
-					<a href={`${base}properties`} data-i18n="nav.properties">Ominaisuudet</a>
-					<a href={`${base}propertysets`} data-i18n="nav.propertysets">Ominaisuusryhmät</a>
+					<a href={`${base}properties`} class="nav-stacked">
+						<span data-i18n="nav.properties">Ominaisuudet</span>
+						<span class="nav-sub">Properties</span>
+					</a>
+					<a href={`${base}propertysets`} class="nav-stacked">
+						<span data-i18n="nav.propertysets">Ominaisuusryhmät</span>
+						<span class="nav-sub">Property-sets</span>
+					</a>
 					<a href={`${base}soveltamisohje/tarjousvaiheen-tietomaaritykset`} data-i18n="nav.documents">Soveltamisohjeet</a>
 					<a href={`${base}peppol`} data-i18n="nav.peppol">Peppol</a>
 					<a href={`${base}sanasto`} data-i18n="nav.glossary">Sanasto</a>
@@ -119,6 +125,28 @@ const base = import.meta.env.BASE_URL;
   /* Push the Esimerkkimallit link to the right edge of the nav row. */
   .app-nav .nav-right {
     margin-left: auto;
+  }
+
+  /* Stack the FI label and the English subtitle inside a single nav link. */
+  .app-nav a.nav-stacked {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .app-nav .nav-sub {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-top: 1px;
+  }
+
+  /* When EN is the active language, the FI label is replaced by the English
+     term, so hide the subtitle to avoid the same word appearing twice. */
+  html[lang="en"] .app-nav .nav-sub {
+    display: none;
   }
 
   .app-brand {
