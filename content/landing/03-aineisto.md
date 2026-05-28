@@ -7,4 +7,4 @@ Julkaisualusta kokoaa yhteen työryhmän tuottamat tietomäärittelyt ja sovelta
 Aineisto on saatavilla kielillä FI / SV / EN, ja sitä päivitetään jatkuvasti. Yksittäiset tuotokset löytyvät seuraavista osioista.<br>
 Aineisto on avoin ja julkisesti hyödynnettävissä.<br>
 Aineistoa kehitetään jatkuvasti Rakennusteollisuus RT:n BETK-työryhmän toimesta havaintojen ja käyttäjäpalautteen pohjalta.<br>
-Julkaisualustaa ylläpitävät Teemu Alaluusua, Tom Partanen, Antti Pekkala ja Eetu Lahtinen.
+Julkaisualustaa ylläpitävät<br> Teemu Alaluusua,<br> Tom Partanen,<br> Antti Pekkala<br> ja Eetu Lahtinen.
