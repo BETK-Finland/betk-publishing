@@ -14,6 +14,7 @@ Työ jakautuu kahteen suuntaan. Tietosisältöjen vakioinnissa toimitusketjussa 
 
 Tuotetut osa-alueet kattavat tietomallit eli vakioidut ominaisuudet ja ominaisuusryhmät sallittuine arvoineen, tuoteyksilöinnin ja -tunnistamisen tietorakenteineen ja koneellisine tunnistuksineen, tilaus–toimitusprosessin sähköisten sanomien soveltamisohjeen, tapahtumatiedon jakamisen toimitusketjun näkyvyyttä varten, yhdenmukaisen sanaston sekä toimitusketjun tavoitetilaa jäsentävän kokonaisarkkitehtuurin viitekehyksen. Kunkin osa-alueen tarkemmat tietomäärittelyt ja soveltamisohjeet on julkaistu julkaisualustalla.
 
+Työryhmää ylläpitää Rakennusteollisuus RT. Työ organisoituu teemaryhmiin, jotka keskittyvät vakiointiin ja tiedonsiirtoon, sekä ohjausryhmään. Osallistuminen on maksutonta ja korvauksetonta, ja työskentely tapahtuu virtuaalisesti.
 ---
 
 
