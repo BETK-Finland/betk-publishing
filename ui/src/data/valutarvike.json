@@ -6,189 +6,33 @@
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Harjateräspultti on harjapintaisesta betoniteräksestä valmistettu, yleensä kierteytetty pultti, jota käytetään rakenteiden ankkurointiin",
     "hierarchy": [
-      "Raudoitus",
-      "Raudoitusjärjestelmät",
-      "Raudoitusliitokset"
+      "VALUTARVIKKEET",
+      "RAUDOITUS JA ANKKUROINTI",
+      "Raudoitusjärjestelmät"
     ],
     "examples": "HPM",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
     "id": "",
-    "name": "Työsaumaraudoite/-vaarnalenkki",
+    "name": "Raudoitusjatkos",
     "generalId": "",
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Raudoitusjatkos tarkoittaa betonirakenteessa olevien terästankojen (harjaterästen) liittämistä toisiinsa pituussuunnassa, jotta vetorastus ja muut voimat siirtyvät katkeamattomasti tangosta toiseen.",
     "hierarchy": [
-      "Raudoitus",
-      "Raudoitusjärjestelmät",
-      "Raudoitusliitokset"
+      "VALUTARVIKKEET",
+      "RAUDOITUS JA ANKKUROINTI",
+      "Raudoitusjärjestelmät"
     ],
-    "examples": "ARBOX, FS Box LI, M-Box",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Raudoitusjatkos / Harjateräsjatkos",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Raudoitusjärjestelmät",
-      "Raudoitusliitokset"
-    ],
-    "examples": "MODIX, PH-A, PH-MU, ALC",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Injektointiletku",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Raudoitusjärjestelmät",
-      "Raudoitusliitokset"
-    ],
-    "examples": "IH-injektointiletku, Masterseal",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Tyssäankkuri",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Lävistysraudoitus",
-      "Lävistysraudoitus"
-    ],
-    "examples": "PSB, DB-tyssäankkuri",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Sidosraudoite / Lävistysraudoite / Diagonaaliansas",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Lävistysraudoitus",
-      "Lävistysraudoitus"
-    ],
-    "examples": "PD, FBD, PPA, PPI, PDQ, JDA, AD-diagonaaliansas",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Liikuntasauma / Korjaussauma",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Erikoisrakenteet",
-      "Erityisrakenteet"
-    ],
-    "examples": "TERAJOINT, WAWEJOINT, Sinus, Omega, Cosinus, Semjoint",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Liittopalkki",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Erikoisrakenteet",
-      "Erityisrakenteet"
-    ],
-    "examples": "DELTABEAM, A-BEAM W, A-BEAM S",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Runkojärjestelmä",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Raudoitus",
-      "Erikoisrakenteet",
-      "Erityisrakenteet"
-    ],
-    "examples": "ANSTAR SMART FRAME",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Nostoankkuri",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Nostojärjestelmät",
-      "Nosto-osat"
-    ],
-    "examples": "KK, JENKA, WILJA, RR, WRA, HBS, RKS, ST, SNA, SNA-T, Putkivaluankkuri",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Nostolenkki / Vaijerinostolenkki / Hissilenkki",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Nostojärjestelmät",
-      "Nosto-osat"
-    ],
-    "examples": "JENKA, WRA, PVL, THL, THS, TIL, , BS-vaijerilenkki, Ripustuslenkit, Nostolenkki painelevyllä",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "T-nostolukko / Nostolukko",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Nostojärjestelmät",
-      "Nosto-osat"
-    ],
-    "examples": "RR-nostolukko, KK-nostolukko, T-nostolukko",
+    "examples": "MODIX, ARJ, ALC, PH-A",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
@@ -198,13 +42,15 @@
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Pilarikenkä on betonisen valmisosapilarin alaosaan valmistusvaiheessa valettava teräsosa, jonka avulla pilari ankkuroidaan ja kiinnitetään perustuksiin tai alemman kerroksen pilariin.",
     "hierarchy": [
-      "Teräsosat",
-      "Pultit ja kengät",
-      "Liitososat"
+      "VALUTARVIKKEET",
+      "LIITOS- JA NOSTO-OSAT",
+      "Liitosjärjestelmät"
     ],
-    "examples": "HPKM, BOLDA, PEC, HELKA, APK, AHK",
+    "examples": "HPKM, BOLDA, PEC, AHK",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
@@ -214,77 +60,15 @@
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Seinäkenkä on betonielementtiseinän alareunaan valmistusvaiheessa valettava teräsosa, jota käytetään seinäelementtien jäykkään ja varmaan ankkurointiin perustuksiin tai muihin kantaviin rakenteisiin pulttiliitoksella.",
     "hierarchy": [
-      "Teräsosat",
-      "Pultit ja kengät",
-      "Liitososat"
+      "VALUTARVIKKEET",
+      "LIITOS- JA NOSTO-OSAT",
+      "Liitosjärjestelmät"
     ],
-    "examples": "SUMO, ASL-H, ASL-P, AL",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Palkkikenkä / Palkkiansas",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Pultit ja kengät",
-      "Liitososat"
-    ],
-    "examples": "BECO, PC, APK, AEP, APA-palkkiansas",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Valukotelo",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Pultit ja kengät",
-      "Liitososat"
-    ],
-    "examples": "Column Shoe Casting Box (CBOX / MBOX)",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Peruspultti",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Pultit ja kengät",
-      "Ankkurointi"
-    ],
-    "examples": "PPM, COPRA, HULCO, VOLTBOLT, FATBAR",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Ristikkoliitos",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Ristikkoliitokset",
-      "Liitososat"
-    ],
-    "examples": "ADE-liitos, ADK-liitos",
+    "examples": "SUMO, ASL-H, AL",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
@@ -294,349 +78,105 @@
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Piilokonsoli on betonielementtien (useimmiten pilarin ja palkin tai seinän ja palkin) liitososajärjestelmä, joka korvaa perinteisen, näkyvän betonisen konsoliulokkeen.",
     "hierarchy": [
-      "Teräsosat",
-      "Konsolit ja kannakkeet",
-      "Kiinnitysosat"
+      "VALUTARVIKKEET",
+      "LIITOS- JA NOSTO-OSAT",
+      "Liitosjärjestelmät"
     ],
-    "examples": "PCs, Anstar Piilokonsolit",
+    "examples": "AEP, PCs",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
     "id": "",
-    "name": "Ontelolaattakannake / Parvekelaattakiinnike",
+    "name": "Nostoankkuri",
     "generalId": "",
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Nostoankkuri on betonielementin sisään valmistusvaiheessa valettava teräsosa, jonka tarkoituksena on mahdollistaa elementin turvallinen nostaminen, siirtäminen ja asennus tehtaalla, kuljetuksessa sekä rakennustyömaalla.",
     "hierarchy": [
-      "Teräsosat",
-      "Konsolit ja kannakkeet",
-      "Kiinnitysosat"
+      "VALUTARVIKKEET",
+      "LIITOS- JA NOSTO-OSAT",
+      "Nostojärjestelmät"
     ],
-    "examples": "AOK, PETRA, SLADEX, PS, RLRK-reunakannatin",
+    "examples": "JENKA, KK, RR, WRA, ST, HSB",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
     "id": "",
-    "name": "Lepotasokannake",
+    "name": "Kiinnityslevy",
     "generalId": "",
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Kiinnityslevy on betonielementin tai paikallavalurakenteen pintaan valmistusvaiheessa valettava teräslevy, johon on hitsattu tartuntateräkset (esim. harjaterästapit tai tyssätapit) betonin sisään ankkuroitusalueeksi.",
     "hierarchy": [
-      "Teräsosat",
-      "Konsolit ja kannakkeet",
-      "Kiinnitysosat"
+      "VALUTARVIKKEET",
+      "LIITOS- JA NOSTO-OSAT",
+      "Kiinnitysjärjestelmät"
     ],
-    "examples": "Lepo70, RVK100, (PARMA-putki)",
+    "examples": "SBKL, WELDA, KL, TR",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
     "id": "",
-    "name": "Kiinnityslevy / Tartuntalevy",
+    "name": "Valuankkuri (Pysyvä)",
     "generalId": "",
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Pysyvä hylsyankkuri on betoniin valettava, sisäkierteellä varustettu teräsholkki, joka on tarkoitettu rakenteen lopullisten ja pysyvien käyttöiän aikaisten kiinnitysten tekemiseen (erotuksena pelkistä asennusaikaisista nostohylsyistä).",
     "hierarchy": [
-      "Teräsosat",
-      "Kiinnityslevyt",
-      "Kiinnitysosat"
+      "VALUTARVIKKEET",
+      "RAUDOITUS JA ANKKUROINTI",
+      "Ankkurointijärjestelmät"
     ],
-    "examples": "WELDA, WELDA STRONG, KL, THRELDA, SBKL, KLR",
+    "examples": "VEMO, DEMU",
+    "material": "Teräs",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
     "id": "",
-    "name": "Hylsyankkuri (Pysyvä) / Valuankkuri",
+    "name": "Läpivientijärjestelmä",
     "generalId": "",
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Läpivientijärjestelmä on kokonaisuus (kuten varausputket, kaulustiivisteet, lohkotiivisteet tai valmiit moduulit), jonka läpi talotekniikka (putket, kaapelit, kanavat) johdetaan betonirakenteen läpi hallitusti.",
     "hierarchy": [
-      "Teräsosat",
-      "Ankkurointitarvikkeet",
-      "Ankkurointi"
+      "VALUTARVIKKEET",
+      "TIIVISTYS JA LÄPIVIENNIT",
+      "Muotti- ja asennusjärjestelmät"
     ],
-    "examples": "DEMU, VASBR, VEMO, HSB",
+    "examples": "POLO-RDS, TRELLEBORG",
+    "material": "Muovi / Kumi",
+    "nativeClass": "100",
     "requiredPropertyIds": []
   },
   {
     "id": "",
-    "name": "Käyräankkuri / Lattateräsankkuri / Tankoankkuri",
+    "name": "Saumanauha",
     "generalId": "",
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Saumanauha (usein kuminen, PVC-muovinen tai paisuva bentoniittinauha) on betonirakenteiden valusaumoihin tai liikuntasaumoihin asennettava tiivistenauha.",
     "hierarchy": [
-      "Teräsosat",
-      "Ankkurointitarvikkeet",
-      "Ankkurointi"
+      "VALUTARVIKKEET",
+      "TIIVISTYS JA LÄPIVIENNIT",
+      "Tiivistysjärjestelmät"
     ],
-    "examples": "DB-tyssäankkuri, PF-käyräankkuri, DWL/DWK",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Kiskopultti / Kiinnityskisko / Asennuskisko",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Ankkurointitarvikkeet",
-      "Ankkurointi"
-    ],
-    "examples": "JB, JC, JD, JTA, JXA, JM, Gripcon-kiinnityslista, AS-ankkurikisko, TU-Trapetsikisko",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Betoniruuvi / Vaarnat",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Asennustarvikkeet",
-      "Ankkurointi"
-    ],
-    "examples": "Hilti HUS, MMS-ruuvi, HST-ankkuri, Kierretangot ja vaarnat (M/Rd)",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Asennuspala (Teräs)",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Asennustarvikkeet",
-      "Kiinnitysosat"
-    ],
-    "examples": "Teräsasennuspala (eri paksuudet)",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Kiila-ankkuri / Lyöntiankkuri",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Teräsosat",
-      "Asennustarvikkeet",
-      "Ankkurointi"
-    ],
-    "examples": "HST-ankkuri, S-KA, Kemiallinen ankkuri, Lyöntiankkuri",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Läpivientijärjestelmä / Poraustiiviste",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Läpiviennit"
-    ],
-    "examples": "POLO-RDS, TRELLEBORG, EGO",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Kulmasuoja / Suojakaideputki",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Suojaus"
-    ],
-    "examples": "UKT, SKT, KKT, KAPU",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Pultin suojahattu",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Suojaus"
-    ],
-    "examples": "Muovinen suojahattu pulttipäille",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Raudoitusvälike",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Välikkeet"
-    ],
-    "examples": "Pyörävälikkeet, tornivälikkeet, listavälikkeet, Kuitubetonivälike (KBC, KBB), Luuvälike",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Saumanauha (PVC / Paisuva)",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Tiivistysjärjestelmät",
-      "Saumaus"
-    ],
-    "examples": "Kunex, PENTAFLEX, BENTOSTRIP, ActiveRing, ELASTOSWELL, STOPPER",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Muottiputki & Kartio",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Muotitus"
-    ],
-    "examples": "PVC-suojaputki, päätykartio, betonitulppa",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Muottiputki & Siteet",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Muotitus"
-    ],
-    "examples": "DW-tangot (Dywidag), jousilukko",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Muottilukko / Kiristin",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Muotitus"
-    ],
-    "examples": "Jousilukko, muottilukko, kiristystyökalu",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Pilarimuotti",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Muotitus"
-    ],
-    "examples": "Kertakäyttöinen pahvipilarimuotti",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Harjaterässuoja",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Turvallisuus"
-    ],
-    "examples": "\"Sienisuoja\" harjateräksen päähän",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Muovinen asennuspala",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Asennus"
-    ],
-    "examples": "Asennuspala (2, 5, 10 mm), Asennuskiila",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Merkkausmaali",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muoviosat",
-      "Muotti- ja asennustarvikkeet",
-      "Merkkaus"
-    ],
-    "examples": "Soppec, Pica, merkkausliidut",
+    "examples": "PENTAFLEX, KUNEX, STOPPER",
+    "material": "Muovi / Kumi",
+    "nativeClass": "103",
     "requiredPropertyIds": []
   },
   {
@@ -646,45 +186,15 @@
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Pakkaslisäaine (tai talvivalmistusaine) on betonin seosaine, joka alentaa vapaan veden jäätymispistettä ja/tai kiihdyttää betonin kemiallista sitoutumisreaktiota ja varhaislujuuden kehitystä alhaisissa lämpötiloissa.",
     "hierarchy": [
-      "Muu Varustelu",
-      "Betonikemia",
-      "Lisäaineet"
+      "VALUTARVIKKEET",
+      "BETONIKEMIA",
+      "Betonikemia"
     ],
     "examples": "Jääbeto, Jääkarhu Strong",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Huokostin / Notkistin",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Betonikemia",
-      "Lisäaineet"
-    ],
-    "examples": "SEMAIR, SEMFLOW, SEMDENS, CENTRAMENT",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Hidastin / Pintahidastin",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Betonikemia",
-      "Lisäaineet"
-    ],
-    "examples": "SEMRETARD, PIERI, PRECO, HYDROTARD",
+    "material": "Kemikaali",
+    "nativeClass": "- (Tekstitieto)",
     "requiredPropertyIds": []
   },
   {
@@ -694,109 +204,15 @@
     "discipline": "VALUTARVIKE",
     "version": "0.1",
     "uri": "",
-    "description": "",
+    "description": "Juotosbetoni (tai juotoslaasti) on erittäin juokseva, yleensä kutistumaton tai kevyesti paisuva erikoisbetoni, jolla on poikkeuksellisen korkea varhais- ja loppulujuus sekä hyvä tiivistyvyys kapeissakin raoissa.",
     "hierarchy": [
-      "Muu Varustelu",
-      "Betonikemia",
-      "Juotosmassat"
+      "VALUTARVIKKEET",
+      "BETONIKEMIA",
+      "Betonikemia"
     ],
-    "examples": "JB 600, JB 1000, SikaGrout, Fescon (yksikerros/talvi)",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Muotinirrotusaine",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Pintakäsittely ja korjaus",
-      "Pinnoitus"
-    ],
-    "examples": "AURAMOL BIO, SEM FORM, PIERI CIRE, PIERI DECOBIO",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Väripigmentti",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Pintakäsittely ja korjaus",
-      "Pinnoitus"
-    ],
-    "examples": "BAYFERROX, HOBBYCOLOR, HEUCODUR-BLAU",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Betonipinnan jälkihoitoaine",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Pintakäsittely ja korjaus",
-      "Pinnoitus"
-    ],
-    "examples": "SEMCURING, E-RED, SEM PROTECT, EVERCRETE, ECOBETON",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Injektointiaine / Puhdistusaine",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Pintakäsittely ja korjaus",
-      "Injektointi"
-    ],
-    "examples": "SEMJECT, PC PU CLEANER, RBS, PC LEAKPLUG, LUXIT",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Kulmasuoja / Kaideputki",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Korjaus ja suojaus",
-      "Suojaus"
-    ],
-    "examples": "UKT, SKT, KAPU",
-    "requiredPropertyIds": []
-  },
-  {
-    "id": "",
-    "name": "Lämpömatto / Peite",
-    "generalId": "",
-    "discipline": "VALUTARVIKE",
-    "version": "0.1",
-    "uri": "",
-    "description": "",
-    "hierarchy": [
-      "Muu Varustelu",
-      "Talvisuojaus",
-      "Suojaus"
-    ],
-    "examples": "Betonipeite, termomatto, roudansulatusmatto",
+    "examples": "JB 600, SikaGrout",
+    "material": "Betoni / Laasti",
+    "nativeClass": "- (Tekstitieto)",
     "requiredPropertyIds": []
   }
 ]

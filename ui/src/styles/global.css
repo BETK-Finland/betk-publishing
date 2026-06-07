@@ -181,6 +181,14 @@ samp,
 	display: none;
 }
 
+/* Deep-link landing highlight — the row/section a cross-reference button
+ * from a soveltamisohje doc points at. */
+tr.product-row:target,
+.node:target > .node-header {
+	outline: 2px solid var(--accent-teal);
+	outline-offset: -2px;
+}
+
 .node-header h2,
 .node-header h3,
 .node-header h4 {
@@ -706,25 +714,26 @@ body.hide-col-propVersion [data-column="propVersion"] {
   font-style: italic;
 }
 
-.sov-xref-col {
-  width: 50px;
-  text-align: center;
+/* Cross-reference button — opens the target in the BETK browser.
+ * Floated right so the buttons form a clean column at the cell edge. */
+.sov-xref-button {
+  float: right;
+  background: var(--surface-raised);
+  color: var(--accent-blue);
+  border: 1px solid var(--separator);
+  border-radius: 4px;
+  padding: 1px 8px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-left: 8px;
+  transition: background 120ms ease-out, color 120ms ease-out;
 }
 
-.sov-xref {
-  display: inline-flex;
-  align-items: center;
-}
-
-.sov-xref-badge {
-  display: inline-block;
-  background: var(--accent-teal);
+.sov-xref-button:hover {
+  background: var(--accent-blue);
   color: var(--bg);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 1px 6px;
-  border-radius: 10px;
-  margin-left: 6px;
+  text-decoration: none;
 }
 
 /* Glossary */
@@ -909,7 +918,7 @@ body.hide-col-propVersion [data-column="propVersion"] {
 
   /* Hide interactive elements */
   .sov-toc,
-  .sov-xref-badge,
+  .sov-xref-button,
   .sidebar,
   .issue-ticket {
     display: none !important;
@@ -1018,12 +1027,6 @@ body.hide-col-propVersion [data-column="propVersion"] {
 
   .sov-section h4 {
     color: #333;
-  }
-
-  /* Cross-reference links — show as plain text in print */
-  .sov-xref {
-    color: black;
-    text-decoration: none;
   }
 
   /* Page footer */

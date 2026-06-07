@@ -1,31 +1,42 @@
 ---
 import { elementTypeToProducts, propertySetToProperties } from "../data/soveltamisohje-loader";
+import { productAnchor, propertySetAnchor } from "../data/anchors";
 
 interface Props {
   type: "element" | "propertySet";
   code: string;
+  /** Display text; for elements the row's kuvaus, which also disambiguates shared codes. */
+  label?: string;
 }
 
-const { type, code } = Astro.props;
+const { type, code, label } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
-let count = 0;
+// Render the text plus a button that opens the target in the BETK browser.
+// When no target resolves, only the plain text is shown.
 let href = "";
+let text = "";
 
 if (type === "element") {
-  const products = elementTypeToProducts.get(code);
-  count = products?.length ?? 0;
-  // Link to the main browser page; the element can be found via search/scroll
-  href = `${base}`;
+  text = label ?? code;
+  const candidates = elementTypeToProducts.get(code) ?? [];
+  // Shared codes (e.g. MUU) carry several products; the row's kuvaus matches
+  // the product name exactly and picks the right one.
+  const product =
+    candidates.length === 1 ? candidates[0] : candidates.find((p) => p.name === label);
+  if (product && text) {
+    href = `${base}properties#${productAnchor(product.name)}`;
+  }
 } else {
-  const props = propertySetToProperties.get(code);
-  count = props?.length ?? 0;
-  href = `${base}`;
+  text = code;
+  if (propertySetToProperties.has(code)) {
+    // Cross-reference maps are built from precast data → PRECAST discipline.
+    href = `${base}propertysets#${propertySetAnchor("PRECAST", code)}`;
+  }
 }
 ---
 
-{count > 0 && (
-  <a href={href} class="sov-xref" title={`${count} kohdetta BETK-selaimessa`}>
-    <span class="sov-xref-badge">{count}</span>
-  </a>
+{type === "propertySet" ? <code>{text}</code> : text}
+{href && (
+  <a href={href} class="sov-xref-button" title="Avaa BETK-selaimessa">Avaa</a>
 )}

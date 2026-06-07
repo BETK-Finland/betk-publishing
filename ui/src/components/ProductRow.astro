@@ -1,6 +1,7 @@
 ---
 import type { Product } from "../data/types";
 import { resolveProductProperties } from "../data/loader";
+import { productAnchor } from "../data/anchors";
 
 interface Props {
 	product: Product;
@@ -10,7 +11,7 @@ const { product } = Astro.props;
 const groups = resolveProductProperties(product);
 ---
 
-<tr class="product-row" data-product-id={product.id || product.generalId}>
+<tr class="product-row" id={productAnchor(product.name)} data-product-id={product.id || product.generalId}>
 	<td data-column="name" class="cell-name">{product.name}</td>
 	<td data-column="generalId" class="cell-mono">{product.generalId}</td>
 	<td data-column="version" class="cell-mono">{product.version}</td>

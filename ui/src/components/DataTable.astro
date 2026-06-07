@@ -1,7 +1,6 @@
 ---
 import type { ValueTable, PintakasittelyTable, PintakasittelyArvo } from "../data/soveltamisohje-types";
 import CrossReferenceLink from "./CrossReferenceLink.astro";
-import { elementTypeToProducts } from "../data/soveltamisohje-loader";
 
 interface Props {
   table: ValueTable | PintakasittelyTable;
@@ -18,7 +17,6 @@ const isPintakasittely = table.arvot.length > 0 && "alavaihtoehdot" in table.arv
         <tr><th>Tietosisältötarve</th><td>{table.tietosisalto}</td></tr>
         <tr><th>Rajaukset</th><td>{table.rajaukset}</td></tr>
         <tr><th>Ominaisuusjoukko</th><td>
-          <code>{table.ominaisuusjoukko}</code>
           <CrossReferenceLink type="propertySet" code={table.ominaisuusjoukko} />
         </td></tr>
         <tr><th>Ominaisuus</th><td>{table.ominaisuus}</td></tr>
@@ -32,7 +30,6 @@ const isPintakasittely = table.arvot.length > 0 && "alavaihtoehdot" in table.arv
       <tr>
         <th>Koodi</th>
         <th>Kuvaus</th>
-        {!isPintakasittely && <th class="sov-xref-col"></th>}
       </tr>
     </thead>
     <tbody>
@@ -54,12 +51,9 @@ const isPintakasittely = table.arvot.length > 0 && "alavaihtoehdot" in table.arv
         (table.arvot as { koodi: string; kuvaus: string }[]).map(arvo => (
           <tr>
             <td><code>{arvo.koodi}</code></td>
-            <td>{arvo.kuvaus}</td>
-            <td class="sov-xref-col">
-              {elementTypeToProducts.has(arvo.koodi) && (
-                <CrossReferenceLink type="element" code={arvo.koodi} />
-              )}
-            </td>
+            {/* Expression wrapper works around an Astro compiler bug: a component
+                as a direct child of <td> here garbles the compiled template. */}
+            <td>{<CrossReferenceLink type="element" code={arvo.koodi} label={arvo.kuvaus} />}</td>
           </tr>
         ))
       )}

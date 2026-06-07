@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Sidebar, { type ColumnToggle } from "../components/Sidebar.astro";
 import { propertySetsByDiscipline } from "../data/loader";
+import { propertySetAnchor } from "../data/anchors";
 import IssueTicket from "../components/IssueTicket.astro";
 
 const columns: ColumnToggle[] = [
@@ -40,7 +41,7 @@ const initialHidden = columns
 						</header>
 						<div class="node-body">
 							{disc.sets.map(set => (
-								<section class="node" data-node="propertyset">
+								<section class="node" data-node="propertyset" id={propertySetAnchor(disc.discipline, set.group)}>
 									<header class="node-header propertyset-header" role="button" tabindex="0" aria-expanded="false">
 										<span class="caret" aria-hidden="true"></span>
 										<h3>{set.group}</h3>
@@ -94,6 +95,8 @@ const initialHidden = columns
 </Layout>
 
 <script>
+	import { revealHashTarget } from "../scripts/reveal-hash-target";
+
 	// Identical expand/collapse pattern to ProductTree.
 	function toggleNode(header: HTMLElement) {
 		const node = header.closest<HTMLElement>(".node");
@@ -112,4 +115,7 @@ const initialHidden = columns
 			}
 		});
 	});
+
+	// Deep links from soveltamisohje cross-reference buttons.
+	revealHashTarget();
 </script>

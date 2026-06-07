@@ -63,6 +63,8 @@ const { tree } = Astro.props;
 </div>
 
 <script>
+	import { revealHashTarget } from "../scripts/reveal-hash-target";
+
 	// Toggle `open` on the nearest .node when its header is clicked or
 	// activated via keyboard. Keeps aria-expanded in sync.
 	function toggleNode(header: HTMLElement) {
@@ -84,4 +86,7 @@ const { tree } = Astro.props;
 			}
 		});
 	});
+
+	// Deep links from soveltamisohje cross-reference buttons.
+	revealHashTarget();
 </script>
