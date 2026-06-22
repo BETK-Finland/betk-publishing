@@ -18,21 +18,3 @@ content:
       - name: body
         label: Body
         type: rich-text
-
-  - name: taulukot
-    label: taulukot
-    type: collection
-    path: content/soveltamisohje
-    subfolders: true
-    filename: '{primary}.json'
-    extensions: [json]
-    format: json
-    fields:
-      - name: rows
-        label: Rows
-        type: object
-        list: true
-        fields:
-          - name: cell
-            label: Cell
-            type: string
