@@ -6,6 +6,11 @@ content:
     subfolders: true
     filename: '{primary}.md'
     extensions: [md]
+    view:
+      sort: [filename]
+      default:
+        sort: filename
+        order: asc
     fields:
       - name: title
         label: Title
