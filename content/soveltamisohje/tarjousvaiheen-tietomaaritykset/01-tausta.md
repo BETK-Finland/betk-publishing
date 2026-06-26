@@ -9,6 +9,6 @@ Tämä soveltamisohje on tehty osana Rakennusteollisuus RT:n tuotetiedon ja toim
 - BETK Soveltamisohje: Tuoteyksilöinti ja -tunnistaminen
 - Esimerkkimalli IFC4x3-muodossa
 - Julkaisualustalta löytyvä ominaisuus ja ominaisuusryhmäselain
-- Keskustelupaperi sijaintitiedoista betonielementtien toimitusketjussa[linkki lisättävä]
+- Keskustelupaperi sijaintitiedoista betonielementtien toimitusketjussa
 - Soveltamisohje tapahtumatiedon  käytöstä (GS1 EPCIS) [työnalla]
 
