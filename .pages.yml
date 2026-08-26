@@ -15,6 +15,12 @@ content:
       - name: title
         label: Title
         type: string
+      - name: order
+        label: Order
+        type: number
+      - name: section
+        label: Section
+        type: string
       - name: body
         label: Body
         type: rich-text
