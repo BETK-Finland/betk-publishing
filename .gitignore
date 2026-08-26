@@ -4,11 +4,11 @@
 # Top-level directories not needed
 /.claude/
 /mcp/
+# Local work dump — never commit
 /.modus
 # OS / editor noise
 .DS_Store
 Thumbs.db
-CLAUDE.md
 .vscode/
 .idea/
 *.log
