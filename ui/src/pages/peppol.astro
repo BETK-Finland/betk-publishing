@@ -57,8 +57,8 @@ const externalLinks = [
 ];
 ---
 
-<Layout title={`BETK — ${meta.otsikko}`}>
-  <div class="app-main">
+<Layout title={`BETK — ${meta.otsikko}`} description={meta.alaotsikko ?? meta.otsikko}>
+  <main id="main" class="sov-layout">
     <aside class="sov-sidebar">
       <SoveltamisohjeToc items={tocItems} />
       <nav class="sov-doc-nav" aria-label="Linkit">
@@ -74,7 +74,7 @@ const externalLinks = [
         </ul>
       </nav>
     </aside>
-    <section class="landing-body">
+    <section>
       <article class="sov-document">
         <header class="sov-header">
           <h1 class="sov-title">{meta.otsikko}</h1>
@@ -92,7 +92,7 @@ const externalLinks = [
         ))}
       </article>
     </section>
-  </div>
+  </main>
   <IssueTicket />
 </Layout>
 

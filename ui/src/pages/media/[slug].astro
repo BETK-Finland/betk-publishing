@@ -1,0 +1,50 @@
+---
+import { render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import MediaSidebar from "../../components/MediaSidebar.astro";
+import { listMedia } from "../../data/media-loader";
+
+export async function getStaticPaths() {
+  const posts = await listMedia();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, posts },
+  }));
+}
+
+const { post, posts } = Astro.props;
+const { Content } = await render(post);
+const items = posts.map((item) => ({ id: item.id, title: item.data.title }));
+---
+
+<Layout title={`${post.data.title} — BETK`} description={post.data.title}>
+  <main id="main" class="sov-layout">
+    <MediaSidebar items={items} current={post.id} />
+    <article class="sov-document">
+      <header class="sov-header">
+        <p class="mark" data-i18n="nav.media">Media</p>
+        <h1 class="sov-title">{post.data.title}</h1>
+        {
+          post.data.date && (
+            <p class="sov-subtitle">
+              {post.data.date.toLocaleDateString("fi-FI")}
+            </p>
+          )
+        }
+      </header>
+      <div class="sov-prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .mark {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>

@@ -1,6 +1,6 @@
 // Build-time loader for the Peppol intro page.
 // Reads meta.json + manifest.json from /content/peppol/ (repo root).
-// Mirrors landing-loader: single-page, multi-section markdown driven by manifest.
+// Single-page, multi-section markdown driven by manifest.
 
 export interface PeppolMeta {
   otsikko: string;

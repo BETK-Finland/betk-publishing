@@ -27,8 +27,8 @@ const initialHidden = columns
 	.join(" ");
 ---
 
-<Layout title="BETK — Ominaisuusryhmät" bodyClass={initialHidden}>
-	<div class="app-main">
+<Layout title="BETK — Ominaisuusryhmät" description="Ominaisuusryhmät" bodyClass={initialHidden}>
+	<main id="main" class="app-main">
 		<Sidebar columns={columns} />
 		<section class="tree-pane">
 			<div class="property-set-list">
@@ -90,7 +90,7 @@ const initialHidden = columns
 				))}
 			</div>
 		</section>
-	</div>
+	</main>
 	<IssueTicket />
 </Layout>
 

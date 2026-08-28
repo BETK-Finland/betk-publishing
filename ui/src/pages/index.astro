@@ -1,120 +1,256 @@
 ---
-import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import ProseSection from "../components/ProseSection.astro";
-import PrintToc from "../components/PrintToc.astro";
-import SoveltamisohjeToc from "../components/SoveltamisohjeToc.astro";
-import IssueTicket from "../components/IssueTicket.astro";
-import { listDocs } from "../data/soveltamisohje-loader";
-import { getLandingMeta, getLandingManifest } from "../data/landing-loader";
+import { withBase } from "../data/nav";
+import morko from "../assets/morko.png";
 
-const meta = getLandingMeta();
-const manifest = getLandingManifest();
-const base = import.meta.env.BASE_URL;
-const docs = listDocs();
+const docsHref = withBase("soveltamisohje/tarjousvaiheen-tietomaaritykset");
+const propertiesHref = withBase("properties");
+const peppolHref = withBase("peppol");
 
-interface NavLink {
-  href: string;
-  label: string;
-  lang?: string;
-}
-
-const navLinks: NavLink[] = [
-  { href: `${base}properties`, label: "Ominaisuudet" },
-  { href: `${base}propertysets`, label: "Ominaisuusryhmät" },
-  ...docs.map(d => ({
-    href: `${base}soveltamisohje/${d.slug}`,
-    label: d.manifest.nav_title,
-    lang: d.manifest.lang ?? "fi",
-  })),
-  { href: `${base}sanasto`, label: "Sanasto" },
-  { href: `${base}esimerkkimallit`, label: "Esimerkkimallit" },
-];
-
-const entries = await getCollection("landing");
-const byId = new Map(entries.map(e => [e.id, e]));
-
-type Rendered = {
-  anchor: string;
-  sectionNumber: string;
-  title: string;
-  Content: any;
-};
-
-async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
-  const entry = byId.get(section.content);
-  if (!entry) return null;
-  const { Content } = await render(entry);
-  return {
-    anchor: section.anchor,
-    sectionNumber: entry.data.section,
-    title: entry.data.title,
-    Content,
-  };
-}
-
-const resolved = (await Promise.all(manifest.sections.map(resolveSection))).filter(
-  (r): r is Rendered => r !== null,
-);
-
-const tocItems = resolved.map(r => ({
-  anchor: r.anchor,
-  label: `${r.sectionNumber} ${r.title}`.trim(),
-}));
+const topics = [
+  {
+    href: docsHref,
+    title: "Soveltamisohjeet",
+    i18nKey: "nav.documents",
+    blurbKey: "home.cardGuides",
+    mark: "guide",
+    blurb:
+      "Tietomääritykset ja soveltamisohjeet toimialan käyttöön. Tarjousvaihe, tuoteyksilöinti ja tunnistaminen.",
+  },
+  {
+    href: propertiesHref,
+    title: "BIM / IFC",
+    blurbKey: "home.cardBim",
+    mark: "standard",
+    blurb:
+      "Vakioidut ominaisuudet ja ominaisuusryhmät sallittuine arvoineen. Koneluettava tietopohja suunnittelusta työmaalle.",
+  },
+  {
+    href: peppolHref,
+    title: "Peppol",
+    i18nKey: "nav.peppol",
+    blurbKey: "home.cardPeppol",
+    mark: "peppol",
+    blurb:
+      "Standardoituja sanomia ja asiakirjoja prosessivaiheiden tiedonvälitykseen. Neljän kulman malli, yksilöllinen Peppol-tunnus.",
+  },
+] as const;
 ---
 
-<Layout title={meta.otsikko}>
-  <div class="app-main">
-    <aside class="sov-sidebar">
-      <SoveltamisohjeToc items={tocItems} />
-      <nav class="sov-doc-nav" aria-label="Navigaatio">
-        <p class="sidebar-heading" data-i18n="sidebar.navigation">NAVIGAATIO</p>
-        <ul class="sov-toc-list">
-          {navLinks.map(link => (
-            <li data-sov-lang={link.lang}><a class="sov-toc-link" href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
-    <section class="landing-body">
-      <article class="sov-document">
-        <header class="sov-header">
-          <h1 class="sov-title">{meta.otsikko}</h1>
-          {meta.alaotsikko && <p class="sov-subtitle"><strong>{meta.alaotsikko}</strong></p>}
-          {meta.paivamaara && (
-            <div class="sov-meta"><p>Päivämäärä: {meta.paivamaara}</p></div>
-          )}
-          <p class="sov-print-date" aria-hidden="true"></p>
-        </header>
-        <PrintToc sections={tocItems} />
-        {resolved.map(r => (
-          <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
-            <r.Content />
-          </ProseSection>
-        ))}
-      </article>
+<Layout
+  title="BETK — Betonielementin toimitusketju"
+  description="Standardoidut tietomäärittelyt rakennustuotteille"
+>
+  <main id="main">
+    <section class="hero">
+      <h1>
+        <span>BETK</span>
+        <span data-i18n="home.name">Betonielementin toimitusketju</span>
+      </h1>
+      <p class="lead">
+        <span data-i18n="home.description">Standardoidut tietomäärittelyt rakennustuotteille</span>
+        <span data-i18n="home.lead">
+          Sivuston tarkoitus on tarjota suunnittelijoille, urakoitsijoille ja
+          elementtitoimittajille yhteinen, koneluettava tietopohja
+          rakennushankkeiden tietomallintamiseen ja osapuolien väliseen
+          tiedonsiirtoon.
+        </span>
+      </p>
     </section>
-  </div>
-  <IssueTicket />
+
+    <section class="topics" id="what">
+      <h2 data-i18n="home.focus">Painopisteet</h2>
+      <ul class="cards">
+        {
+          topics.map((topic) => (
+            <li>
+              <a class="card" href={topic.href}>
+                {topic.mark === "guide" && (
+                  <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+                    <rect x="14" y="10" width="36" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                    <path d="M22 22h20M22 30h20M22 38h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                  </svg>
+                )}
+                {topic.mark === "standard" && (
+                  <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+                    <circle cx="32" cy="32" r="18" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                    <path d="M32 18v28M18 32h28" fill="none" stroke="currentColor" stroke-width="2"></path>
+                    <circle cx="32" cy="32" r="5" fill="currentColor"></circle>
+                  </svg>
+                )}
+                {topic.mark === "peppol" && (
+                  <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+                    <circle cx="18" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                    <circle cx="46" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                    <circle cx="32" cy="44" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                    <path d="M22.5 23.5 28.5 40M41.5 23.5 35.5 40M23 20h18" fill="none" stroke="currentColor" stroke-width="2"></path>
+                  </svg>
+                )}
+                <h3 data-i18n={"i18nKey" in topic ? topic.i18nKey : undefined}>{topic.title}</h3>
+                <p data-i18n={topic.blurbKey}>{topic.blurb}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="architecture" id="architecture">
+      <h2 data-i18n="home.archTitle">Hajautettu ja avoin ETO-arkkitehtuuri</h2>
+      <p class="arch-lead" data-i18n="home.archLead">
+        Digitalisoidun elementtitoimitusketjun tietovarannot, rajapinnat ja
+        prosessin tärkeimmät toiminnot
+      </p>
+      <div class="arch-frame">
+        <img
+          src={morko.src}
+          width={morko.width}
+          height={morko.height}
+          alt="Tiedonvirtauksen arkkitehtuurikuvaus: rakennusalan projektituotteen (ETO) tavoitetila"
+          data-i18n-alt="home.archAlt"
+        />
+      </div>
+    </section>
+  </main>
 </Layout>
 
-<script>
-  // Print date stamp — set on beforeprint, visible only in print CSS
-  const el = document.querySelector(".sov-print-date");
-  if (el) {
-    window.addEventListener("beforeprint", () => {
-      el.textContent = `Tulostettu: ${new Date().toLocaleDateString("fi-FI")}`;
-    });
-  }
-  // Force all <details> open before print
-  window.addEventListener("beforeprint", () => {
-    document.querySelectorAll("details").forEach(d => d.setAttribute("open", ""));
-  });
-</script>
-
 <style>
-  .landing-body {
-    padding: 2rem;
-    overflow-y: auto;
+  main {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3rem;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2.2rem 0 2.4rem;
+    text-align: center;
+  }
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.55rem, 3.2vw, 2.1rem);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .lead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    margin: 0;
+  }
+
+  .topics {
+    padding: 2.2rem 0 2.8rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 4.6rem;
+  }
+
+  .topics h2 {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.15rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 18rem;
+    padding: 1.8rem 1.15rem 1.5rem;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+  }
+
+  .card:hover {
+    text-decoration: none;
+  }
+
+  .logo {
+    width: 4.8rem;
+    height: 4.8rem;
+    flex-shrink: 0;
+    margin: 0 0 0.9rem;
+    color: var(--accent);
+  }
+
+  .card h3 {
+    margin: 0 0 0.7rem;
+    font-size: 1.12rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .card p {
+    flex: 1;
+    margin: 0;
+    min-height: 4.2em;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .architecture {
+    padding: 2.2rem 0 2.8rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 4.6rem;
+  }
+
+  .architecture h2 {
+    margin: 0 0 0.7rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .arch-lead {
+    max-width: 36rem;
+    margin: 0 auto 1.4rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .arch-frame {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+  }
+
+  .arch-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 520px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

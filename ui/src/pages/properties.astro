@@ -16,13 +16,97 @@ const columns: ColumnToggle[] = [
 ];
 ---
 
-<Layout title="BETK — Ominaisuudet" bodyClass="hide-col-description">
-	<div class="app-main">
+<Layout title="BETK — Ominaisuudet" description="Ominaisuudet ja tuoteosat" bodyClass="hide-col-description">
+	<main id="main" class="app-main">
 		<Sidebar columns={columns} alwaysOnLabel="TIEDOT" />
 		<section class="tree-pane">
+			<label class="tree-search">
+				<span class="sidebar-heading">Haku</span>
+				<input
+					id="property-search"
+					type="search"
+					placeholder="Ominaisuus, tunnus, tuoteosa"
+					autocomplete="off"
+					spellcheck="false"
+				/>
+			</label>
+			<p class="tree-empty" hidden>Ei osumia.</p>
 			<ProductTree tree={tree} />
 		</section>
-	</div>
+	</main>
 	<DetailModal />
 	<IssueTicket />
 </Layout>
+
+<script>
+	const input = document.getElementById("property-search");
+	const empty = document.querySelector(".tree-empty");
+	const tree = document.querySelector(".product-tree");
+
+	if (input instanceof HTMLInputElement && empty instanceof HTMLElement && tree) {
+		const rows = [...tree.querySelectorAll<HTMLElement>(".product-row")];
+
+		const setOpen = (node: HTMLElement | null, open: boolean) => {
+			if (!node) return;
+			node.classList.toggle("open", open);
+			node.querySelector(":scope > .node-header")?.setAttribute("aria-expanded", String(open));
+		};
+
+		const apply = () => {
+			const query = input.value.trim().toLowerCase();
+			let visible = 0;
+
+			for (const row of rows) {
+				const hit = query.length === 0 || (row.dataset.search ?? "").includes(query);
+				row.hidden = !hit;
+				if (hit) visible += 1;
+			}
+
+			for (const node of tree.querySelectorAll<HTMLElement>(".node")) {
+				const hasHit = [...node.querySelectorAll<HTMLElement>(".product-row")].some((row) => !row.hidden);
+				node.hidden = query.length > 0 && !hasHit;
+				if (query.length > 0 && hasHit) setOpen(node, true);
+			}
+
+			empty.hidden = visible > 0;
+		};
+
+		const initial = new URLSearchParams(location.search).get("q");
+		if (initial) input.value = initial;
+		apply();
+		input.addEventListener("input", apply);
+	}
+</script>
+
+<style>
+	.tree-search {
+		display: block;
+		margin: 0 0 1.4rem;
+	}
+
+	.tree-search .sidebar-heading {
+		margin-bottom: 0.45rem;
+	}
+
+	.tree-search input {
+		display: block;
+		width: 100%;
+		max-width: 26rem;
+		padding: 0.4rem 0.55rem;
+		font: inherit;
+		font-size: 0.95rem;
+		color: var(--ink);
+		background: transparent;
+		border: 1px solid var(--line);
+	}
+
+	.tree-search input:focus {
+		outline: 1px solid var(--ink);
+		border-color: var(--ink);
+	}
+
+	.tree-empty {
+		margin: 0 0 1rem;
+		color: var(--muted);
+	}
+</style>

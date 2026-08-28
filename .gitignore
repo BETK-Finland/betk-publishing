@@ -6,6 +6,7 @@
 /mcp/
 # Local work dump — never commit
 /.modus
+/.project/
 # OS / editor noise
 .DS_Store
 Thumbs.db

@@ -9,9 +9,16 @@ interface Props {
 
 const { product } = Astro.props;
 const groups = resolveProductProperties(product);
+const searchText = [
+  product.name,
+  product.generalId,
+  product.id,
+  product.description,
+  product.uri,
+].filter(Boolean).join(" ").toLowerCase();
 ---
 
-<tr class="product-row" id={productAnchor(product.name)} data-product-id={product.id || product.generalId}>
+<tr class="product-row" id={productAnchor(product.name)} data-product-id={product.id || product.generalId} data-search={searchText}>
 	<td data-column="name" class="cell-name">{product.name}</td>
 	<td data-column="generalId" class="cell-mono">{product.generalId}</td>
 	<td data-column="version" class="cell-mono">{product.version}</td>

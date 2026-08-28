@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { listMedia } from "../../data/media-loader";
+import { withBase } from "../../data/nav";
+
+const posts = await listMedia();
+if (posts[0]) {
+  return Astro.redirect(withBase(`media/${posts[0].id}`));
+}
+---
+
+<Layout
+  title="Media — BETK"
+  description="Artikkelit, blogit, videot ja muu viestintä. Tulossa pian."
+>
+  <main id="main" class="sov-layout">
+    <aside class="sov-sidebar">
+      <nav class="sov-doc-nav" aria-label="Media">
+        <p class="sidebar-heading" data-i18n="media.heading">MEDIA</p>
+        <ul class="sov-toc-list"></ul>
+      </nav>
+    </aside>
+    <article class="sov-document">
+      <header class="sov-header">
+        <p class="mark" data-i18n="nav.media">Media</p>
+        <h1 class="sov-title" data-i18n="nav.media">Media</h1>
+        <p class="sov-subtitle" data-i18n="comingSoon">Tulossa pian</p>
+      </header>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .mark {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>

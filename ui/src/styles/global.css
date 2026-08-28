@@ -1,39 +1,29 @@
-/* BETK Precast Browser — dark theme tokens & base styles.
- * Palette and typography follow plans/superpowers/specs/2026-04-13-precast-browser-design.md. */
+/* BETK site tokens — parchment shell from the landing template.
+ * Tool pages keep their existing component CSS; these aliases map the old
+ * names (--text, --accent-teal, …) onto the template palette. */
 
 :root {
-	--bg: #1a1a2e;
-	--surface: #242442;
-	--surface-raised: #2d2d4a;
-	--text: #e0e0e0;
-	--text-strong: #ffffff;
-	--text-muted: #a5a5c0;
-	--accent-teal: #5eead4;
-	--accent-blue: #93c5fd;
-	--separator: #333355;
+	--bg: #f4f1ea;
+	--ink: #1c1a16;
+	--muted: #5c574e;
+	--line: #cfc8bb;
+	--accent: #8a3b12;
 
-	--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial, sans-serif;
-	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
-		"Liberation Mono", monospace;
+	--surface: #faf8f3;
+	--surface-raised: #fffdf8;
+	--text: var(--ink);
+	--text-strong: var(--ink);
+	--text-muted: var(--muted);
+	--accent-teal: var(--accent);
+	--accent-blue: var(--accent);
+	--separator: var(--line);
 
-	color-scheme: dark;
-}
+	--font-sans: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman",
+		serif;
+	--font-mono: ui-monospace, "IBM Plex Mono", "Cascadia Code", SFMono-Regular,
+		Menlo, Consolas, "Liberation Mono", monospace;
 
-@media (prefers-color-scheme: light) {
-	:root {
-		--bg: #f5f6fa;
-		--surface: #ffffff;
-		--surface-raised: #eef0f7;
-		--text: #2d2d4a;
-		--text-strong: #1a1a2e;
-		--text-muted: #6b6b8a;
-		--accent-teal: #0d9488;
-		--accent-blue: #2563eb;
-		--separator: #d8dae8;
-
-		color-scheme: light;
-	}
+	color-scheme: light;
 }
 
 *,
@@ -42,20 +32,30 @@
 	box-sizing: border-box;
 }
 
+html {
+	scroll-padding-top: 4.5rem;
+}
+
 html,
 body {
 	margin: 0;
 	padding: 0;
 	background: var(--bg);
-	color: var(--text);
+	color: var(--ink);
 	font-family: var(--font-sans);
-	font-size: 14px;
-	line-height: 1.5;
+	font-size: 19px;
+	line-height: 1.45;
 	min-height: 100%;
 }
 
 body {
 	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
 }
 
 h1,
@@ -83,53 +83,7 @@ samp,
 	font-family: var(--font-mono);
 }
 
-/* Header ------------------------------------------------------------------- */
-
-.app-header {
-	padding: 20px 28px;
-	border-bottom: 1px solid var(--separator);
-	background: var(--surface);
-}
-
-.app-header h1 {
-	font-size: 18px;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-}
-
-.app-nav {
-	display: flex;
-	gap: 16px;
-	margin-top: 8px;
-}
-
-.app-nav a {
-	font-size: 12px;
-	letter-spacing: 0.04em;
-	color: var(--text-muted);
-	padding: 4px 0;
-	border-bottom: 2px solid transparent;
-	transition: color 120ms, border-color 120ms;
-}
-
-.app-nav a:hover {
-	color: var(--text-strong);
-	text-decoration: none;
-	border-bottom-color: var(--accent-teal);
-}
-
-/* Shell -------------------------------------------------------------------- */
-
-.app-shell {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-.app-body {
-	flex: 1 1 auto;
-	padding: 24px 28px;
-}
+/* Header / shell leftovers — chrome lives in SiteHeader / SiteFooter now. */
 
 /* Product tree ------------------------------------------------------------- */
 
@@ -269,6 +223,11 @@ tr.product-row:target,
 	border-bottom: none;
 }
 
+.product-row[hidden],
+.node[hidden] {
+	display: none;
+}
+
 .cell-mono {
 	font-family: var(--font-mono);
 	color: var(--text-muted);
@@ -381,14 +340,17 @@ body.hide-col-propVersion [data-column="propVersion"] {
 
 .app-main {
 	display: grid;
-	grid-template-columns: 240px 1fr;
-	gap: 28px;
+	grid-template-columns: 12.5rem minmax(0, 1fr);
+	gap: 2.4rem;
 	align-items: start;
+	width: 100%;
+	margin: 0;
+	padding: 2.6rem 1.5rem 5rem;
 }
 
 .sidebar {
 	position: sticky;
-	top: 24px;
+	top: 4.6rem;
 	background: var(--surface);
 	border: 1px solid var(--separator);
 	border-radius: 6px;
@@ -445,18 +407,21 @@ body.hide-col-propVersion [data-column="propVersion"] {
 
 .sov-layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 28px;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: 2.4rem;
   align-items: start;
+  width: 100%;
+  margin: 0;
+  padding: 2.6rem 1.5rem 5rem;
 }
 
 .sov-sidebar {
   position: sticky;
-  top: 24px;
+  top: 4.6rem;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 6rem);
   overflow-y: auto;
 }
 
@@ -499,8 +464,8 @@ body.hide-col-propVersion [data-column="propVersion"] {
 }
 
 .sov-toc-link.active {
-  color: var(--accent-teal);
-  background: rgba(94, 234, 212, 0.08);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 /* Document body */
@@ -825,31 +790,10 @@ body.hide-col-propVersion [data-column="propVersion"] {
 /* Responsive: mobile (≤ 640px) --------------------------------------------- */
 
 @media screen and (max-width: 640px) {
-  .app-header {
-    padding: 14px 16px;
-  }
-
-  .app-header h1 {
-    font-size: 14px;
-  }
-
-  .app-nav {
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 6px;
-  }
-
-  .app-nav a {
-    font-size: 11px;
-  }
-
-  .app-body {
-    padding: 16px;
-  }
-
   /* Properties / Etusivu: sidebar stacks above content */
   .app-main {
     grid-template-columns: 1fr;
+    padding: 1.6rem 1.5rem 3rem;
   }
 
   .sidebar {
@@ -869,11 +813,6 @@ body.hide-col-propVersion [data-column="propVersion"] {
 
   .sov-document {
     max-width: 100%;
-  }
-
-  /* Landing page */
-  .landing-body {
-    padding: 1rem;
   }
 
   /* Tables: horizontal scroll on narrow screens */
@@ -905,19 +844,9 @@ body.hide-col-propVersion [data-column="propVersion"] {
     font-size: 10pt;
   }
 
-  .app-header {
-    background: white;
-    border-bottom: 2px solid black;
-    padding: 12px 0;
-  }
-
-  .app-header h1 {
-    color: black;
-    font-size: 12pt;
-  }
-
   /* Hide interactive elements */
   .sov-toc,
+  .sov-doc-nav,
   .sov-xref-button,
   .sidebar,
   .issue-ticket {
@@ -968,11 +897,6 @@ body.hide-col-propVersion [data-column="propVersion"] {
   .sov-layout,
   .app-main {
     display: block;
-  }
-
-  .landing-body {
-    padding: 0;
-    overflow: visible;
   }
 
   .sov-document {

@@ -140,8 +140,8 @@ const tocItems = resolved.flatMap(r => {
 });
 ---
 
-<Layout title={`BETK — ${meta.otsikko}`}>
-  <div class="sov-layout">
+<Layout title={`BETK — ${meta.otsikko}`} description={meta.alaotsikko ?? meta.otsikko}>
+  <main id="main" class="sov-layout">
     <div class="sov-sidebar">
       <nav class="sov-doc-nav" aria-label="Dokumentit">
         <p class="sidebar-heading" data-i18n="docs.heading">DOKUMENTIT</p>
@@ -253,7 +253,7 @@ const tocItems = resolved.flatMap(r => {
         return null;
       })}
     </article>
-  </div>
+  </main>
 </Layout>
 
 

@@ -24,3 +24,44 @@ content:
       - name: body
         label: Body
         type: rich-text
+
+  - name: media
+    label: Media
+    type: collection
+    path: content/media
+    filename: '{year}-{month}-{day}-{primary}.md'
+    extensions: [md]
+    view:
+      sort: [filename]
+      default:
+        sort: filename
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Date
+        type: date
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: tyoryhmat
+    label: Työryhmät
+    type: collection
+    path: content/tyoryhmat
+    filename: '{primary}.md'
+    extensions: [md]
+    view:
+      sort: [filename]
+      default:
+        sort: filename
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: body
+        label: Body
+        type: rich-text

@@ -1,0 +1,146 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { workingGroupBySlug, workingGroups } from "../../data/tyoryhmat";
+import { withBase } from "../../data/nav";
+import { leads, managers } from "../../data/people";
+
+export function getStaticPaths() {
+  return workingGroups.map((group) => ({
+    params: { slug: group.slug },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props;
+const resolved = group ?? workingGroupBySlug(Astro.params.slug);
+
+if (!resolved) {
+  return Astro.redirect(withBase("tyoryhmat/betk"));
+}
+
+const isBetk = resolved.slug === "betk";
+const managerLine = managers.join(", ");
+
+const entries = await getCollection("tyoryhmat");
+const entry = entries.find((item) => item.id === resolved.slug);
+const hasBody = Boolean(entry?.body?.trim());
+const rendered = entry && hasBody ? await render(entry) : null;
+const Content = rendered?.Content;
+const heading = entry?.data.title ?? resolved.title;
+---
+
+<Layout title={`${resolved.title} — BETK`} description={resolved.lead}>
+  <main id="main">
+    <p class="mark">
+      <span data-i18n="nav.workingGroups">Työryhmät</span>
+      · {resolved.label}
+    </p>
+    <h1>{heading}</h1>
+    {!hasBody && <p class="lead" data-i18n="comingSoon">{resolved.lead}</p>}
+    {
+      isBetk && (
+        <div class="people">
+          <p>
+            <span data-i18n="footer.managers">Projektipäälliköt</span>: {managerLine}
+          </p>
+          <p data-i18n="footer.leads">Työryhmien vetäjät</p>
+          <ul>
+            {leads.map((person) => (
+              <li>
+                {person.name} ({person.group})
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    {Content && (
+      <div class="sov-prose">
+        <Content />
+      </div>
+    )}
+    <ul class="peers">
+      {
+        workingGroups.map((item) => (
+          <li>
+            <a
+              href={withBase(`tyoryhmat/${item.slug}`)}
+              class:list={[{ current: item.slug === resolved.slug }]}
+              aria-current={item.slug === resolved.slug ? "page" : undefined}
+              data-i18n={item.i18nKey}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 3.2rem 1.25rem 4rem;
+  }
+
+  .mark {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 0 0 0.9rem;
+    font-size: 1.55rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .lead {
+    margin: 0 0 1.1rem;
+  }
+
+  .people {
+    margin: 0 0 1.1rem;
+  }
+
+  .people p {
+    margin: 0;
+  }
+
+  .people p + p {
+    margin-top: 0.75rem;
+  }
+
+  .people ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+
+  p {
+    margin: 0 0 0.75rem;
+  }
+
+  .peers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0.9rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .peers a {
+    color: var(--muted);
+  }
+
+  .peers a.current {
+    color: var(--ink);
+  }
+</style>

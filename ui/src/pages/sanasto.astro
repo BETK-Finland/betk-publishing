@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 ---
 
-<Layout title="Digisanasto — BETK">
-  <div class="sn-page">
+<Layout title="Digisanasto — BETK" description="BETK-sanasto">
+  <main id="main" class="sn-page">
     <div class="sn-toolbar">
       <input id="search" class="sn-search" placeholder="Hae käsitettä..." />
       <div class="sn-dropdown">
@@ -21,13 +21,13 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
       </div>
       <div id="view" class="sn-view-panel"></div>
     </div>
-  </div>
+  </main>
 
   <style is:global>
     .sn-page {
-      margin: -24px -28px;
       display: flex;
       flex-direction: column;
+      min-height: calc(100vh - 7rem);
     }
 
     .sn-toolbar {
@@ -231,10 +231,6 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 
     /* Mobile (≤ 640px) */
     @media screen and (max-width: 640px) {
-      .sn-page {
-        margin: -16px;
-      }
-
       .sn-toolbar {
         flex-wrap: wrap;
         gap: 6px;

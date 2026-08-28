@@ -1,0 +1,85 @@
+---
+import { withBase } from "../data/nav";
+
+const home = withBase("");
+const logo = withBase("betk-logo.svg");
+const github = "https://github.com/BETK-Finland/betk-publishing";
+---
+
+<footer class="site">
+  <div class="site-inner">
+    <a class="brand" href={home}>
+      <img src={logo} width="22" height="22" alt="" />
+      <span>BETK</span>
+    </a>
+    <a class="contact" href={github} target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M8 1.333A6.67 6.67 0 0 0 1.333 8c0 2.947 1.91 5.453 4.56 6.336.333.061.455-.145.455-.322 0-.158-.006-.579-.009-1.136-1.855.403-2.246-.894-2.246-.894-.303-.77-.74-.975-.74-.975-.605-.413.046-.405.046-.405.669.047 1.021.688 1.021.688.595 1.02 1.56.725 1.94.555.06-.431.233-.726.424-.893-1.48-.168-3.037-.74-3.037-3.3 0-.729.26-1.325.686-1.792-.069-.169-.297-.848.065-1.767 0 0 .56-.18 1.833.684A6.376 6.376 0 0 1 8 4.563c.567.003 1.138.077 1.67.225 1.272-.864 1.831-.684 1.831-.684.364.919.136 1.598.067 1.767.427.467.685 1.063.685 1.792 0 2.566-1.56 3.129-3.044 3.295.24.206.452.613.452 1.237 0 .893-.008 1.613-.008 1.831 0 .179.12.388.458.322A6.675 6.675 0 0 0 14.667 8 6.67 6.67 0 0 0 8 1.333Z"
+        ></path>
+      </svg>
+      <span data-i18n="nav.contact">GitHub</span>
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site {
+    border-top: 1px solid var(--line);
+  }
+
+  .site-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--ink);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .brand img {
+    display: block;
+  }
+
+  .brand:hover,
+  .contact:hover {
+    text-decoration: none;
+  }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .contact svg {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .site-inner {
+      padding: 0.75rem 1.25rem;
+    }
+  }
+
+  @media print {
+    .site {
+      display: none;
+    }
+  }
+</style>
