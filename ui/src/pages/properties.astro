@@ -2,8 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Sidebar, { type ColumnToggle } from "../components/Sidebar.astro";
 import ProductTree from "../components/ProductTree.astro";
+import PropertySetList from "../components/PropertySetList.astro";
 import DetailModal from "../components/DetailModal.astro";
-import { tree } from "../data/loader";
+import { tree, views } from "../data/loader";
 import IssueTicket from "../components/IssueTicket.astro";
 
 const columns: ColumnToggle[] = [
@@ -14,11 +15,30 @@ const columns: ColumnToggle[] = [
 	{ label: "LINKKI", column: "uri", defaultChecked: true, i18nKey: "col.uri" },
 	{ label: "KUVAUS", column: "description", defaultChecked: false, i18nKey: "col.description" },
 ];
+
+const propertySetColumns: ColumnToggle[] = [
+	{ label: "LABEL", column: "label", defaultChecked: true },
+	{ label: "BEC", column: "bec", defaultChecked: true },
+	{ label: "IFC PROPERTY TYPE", column: "ifcType", defaultChecked: true },
+	{ label: "DATA TYPE", column: "dataType", defaultChecked: true },
+	{ label: "UNIT", column: "unit", defaultChecked: true },
+	{ label: "REQUIREMENT", column: "requirement", defaultChecked: true },
+	{ label: "EXAMPLE VALUE", column: "exampleValue", defaultChecked: false },
+	{ label: "ALLOWED VALUES", column: "allowedValues", defaultChecked: false },
+	{ label: "DESCRIPTION", column: "description", defaultChecked: false },
+	{ label: "ID", column: "propId", defaultChecked: false },
+	{ label: "VERSION", column: "propVersion", defaultChecked: false },
+];
 ---
 
 <Layout title="BETK — Ominaisuudet" description="Ominaisuudet ja tuoteosat" bodyClass="hide-col-description">
 	<main id="main" class="app-main">
-		<Sidebar columns={columns} alwaysOnLabel="TIEDOT" />
+		<Sidebar
+			columns={columns}
+			propertySetColumns={propertySetColumns}
+			catalogs={views}
+			alwaysOnLabel="TIEDOT"
+		/>
 		<section class="tree-pane">
 			<label class="tree-search">
 				<span class="sidebar-heading">Haku</span>
@@ -32,6 +52,7 @@ const columns: ColumnToggle[] = [
 			</label>
 			<p class="tree-empty" hidden>Ei osumia.</p>
 			<ProductTree tree={tree} />
+			<PropertySetList />
 		</section>
 	</main>
 	<DetailModal />
@@ -41,10 +62,10 @@ const columns: ColumnToggle[] = [
 <script>
 	const input = document.getElementById("property-search");
 	const empty = document.querySelector(".tree-empty");
-	const tree = document.querySelector(".product-tree");
+	const pane = document.querySelector(".tree-pane");
 
-	if (input instanceof HTMLInputElement && empty instanceof HTMLElement && tree) {
-		const rows = [...tree.querySelectorAll<HTMLElement>(".product-row")];
+	if (input instanceof HTMLInputElement && empty instanceof HTMLElement && pane) {
+		const rows = [...pane.querySelectorAll<HTMLElement>(".product-row, .property-set-row")];
 
 		const setOpen = (node: HTMLElement | null, open: boolean) => {
 			if (!node) return;
@@ -57,13 +78,17 @@ const columns: ColumnToggle[] = [
 			let visible = 0;
 
 			for (const row of rows) {
+				const viewOff = row.closest("[data-view]")?.classList.contains("catalog-off") ?? false;
 				const hit = query.length === 0 || (row.dataset.search ?? "").includes(query);
-				row.hidden = !hit;
-				if (hit) visible += 1;
+				row.hidden = viewOff || !hit;
+				if (!row.hidden) visible += 1;
 			}
 
-			for (const node of tree.querySelectorAll<HTMLElement>(".node")) {
-				const hasHit = [...node.querySelectorAll<HTMLElement>(".product-row")].some((row) => !row.hidden);
+			for (const node of pane.querySelectorAll<HTMLElement>(".node")) {
+				if (node.classList.contains("catalog-off") || node.closest(".catalog-off")) continue;
+				const hasHit = [...node.querySelectorAll<HTMLElement>(".product-row, .property-set-row")].some(
+					(row) => !row.hidden,
+				);
 				node.hidden = query.length > 0 && !hasHit;
 				if (query.length > 0 && hasHit) setOpen(node, true);
 			}
@@ -75,6 +100,7 @@ const columns: ColumnToggle[] = [
 		if (initial) input.value = initial;
 		apply();
 		input.addEventListener("input", apply);
+		document.addEventListener("betk-filter-change", apply);
 	}
 </script>
 

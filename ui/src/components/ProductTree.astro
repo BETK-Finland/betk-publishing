@@ -1,6 +1,9 @@
 ---
 import type { ProductTree } from "../data/types";
 import ProductRow from "./ProductRow.astro";
+import { catalogs } from "../data/loader";
+
+const initialCatalog = catalogs[0]?.key;
 
 interface Props {
 	tree: ProductTree;
@@ -11,12 +14,11 @@ const { tree } = Astro.props;
 
 <div class="product-tree">
 	{tree.map((koodisto) => (
-		<section class="koodisto node" data-node="koodisto">
-			<header class="node-header koodisto-header" role="button" tabindex="0" aria-expanded="false">
-				<span class="caret" aria-hidden="true"></span>
-				<h2>{koodisto.name}</h2>
-				<span class="version">Versio {koodisto.version}</span>
-			</header>
+		<section
+			class:list={["koodisto", "node", "open", { "catalog-off": koodisto.name !== initialCatalog }]}
+			data-node="koodisto"
+			data-view={koodisto.name}
+		>
 			<div class="node-body">
 				{koodisto.paaryhmat.map((paa) => (
 					<section class="paaryhma node" data-node="paaryhma">
@@ -75,7 +77,7 @@ const { tree } = Astro.props;
 	}
 
 	const headers = document.querySelectorAll<HTMLElement>(
-		".product-tree .node-header",
+		".product-tree .paaryhma-header, .product-tree .alaryhma-header",
 	);
 	headers.forEach((header) => {
 		header.addEventListener("click", () => toggleNode(header));

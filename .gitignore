@@ -4,6 +4,7 @@
 # Top-level directories not needed
 /.claude/
 /mcp/
+/.venv/
 # Local work dump — never commit
 /.modus
 /.project/

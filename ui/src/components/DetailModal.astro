@@ -55,7 +55,7 @@
 		background: var(--surface);
 		border: 1px solid var(--separator);
 		border-radius: 8px;
-		max-width: 760px;
+		max-width: 880px;
 		width: 100%;
 		max-height: calc(100vh - 48px);
 		overflow-y: auto;
@@ -125,62 +125,8 @@
 		font-weight: 600;
 	}
 
-	.property-list {
-		list-style: none;
-		padding: 0;
+	.detail-property-table {
 		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-	}
-
-	.property-row {
-		display: grid;
-		grid-template-columns: 1fr auto auto;
-		gap: 12px;
-		align-items: center;
-		padding: 6px 10px;
-		border-bottom: 1px solid var(--separator);
-		font-size: 13px;
-	}
-
-	.property-row:last-child {
-		border-bottom: none;
-	}
-
-	.property-label {
-		color: var(--text);
-	}
-
-	.property-bec {
-		color: var(--text-muted);
-		font-family: var(--font-mono);
-		font-size: 11px;
-		margin-left: 4px;
-	}
-
-	.property-badge {
-		background: var(--surface-raised);
-		color: var(--accent-blue);
-		font-family: var(--font-mono);
-		font-size: 11px;
-		padding: 3px 8px;
-		border-radius: 4px;
-		letter-spacing: 0.02em;
-	}
-
-	/* Hide empty badges without collapsing the grid column. */
-	.property-badge:empty {
-		background: transparent;
-		padding: 0;
-	}
-
-	.property-unit {
-		color: var(--text-muted);
-		font-family: var(--font-mono);
-		font-size: 12px;
-		min-width: 24px;
-		text-align: right;
 	}
 </style>
 

@@ -150,19 +150,22 @@ tr.product-row:target,
 	text-transform: uppercase;
 }
 
-.koodisto-header h2 {
-	font-size: 15px;
-	color: var(--text-strong);
+.tree-pane [data-view].catalog-off {
+	display: none;
 }
 
-.koodisto-header .version {
-	color: var(--text-muted);
-	font-family: var(--font-mono);
-	font-size: 12px;
+.catalog-heading {
+	font-size: 15px;
+	color: var(--text-strong);
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	margin: 0 0 8px;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--separator);
 }
 
 .paaryhma {
-	margin-left: 18px;
+	margin-left: 0;
 }
 
 .paaryhma-header h3 {
@@ -274,26 +277,25 @@ tr.product-row:target,
 	color: var(--bg);
 }
 
-/* Column hiding — the sidebar script adds body.hide-col-<key> when a checkbox
- * is unchecked. Defaults come from the checkbox `checked` attribute; the
- * script syncs body classes once on load. */
+/* Column hiding — body.hide-col-<key> when a sidebar checkbox is unchecked.
+ * Limit to th/td so the sidebar checkbox itself stays visible. */
 
-body.hide-col-name [data-column="name"],
-body.hide-col-generalId [data-column="generalId"],
-body.hide-col-version [data-column="version"],
-body.hide-col-id [data-column="id"],
-body.hide-col-uri [data-column="uri"],
-body.hide-col-description [data-column="description"],
-body.hide-col-label [data-column="label"],
-body.hide-col-bec [data-column="bec"],
-body.hide-col-ifcType [data-column="ifcType"],
-body.hide-col-dataType [data-column="dataType"],
-body.hide-col-unit [data-column="unit"],
-body.hide-col-requirement [data-column="requirement"],
-body.hide-col-exampleValue [data-column="exampleValue"],
-body.hide-col-allowedValues [data-column="allowedValues"],
-body.hide-col-propId [data-column="propId"],
-body.hide-col-propVersion [data-column="propVersion"] {
+body.hide-col-name :is(th, td)[data-column="name"],
+body.hide-col-generalId :is(th, td)[data-column="generalId"],
+body.hide-col-version :is(th, td)[data-column="version"],
+body.hide-col-id :is(th, td)[data-column="id"],
+body.hide-col-uri :is(th, td)[data-column="uri"],
+body.hide-col-description :is(th, td)[data-column="description"],
+body.hide-col-label :is(th, td)[data-column="label"],
+body.hide-col-bec :is(th, td)[data-column="bec"],
+body.hide-col-ifcType :is(th, td)[data-column="ifcType"],
+body.hide-col-dataType :is(th, td)[data-column="dataType"],
+body.hide-col-unit :is(th, td)[data-column="unit"],
+body.hide-col-requirement :is(th, td)[data-column="requirement"],
+body.hide-col-exampleValue :is(th, td)[data-column="exampleValue"],
+body.hide-col-allowedValues :is(th, td)[data-column="allowedValues"],
+body.hide-col-propId :is(th, td)[data-column="propId"],
+body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
 	display: none;
 }
 
@@ -305,15 +307,9 @@ body.hide-col-propVersion [data-column="propVersion"] {
 	gap: 12px;
 }
 
-.discipline-header h2 {
-	font-size: 15px;
-	color: var(--text-strong);
-}
-
-.discipline-header .count {
-	color: var(--text-muted);
-	font-family: var(--font-mono);
-	font-size: 12px;
+.koodisto > .node-body {
+	margin-left: 0;
+	padding-top: 0;
 }
 
 .discipline-node > .node-body {

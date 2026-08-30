@@ -132,25 +132,50 @@ function buildPropertySets(items: Property[]): PropertySet[] {
 
 export const propertySets: PropertySet[] = buildPropertySets(properties);
 
+export interface CatalogFilter {
+  key: string;
+  label: string;
+}
+
+export const PROPERTYSETS_VIEW_KEY = "OMINAISUUSRYHMÄT";
+
+// Sidebar view switcher: product catalogs, then property sets.
+export const catalogs: CatalogFilter[] = [
+  { key: "BETONIELEMENTIT", label: "ELE-KOODISTOT" },
+  { key: "VALUTARVIKKEET", label: "VALUOSAKOODISTOT" },
+];
+
+export const views: CatalogFilter[] = [
+  ...catalogs,
+  { key: PROPERTYSETS_VIEW_KEY, label: "OMINAISUUSRYHMÄT" },
+];
+
+const catalogDiscipline: Record<string, string> = {
+  BETONIELEMENTIT: "PRECAST",
+  VALUTARVIKKEET: "VALUTARVIKE",
+};
+
 export interface DisciplinePropertySets {
   discipline: string;
+  catalog: string;
   label: string;
   sets: PropertySet[];
 }
 
 // Per-discipline property catalogs for the /propertysets view.
-export const propertySetsByDiscipline: DisciplinePropertySets[] = [
-  {
-    discipline: "PRECAST",
-    label: "Betonielementit",
-    sets: buildPropertySets(precastProperties),
+export const propertySetsByDiscipline: DisciplinePropertySets[] = catalogs.map(
+  (catalog) => {
+    const discipline = catalogDiscipline[catalog.key] ?? catalog.key;
+    const items =
+      discipline === "PRECAST" ? precastProperties : valutarvikeProperties;
+    return {
+      discipline,
+      catalog: catalog.key,
+      label: catalog.label,
+      sets: buildPropertySets(items),
+    };
   },
-  {
-    discipline: "VALUTARVIKE",
-    label: "Valutarvikkeet",
-    sets: buildPropertySets(valutarvikeProperties),
-  },
-];
+);
 
 // Exposed for smoke checks / debug pages.
 export const productCount = products.length;

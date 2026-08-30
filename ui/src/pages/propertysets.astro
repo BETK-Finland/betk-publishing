@@ -1,121 +1,21 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Sidebar, { type ColumnToggle } from "../components/Sidebar.astro";
-import { propertySetsByDiscipline } from "../data/loader";
-import { propertySetAnchor } from "../data/anchors";
-import IssueTicket from "../components/IssueTicket.astro";
+import { withBase } from "../data/nav";
 
-const columns: ColumnToggle[] = [
-	{ label: "LABEL", column: "label", defaultChecked: true },
-	{ label: "BEC", column: "bec", defaultChecked: true },
-	{ label: "IFC PROPERTY TYPE", column: "ifcType", defaultChecked: true },
-	{ label: "DATA TYPE", column: "dataType", defaultChecked: true },
-	{ label: "UNIT", column: "unit", defaultChecked: true },
-	{ label: "REQUIREMENT", column: "requirement", defaultChecked: true },
-	{ label: "EXAMPLE VALUE", column: "exampleValue", defaultChecked: false },
-	{ label: "ALLOWED VALUES", column: "allowedValues", defaultChecked: false },
-	{ label: "DESCRIPTION", column: "description", defaultChecked: false },
-	{ label: "ID", column: "propId", defaultChecked: false },
-	{ label: "VERSION", column: "propVersion", defaultChecked: false },
-];
-
-// Pre-apply hide classes for columns that start unchecked — prevents a flash
-// of visible columns before the sidebar script runs.
-const initialHidden = columns
-	.filter(c => !c.defaultChecked)
-	.map(c => `hide-col-${c.column}`)
-	.join(" ");
+const target = withBase("properties");
+const canonical = Astro.site ? new URL(target, Astro.site).href : target;
 ---
 
-<Layout title="BETK — Ominaisuusryhmät" description="Ominaisuusryhmät" bodyClass={initialHidden}>
-	<main id="main" class="app-main">
-		<Sidebar columns={columns} />
-		<section class="tree-pane">
-			<div class="property-set-list">
-				{propertySetsByDiscipline.map(disc => (
-					<section class="node discipline-node" data-node="discipline">
-						<header class="node-header discipline-header" role="button" tabindex="0" aria-expanded="false">
-							<span class="caret" aria-hidden="true"></span>
-							<h2>{disc.label}</h2>
-							<span class="count">{disc.sets.reduce((n, s) => n + s.properties.length, 0)}</span>
-						</header>
-						<div class="node-body">
-							{disc.sets.map(set => (
-								<section class="node" data-node="propertyset" id={propertySetAnchor(disc.discipline, set.group)}>
-									<header class="node-header propertyset-header" role="button" tabindex="0" aria-expanded="false">
-										<span class="caret" aria-hidden="true"></span>
-										<h3>{set.group}</h3>
-										<span class="count">{set.properties.length}</span>
-									</header>
-									<div class="node-body">
-										<table class="product-table property-set-table">
-											<thead>
-												<tr>
-													<th data-column="label">LABEL</th>
-													<th data-column="bec">BEC</th>
-													<th data-column="ifcType">IFC PROPERTY TYPE</th>
-													<th data-column="dataType">DATA TYPE</th>
-													<th data-column="unit">UNIT</th>
-													<th data-column="requirement">REQUIREMENT</th>
-													<th data-column="exampleValue">EXAMPLE VALUE</th>
-													<th data-column="allowedValues">ALLOWED VALUES</th>
-													<th data-column="description">DESCRIPTION</th>
-													<th data-column="propId">ID</th>
-													<th data-column="propVersion">VERSION</th>
-												</tr>
-											</thead>
-											<tbody>
-												{set.properties.map(p => (
-													<tr class="property-set-row">
-														<td data-column="label" class="cell-name">{p.label}</td>
-														<td data-column="bec" class="cell-mono">{p.becProperty || "—"}</td>
-														<td data-column="ifcType" class="cell-mono">{p.ifcPropertyType || "—"}</td>
-														<td data-column="dataType" class="cell-mono">{p.dataType || "—"}</td>
-														<td data-column="unit" class="cell-mono">{p.unit || "—"}</td>
-														<td data-column="requirement">{p.requirement || "—"}</td>
-														<td data-column="exampleValue" class="cell-mono">{p.exampleValue || "—"}</td>
-														<td data-column="allowedValues">{p.allowedValues || "—"}</td>
-														<td data-column="description" class="cell-description">{p.description || "—"}</td>
-														<td data-column="propId" class="cell-mono">{p.id || "—"}</td>
-														<td data-column="propVersion" class="cell-mono">{p.version || "—"}</td>
-													</tr>
-												))}
-											</tbody>
-										</table>
-									</div>
-								</section>
-							))}
-						</div>
-					</section>
-				))}
-			</div>
-		</section>
-	</main>
-	<IssueTicket />
-</Layout>
-
-<script>
-	import { revealHashTarget } from "../scripts/reveal-hash-target";
-
-	// Identical expand/collapse pattern to ProductTree.
-	function toggleNode(header: HTMLElement) {
-		const node = header.closest<HTMLElement>(".node");
-		if (!node) return;
-		const isOpen = node.classList.toggle("open");
-		header.setAttribute("aria-expanded", String(isOpen));
-	}
-
-	const headers = document.querySelectorAll<HTMLElement>(".property-set-list .node-header");
-	headers.forEach(header => {
-		header.addEventListener("click", () => toggleNode(header));
-		header.addEventListener("keydown", event => {
-			if (event.key === "Enter" || event.key === " ") {
-				event.preventDefault();
-				toggleNode(header);
-			}
-		});
-	});
-
-	// Deep links from soveltamisohje cross-reference buttons.
-	revealHashTarget();
-</script>
+<html lang="fi">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="refresh" content={`0;url=${target}`} />
+		<link rel="canonical" href={canonical} />
+		<title>BETK — Ominaisuusryhmät</title>
+		<script is:inline define:vars={{ target }}>
+			location.replace(target + location.hash + location.search);
+		</script>
+	</head>
+	<body>
+		<p><a href={target}>Ominaisuudet</a></p>
+	</body>
+</html>

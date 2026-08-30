@@ -1,0 +1,87 @@
+---
+import { propertySetsByDiscipline } from "../data/loader";
+import { propertySetAnchor } from "../data/anchors";
+---
+
+<div class="property-set-list catalog-off" data-view="OMINAISUUSRYHMÄT">
+	{propertySetsByDiscipline.map((disc) => (
+		<section class="node discipline-node open" data-node="discipline">
+			<h2 class="catalog-heading">{disc.label}</h2>
+			<div class="node-body">
+				{disc.sets.map((set) => (
+					<section class="node" data-node="propertyset" id={propertySetAnchor(disc.discipline, set.group)}>
+						<header class="node-header propertyset-header" role="button" tabindex="0" aria-expanded="false">
+							<span class="caret" aria-hidden="true"></span>
+							<h3>{set.group}</h3>
+							<span class="count">{set.properties.length}</span>
+						</header>
+						<div class="node-body">
+							<table class="product-table property-set-table">
+								<thead>
+									<tr>
+										<th data-column="label">LABEL</th>
+										<th data-column="bec">BEC</th>
+										<th data-column="ifcType">IFC PROPERTY TYPE</th>
+										<th data-column="dataType">DATA TYPE</th>
+										<th data-column="unit">UNIT</th>
+										<th data-column="requirement">REQUIREMENT</th>
+										<th data-column="exampleValue">EXAMPLE VALUE</th>
+										<th data-column="allowedValues">ALLOWED VALUES</th>
+										<th data-column="description">DESCRIPTION</th>
+										<th data-column="propId">ID</th>
+										<th data-column="propVersion">VERSION</th>
+									</tr>
+								</thead>
+								<tbody>
+									{set.properties.map((p) => (
+										<tr
+											class="property-set-row"
+											data-search={[
+												p.label,
+												p.becProperty,
+												p.id,
+												p.description,
+												set.group,
+											].filter(Boolean).join(" ").toLowerCase()}
+										>
+											<td data-column="label" class="cell-name">{p.label}</td>
+											<td data-column="bec" class="cell-mono">{p.becProperty || "—"}</td>
+											<td data-column="ifcType" class="cell-mono">{p.ifcPropertyType || "—"}</td>
+											<td data-column="dataType" class="cell-mono">{p.dataType || "—"}</td>
+											<td data-column="unit" class="cell-mono">{p.unit || "—"}</td>
+											<td data-column="requirement">{p.requirement || "—"}</td>
+											<td data-column="exampleValue" class="cell-mono">{p.exampleValue || "—"}</td>
+											<td data-column="allowedValues">{p.allowedValues || "—"}</td>
+											<td data-column="description" class="cell-description">{p.description || "—"}</td>
+											<td data-column="propId" class="cell-mono">{p.id || "—"}</td>
+											<td data-column="propVersion" class="cell-mono">{p.version || "—"}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</section>
+				))}
+			</div>
+		</section>
+	))}
+</div>
+
+<script>
+	function toggleNode(header: HTMLElement) {
+		const node = header.closest<HTMLElement>(".node");
+		if (!node) return;
+		const isOpen = node.classList.toggle("open");
+		header.setAttribute("aria-expanded", String(isOpen));
+	}
+
+	document.querySelectorAll<HTMLElement>(".property-set-list .propertyset-header").forEach((header) => {
+		header.addEventListener("click", () => toggleNode(header));
+		header.addEventListener("keydown", (event) => {
+			if (event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+				toggleNode(header);
+			}
+		});
+	});
+</script>

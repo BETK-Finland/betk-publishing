@@ -14,8 +14,9 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-// Property set section on /propertysets. Discipline-scoped because the same
-// group name (e.g. "BETK-Materiaali") exists under several disciplines.
+// Property set section on /properties (OMINAISUUSRYHMÄT view). Discipline-scoped
+// because the same group name (e.g. "BETK-Materiaali") exists under several
+// disciplines.
 export function propertySetAnchor(discipline: string, group: string): string {
   return `pset-${slugify(discipline)}-${slugify(group)}`;
 }

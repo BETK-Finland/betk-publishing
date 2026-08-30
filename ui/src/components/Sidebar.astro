@@ -11,14 +11,24 @@ export interface ColumnToggle {
 	i18nKey?: string;
 }
 
+export interface CatalogToggle {
+	label: string;
+	key: string;
+	i18nKey?: string;
+}
+
 interface Props {
 	columns: ColumnToggle[];
+	propertySetColumns?: ColumnToggle[];
+	catalogs?: CatalogToggle[];
 	heading?: string;
 	alwaysOnLabel?: string;
 }
 
 const {
 	columns,
+	propertySetColumns = [],
+	catalogs = [],
 	heading = "SARAKKEIDEN SUODATUS",
 	alwaysOnLabel,
 } = Astro.props;
@@ -32,9 +42,26 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <aside class="sidebar">
+	{catalogs.length > 0 && (
+		<section class="catalog-filter">
+			<div class="catalog-list">
+				{catalogs.map((catalog, index) => (
+					<button
+						type="button"
+						class="catalog-option"
+						data-view={catalog.key}
+						aria-pressed={index === 0 ? "true" : "false"}
+						data-i18n={catalog.i18nKey || undefined}
+					>
+						{catalog.label}
+					</button>
+				))}
+			</div>
+		</section>
+	)}
 	<section class="column-filter">
 		<h2 class="sidebar-heading" data-i18n={headingKey || undefined}>{heading}</h2>
-		<ul class="column-filter-list">
+		<ul class="column-filter-list" data-column-set="products">
 			{columns.map((col) => (
 				<li>
 					<label class="checkbox-row">
@@ -57,6 +84,23 @@ const base = import.meta.env.BASE_URL;
 				</li>
 			)}
 		</ul>
+		{propertySetColumns.length > 0 && (
+			<ul class="column-filter-list column-set-off" data-column-set="propertysets">
+				{propertySetColumns.map((col) => (
+					<li>
+						<label class="checkbox-row">
+							<input
+								type="checkbox"
+								class="column-toggle"
+								data-column={col.column}
+								checked={col.defaultChecked}
+							/>
+							<span data-i18n={col.i18nKey}>{col.label}</span>
+						</label>
+					</li>
+				))}
+			</ul>
+		)}
 	</section>
 
 	<section class="sidebar-download">
@@ -73,6 +117,56 @@ const base = import.meta.env.BASE_URL;
 </aside>
 
 <style>
+	.catalog-filter {
+		margin-bottom: 16px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid var(--separator);
+	}
+
+	.catalog-list {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.catalog-option {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 6px 8px;
+		text-align: left;
+		font: inherit;
+		font-size: 12px;
+		letter-spacing: 0.04em;
+		line-height: 1.3;
+		color: var(--muted);
+		font-weight: 400;
+		background: transparent;
+		border: 1px solid transparent;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+
+	.catalog-option:hover {
+		color: var(--ink);
+	}
+
+	.catalog-option[aria-pressed="true"] {
+		color: var(--ink);
+		font-weight: 700;
+		border-color: var(--ink);
+		background: var(--surface-raised);
+	}
+
+	.catalog-option:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.column-set-off {
+		display: none;
+	}
+
 	.sidebar-download {
 		margin-top: 16px;
 		padding-top: 14px;
@@ -115,9 +209,65 @@ const base = import.meta.env.BASE_URL;
 		document.body.classList.toggle(`hide-col-${col}`, !checkbox.checked);
 	}
 
+	const PROPERTYSETS_VIEW_KEY = "OMINAISUUSRYHMÄT";
+
 	const checkboxes = document.querySelectorAll<HTMLInputElement>(".column-toggle");
 	checkboxes.forEach((cb) => {
-		syncColumn(cb);
+		const wrap = cb.closest<HTMLElement>("[data-column-set]");
+		if (!wrap?.classList.contains("column-set-off")) syncColumn(cb);
 		cb.addEventListener("change", () => syncColumn(cb));
 	});
+
+	function applyView(key: string) {
+		document.querySelectorAll<HTMLButtonElement>(".catalog-option").forEach((btn) => {
+			btn.setAttribute("aria-pressed", String(btn.dataset.view === key));
+		});
+		document.querySelectorAll<HTMLElement>(".tree-pane [data-view]").forEach((el) => {
+			el.classList.toggle("catalog-off", el.dataset.view !== key);
+		});
+
+		const psets = key === PROPERTYSETS_VIEW_KEY;
+		document.querySelectorAll<HTMLElement>("[data-column-set]").forEach((el) => {
+			el.classList.toggle(
+				"column-set-off",
+				psets ? el.dataset.columnSet !== "propertysets" : el.dataset.columnSet !== "products",
+			);
+		});
+
+		const activeCols = new Set<string>();
+		document.querySelectorAll<HTMLInputElement>(".column-toggle").forEach((cb) => {
+			const col = cb.dataset.column;
+			if (!col) return;
+			const wrap = cb.closest<HTMLElement>("[data-column-set]");
+			const active = wrap ? !wrap.classList.contains("column-set-off") : true;
+			if (!active) return;
+			activeCols.add(col);
+			document.body.classList.toggle(`hide-col-${col}`, !cb.checked);
+		});
+		document.querySelectorAll<HTMLInputElement>(".column-toggle").forEach((cb) => {
+			const col = cb.dataset.column;
+			if (!col || activeCols.has(col)) return;
+			document.body.classList.remove(`hide-col-${col}`);
+		});
+
+		document.dispatchEvent(new Event("betk-filter-change"));
+	}
+
+	document.querySelectorAll<HTMLButtonElement>(".catalog-option").forEach((btn) => {
+		btn.addEventListener("click", () => {
+			const key = btn.dataset.view;
+			if (key) applyView(key);
+		});
+	});
+
+	document.addEventListener("betk-select-view", (event) => {
+		const key = (event as CustomEvent<string>).detail;
+		if (key) applyView(key);
+	});
+
+	const hashId = decodeURIComponent(location.hash.slice(1));
+	if (hashId) {
+		const view = document.getElementById(hashId)?.closest<HTMLElement>("[data-view]")?.dataset.view;
+		if (view) applyView(view);
+	}
 </script>

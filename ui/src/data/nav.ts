@@ -48,7 +48,6 @@ export const headlines: NavItem[] = [
     i18nKey: "nav.resources",
     children: [
       { href: withBase("properties"), label: "Ominaisuudet", i18nKey: "nav.properties" },
-      { href: withBase("propertysets"), label: "Ominaisuusryhmät", i18nKey: "nav.propertysets" },
       { href: withBase("sanasto"), label: "Sanasto", i18nKey: "nav.glossary" },
       { href: withBase("peppol"), label: "Peppol", i18nKey: "nav.peppol" },
     ],
