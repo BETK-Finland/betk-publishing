@@ -565,6 +565,30 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   margin: 16px 0;
 }
 
+.sov-prose iframe {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  margin: 16px 0;
+}
+
+.sov-prose iframe.pdf-embed {
+  max-width: none;
+  aspect-ratio: auto;
+  height: 640px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+@media (max-width: 700px) {
+  .sov-prose iframe.pdf-embed {
+    display: none;
+  }
+}
+
 .sov-prose table {
   width: 100%;
   border-collapse: collapse;
