@@ -24,6 +24,18 @@ const media = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date().optional(),
+    // Optional translated title/intro for the language switcher (fi/sv/en).
+    // The linked material itself (PDF/video/article) is not re-translated;
+    // only the site's own title + short intro line are. `original_lang`
+    // says what language the linked material actually is in (defaults to
+    // "fi" since that's true for almost all posts) so the "original
+    // material is in X" note is only shown, and only says the right
+    // language, when it doesn't match the reader's chosen site language.
+    title_sv: z.string().optional(),
+    title_en: z.string().optional(),
+    excerpt_sv: z.string().optional(),
+    excerpt_en: z.string().optional(),
+    original_lang: z.enum(["fi", "sv", "en"]).optional().default("fi"),
   }),
 });
 

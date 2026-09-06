@@ -26,7 +26,7 @@ const { items, current } = Astro.props;
               class:list={["sov-toc-link", "media-nav-link", { active: item.id === current }]}
               href={withBase(`media/${item.id}`)}
             >
-              <span class="media-nav-title">{item.title}</span>
+              <span class="media-nav-title" data-media-title={item.id}>{item.title}</span>
               {item.date && (
                 <time class="media-nav-date" datetime={item.date.toISOString().slice(0, 10)}>
                   {item.date.toLocaleDateString("fi-FI")}

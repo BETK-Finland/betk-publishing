@@ -14,8 +14,30 @@ const items = posts.map((post) => {
     .split("\n")
     .map((line) => line.trim())
     .find((line) => line.length > 0 && !line.startsWith("<") && !line.startsWith("["));
-  return { id: post.id, title: post.data.title, date: post.data.date, video, excerpt };
+  const date = post.data.date;
+  return {
+    id: post.id,
+    title: post.data.title,
+    date,
+    video,
+    excerpt,
+    i18n: {
+      title: { fi: post.data.title, sv: post.data.title_sv, en: post.data.title_en },
+      excerpt: { fi: excerpt, sv: post.data.excerpt_sv, en: post.data.excerpt_en },
+      date: date
+        ? {
+            fi: date.toLocaleDateString("fi-FI"),
+            sv: date.toLocaleDateString("sv-SE"),
+            en: date.toLocaleDateString("en-GB"),
+          }
+        : null,
+    },
+  };
 });
+
+// Per-post translations for the client-side language switcher (title/excerpt/date
+// text only — the linked PDF/video and full article body stay Finnish-only).
+const mediaText = Object.fromEntries(items.map((item) => [item.id, item.i18n]));
 
 const navItems = posts.map((item) => ({
   id: item.id,
@@ -34,7 +56,7 @@ const navItems = posts.map((item) => ({
       <header class="sov-header">
         <p class="mark" data-i18n="nav.media">Media</p>
         <h1 class="sov-title" data-i18n="nav.media">Media</h1>
-        <p class="sov-subtitle">
+        <p class="sov-subtitle" data-i18n="media.subtitle">
           Artikkelit, blogitekstit, webinaarit ja julkaisut, joissa BETK on
           ollut esillä. Uusin ylimpänä.
         </p>
@@ -57,16 +79,17 @@ const navItems = posts.map((item) => ({
               )}
               <div class="media-body">
                 <h2 class="media-title">
-                  <a href={withBase(`media/${item.id}`)}>{item.title}</a>
+                  <a href={withBase(`media/${item.id}`)} data-media-title={item.id}>{item.title}</a>
                 </h2>
                 {item.date && (
                   <p class="media-date">
-                    <time datetime={item.date.toISOString().slice(0, 10)}>
-                      {item.date.toLocaleDateString("fi-FI")}
+                    <span data-i18n="media.published">Julkaistu:</span>{" "}
+                    <time datetime={item.date.toISOString().slice(0, 10)} data-media-date={item.id}>
+                      {item.i18n.date?.fi}
                     </time>
                   </p>
                 )}
-                {item.excerpt && <p class="media-excerpt">{item.excerpt}</p>}
+                {item.excerpt && <p class="media-excerpt" data-media-excerpt={item.id}>{item.excerpt}</p>}
               </div>
             </li>
           ))
@@ -75,6 +98,34 @@ const navItems = posts.map((item) => ({
     </article>
   </main>
 </Layout>
+
+<script define:vars={{ mediaText }}>
+  // Translates per-post title/excerpt/date on the Media listing when the
+  // site language switches (fi/sv/en). Reuses the global language state
+  // exposed by Layout.astro (window.betkGetLang / "betk-lang-change") —
+  // this is content, not site chrome, so it isn't part of the shared
+  // translations dictionary in i18n.ts.
+  function applyMediaLang(lang) {
+    document.querySelectorAll("[data-media-title]").forEach((el) => {
+      const id = el.getAttribute("data-media-title");
+      const entry = mediaText[id]?.title;
+      if (entry) el.textContent = entry[lang] || entry.fi;
+    });
+    document.querySelectorAll("[data-media-excerpt]").forEach((el) => {
+      const id = el.getAttribute("data-media-excerpt");
+      const entry = mediaText[id]?.excerpt;
+      if (entry) el.textContent = entry[lang] || entry.fi;
+    });
+    document.querySelectorAll("[data-media-date]").forEach((el) => {
+      const id = el.getAttribute("data-media-date");
+      const entry = mediaText[id]?.date;
+      if (entry) el.textContent = entry[lang] || entry.fi;
+    });
+  }
+
+  applyMediaLang(window.betkGetLang ? window.betkGetLang() : "fi");
+  window.addEventListener("betk-lang-change", (e) => applyMediaLang(e.detail));
+</script>
 
 <style>
   .mark {

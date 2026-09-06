@@ -19,6 +19,60 @@ const items = posts.map((item) => ({
   title: item.data.title,
   date: item.data.date,
 }));
+
+const date = post.data.date;
+
+type LocalizedText = { fi: string | null; sv?: string | null; en?: string | null };
+type MediaTextEntry = {
+  title: LocalizedText;
+  excerpt: LocalizedText | null;
+  date: LocalizedText | null;
+  note: LocalizedText | null;
+};
+
+// "The original material is in <language>" note, phrased in each site
+// language, naming whatever language the LINKED material (PDF/video/
+// external article) actually is in. Not shown in the language that
+// already matches (no mismatch to explain).
+const LANG_NAME: Record<"fi" | "sv" | "en", Record<"fi" | "sv" | "en", string>> = {
+  fi: { fi: "suomeksi", sv: "på finska", en: "in Finnish" },
+  sv: { fi: "ruotsiksi", sv: "på svenska", en: "in Swedish" },
+  en: { fi: "englanniksi", sv: "på engelska", en: "in English" },
+};
+const NOTE_TEMPLATE: Record<"fi" | "sv" | "en", (langName: string) => string> = {
+  fi: (langName) => `Alkuperäinen materiaali on saatavilla ${langName}.`,
+  sv: (langName) => `Originalmaterialet finns ${langName}.`,
+  en: (langName) => `The original material is available ${langName}.`,
+};
+function noteFor(originalLang: "fi" | "sv" | "en"): LocalizedText {
+  const make = (viewLang: "fi" | "sv" | "en") =>
+    viewLang === originalLang ? null : NOTE_TEMPLATE[viewLang](LANG_NAME[originalLang][viewLang]);
+  return { fi: make("fi"), sv: make("sv"), en: make("en") };
+}
+
+// Titles for every post (so the sidebar list also translates), plus the
+// full excerpt/date/note detail for the post being viewed on this page.
+const mediaText: Record<string, MediaTextEntry> = Object.fromEntries(
+  posts.map((p) => [
+    p.id,
+    {
+      title: { fi: p.data.title, sv: p.data.title_sv, en: p.data.title_en },
+      excerpt: null,
+      date: null,
+      note: null,
+    } satisfies MediaTextEntry,
+  ]),
+);
+mediaText[post.id].excerpt = { fi: null, sv: post.data.excerpt_sv, en: post.data.excerpt_en };
+mediaText[post.id].note = noteFor(post.data.original_lang);
+mediaText[post.id].date = date
+  ? {
+      fi: date.toLocaleDateString("fi-FI"),
+      sv: date.toLocaleDateString("sv-SE"),
+      en: date.toLocaleDateString("en-GB"),
+    }
+  : null;
+const hasTranslatedExcerpt = Boolean(post.data.excerpt_sv || post.data.excerpt_en);
 ---
 
 <Layout title={`${post.data.title} — BETK`} description={post.data.title}>
@@ -27,14 +81,21 @@ const items = posts.map((item) => ({
     <article class="sov-document">
       <header class="sov-header">
         <p class="mark" data-i18n="nav.media">Media</p>
-        <h1 class="sov-title">{post.data.title}</h1>
+        <h1 class="sov-title" data-media-title={post.id}>{post.data.title}</h1>
         {
           post.data.date && (
             <p class="sov-subtitle">
-              {post.data.date.toLocaleDateString("fi-FI")}
+              <span data-i18n="media.published">Julkaistu:</span>{" "}
+              <span data-media-date={post.id}>{mediaText[post.id].date?.fi}</span>
             </p>
           )
         }
+        {
+          hasTranslatedExcerpt && (
+            <p class="media-translated-excerpt" data-media-excerpt={post.id} hidden />
+          )
+        }
+        <p class="media-source-note" data-media-note={post.id} hidden />
       </header>
       <div class="sov-prose">
         <Content />
@@ -51,4 +112,62 @@ const items = posts.map((item) => ({
     text-transform: uppercase;
     color: var(--muted);
   }
+
+  .media-translated-excerpt {
+    margin: 12px 0 0;
+    line-height: 1.6;
+  }
+
+  .media-source-note {
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--muted);
+  }
 </style>
+
+<script define:vars={{ mediaText }}>
+  // Same per-post language switching as the Media listing page (see
+  // media/index.astro) — translates the title/date, reveals the translated
+  // intro when one exists and the visitor isn't reading the site's default
+  // Finnish blurb, and shows a note naming the linked material's actual
+  // language whenever it differs from the chosen site language. The full
+  // article body (<Content />) is never machine-translated.
+  function applyMediaLang(lang) {
+    document.querySelectorAll("[data-media-title]").forEach((el) => {
+      const id = el.getAttribute("data-media-title");
+      const entry = mediaText[id]?.title;
+      if (entry) el.textContent = entry[lang] || entry.fi;
+    });
+    document.querySelectorAll("[data-media-date]").forEach((el) => {
+      const id = el.getAttribute("data-media-date");
+      const entry = mediaText[id]?.date;
+      if (entry) el.textContent = entry[lang] || entry.fi;
+    });
+    document.querySelectorAll("[data-media-excerpt]").forEach((el) => {
+      const id = el.getAttribute("data-media-excerpt");
+      const entry = mediaText[id]?.excerpt;
+      const text = entry && lang !== "fi" ? entry[lang] : null;
+      if (text) {
+        el.textContent = text;
+        el.hidden = false;
+      } else {
+        el.hidden = true;
+      }
+    });
+    document.querySelectorAll("[data-media-note]").forEach((el) => {
+      const id = el.getAttribute("data-media-note");
+      const entry = mediaText[id]?.note;
+      const text = entry ? entry[lang] : null;
+      if (text) {
+        el.textContent = text;
+        el.hidden = false;
+      } else {
+        el.hidden = true;
+      }
+    });
+  }
+
+  applyMediaLang(window.betkGetLang ? window.betkGetLang() : "fi");
+  window.addEventListener("betk-lang-change", (e) => applyMediaLang(e.detail));
+</script>
