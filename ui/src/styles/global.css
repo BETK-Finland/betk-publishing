@@ -568,7 +568,7 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
 .sov-prose iframe {
   display: block;
   width: 100%;
-  max-width: 320px;
+  max-width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
   border: 0;

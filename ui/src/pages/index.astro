@@ -1,11 +1,42 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { withBase } from "../data/nav";
+import { listMedia } from "../data/media-loader";
 import morko from "../assets/morko.png";
 
 const docsHref = withBase("soveltamisohje/tarjousvaiheen-tietomaaritykset");
 const propertiesHref = withBase("properties");
 const peppolHref = withBase("peppol");
+const mediaHref = withBase("media");
+
+const TILE_SHAPES = [
+  "full",
+  "full",
+  "half",
+  "half",
+  "wide",
+  "half",
+  "small",
+  "small",
+  "wide",
+] as const;
+
+const recentMedia = (await listMedia()).slice(0, 9).map((post, index) => {
+  const excerpt = (post.body ?? "")
+    .split("\n")
+    .map((line) => line.trim())
+    .find((line) => line.length > 0 && !line.startsWith("<") && !line.startsWith("["));
+  const shape = TILE_SHAPES[index] ?? "half";
+  const showExcerpt = shape === "full" || shape === "wide";
+  return {
+    id: post.id,
+    href: withBase(`media/${post.id}`),
+    title: post.data.title,
+    date: post.data.date,
+    excerpt: showExcerpt ? excerpt : undefined,
+    shape,
+  };
+});
 
 const topics = [
   {
@@ -94,6 +125,36 @@ const topics = [
         }
       </ul>
     </section>
+
+    {
+      recentMedia.length > 0 && (
+        <section class="media-home" id="media">
+          <h2 data-i18n="home.latest">Ajankohtaista</h2>
+          <ul class="media-mosaic">
+            {recentMedia.map((item, index) => (
+              <li class={`media-cell shape-${item.shape} slot-${index}`}>
+                <a class="media-tile" href={item.href}>
+                  <h3>{item.title}</h3>
+                  {item.date && (
+                    <p class="media-date">
+                      <time datetime={item.date.toISOString().slice(0, 10)}>
+                        {item.date.toLocaleDateString("fi-FI")}
+                      </time>
+                    </p>
+                  )}
+                  {item.excerpt && <p class="media-excerpt">{item.excerpt}</p>}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="media-all">
+            <a href={mediaHref} data-i18n="home.mediaAll">
+              Kaikki media
+            </a>
+          </p>
+        </section>
+      )
+    }
 
     <section class="architecture" id="architecture">
       <h2 data-i18n="home.archTitle">Hajautettu ja avoin ETO-arkkitehtuuri</h2>
@@ -212,6 +273,168 @@ const topics = [
     text-align: center;
   }
 
+  .media-home {
+    padding: 2.2rem 0 2.8rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 4.6rem;
+  }
+
+  .media-home h2 {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .media-mosaic {
+    --gap: 1.15rem;
+    --full-h: 18rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: calc((var(--full-h) - var(--gap)) / 2);
+    grid-template-areas:
+      "a a b b c c"
+      "a a b b d d"
+      "e e e e f f"
+      "g h i i i i";
+    gap: var(--gap);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .slot-0 { grid-area: a; }
+  .slot-1 { grid-area: b; }
+  .slot-2 { grid-area: c; }
+  .slot-3 { grid-area: d; }
+  .slot-4 { grid-area: e; }
+  .slot-5 { grid-area: f; }
+  .slot-6 { grid-area: g; }
+  .slot-7 { grid-area: h; }
+  .slot-8 { grid-area: i; }
+
+  .media-cell {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .media-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 1rem 1.05rem;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    overflow: hidden;
+  }
+
+  .shape-full .media-tile {
+    padding: 1.8rem 1.15rem 1.5rem;
+  }
+
+  .shape-wide .media-tile {
+    padding: 1rem 1.4rem;
+  }
+
+  .shape-small .media-tile {
+    padding: 0.65rem 0.7rem;
+  }
+
+  .media-tile:hover {
+    text-decoration: none;
+  }
+
+  .media-tile:hover h3 {
+    color: var(--accent);
+  }
+
+  .media-tile:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .media-tile h3 {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.25;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .shape-full .media-tile h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.12rem;
+    -webkit-line-clamp: 4;
+  }
+
+  .shape-half .media-tile h3 {
+    -webkit-line-clamp: 2;
+  }
+
+  .shape-wide .media-tile h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .shape-small .media-tile h3 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    -webkit-line-clamp: 4;
+  }
+
+  .media-date {
+    flex: 0 0 auto;
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .shape-full .media-date {
+    margin: 0 0 0.55rem;
+  }
+
+  .shape-small .media-date {
+    margin: 0.25rem 0 0;
+    font-size: 0.68rem;
+  }
+
+  .media-excerpt {
+    display: -webkit-box;
+    flex: 0 0 auto;
+    margin: 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  .shape-wide .media-excerpt {
+    -webkit-line-clamp: 1;
+  }
+
+  .media-all {
+    margin: 1.1rem 0 0;
+    text-align: center;
+  }
+
+  .media-all a {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
   .architecture {
     padding: 2.2rem 0 2.8rem;
     border-top: 1px solid var(--line);
@@ -248,9 +471,66 @@ const topics = [
     height: auto;
   }
 
+  @media (max-width: 800px) {
+    .media-mosaic {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 8rem;
+      grid-template-areas:
+        "a a"
+        "b b"
+        "c d"
+        "e e"
+        "f g"
+        "h i";
+    }
+
+    .media-tile {
+      justify-content: flex-start;
+    }
+
+    .shape-full .media-tile,
+    .shape-wide .media-tile {
+      padding: 1.1rem 1.2rem;
+    }
+
+    .shape-full .media-tile h3,
+    .shape-wide .media-tile h3 {
+      -webkit-line-clamp: 3;
+    }
+  }
+
   @media (max-width: 520px) {
     .cards {
       grid-template-columns: 1fr;
+    }
+
+    .media-mosaic {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      grid-template-areas: none;
+    }
+
+    .media-cell {
+      grid-area: auto;
+    }
+
+    .media-tile {
+      min-height: 0;
+      padding: 1rem 1.05rem;
+    }
+
+    .shape-full .media-tile,
+    .shape-wide .media-tile,
+    .shape-small .media-tile {
+      padding: 1rem 1.05rem;
+    }
+
+    .shape-full .media-tile h3,
+    .shape-half .media-tile h3,
+    .shape-wide .media-tile h3,
+    .shape-small .media-tile h3 {
+      font-size: 1rem;
+      -webkit-line-clamp: 5;
     }
   }
 </style>

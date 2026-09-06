@@ -4,6 +4,7 @@ import { withBase } from "../data/nav";
 interface Item {
   id: string;
   title: string;
+  date?: Date;
 }
 
 interface Props {
@@ -22,10 +23,15 @@ const { items, current } = Astro.props;
         items.map((item) => (
           <li>
             <a
-              class:list={["sov-toc-link", { active: item.id === current }]}
+              class:list={["sov-toc-link", "media-nav-link", { active: item.id === current }]}
               href={withBase(`media/${item.id}`)}
             >
-              {item.title}
+              <span class="media-nav-title">{item.title}</span>
+              {item.date && (
+                <time class="media-nav-date" datetime={item.date.toISOString().slice(0, 10)}>
+                  {item.date.toLocaleDateString("fi-FI")}
+                </time>
+              )}
             </a>
           </li>
         ))
@@ -33,3 +39,23 @@ const { items, current } = Astro.props;
     </ul>
   </nav>
 </aside>
+
+<style>
+  .media-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.12rem;
+    padding: 0.35rem 0.5rem;
+    line-height: 1.3;
+  }
+
+  .media-nav-title {
+    overflow-wrap: anywhere;
+  }
+
+  .media-nav-date {
+    color: var(--muted);
+    font-size: 11px;
+  }
+</style>

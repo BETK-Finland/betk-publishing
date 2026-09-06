@@ -14,7 +14,11 @@ export async function getStaticPaths() {
 
 const { post, posts } = Astro.props;
 const { Content } = await render(post);
-const items = posts.map((item) => ({ id: item.id, title: item.data.title }));
+const items = posts.map((item) => ({
+  id: item.id,
+  title: item.data.title,
+  date: item.data.date,
+}));
 ---
 
 <Layout title={`${post.data.title} — BETK`} description={post.data.title}>
