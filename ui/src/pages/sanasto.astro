@@ -7,6 +7,7 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
   <main id="main" class="sn-page">
     <div class="sn-toolbar">
       <input id="search" class="sn-search" placeholder="Hae käsitettä..." />
+      <a class="sn-dropbtn sn-kasitekartta-link" href={import.meta.env.BASE_URL + "kasitekartta/"} target="_blank" rel="noopener">Käsitekartta ↗</a>
       <div class="sn-dropdown">
         <button class="sn-dropbtn">Export</button>
         <div class="sn-dropdown-menu">
@@ -69,6 +70,8 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
     }
 
     .sn-dropbtn:hover { border-color: var(--accent-teal); color: var(--accent-teal); }
+
+    .sn-kasitekartta-link { text-decoration: none; display: inline-block; }
 
     .sn-dropdown-menu {
       display: none;
@@ -263,8 +266,8 @@ const sanastoDataUrl = import.meta.env.BASE_URL + "sanasto.jsonld";
 
   <script define:vars={{ sanastoDataUrl }}>
     const SANASTO_DATA_URL = sanastoDataUrl;
-    const ISSUE_REPO = "https://github.com/TeemuAlaluusua/sanasto1/issues/new";
-    const BASE_URI = "https://teemualaluusua.github.io/sanasto1/#/concept/";
+    const ISSUE_REPO = "https://github.com/BETK-Finland/betk-publishing/issues/new";
+    const BASE_URI = "https://betk.fi/sanasto/#/concept/";
 
     const UI = {
       fi: {
