@@ -5,7 +5,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     "nav.skip": "Siirry sisältöön",
     "nav.properties": "Ominaisuudet",
     "nav.propertysets": "Ominaisuusryhmät",
-    "nav.documents": "Soveltamisohjeed",
+    "nav.documents": "Soveltamisohjeet",
     "nav.peppol": "Peppol",
     "nav.glossary": "Sanasto",
     "nav.examples": "Esimerkkimallit",
