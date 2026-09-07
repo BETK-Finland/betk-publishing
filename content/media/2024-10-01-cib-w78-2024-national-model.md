@@ -1,6 +1,8 @@
 ---
 title: "Challenges and Opportunities in Digitalising Concrete Element Supply Chain: Proposed National Model"
 date: 2024-10-01
+excerpt_sv: "Vetenskaplig konferenspublikation, CIB W78 2024-konferensen 1–3.10.2024, Marrakech. Otto Alhava, Teemu Alaluusua, Antti Pekkala, Antti Peltokorpi, Antti Aaltonen och Tomi Pitkäranta."
+excerpt_en: "Scientific conference paper, CIB W78 2024 conference, 1–3 October 2024, Marrakesh. Otto Alhava, Teemu Alaluusua, Antti Pekkala, Antti Peltokorpi, Antti Aaltonen and Tomi Pitkäranta."
 ---
 
 Tieteellinen konferenssijulkaisu, CIB W78 2024 -konferenssi 1.–3.10.2024, Marrakesh. Otto Alhava, Teemu Alaluusua, Antti Pekkala, Antti Peltokorpi, Antti Aaltonen ja Tomi Pitkäranta.

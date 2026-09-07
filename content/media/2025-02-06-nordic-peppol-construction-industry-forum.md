@@ -1,6 +1,8 @@
 ---
 title: "Nordic Peppol Construction Industry Forum"
 date: 2025-02-06
+excerpt_sv: "Mötesinspelning."
+excerpt_en: "Meeting recording."
 ---
 
 Kokoustallenne.

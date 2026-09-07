@@ -1,6 +1,10 @@
 ---
 title: "Pyöreä pöytä III 2024: Projektituotteiden toimitusketjun tietovirrat haltuun rakentamisen teollistamiseksi"
 date: 2024-09-12
+title_sv: "Runda bordet III 2024: Kontroll över informationsflödena i projektproduktens leveranskedja för att industrialisera byggandet"
+title_en: "Round Table III 2024: Taking control of information flows in the project-product supply chain to industrialise construction"
+excerpt_sv: "Evenemang, Rakennustieto. Fallstudie: betongmellanväggselement."
+excerpt_en: "Event, Rakennustieto. Case study: precast concrete partition wall element."
 ---
 
 Tapahtuma, Rakennustieto. Case: betoniväliseinäelementti.

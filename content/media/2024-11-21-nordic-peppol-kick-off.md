@@ -1,6 +1,8 @@
 ---
 title: "Nordic Peppol Construction Industry Forum, kick off"
 date: 2024-11-21
+excerpt_sv: "Mötesinspelning."
+excerpt_en: "Meeting recording."
 ---
 
 Kokoustallenne.

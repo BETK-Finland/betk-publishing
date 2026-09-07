@@ -1,6 +1,10 @@
 ---
 title: "Betonielementtitoimitusketjun digitalisointi – Sanoista tekoihin teollistamisessa"
 date: 2024-09-27
+title_sv: "Digitalisering av betongelementens leveranskedja – Från ord till handling i industrialiseringen"
+title_en: "Digitalising the precast concrete element supply chain – From words to action in industrialisation"
+excerpt_sv: "Webbinarium. Inspelning och presentationsmaterial."
+excerpt_en: "Webinar. Recording and presentation materials."
 ---
 
 Webinaari. Tallenne ja esitysaineistot.

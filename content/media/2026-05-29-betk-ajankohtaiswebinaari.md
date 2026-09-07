@@ -1,6 +1,10 @@
 ---
 title: "BETK-toimitusketjutyöryhmän ajankohtaiswebinaari"
 date: 2026-05-29
+title_sv: "BETK-leveranskedjearbetsgruppens aktuella webbinarium"
+title_en: "BETK Supply Chain Working Group topical webinar"
+excerpt_sv: "BETK-leveranskedjearbetsgruppens aktuella webbinarium om beställningsstyrt konstruerade byggprodukter (ETO)."
+excerpt_en: "BETK Supply Chain Working Group's topical webinar on engineer-to-order (ETO) construction products."
 ---
 
 BETK-toimitusketjutyöryhmän ajankohtaiswebinaari aiheesta tilauksesta suunniteltavat rakennustuotteet.
