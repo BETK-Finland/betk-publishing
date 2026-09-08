@@ -38,6 +38,24 @@ const recentMedia = (await listMedia()).slice(0, 9).map((post, index) => {
   };
 });
 
+const partners = [
+  { file: "aalto.png", name: "Aalto University School of Engineering" },
+  { file: "anstar.png", name: "Anstar" },
+  { file: "betset.png", name: "Betset" },
+  { file: "consolis-parma.png", name: "Consolis Parma" },
+  { file: "dbe-core.png", name: "DBE Core" },
+  { file: "fira.png", name: "Fira" },
+  { file: "lujabetoni.png", name: "Lujabetoni" },
+  { file: "rfid-lab-finland.png", name: "RFID Lab Finland ry" },
+  { file: "riffid.png", name: "RiFFiD" },
+  { file: "sitowise.png", name: "Sitowise" },
+  { file: "suutarinen.png", name: "Suutarinen" },
+  { file: "twinbase.png", name: "Twinbase" },
+  { file: "valtiokonttori.png", name: "Valtiokonttori" },
+  { file: "verohallinto.png", name: "Verohallinto" },
+  { file: "yit.png", name: "YIT" },
+].map((p) => ({ ...p, src: withBase(`partners/${p.file}`) }));
+
 const topics = [
   {
     href: docsHref,
@@ -171,6 +189,19 @@ const topics = [
           data-i18n-alt="home.archAlt"
         />
       </div>
+    </section>
+
+    <section class="partners" id="partners">
+      <h2 data-i18n="home.partners">BETK toiminnassa mukana</h2>
+      <ul class="partners-grid">
+        {
+          partners.map((partner) => (
+            <li class="partner-logo">
+              <img src={partner.src} alt={partner.name} loading="lazy" />
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </main>
 </Layout>
@@ -468,6 +499,45 @@ const topics = [
   .arch-frame img {
     display: block;
     width: 100%;
+    height: auto;
+  }
+
+  .partners {
+    padding: 2.2rem 0 2.8rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 4.6rem;
+  }
+
+  .partners h2 {
+    margin: 0 0 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .partners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem 2.2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.6rem;
+  }
+
+  .partner-logo img {
+    display: block;
+    max-width: 8.5rem;
+    max-height: 100%;
+    width: auto;
     height: auto;
   }
 
