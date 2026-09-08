@@ -46,9 +46,7 @@ const partners = [
   { file: "dbe-core.png", name: "DBE Core" },
   { file: "fira.png", name: "Fira" },
   { file: "lujabetoni.png", name: "Lujabetoni" },
-  { file: "rfid-lab-finland.png", name: "RFID Lab Finland ry" },
   { file: "riffid.png", name: "RiFFiD" },
-  { file: "sitowise.png", name: "Sitowise" },
   { file: "suutarinen.png", name: "Suutarinen" },
   { file: "twinbase.png", name: "Twinbase" },
   { file: "valtiokonttori.png", name: "Valtiokonttori" },
@@ -530,15 +528,15 @@ const topics = [
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.6rem;
+    height: 2.4rem;
   }
 
   .partner-logo img {
     display: block;
-    max-width: 8.5rem;
-    max-height: 100%;
     width: auto;
-    height: auto;
+    height: 100%;
+    max-width: 9rem;
+    object-fit: contain;
   }
 
   @media (max-width: 800px) {
