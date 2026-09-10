@@ -2,7 +2,7 @@
   {
     "id": "Ominaisuus-BETK-001",
     "version": "0.1",
-    "label": "KiinteistönNImi",
+    "label": "KiinteistönNimi",
     "becProperty": "<Uusi>",
     "group": "FI_Kiinteistö",
     "ifcPropertyType": "IfcLabel",
@@ -136,7 +136,7 @@
     "unit": "",
     "exampleValue": "01 - P1",
     "requirement": "",
-    "allowedValues": "[ 00 - P0 | 01 - P1 | 02 - P2 | 03 - P3 ]",
+    "allowedValues": "00 - P0; 01 - P1; 02 - P2; 03 - P3",
     "description": "Rakennusten paloluokitus, joka on määritelty ympäristöministeriön asetuksessa rakennusten paloturvallisuudesta (848/2017, 4 §)."
   },
   {
@@ -179,7 +179,7 @@
     "exampleValue": "3CiS5UFtr9vg$kEFvOhN8N",
     "requirement": "",
     "allowedValues": "",
-    "description": "Natiivohjelmasta tuotetun IFC-malliin tuleva kokoonpanon Guid"
+    "description": "Natiiviohjelmasta tuotetun IFC-malliin tuleva kokoonpanon Guid"
   },
   {
     "id": "Ominaisuus-BETK-014",
@@ -206,7 +206,7 @@
     "unit": "",
     "exampleValue": "BETONIELEMENTTI",
     "requirement": "",
-    "allowedValues": "[BETONIELEMENTTI | PAIKALLAVALU | TERÄSKOKOONPANO | PUUKOKOONPANO | (RAUDOITEKOKOONPANO) | MUU KOKOONPANO]",
+    "allowedValues": "BETONIELEMENTTI; PAIKALLAVALU; PUUKOKOONPANO; TERÄSKOKOONPANO; EI ASETETTU",
     "description": "Materiaalin ja valmistustavan mukaan valittava tieto rakenneosien tunnistamista varten"
   },
   {
@@ -234,7 +234,7 @@
     "unit": "",
     "exampleValue": "",
     "requirement": "",
-    "allowedValues": "[Ei asetettu | Tehdas | Työmaa]",
+    "allowedValues": "EI ASETETTU; Tehdas; Työmaa",
     "description": "Valmistuspaikka"
   },
   {
@@ -318,7 +318,7 @@
     "unit": "",
     "exampleValue": "UUSI",
     "requirement": "",
-    "allowedValues": "[PURETTAVA | SÄILYVÄ | SIIRRETTÄVÄ | KUNNOSTETTAVA | UUSI | VÄLIAIKAINEN]",
+    "allowedValues": "PURETTAVA; SÄILYVÄ; SIIRRETTÄVÄ; KUNNOSTETTAVA; UUSI; VÄLIAIKAINEN",
     "description": "Korjauskohteissa käytettävä tieto rakenneosalla"
   },
   {
@@ -374,7 +374,7 @@
     "unit": "",
     "exampleValue": "R90",
     "requirement": "",
-    "allowedValues": "[R15 | R30 | R45 |R60 | R90 | R120 | R180 | R240]",
+    "allowedValues": "R15; R30; R45; R60; R90; R120; R180; R240",
     "description": "Rakennusosan paloluokka"
   },
   {
@@ -388,7 +388,7 @@
     "unit": "",
     "exampleValue": "CC2",
     "requirement": "",
-    "allowedValues": "[CC1 | CC2 | CC3]",
+    "allowedValues": "CC1; CC2; CC3",
     "description": "Rakennusosan seuraamusluokka"
   },
   {
@@ -416,7 +416,7 @@
     "unit": "",
     "exampleValue": "RC2",
     "requirement": "",
-    "allowedValues": "[RC1 | RC2 | RC3]",
+    "allowedValues": "RC1; RC2; RC3",
     "description": "Rakennusosan luotettavuusluokka"
   },
   {
@@ -556,7 +556,7 @@
     "unit": "",
     "exampleValue": "A",
     "requirement": "",
-    "allowedValues": "[AA | A | B ] C ]",
+    "allowedValues": "AA; A; B; C",
     "description": "Elementin pintakäsittelyluokka By40 mukaan"
   },
   {
@@ -570,7 +570,7 @@
     "unit": "",
     "exampleValue": "JK - Jännebetonipalkki (muut profiilit)",
     "requirement": "",
-    "allowedValues": "",
+    "allowedValues": "A - Anturaelementti; PH - Pilariholkkielementti; AN - Sokkelielementti (ei-kantava); AS - Sokkelielementti (kantava); AK - Sokkelipalkki; AR - Sokkeliruutuelementti (maanpaine); AV - Sokkelielementti (yksi kuori); MP - Maanpaineseinäelementti; TKE - Tukimuurielementti; MUU - Muu perustuselementti; P - Pilari; MUU - Muu pilarielementti; V - Väliseinä; VSP - Väliseinä (seinämäinen palkki); S - Ruutuelementti (kantava); R - Ruutuelementti (ei-kantava); SK - Sisäkuorielementti (kantava); RK - Sisäkuorielementti (ei-kantava); SKE - Sisäkuorielementti (kantava, tehdaseriste); RKE - Sisäkuorielementti (ei kantava, tehdaseriste); SKRO - Ohutrapattu elementti (kantava); RKRO - Ohutrapattu elementti (ei-kantava); SKRP - Paksurapattu elementti (kantava); RKRP - Paksurapattu elementti (ei-kantava); NK - Nauhaelementti (kantava); N - Nauhaelementti (ei-kantava); KE - Kuorielementti; MUU - Muu seinäelementti; K - Palkkielementti (teräsbetoni); I - Jännebetonipalkki (I-profiili); HI - Jännebetonipalkki (HI-profiili); JK - Jännebetonipalkki (muut profiilit); JR - Jäykistesauva; MUU - Muu palkkielementti; L - Laattaelementti (massiivilaatta, välipohja); LT - Lepotasolaatta (teräskonsolit); EL - Alapohjalaatta (massivilaatta, eristetty); JL - Jännitetty laattaelementti; O - Ontelolaatta; KL - Kuorilaatta; SL - Luja-Superlaatta; TT - TT-laatta; TEK - TEK-laatta; STT - SuperTT-laatta; HTT - HTT-laatta; RL - Ripalaatta; MUU - Muu laattaelementti; C - Parveke-elementti; CL - Parvekelaattaelementti; CP - Parvekepilari; JCL - Jännitetty parvekelaattaelementti; UCL - Ulokeparvekelaatta; M - Parvekepielielementti; Z - Parvekekaide-elementti; CX - Parvekekattoelementti; JCX - Jännitetty parvekkeen kattoelementti; MUU - Muu parveke-elementti; T - Porraselementti; MUU - Muu porraselementti; HK - Hissikuiluelementti; HKA - Hissikuilun pohjaelementti; HKL - Hissikuilun kattolaatta; HKY - Hissikuilun yläpään elementti; MUU - Muu hissikuilun elementti; H - Hormielementti; MUU - Muu erikoiselementti; EI ASETETTU - EI ASETETTU",
     "description": "Elementtityypit ks. soveltamisohje"
   },
   {
@@ -584,7 +584,7 @@
     "unit": "",
     "exampleValue": "JK",
     "requirement": "",
-    "allowedValues": "",
+    "allowedValues": "A; PH; AN; AS; AK; AR; AV; MP; TKE; MUU; P; V; VSP; S; R; SK; RK; SKE; RKE; SKRO; RKRO; SKRP; RKRP; NK; N; KE; K; I; HI; JK; JR; L; LT; EL; JL; O; KL; SL; TT; TEK; STT; HTT; RL; C; CL; CP; JCL; UCL; M; Z; CX; JCX; T; HK; HKA; HKL; HKY; H; EI ASETETTU",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -598,7 +598,7 @@
     "unit": "",
     "exampleValue": "Jännebetonipalkki (muut profiilit)",
     "requirement": "",
-    "allowedValues": "",
+    "allowedValues": "Anturaelementti; Pilariholkkielementti; Sokkelielementti (ei-kantava); Sokkelielementti (kantava); Sokkelipalkki; Sokkeliruutuelementti (maanpaine); Sokkelielementti (yksi kuori); Maanpaineseinäelementti; Tukimuurielementti; Muu perustuselementti; Pilari; Muu pilarielementti; Väliseinä; Väliseinä (seinämäinen palkki); Ruutuelementti (kantava); Ruutuelementti (ei-kantava); Sisäkuorielementti (kantava); Sisäkuorielementti (ei-kantava); Sisäkuorielementti (kantava, tehdaseriste); Sisäkuorielementti (ei kantava, tehdaseriste); Ohutrapattu elementti (kantava); Ohutrapattu elementti (ei-kantava); Paksurapattu elementti (kantava); Paksurapattu elementti (ei-kantava); Nauhaelementti (kantava); Nauhaelementti (ei-kantava); Kuorielementti; Muu seinäelementti; Palkkielementti (teräsbetoni); Jännebetonipalkki (I-profiili); Jännebetonipalkki (HI-profiili); Jännebetonipalkki (muut profiilit); Jäykistesauva; Muu palkkielementti; Laattaelementti (massiivilaatta, välipohja); Lepotasolaatta (teräskonsolit); Alapohjalaatta (massivilaatta, eristetty); Jännitetty laattaelementti; Ontelolaatta; Kuorilaatta; Luja-Superlaatta; TT-laatta; TEK-laatta; SuperTT-laatta; HTT-laatta; Ripalaatta; Muu laattaelementti; Parveke-elementti; Parvekelaattaelementti; Parvekepilari; Jännitetty parvekelaattaelementti; Ulokeparvekelaatta; Parvekepielielementti; Parvekekaide-elementti; Parvekekattoelementti; Jännitetty parvekkeen kattoelementti; Muu parveke-elementti; Porraselementti; Muu porraselementti; Hissikuiluelementti; Hissikuilun pohjaelementti; Hissikuilun kattolaatta; Hissikuilun yläpään elementti; Muu hissikuilun elementti; Hormielementti; Muu erikoiselementti; EI ASETETTU",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -612,7 +612,7 @@
     "unit": "",
     "exampleValue": "R1",
     "requirement": "",
-    "allowedValues": "[R1 | R2 | ... | R9]",
+    "allowedValues": "R1; R2; R3; R4; R5; R6; R7; R8; R9; EI ASETETTU",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -640,7 +640,7 @@
     "unit": "",
     "exampleValue": "R2",
     "requirement": "",
-    "allowedValues": "[R1 | R2 | ... | R9]",
+    "allowedValues": "R1; R2; R3; R4; R5; R6; R7; R8; R9; EI ASETETTU",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -668,7 +668,7 @@
     "unit": "",
     "exampleValue": "PK1",
     "requirement": "",
-    "allowedValues": "[PK1 | PK2 | ... | PK9]",
+    "allowedValues": "PK1; PK2; PK3; PK4; PK5; PK6; PK7; PK8; PK9",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -680,9 +680,9 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "02 Valkoinen väribetonipinta",
+    "exampleValue": "02 TIIP-Tiililaattapinta (poltetut tiilet)",
     "requirement": "",
-    "allowedValues": "01 MUO-Muottipinta\n02 TIIP-Tiililaattapinta (polteltut tiilet)\n03 VÄR-Väribetonipinta\n04 KALV-Valukalvon pääller valettu pesubetonipinta\n05 MUK-Kuvioitua muottia vasten valettu pinta\n06 ER-Eristepinta\n07 SEM-Sementtiliiman poisto\n08 PESH Hienopesubetonipinta\n09 MUU-Muu pinta",
+    "allowedValues": "01 MUO-muottipinta; 02 TIIP-Tiililaattapinta (poltetut tiilet); 03 KALV-Valukalvon päälle valettu pesubetoni-pinta; 04 MUK-Kuvioitua muottia vasten valettu pinta; 05 ER-Eristepinta; 06 SEM-Sementtiliiman poisto; 07 PESH-Hienopesubetonipinta; 08 MUU-Muu pinta",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -696,7 +696,7 @@
     "unit": "",
     "exampleValue": "PK2",
     "requirement": "",
-    "allowedValues": "[PK1 | PK2 | ... | PK9]",
+    "allowedValues": "PK1; PK2; PK3; PK4; PK5; PK6; PK7; PK8; PK9",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -708,9 +708,9 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "04 Hienopesty pinta",
+    "exampleValue": "04 MUK-Kuvioitua muottia vasten valettu pinta",
     "requirement": "",
-    "allowedValues": "01 MUO-Muottipinta\n02 TIIP-Tiililaattapinta (polteltut tiilet)\n03 VÄR-Väribetonipinta\n04 KALV-Valukalvon pääller valettu pesubetonipinta\n05 MUK-Kuvioitua muottia vasten valettu pinta\n06 ER-Eristepinta\n07 SEM-Sementtiliiman poisto\n08 PESH Hienopesubetonipinta\n09 MUU-Muu pinta",
+    "allowedValues": "01 MUO-muottipinta; 02 TIIP-Tiililaattapinta (poltetut tiilet); 03 KALV-Valukalvon päälle valettu pesubetoni-pinta; 04 MUK-Kuvioitua muottia vasten valettu pinta; 05 ER-Eristepinta; 06 SEM-Sementtiliiman poisto; 07 PESH-Hienopesubetonipinta; 08 MUU-Muu pinta",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -724,7 +724,7 @@
     "unit": "",
     "exampleValue": "PK3",
     "requirement": "",
-    "allowedValues": "[PK1 | PK2 | ... | PK9]",
+    "allowedValues": "PK1; PK2; PK3; PK4; PK5; PK6; PK7; PK8; PK9",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -736,9 +736,9 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "08 Uritettu pinta",
+    "exampleValue": "07 PESH-Hienopesubetonipinta",
     "requirement": "",
-    "allowedValues": "01 MUO-Muottipinta\n02 TIIP-Tiililaattapinta (polteltut tiilet)\n03 VÄR-Väribetonipinta\n04 KALV-Valukalvon pääller valettu pesubetonipinta\n05 MUK-Kuvioitua muottia vasten valettu pinta\n06 ER-Eristepinta\n07 SEM-Sementtiliiman poisto\n08 PESH Hienopesubetonipinta\n09 MUU- Muu pinta",
+    "allowedValues": "01 MUO-muottipinta; 02 TIIP-Tiililaattapinta (poltetut tiilet); 03 KALV-Valukalvon päälle valettu pesubetoni-pinta; 04 MUK-Kuvioitua muottia vasten valettu pinta; 05 ER-Eristepinta; 06 SEM-Sementtiliiman poisto; 07 PESH-Hienopesubetonipinta; 08 MUU-Muu pinta",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -752,7 +752,7 @@
     "unit": "",
     "exampleValue": "HP1",
     "requirement": "",
-    "allowedValues": "[HP1 | HP2 | ... | HP9]",
+    "allowedValues": "HP1; HP2; HP3; HP4; HP5; HP6; HP7; HP8; HP9",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -764,9 +764,9 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "03 Puuhierretty pinta",
+    "exampleValue": "03 PHI-Puuhierto",
     "requirement": "",
-    "allowedValues": "01 THI-Teräshierretty pinta\n02 TEL-Telattu pinta\n03 PHI-Puuhierto\n04 ER-Eristepinta\n05 TÖP-Töpötetty pinta\n06 HAR Harjattu pinta\n07 SHI-Sienihierretty pinta\n08 MUU-Muu pinta",
+    "allowedValues": "01 THI-Teräshierretty pinta; 02 TEL-Telattu pinta; 03 PHI-Puuhierto; 04 ER-Eristepinta; 05 TÖP-Töpötetty pinta; 06 HAR-Harjattu pinta; 07 SHI-Sienihierretty pinta; 08 MUU-Muu pinta",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -780,7 +780,7 @@
     "unit": "",
     "exampleValue": "HP2",
     "requirement": "",
-    "allowedValues": "[HP1 | HP2 | ... | HP9]",
+    "allowedValues": "HP1; HP2; HP3; HP4; HP5; HP6; HP7; HP8; HP9",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -792,9 +792,9 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "04 Telattu pinta",
+    "exampleValue": "02 TEL-Telattu pinta",
     "requirement": "",
-    "allowedValues": "01 THI-Teräshierretty pinta\n02 TEL-Telattu pinta\n03 PHI-Puuhierto\n04 ER-Eristepinta\n05 TÖP-Töpötetty pinta\n06 HAR-Harjattu pinta\n07 SHI-Sienihierretty pinta\n08 MUU-Muu pinta",
+    "allowedValues": "01 THI-Teräshierretty pinta; 02 TEL-Telattu pinta; 03 PHI-Puuhierto; 04 ER-Eristepinta; 05 TÖP-Töpötetty pinta; 06 HAR-Harjattu pinta; 07 SHI-Sienihierretty pinta; 08 MUU-Muu pinta",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -808,7 +808,7 @@
     "unit": "",
     "exampleValue": "03 VAL-Valkoinen",
     "requirement": "",
-    "allowedValues": "01 Harmaa, värjätty\n02 MUS-Musta\n03 VAL-Valkoinen\n04 PUN-Punainen\n05 SIN-Sininen\n06 RUS-Ruskea\n07 VIH-Vihreä\n08 KEL-Keltainen",
+    "allowedValues": "01 Harmaa, värjätty; 02 MUS-Musta; 03 VAL-Valkoinen; 04 PUN-Punainen; 05 SIN-Sininen; 06 RUS-Ruskea; 07 VIH-Vihreä; 08 KEL-Keltainen; Muu",
     "description": "ks. Soveltamisohje"
   },
   {
@@ -820,10 +820,10 @@
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "Kyllä",
+    "exampleValue": "True",
     "requirement": "",
-    "allowedValues": "[True|False] - ei arvoa, jos ei ole asetettu ollenkaan",
-    "description": "Tarjousvaiheessa käytettävä valinta. Tarkentuu toteutusvaiheessa"
+    "allowedValues": "True; False",
+    "description": "Tarjousvaiheessa käytettävä valinta. Tarkentuu toteutusvaiheessa. Ei arvoa, jos ei ole asetettu ollenkaan."
   },
   {
     "id": "Ominaisuus-BETK-060",
@@ -848,10 +848,10 @@
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "Kyllä",
+    "exampleValue": "True",
     "requirement": "",
-    "allowedValues": "[True|False] - ei arvoa, jos ei ole asetettu ollenkaan",
-    "description": "Tarjousvaiheessa detaljoitu ja raudoitettu elementti mallissa"
+    "allowedValues": "True; False",
+    "description": "Tarjousvaiheessa detaljoitu ja raudoitettu elementti mallissa. Ei arvoa, jos ei ole asetettu ollenkaan."
   },
   {
     "id": "Ominaisuus-BETK-062",
@@ -876,10 +876,10 @@
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "Ei",
+    "exampleValue": "False",
     "requirement": "",
-    "allowedValues": "[True|False] - ei arvoa, jos ei ole asetettu ollenkaan",
-    "description": "Tarjousvaiheessa lisättävä tieto työmaalla käännettävistä elementeistä"
+    "allowedValues": "True; False",
+    "description": "Tarjousvaiheessa lisättävä tieto työmaalla käännettävistä elementeistä. Ei arvoa, jos ei ole asetettu ollenkaan."
   },
   {
     "id": "Ominaisuus-BETK-064",
@@ -1327,7 +1327,7 @@
     "exampleValue": "12",
     "requirement": "",
     "allowedValues": "",
-    "description": "Elementtin mallinnetun pintakäsittelyn määrä"
+    "description": "Elementin mallinnetun pintakäsittelyn määrä"
   },
   {
     "id": "Ominaisuus-BETK-096",
@@ -1341,7 +1341,7 @@
     "exampleValue": "12",
     "requirement": "",
     "allowedValues": "",
-    "description": "Elementtin mallinnetun pintakäsittelyn määrä"
+    "description": "Elementin mallinnetun pintakäsittelyn määrä"
   },
   {
     "id": "Ominaisuus-BETK-097",
@@ -1355,7 +1355,7 @@
     "exampleValue": "12",
     "requirement": "",
     "allowedValues": "",
-    "description": "Elementtin mallinnetun pintakäsittelyn määrä"
+    "description": "Elementin mallinnetun pintakäsittelyn määrä"
   },
   {
     "id": "Ominaisuus-BETK-098",
@@ -1464,9 +1464,9 @@
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "TRUE",
+    "exampleValue": "True",
     "requirement": "",
-    "allowedValues": "[TRUE | FALSE]",
+    "allowedValues": "True; False",
     "description": "Mallissa elementin detaljointi valmis, Kyllä/ei"
   },
   {
@@ -1494,7 +1494,7 @@
     "unit": "",
     "exampleValue": "m2",
     "requirement": "",
-    "allowedValues": "[kpl | m | m2]",
+    "allowedValues": "kpl; m; m2",
     "description": "Elementin varusteluosan määrätiedon yksikkö"
   },
   {
@@ -1562,9 +1562,9 @@
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "TRUE",
+    "exampleValue": "True",
     "requirement": "",
-    "allowedValues": "[TRUE | FALSE]",
+    "allowedValues": "True; False",
     "description": "Suunnittelijan ilmoittama tieto nostotavasta"
   },
   {
@@ -1586,7 +1586,7 @@
     "version": "0.1",
     "label": "Rakennus",
     "becProperty": "Elementin rakennus",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -1600,7 +1600,7 @@
     "version": "0.1",
     "label": "Lohko",
     "becProperty": "Elementin lohko",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -1614,21 +1614,21 @@
     "version": "0.1",
     "label": "Kerros",
     "becProperty": "Elementin kerros",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
     "exampleValue": "5",
     "requirement": "",
     "allowedValues": "",
-    "description": "Sijaintiedon kerrostieto"
+    "description": "Sijaintitiedon kerrostieto"
   },
   {
     "id": "Ominaisuus-BETK-117",
     "version": "0.1",
     "label": "Asennuslohko 1",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -1642,7 +1642,7 @@
     "version": "0.1",
     "label": "Asennuslohko 2",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -1656,7 +1656,7 @@
     "version": "0.1",
     "label": "Painopiste, ETRS-GK, itäkoordinaatti",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1670,7 +1670,7 @@
     "version": "0.1",
     "label": "Painopiste, ETRS-GK, pohjoiskoordinaatti",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1684,7 +1684,7 @@
     "version": "0.1",
     "label": "Painopiste, WGS84, leveysaste",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1698,7 +1698,7 @@
     "version": "0.1",
     "label": "Painopiste, WGS84, pituusaste",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1712,7 +1712,7 @@
     "version": "0.1",
     "label": "Kuuluu",
     "becProperty": "Valutarvikkeen Elementtitunnus",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "",
     "dataType": "Text",
     "unit": "",
@@ -1726,13 +1726,13 @@
     "version": "0.1",
     "label": "Tyyppi",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "",
     "dataType": "Text",
     "unit": "",
     "exampleValue": "ELEMENTTI",
     "requirement": "",
-    "allowedValues": "[ IRRALLINEN | ELEMENTTI | PAIKALLAVALU ]",
+    "allowedValues": "IRRALLINEN; ELEMENTTI; PAIKALLAVALU",
     "description": "Valutarvikkeelle kirjoittettava tieto"
   },
   {
@@ -1740,7 +1740,7 @@
     "version": "0.1",
     "label": "Korko, alapinta",
     "becProperty": "",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1754,7 +1754,7 @@
     "version": "0.1",
     "label": "Korko, yläpinta",
     "becProperty": "",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1768,7 +1768,7 @@
     "version": "0.1",
     "label": "Korko, pääosa, alapinta",
     "becProperty": "",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1782,7 +1782,7 @@
     "version": "0.1",
     "label": "Korko, pääosa, yläpinta",
     "becProperty": "",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLengthMeasure",
     "dataType": "Number",
     "unit": "",
@@ -1816,7 +1816,7 @@
     "unit": "",
     "exampleValue": "CONCRETE",
     "requirement": "",
-    "allowedValues": "[STEEL | CONCRETE | TIMBER | MISCELLANEOUS]",
+    "allowedValues": "STEEL; CONCRETE; TIMBER; MISCELLANEOUS",
     "description": "Useammasta osasta koostuvan elementin pääosan materiaali. Pääosa usein tilavuudeltaan suurin osa"
   },
   {

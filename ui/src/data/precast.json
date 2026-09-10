@@ -1130,7 +1130,7 @@
   },
   {
     "id": "",
-    "name": "Lepotasoelementti (teräskonsolit)",
+    "name": "Lepotasolaatta (teräskonsolit)",
     "generalId": "LT",
     "discipline": "PRECAST",
     "version": "0.1",
@@ -3052,7 +3052,7 @@
   },
   {
     "id": "",
-    "name": "Parvekelaatta-elementti",
+    "name": "Parvekelaattaelementti",
     "generalId": "CL",
     "discipline": "PRECAST",
     "version": "0.1",
@@ -3146,7 +3146,7 @@
   },
   {
     "id": "",
-    "name": "Parvekepieli-elementti",
+    "name": "Parvekepielielementti",
     "generalId": "M",
     "discipline": "PRECAST",
     "version": "0.1",

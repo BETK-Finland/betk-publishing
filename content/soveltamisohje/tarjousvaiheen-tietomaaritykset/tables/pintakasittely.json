@@ -10,7 +10,7 @@
       "kuvaus": "",
       "alavaihtoehdot": [
         { "koodi": "01", "kuvaus": "MUO-muottipinta" },
-        { "koodi": "02", "kuvaus": "TIIP-Tiililaatta pinta (poltetut tiilet)" },
+        { "koodi": "02", "kuvaus": "TIIP-Tiililaattapinta (poltetut tiilet)" },
         { "koodi": "03", "kuvaus": "KALV-Valukalvon päälle valettu pesubetoni-pinta" },
         { "koodi": "04", "kuvaus": "MUK-Kuvioitua muottia vasten valettu pinta" },
         { "koodi": "05", "kuvaus": "ER-Eristepinta" },
@@ -24,7 +24,7 @@
       "kuvaus": "",
       "alavaihtoehdot": [
         { "koodi": "01", "kuvaus": "MUO-muottipinta" },
-        { "koodi": "02", "kuvaus": "TIIP-Tiililaatta pinta (poltetut tiilet)" },
+        { "koodi": "02", "kuvaus": "TIIP-Tiililaattapinta (poltetut tiilet)" },
         { "koodi": "03", "kuvaus": "KALV-Valukalvon päälle valettu pesubetoni-pinta" },
         { "koodi": "04", "kuvaus": "MUK-Kuvioitua muottia vasten valettu pinta" },
         { "koodi": "05", "kuvaus": "ER-Eristepinta" },
@@ -38,7 +38,7 @@
       "kuvaus": "jos tarvetta",
       "alavaihtoehdot": [
         { "koodi": "01", "kuvaus": "MUO-muottipinta" },
-        { "koodi": "02", "kuvaus": "TIIP-Tiililaatta pinta (poltetut tiilet)" },
+        { "koodi": "02", "kuvaus": "TIIP-Tiililaattapinta (poltetut tiilet)" },
         { "koodi": "03", "kuvaus": "KALV-Valukalvon päälle valettu pesubetoni-pinta" },
         { "koodi": "04", "kuvaus": "MUK-Kuvioitua muottia vasten valettu pinta" },
         { "koodi": "05", "kuvaus": "ER-Eristepinta" },

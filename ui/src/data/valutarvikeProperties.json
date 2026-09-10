@@ -25,7 +25,7 @@
     "exampleValue": "3CiS5UFtr9vg$kEFvOhN8N",
     "requirement": "",
     "allowedValues": "",
-    "description": "Natiivohjelmasta tuotetun IFC-malliin tuleva kokoonpanon Guid"
+    "description": "Natiiviohjelmasta tuotetun IFC-malliin tuleva kokoonpanon Guid"
   },
   {
     "id": "Ominaisuus-BETK-014",
@@ -52,7 +52,7 @@
     "unit": "",
     "exampleValue": "BETONIELEMENTTI",
     "requirement": "",
-    "allowedValues": "[BETONIELEMENTTI | PAIKALLAVALU | TERÄSKOKOONPANO | PUUKOKOONPANO | (RAUDOITEKOKOONPANO) | MUU KOKOONPANO]",
+    "allowedValues": "BETONIELEMENTTI; PAIKALLAVALU; PUUKOKOONPANO; TERÄSKOKOONPANO; EI ASETETTU",
     "description": "Materiaalin ja valmistustavan mukaan valittava tieto rakenneosien tunnistamista varten"
   },
   {
@@ -360,7 +360,7 @@
     "unit": "",
     "exampleValue": "m2",
     "requirement": "",
-    "allowedValues": "[kpl | m | m2]",
+    "allowedValues": "kpl; m; m2",
     "description": "Elementin varusteluosan määrätiedon yksikkö"
   },
   {
@@ -386,9 +386,9 @@
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "TRUE",
+    "exampleValue": "True",
     "requirement": "",
-    "allowedValues": "[TRUE | FALSE]",
+    "allowedValues": "True; False",
     "description": "Suunnittelijan ilmoittama tieto nostotavasta"
   },
   {
@@ -410,7 +410,7 @@
     "version": "0.1",
     "label": "Rakennus",
     "becProperty": "Elementin rakennus",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -424,7 +424,7 @@
     "version": "0.1",
     "label": "Lohko",
     "becProperty": "Elementin lohko",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -438,21 +438,21 @@
     "version": "0.1",
     "label": "Kerros",
     "becProperty": "Elementin kerros",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
     "exampleValue": "5",
     "requirement": "",
     "allowedValues": "",
-    "description": "Sijaintiedon kerrostieto"
+    "description": "Sijaintitiedon kerrostieto"
   },
   {
     "id": "Ominaisuus-BETK-117",
     "version": "0.1",
     "label": "Asennuslohko 1",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -466,7 +466,7 @@
     "version": "0.1",
     "label": "Asennuslohko 2",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -480,7 +480,7 @@
     "version": "0.1",
     "label": "Kuuluu",
     "becProperty": "Valutarvikkeen Elementtitunnus",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "",
     "dataType": "Text",
     "unit": "",
@@ -494,13 +494,13 @@
     "version": "0.1",
     "label": "Tyyppi",
     "becProperty": "<Uusi>",
-    "group": "BETK-Sijainti",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "",
     "dataType": "Text",
     "unit": "",
     "exampleValue": "ELEMENTTI",
     "requirement": "",
-    "allowedValues": "[ IRRALLINEN | ELEMENTTI | PAIKALLAVALU ]",
+    "allowedValues": "IRRALLINEN; ELEMENTTI; PAIKALLAVALU",
     "description": "Valutarvikkeelle kirjoittettava tieto"
   },
   {
