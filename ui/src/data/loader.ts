@@ -6,8 +6,10 @@ import productsJson from "./precast.json";
 import valutarvikeJson from "./valutarvike.json";
 import precastPropertiesJson from "./precastProperties.json";
 import valutarvikePropertiesJson from "./valutarvikeProperties.json";
+import designApplicationsJson from "./designApplications.json";
 import type {
   AlaryhmaNode,
+  DesignApplication,
   KoodistoNode,
   PaaryhmaNode,
   Product,
@@ -176,6 +178,40 @@ export const propertySetsByDiscipline: DisciplinePropertySets[] = catalogs.map(
     };
   },
 );
+
+// Design-application source names (Tekla, later Revit). Overlay on the
+// catalog — not a property field. Experimental until the group confirms.
+interface DesignApplicationsFile {
+  applications: DesignApplication[];
+  defaultApplication: string;
+  mappings: Record<string, Record<string, string>>;
+}
+
+const designAppFile = designApplicationsJson as DesignApplicationsFile;
+
+export const designApplications: DesignApplication[] = designAppFile.applications;
+export const defaultDesignApplication = designAppFile.defaultApplication;
+export const designAppMappings = designAppFile.mappings;
+
+export function designAppSources(propertyId: string): Record<string, string> {
+  return designAppMappings[propertyId] ?? {};
+}
+
+export function designAppValue(
+  propertyId: string,
+  applicationId: string = defaultDesignApplication,
+): string {
+  return designAppSources(propertyId)[applicationId] ?? "";
+}
+
+export function designAppAttrs(propertyId: string): Record<string, string> {
+  const sources = designAppSources(propertyId);
+  const attrs: Record<string, string> = {};
+  for (const app of designApplications) {
+    attrs[`data-app-${app.id}`] = sources[app.id] ?? "";
+  }
+  return attrs;
+}
 
 // Exposed for smoke checks / debug pages.
 export const productCount = products.length;

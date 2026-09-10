@@ -113,20 +113,48 @@
 		font-style: italic;
 	}
 
-	.property-group {
-		margin-top: 14px;
-	}
-
-	.property-group-name {
-		font-size: 12px;
-		color: var(--accent-teal);
-		letter-spacing: 0.04em;
-		margin: 0 0 8px;
-		font-weight: 600;
-	}
-
 	.detail-property-table {
 		margin: 0;
+		table-layout: fixed;
+		width: 100%;
+	}
+
+	.detail-property-table .col-betk {
+		width: 28%;
+	}
+
+	.detail-property-table .col-bec {
+		width: 22%;
+	}
+
+	.detail-property-table .col-design-app {
+		width: 34%;
+	}
+
+	.detail-property-table .col-type {
+		width: 16%;
+	}
+
+	.detail-property-table .cell-mono,
+	.detail-property-table .cell-name {
+		white-space: normal;
+		overflow-wrap: anywhere;
+	}
+
+	.detail-property-table .design-app-header {
+		min-width: 0;
+		white-space: normal;
+	}
+
+	.property-group-row th {
+		padding: 12px 10px 6px;
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: none;
+		color: var(--accent-teal);
+		background: var(--surface);
+		border-bottom: 1px solid var(--separator);
 	}
 </style>
 
@@ -141,6 +169,7 @@
 			content.replaceChildren(tpl.content.cloneNode(true));
 			modal.hidden = false;
 			document.body.classList.add("modal-open");
+			document.dispatchEvent(new Event("betk-detail-open"));
 			// Move focus to the close button so Escape feels natural.
 			modal.querySelector<HTMLButtonElement>(".modal-close")?.focus();
 		};

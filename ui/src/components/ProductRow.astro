@@ -1,7 +1,8 @@
 ---
 import type { Product } from "../data/types";
-import { resolveProductProperties } from "../data/loader";
+import { resolveProductProperties, designAppAttrs, designAppValue } from "../data/loader";
 import { productAnchor } from "../data/anchors";
+import DesignAppHeader from "./DesignAppHeader.astro";
 
 interface Props {
 	product: Product;
@@ -54,29 +55,45 @@ const searchText = [
 				{groups.length === 0 && (
 					<p class="detail-empty">Ei määriteltyjä ominaisuuksia.</p>
 				)}
-				{groups.map((g) => (
-					<section class="property-group">
-						<h4 class="property-group-name">{g.group}</h4>
-						<table class="product-table detail-property-table">
-							<thead>
-								<tr>
-									<th>BETK</th>
-									<th>BEC</th>
-									<th>TYPE</th>
-								</tr>
-							</thead>
-							<tbody>
-								{g.properties.map((prop) => (
-									<tr>
-										<td class="cell-name">{prop.label}</td>
-										<td class="cell-mono">{prop.becProperty || "—"}</td>
-										<td class="cell-mono">{prop.ifcPropertyType || "—"}</td>
+				{groups.length > 0 && (
+					<table class="product-table detail-property-table">
+						<colgroup>
+							<col class="col-betk" />
+							<col class="col-bec" />
+							<col class="col-design-app" />
+							<col class="col-type" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>BETK</th>
+								<th>BEC</th>
+								<DesignAppHeader />
+								<th>TYPE</th>
+							</tr>
+						</thead>
+						<tbody>
+							{groups.map((g) => (
+								<>
+									<tr class="property-group-row">
+										<th colspan="4">{g.group}</th>
 									</tr>
-								))}
-							</tbody>
-						</table>
-					</section>
-				))}
+									{g.properties.map((prop) => (
+										<tr>
+											<td class="cell-name">{prop.label}</td>
+											<td class="cell-mono">{prop.becProperty || "—"}</td>
+											<td
+												data-column="designApp"
+												class="cell-mono cell-design-app"
+												{...designAppAttrs(prop.id)}
+											>{designAppValue(prop.id) || "—"}</td>
+											<td class="cell-mono">{prop.ifcPropertyType || "—"}</td>
+										</tr>
+									))}
+								</>
+							))}
+						</tbody>
+					</table>
+				)}
 			</section>
 		</template>
 	</td>

@@ -29,6 +29,11 @@ export interface Property {
   description: string;
 }
 
+export interface DesignApplication {
+  id: string;
+  label: string;
+}
+
 // Resolved shapes built by the loader.
 
 export interface PropertyGroup {

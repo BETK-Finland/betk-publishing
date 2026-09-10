@@ -1,0 +1,388 @@
+{
+  "applications": [
+    {
+      "id": "tekla",
+      "label": "Tekla Structures"
+    },
+    {
+      "id": "revit",
+      "label": "Revit"
+    },
+    {
+      "id": "more",
+      "label": "..."
+    }
+  ],
+  "defaultApplication": "more",
+  "mappings": {
+    "Ominaisuus-BETK-001": {
+      "tekla": "USERDEFINED.S_ESTATE_NAME"
+    },
+    "Ominaisuus-BETK-002": {
+      "tekla": "USERDEFINED.S_ESTATE_CODE"
+    },
+    "Ominaisuus-BETK-003": {
+      "tekla": "USERDEFINED.S_STREET_ADDRESS"
+    },
+    "Ominaisuus-BETK-004": {
+      "tekla": "USERDEFINED.S_POSTAL_CODE"
+    },
+    "Ominaisuus-BETK-005": {
+      "tekla": "USERDEFINED.S_POSTAL_CODE_AREA"
+    },
+    "Ominaisuus-BETK-006": {
+      "tekla": "USERDEFINED.B_RESPONS_PERSON"
+    },
+    "Ominaisuus-BETK-007": {
+      "tekla": "USERDEFINED.B_COMPANY"
+    },
+    "Ominaisuus-BETK-008": {
+      "tekla": "USERDEFINED.B_DISCIPLINE"
+    },
+    "Ominaisuus-BETK-009": {
+      "tekla": "USERDEFINED.B_PERMANENT_CODE"
+    },
+    "Ominaisuus-BETK-010": {
+      "tekla": "USERDEFINED.B_FIRE_CLASS"
+    },
+    "Ominaisuus-BETK-011": {
+      "tekla": "USERDEFINED.B_NAME"
+    },
+    "Ominaisuus-BETK-012": {
+      "tekla": "GUID"
+    },
+    "Ominaisuus-BETK-013": {
+      "tekla": "CUSTOM.IFC_GUID"
+    },
+    "Ominaisuus-BETK-014": {
+      "tekla": "CUSTOM.CLASS_ATTR"
+    },
+    "Ominaisuus-BETK-015": {
+      "tekla": "CUSTOM.ASSEMBLY_TYPE"
+    },
+    "Ominaisuus-BETK-016": {
+      "tekla": "ASSEMBLY_NAME"
+    },
+    "Ominaisuus-BETK-017": {
+      "tekla": "MANUFACTURED_AT"
+    },
+    "Ominaisuus-BETK-018": {
+      "tekla": "CUSTOM.ELEMENT_POS"
+    },
+    "Ominaisuus-BETK-019": {
+      "tekla": "CUSTOM.SLAB_CAST_UNIT_POS"
+    },
+    "Ominaisuus-BETK-020": {
+      "tekla": "ASSEMBLY_PREFIX"
+    },
+    "Ominaisuus-BETK-021": {
+      "tekla": "ACN"
+    },
+    "Ominaisuus-BETK-022": {
+      "tekla": "ASSEMBLY_POS / CAST_UNIT_POS"
+    },
+    "Ominaisuus-BETK-023": {
+      "tekla": "RENOV_STATUS"
+    },
+    "Ominaisuus-BETK-024": {
+      "tekla": "RENOV_STATUS_DATE"
+    },
+    "Ominaisuus-BETK-025": {
+      "tekla": "RENOV_COMMENT"
+    },
+    "Ominaisuus-BETK-026": {
+      "tekla": "HIERARCHY_LEVEL"
+    },
+    "Ominaisuus-BETK-027": {
+      "tekla": "R_FIRE_CLASS"
+    },
+    "Ominaisuus-BETK-032": {
+      "tekla": "LIFE_EXP_YEARS_1"
+    },
+    "Ominaisuus-BETK-033": {
+      "tekla": "LIFE_EXP_YEARS_2"
+    },
+    "Ominaisuus-BETK-034": {
+      "tekla": "PROCUREMENT_ID"
+    },
+    "Ominaisuus-BETK-035": {
+      "tekla": "TALO2000_CODE"
+    },
+    "Ominaisuus-BETK-036": {
+      "tekla": "PILE_NUMBER"
+    },
+    "Ominaisuus-BETK-037": {
+      "tekla": "CUSTOM.EMBED.ORDER_INFO"
+    },
+    "Ominaisuus-BETK-038": {
+      "tekla": "CUSTOM.EMBED.PRODUCT_DESCR"
+    },
+    "Ominaisuus-BETK-039": {
+      "tekla": "CUSTOM.EMBED.PRODUCT_CODE"
+    },
+    "Ominaisuus-BETK-041": {
+      "tekla": "CUSTOM.ELEMENT_TYPE"
+    },
+    "Ominaisuus-BETK-042": {
+      "tekla": "CUSTOM.ELEMENT_TYPE.CODE"
+    },
+    "Ominaisuus-BETK-043": {
+      "tekla": "CUSTOM.ELEMENT_TYPE.DESCRIPTION"
+    },
+    "Ominaisuus-BETK-044": {
+      "tekla": "REINF_CODE_1"
+    },
+    "Ominaisuus-BETK-045": {
+      "tekla": "REINF_DESCR_1"
+    },
+    "Ominaisuus-BETK-046": {
+      "tekla": "REINF_CODE_2"
+    },
+    "Ominaisuus-BETK-047": {
+      "tekla": "REINF_DESCR_2"
+    },
+    "Ominaisuus-BETK-048": {
+      "tekla": "SURF_CODE_1"
+    },
+    "Ominaisuus-BETK-049": {
+      "tekla": "SURF_DESCR_1"
+    },
+    "Ominaisuus-BETK-050": {
+      "tekla": "SURF_CODE_2"
+    },
+    "Ominaisuus-BETK-051": {
+      "tekla": "SURF_DESCR_2"
+    },
+    "Ominaisuus-BETK-052": {
+      "tekla": "SURF_CODE_3"
+    },
+    "Ominaisuus-BETK-053": {
+      "tekla": "SURF_DESCR_3"
+    },
+    "Ominaisuus-BETK-054": {
+      "tekla": "RUB_SURF_CODE_1"
+    },
+    "Ominaisuus-BETK-055": {
+      "tekla": "RUB_SURF_DESCR_1"
+    },
+    "Ominaisuus-BETK-056": {
+      "tekla": "RUB_SURF_CODE_2"
+    },
+    "Ominaisuus-BETK-057": {
+      "tekla": "RUB_SURF_DESCR_2"
+    },
+    "Ominaisuus-BETK-059": {
+      "tekla": "IS_LOW_CARBON"
+    },
+    "Ominaisuus-BETK-060": {
+      "tekla": "LOW_CARBON_DESCR"
+    },
+    "Ominaisuus-BETK-061": {
+      "tekla": "IS_SAMPLE_ELEMENT"
+    },
+    "Ominaisuus-BETK-062": {
+      "tekla": "SAMPLE_DRAWING"
+    },
+    "Ominaisuus-BETK-063": {
+      "tekla": "IS_TURN_ELEMENT"
+    },
+    "Ominaisuus-BETK-064": {
+      "tekla": "TURN_DESCR"
+    },
+    "Ominaisuus-BETK-065": {
+      "tekla": "MAINPART.PROFILE"
+    },
+    "Ominaisuus-BETK-066": {
+      "tekla": "CUSTOM.CROSS_SECTION_TYPE"
+    },
+    "Ominaisuus-BETK-067": {
+      "tekla": "LENGTH"
+    },
+    "Ominaisuus-BETK-068": {
+      "tekla": "HEIGHT"
+    },
+    "Ominaisuus-BETK-069": {
+      "tekla": "WIDTH"
+    },
+    "Ominaisuus-BETK-070": {
+      "tekla": "CAST_UNIT_LENGTH_ONLY_CONCRETE_PARTS"
+    },
+    "Ominaisuus-BETK-071": {
+      "tekla": "CAST_UNIT_HEIGHT_ONLY_CONCRETE_PARTS"
+    },
+    "Ominaisuus-BETK-072": {
+      "tekla": "CAST_UNIT_WIDTH_ONLY_CONCRETE_PARTS"
+    },
+    "Ominaisuus-BETK-073": {
+      "tekla": "CAST_UNIT_LENGTH_TOTAL"
+    },
+    "Ominaisuus-BETK-074": {
+      "tekla": "CAST_UNIT_HEIGHT_TOTAL"
+    },
+    "Ominaisuus-BETK-075": {
+      "tekla": "CAST_UNIT_WIDTH_TOTAL"
+    },
+    "Ominaisuus-BETK-076": {
+      "tekla": "VOLUME_NET_ONLY_CONCRETE_PARTS"
+    },
+    "Ominaisuus-BETK-077": {
+      "tekla": "CUSTOM.ELEMENT_WEIGHT"
+    },
+    "Ominaisuus-BETK-078": {
+      "tekla": "CAST_UNIT_REBAR_WEIGHT"
+    },
+    "Ominaisuus-BETK-079": {
+      "tekla": "REBAR_ESTIMATE"
+    },
+    "Ominaisuus-BETK-080": {
+      "tekla": "CUSTOM.WALL_GROSS_AREA"
+    },
+    "Ominaisuus-BETK-081": {
+      "tekla": "CUSTOM.WALL_NET_AREA"
+    },
+    "Ominaisuus-BETK-082": {
+      "tekla": "CUSTOM.WALL_CORNER_AREA"
+    },
+    "Ominaisuus-BETK-083": {
+      "tekla": "CUSTOM.WALL_OPENINGS_AREA"
+    },
+    "Ominaisuus-BETK-084": {
+      "tekla": "CUSTOM.WALL_OPENINGS_N"
+    },
+    "Ominaisuus-BETK-085": {
+      "tekla": "CUSTOM.WEB_THICKNESS"
+    },
+    "Ominaisuus-BETK-086": {
+      "tekla": "CUSTOM.BOTTOM_FLANGE_THICKNESS_1"
+    },
+    "Ominaisuus-BETK-087": {
+      "tekla": "CUSTOM.BOTTOM_FLANGE_THICKNESS_2"
+    },
+    "Ominaisuus-BETK-088": {
+      "tekla": "CUSTOM.RIB_WIDTH"
+    },
+    "Ominaisuus-BETK-089": {
+      "tekla": "PRECAMBERING"
+    },
+    "Ominaisuus-BETK-090": {
+      "tekla": "CUSTOM.INNER_PANEL_THICKNESS"
+    },
+    "Ominaisuus-BETK-091": {
+      "tekla": "CUSTOM.INNER_PANEL_VOLUME"
+    },
+    "Ominaisuus-BETK-092": {
+      "tekla": "CUSTOM.INSULATION_THICKNESS"
+    },
+    "Ominaisuus-BETK-093": {
+      "tekla": "CUSTOM.OUTER_PANEL_THICKNESS"
+    },
+    "Ominaisuus-BETK-094": {
+      "tekla": "CUSTOM.OUTER_PANEL_VOLUME"
+    },
+    "Ominaisuus-BETK-095": {
+      "tekla": "CUSTOM.SURFACE_TREATMENT_AREA_1"
+    },
+    "Ominaisuus-BETK-096": {
+      "tekla": "CUSTOM.SURFACE_TREATMENT_AREA_2"
+    },
+    "Ominaisuus-BETK-097": {
+      "tekla": "CUSTOM.SURFACE_TREATMENT_AREA_3"
+    },
+    "Ominaisuus-BETK-098": {
+      "tekla": "CUSTOM.HC_OPENINGS_L"
+    },
+    "Ominaisuus-BETK-099": {
+      "tekla": "CUSTOM.HC_RECESSES_L"
+    },
+    "Ominaisuus-BETK-100": {
+      "tekla": "CUSTOM.HC_SAWINGS_SIDE"
+    },
+    "Ominaisuus-BETK-101": {
+      "tekla": "CUSTOM.HC_SAWINGS_END_N"
+    },
+    "Ominaisuus-BETK-102": {
+      "tekla": "CUSTOM.HC_GROSS_AREA"
+    },
+    "Ominaisuus-BETK-103": {
+      "tekla": "AREA_PROJECTION_XZ_NET | CUSTOM.HC_NET_AREA"
+    },
+    "Ominaisuus-BETK-104": {
+      "tekla": "CUSTOM.SLAB_INSULATION_THICKNESS"
+    },
+    "Ominaisuus-BETK-105": {
+      "tekla": "CUSTOM.IS_DETAILED_SLAB"
+    },
+    "Ominaisuus-BETK-106": {
+      "tekla": "CUSTOM.EMBED.QUANTITY"
+    },
+    "Ominaisuus-BETK-107": {
+      "tekla": "CUSTOM.EMBED.UNIT"
+    },
+    "Ominaisuus-BETK-108": {
+      "tekla": "CUSTOM.SURFACE_TREATMENT_NAME_1"
+    },
+    "Ominaisuus-BETK-109": {
+      "tekla": "CUSTOM.SURFACE_TREATMENT_NAME_2"
+    },
+    "Ominaisuus-BETK-110": {
+      "tekla": "CUSTOM.SURFACE_TREATMENT_NAME_3"
+    },
+    "Ominaisuus-BETK-114": {
+      "tekla": "CUSTOM.BUILDING | CUSTOM.EMBED.BUILDING"
+    },
+    "Ominaisuus-BETK-115": {
+      "tekla": "CUSTOM.SECTION | CUSTOM.EMBED.SECTION"
+    },
+    "Ominaisuus-BETK-116": {
+      "tekla": "CUSTOM.FLOOR | CUSTOM.EMBED.FLOOR"
+    },
+    "Ominaisuus-BETK-119": {
+      "tekla": "CUSTOM.ASSEMBLY.CENTER_OF_GRAVITY.PROJECT_BASEPOINT.EAST"
+    },
+    "Ominaisuus-BETK-120": {
+      "tekla": "CUSTOM.ASSEMBLY.CENTER_OF_GRAVITY.PROJECT_BASEPOINT.NORTH"
+    },
+    "Ominaisuus-BETK-121": {
+      "tekla": "CUSTOM.ASSEMBLY.CENTER_OF_GRAVITY.LATITUDE.IN_RADIANS"
+    },
+    "Ominaisuus-BETK-122": {
+      "tekla": "CUSTOM.ASSEMBLY.CENTER_OF_GRAVITY.LONGITUDE.IN_RADIANS"
+    },
+    "Ominaisuus-BETK-123": {
+      "tekla": "CUSTOM.EMBED.BELONGS_TO"
+    },
+    "Ominaisuus-BETK-124": {
+      "tekla": "CUSTOM.EMBED.TYPE"
+    },
+    "Ominaisuus-BETK-125": {
+      "tekla": "ASSEMBLY_BOTTOM_LEVEL_UNFORMATTED_PROJECT"
+    },
+    "Ominaisuus-BETK-126": {
+      "tekla": "ASSEMBLY_TOP_LEVEL_UNFORMATTED_PROJECT"
+    },
+    "Ominaisuus-BETK-127": {
+      "tekla": "MAINPART.BOTTOM_LEVEL_UNFORMATTED_PROJECT"
+    },
+    "Ominaisuus-BETK-128": {
+      "tekla": "MAINPART.TOP_LEVEL_UNFORMATTED_PROJECT"
+    },
+    "Ominaisuus-BETK-129": {
+      "tekla": "CUSTOM.MATERIAL_TYPE"
+    },
+    "Ominaisuus-BETK-130": {
+      "tekla": "CUSTOM.MAINPART.MATERIAL_TYPE"
+    },
+    "Ominaisuus-BETK-131": {
+      "tekla": "CUSTOM.INNER_PANEL_MATERIAL"
+    },
+    "Ominaisuus-BETK-132": {
+      "tekla": "CUSTOM.INSULATION_MATERIAL"
+    },
+    "Ominaisuus-BETK-133": {
+      "tekla": "CUSTOM.SLAB_INSULATION_MATERIAL"
+    },
+    "Ominaisuus-BETK-134": {
+      "tekla": "CUSTOM.OUTER_PANEL_MATERIAL"
+    }
+  }
+}

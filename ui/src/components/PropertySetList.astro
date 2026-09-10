@@ -1,9 +1,20 @@
 ---
-import { propertySetsByDiscipline } from "../data/loader";
+import {
+	propertySetsByDiscipline,
+	designAppAttrs,
+	designAppSources,
+	designAppValue,
+	defaultDesignApplication,
+} from "../data/loader";
 import { propertySetAnchor } from "../data/anchors";
+import DesignAppHeader from "./DesignAppHeader.astro";
 ---
 
-<div class="property-set-list catalog-off" data-view="OMINAISUUSRYHMÄT">
+<div
+	class="property-set-list catalog-off"
+	data-view="OMINAISUUSRYHMÄT"
+	data-default-design-app={defaultDesignApplication}
+>
 	{propertySetsByDiscipline.map((disc) => (
 		<section class="node discipline-node open" data-node="discipline">
 			<h2 class="catalog-heading">{disc.label}</h2>
@@ -21,6 +32,7 @@ import { propertySetAnchor } from "../data/anchors";
 									<tr>
 										<th data-column="label">LABEL</th>
 										<th data-column="bec">BEC</th>
+										<DesignAppHeader />
 										<th data-column="ifcType">IFC PROPERTY TYPE</th>
 										<th data-column="dataType">DATA TYPE</th>
 										<th data-column="unit">UNIT</th>
@@ -42,10 +54,16 @@ import { propertySetAnchor } from "../data/anchors";
 												p.id,
 												p.description,
 												set.group,
+												...Object.values(designAppSources(p.id)),
 											].filter(Boolean).join(" ").toLowerCase()}
 										>
 											<td data-column="label" class="cell-name">{p.label}</td>
 											<td data-column="bec" class="cell-mono">{p.becProperty || "—"}</td>
+											<td
+												data-column="designApp"
+												class="cell-mono cell-design-app"
+												{...designAppAttrs(p.id)}
+											>{designAppValue(p.id) || "—"}</td>
 											<td data-column="ifcType" class="cell-mono">{p.ifcPropertyType || "—"}</td>
 											<td data-column="dataType" class="cell-mono">{p.dataType || "—"}</td>
 											<td data-column="unit" class="cell-mono">{p.unit || "—"}</td>
@@ -68,6 +86,11 @@ import { propertySetAnchor } from "../data/anchors";
 </div>
 
 <script>
+	import { initDesignAppColumn } from "../scripts/design-app";
+
+	const root = document.querySelector<HTMLElement>(".property-set-list");
+	initDesignAppColumn(root?.dataset.defaultDesignApp || "tekla");
+
 	function toggleNode(header: HTMLElement) {
 		const node = header.closest<HTMLElement>(".node");
 		if (!node) return;
