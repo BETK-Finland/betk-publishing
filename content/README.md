@@ -37,6 +37,18 @@ Neljä sivua, yksi tiedosto kukin. **Älä nimeä näitä tiedostoja uudelleen**
 
 Muokkaa vain `title` ja leipäteksti. Tyhjä leipäteksti = “Tulossa pian”. Älä lisää uusia tiedostoja tähän kansioon.
 
+## Muutosloki (`content/muutokset.md`)
+
+Sivu `/muutokset`. Ei versionumeroita. Lisää uusi päiväotsikko tiedoston alkuun, uusin ylimmäksi:
+
+```markdown
+## 12.9.2026
+
+- mitä muuttui
+```
+
+Merkinnät suomeksi. Yläotsikko ja johdanto kääntyvät kielivalinnalla.
+
 ## Soveltamisohjeet ja Peppol
 
 Vanha rakenne: numeroitu `.md` + `manifest.json`. Tiedoston nimen vaihto ilman manifest-päivitystä piilottaa osion.

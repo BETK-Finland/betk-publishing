@@ -46,4 +46,11 @@ const tyoryhmat = defineCollection({
   }),
 });
 
-export const collections = { soveltamisohje, peppol, media, tyoryhmat };
+const muutokset = defineCollection({
+  loader: glob({ pattern: "muutokset.md", base: "../content" }),
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
+export const collections = { soveltamisohje, peppol, media, tyoryhmat, muutokset };

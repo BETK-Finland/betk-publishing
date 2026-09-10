@@ -65,8 +65,14 @@ export const headlines: NavItem[] = [
 
 export const filesNav: NavLink = {
   href: withBase("esimerkkimallit"),
-  label: "Esimerkkimallit",
+  label: "Tiedostot",
   i18nKey: "nav.examples",
+};
+
+export const logNav: NavLink = {
+  href: withBase("muutokset"),
+  label: "Muutosloki",
+  i18nKey: "footer.changelog",
 };
 
 export const isNavLink = (item: NavItem): item is NavLink => "href" in item;

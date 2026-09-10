@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const entries = await getCollection("muutokset");
+const entry = entries[0];
+const rendered = entry ? await render(entry) : null;
+const Content = rendered?.Content;
+const heading = entry?.data.title ?? "Muutosloki";
+---
+
+<Layout title={`${heading} — BETK`} description="Sivuston muutokset betk.fi käyttöönoton jälkeen">
+  <main id="main">
+    <h1 class="mark" data-i18n="footer.changelog">{heading}</h1>
+    <p class="lead" data-i18n="changelog.subtitle">
+      Sivuston muutokset betk.fi käyttöönoton jälkeen
+    </p>
+    {Content && (
+      <div class="log-prose">
+        <Content />
+      </div>
+    )}
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 3.2rem 1.25rem 4rem;
+  }
+
+  .mark {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .lead {
+    margin: 0 0 1.4rem;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .log-prose {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .log-prose :global(h2) {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 1rem 1.25rem 0.35rem;
+    background: var(--surface);
+    border: 1px solid var(--separator);
+    border-bottom: 0;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .log-prose :global(ul) {
+    list-style: disc;
+    margin: 0 0 1rem;
+    padding: 0 1.25rem 1rem 2.45em;
+    background: var(--surface);
+    border: 1px solid var(--separator);
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .log-prose :global(li) {
+    margin: 0;
+  }
+
+  .log-prose :global(li + li) {
+    margin-top: 0.4rem;
+  }
+</style>
