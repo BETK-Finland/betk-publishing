@@ -2,6 +2,9 @@
 title: Muutosloki
 ---
 
+## 25.9.2026 
+- Etusivun **BETK toiminnassa mukana** -osioon NCC:n logo. 
+
 ## 11.9.2026
 
 - Yläpalkkiin **Tiedostot** (entinen Esimerkkimallit) ja **Muutosloki**.
