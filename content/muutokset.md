@@ -3,7 +3,7 @@ title: Muutosloki
 ---
 
 ## 25.9.2026 
-- Etusivun **BETK toiminnassa mukana** -osioon NCC:n logo. 
+- Etusivun **BETK toiminnassa mukana** -osioon NCC:n ja Con x Digi Technologiesin logot. 
 
 ## 11.9.2026
 
