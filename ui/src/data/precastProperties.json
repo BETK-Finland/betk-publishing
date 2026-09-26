@@ -870,7 +870,7 @@
   {
     "id": "Ominaisuus-BETK-063",
     "version": "0.1",
-    "label": "Onko kääntökivi",
+    "label": "Nosto, pystyyn kääntäen",
     "becProperty": "<Uusi>",
     "group": "BETK-Asennus",
     "ifcPropertyType": "IfcBoolean",
@@ -1542,7 +1542,7 @@
   {
     "id": "Ominaisuus-BETK-111",
     "version": "0.1",
-    "label": "Nostokulma",
+    "label": "Nosto, mitoitettu nostokulmalle",
     "becProperty": "<Uusi>",
     "group": "BETK-Asennus",
     "ifcPropertyType": "IfcInteger",
@@ -1556,13 +1556,13 @@
   {
     "id": "Ominaisuus-BETK-112",
     "version": "0.1",
-    "label": "Vaadittu tasaava nelipistenosto",
+    "label": "Nosto, vaadittu tasaava nelipistenosto",
     "becProperty": "<Uusi>",
     "group": "BETK-Asennus",
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
-    "exampleValue": "True",
+    "exampleValue": "False",
     "requirement": "",
     "allowedValues": "True; False",
     "description": "Suunnittelijan ilmoittama tieto nostotavasta"
@@ -1570,7 +1570,7 @@
   {
     "id": "Ominaisuus-BETK-113",
     "version": "0.1",
-    "label": "Nosto, käytetty dynaaminen kerroin",
+    "label": "Nosto,dynaaminen kerroin",
     "becProperty": "<Uusi>",
     "group": "BETK-Asennus",
     "ifcPropertyType": "IfcInteger",
