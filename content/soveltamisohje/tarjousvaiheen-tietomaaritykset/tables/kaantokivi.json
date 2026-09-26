@@ -2,8 +2,8 @@
   "taulukonNumero": 7,
   "tietosisalto": "Kääntökivi",
   "rajaukset": "–",
-  "ominaisuusjoukko": "BETK-Hankinta",
-  "ominaisuus": "Kääntökivi",
+  "ominaisuusjoukko": "BETK-Asennus",
+  "ominaisuus": "Nosto, pystyyn kääntäen",
   "arvot": [
     { "koodi": "Ei", "kuvaus": "" },
     { "koodi": "Kyllä", "kuvaus": "Description" }
