@@ -232,7 +232,7 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "Tehdas",
     "requirement": "",
     "allowedValues": "EI ASETETTU; Tehdas; Työmaa",
     "description": "Valmistuspaikka"
@@ -372,7 +372,7 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "R90",
+    "exampleValue": "R60",
     "requirement": "",
     "allowedValues": "R15; R30; R45; R60; R90; R120; R180; R240",
     "description": "Rakennusosan paloluokka"
@@ -456,7 +456,7 @@
     "ifcPropertyType": "IfcInteger",
     "dataType": "Number",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "50",
     "requirement": "",
     "allowedValues": "",
     "description": "SW-elementin ulkokuoren suunniteltu käyttöiän tavoite vuosina. Kokonaisluku ilman yksikköä"
@@ -484,7 +484,7 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "1234",
     "requirement": "",
     "allowedValues": "",
     "description": "Talo2000-nimikkeistön tunnus"
@@ -872,7 +872,7 @@
     "version": "0.1",
     "label": "Onko kääntökivi",
     "becProperty": "<Uusi>",
-    "group": "BETK-Hankinta",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
@@ -886,7 +886,7 @@
     "version": "0.1",
     "label": "Käännön kuvaus",
     "becProperty": "<Uusi>",
-    "group": "BETK-Hankinta",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
@@ -1058,7 +1058,7 @@
     "ifcPropertyType": "IfcVolumeMeasure",
     "dataType": "Number",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "5.6",
     "requirement": "",
     "allowedValues": "",
     "description": "Betoniosien yhteenlaskettu tilavuus"
@@ -1156,7 +1156,7 @@
     "ifcPropertyType": "IfcAreaMeasure",
     "dataType": "Number",
     "unit": "",
-    "exampleValue": "5.799999999999999",
+    "exampleValue": "5.79",
     "requirement": "",
     "allowedValues": "",
     "description": "Elementin pinta-alan laskentaohjeiden mukaan laskettu pinta-ala"
@@ -1544,21 +1544,21 @@
     "version": "0.1",
     "label": "Nostokulma",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcInteger",
     "dataType": "Number",
     "unit": "",
-    "exampleValue": "1.3",
+    "exampleValue": "60",
     "requirement": "",
     "allowedValues": "",
-    "description": "Nostolenkin mitoituksessa huomioitava siirto- tai nostotavan vaikutus raksivoimaan"
+    "description": "Nostolenkin mitoituksessa käytetty nostokulma"
   },
   {
     "id": "Ominaisuus-BETK-112",
     "version": "0.1",
     "label": "Vaadittu tasaava nelipistenosto",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcBoolean",
     "dataType": "Boolean",
     "unit": "",
@@ -1570,16 +1570,16 @@
   {
     "id": "Ominaisuus-BETK-113",
     "version": "0.1",
-    "label": "Käytetty dynaaminen kerroin",
+    "label": "Nosto, käytetty dynaaminen kerroin",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
+    "group": "BETK-Asennus",
     "ifcPropertyType": "IfcInteger",
     "dataType": "Number",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "1.3",
     "requirement": "",
     "allowedValues": "",
-    "description": ""
+    "description": "Nostolenkin mitoituksessa huomioitava siirto- tai nostotavan vaikutus raksivoimaan"
   },
   {
     "id": "Ominaisuus-BETK-114",
