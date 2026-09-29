@@ -1,5 +1,5 @@
 ---
-title: BETK
+BETK
 
 BETK on Rakennusteollisuus RT koordinoima kehityskokonaisuus, joka keskittyy tilauksesta suunniteltavien ja valmistettavien rakennustuotteiden toimitusketjujen tiedonhallinnan ja digitaalisen yhteentoimivuuden kehittämiseen. 
 
