@@ -355,7 +355,7 @@
     "label": "Yksikkö",
     "becProperty": "Yksikkö",
     "group": "BETK-Määrät ja geometria",
-    "ifcPropertyType": "",
+    "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
     "exampleValue": "m2",
