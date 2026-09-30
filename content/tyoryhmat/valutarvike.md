@@ -2,7 +2,7 @@
 title: Valutarvike
 ---
 
-Valutarvike-työryhmä kehittää yhtenäistä tapaa nimetä ja kuvata betonielementeissä käytettäviä valutarvikkeita. Tavoitteena on, että sama tieto on yksiselitteisesti tunnistettavissa ja koneluettavissa koko toimitusketjussa: suunnittelussa, hankinnassa, elementtivalmistuksessa ja työmaalla. Ryhmä toimii osana Rakennusteollisuus RT:n luotsaamaa [BETK-työryhmää](/tyoryhmat/betk) ja jatkaa [Vakiointi-työryhmän](/tyoryhmat/vakiointi) työtä tuotetasolla.
+Valutarvike-työryhmä kehittää yhtenäistä tapaa nimetä ja kuvata betonielementeissä käytettäviä valutarvikkeita. Tavoitteena on, että sama tieto on yksiselitteisesti tunnistettavissa ja koneluettavissa koko toimitusketjussa: suunnittelussa, hankinnassa, elementtivalmistuksessa ja työmaalla. Ryhmä toimii osana Rakennusteollisuus RT:n luotsaamaa [BETK kehityskokonaisuutta](/tyoryhmat/betk) ja jatkaa [Vakiointi-työryhmän](/tyoryhmat/vakiointi) työtä tuotetasolla.
 
 ## Taustaa
 
