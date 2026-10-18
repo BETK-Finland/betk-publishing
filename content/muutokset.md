@@ -1,7 +1,7 @@
 ---
 title: Muutosloki
 ---
-## 30.9.2026 
+## 18.10.2026 
 - Täydennetty puuttuvat IFC Property Typet, koordinaattien tietotyypit korjattu
 
 ## 30.9.2026 
