@@ -1265,7 +1265,7 @@
     "label": "Tilavuus, sisäkuori",
     "becProperty": "Seinäelementti, sisäkuoren tilavuus",
     "group": "BETK-Määrät ja geometria",
-    "ifcPropertyType": "IfcLengthMeasure",
+    "ifcPropertyType": "IfcVolumeMeasure",
     "dataType": "Number",
     "unit": "",
     "exampleValue": "2.6999999999999997",
