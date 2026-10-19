@@ -1,6 +1,9 @@
 ---
 title: Muutosloki
 ---
+## 19.10.2026 
+- Tilavuus, sisäkuori-ominaisuuden tietotyypin korjaus
+
 ## 18.10.2026 
 - Täydennetty puuttuvat IFC Property Typet, koordinaattien tietotyypit korjattu
 
