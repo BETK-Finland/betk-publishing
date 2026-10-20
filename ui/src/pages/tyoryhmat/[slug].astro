@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import { workingGroupBySlug, workingGroups } from "../../data/tyoryhmat";
 import { withBase } from "../../data/nav";
 import { leads, managers } from "../../data/people";
+import WorkingGroupMeetings from "../../components/WorkingGroupMeetings.astro";
 
 export function getStaticPaths() {
   return workingGroups.map((group) => ({
@@ -95,6 +96,7 @@ const panels = await Promise.all(
                 <item.Content />
               </div>
             )}
+            {item.slug === "betk" && <WorkingGroupMeetings />}
           </section>
         ))
       }

@@ -2,6 +2,7 @@
 title: Muutosloki
 ---
 ## 20.10.2026
+- BETK-työryhmäsivulle **Työryhmien kokoukset**: Vakiointi- ja Rajapinta-työryhmien neljä seuraavaa kokousta sekä kuukausikalenteri, jossa kokoukset näkyvät elokuusta 2026 helmikuuhun 2027.
 - Etusivun **Ajankohtaista**-osion julkaisuissa näytetään julkaisun kuva tai videon esikatselukuva.
 - Media-sivulle uusi julkaisu: **Rakennusalan Peppol-päivä 2027** (ke 27.1.2027), tapahtuman kuva ja ilmoittautumislinkki.
 - Media-sivulle **Rakennusalan Peppol-päivä 21.1.2026** -tapahtuman tallenne.
