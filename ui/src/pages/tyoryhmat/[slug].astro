@@ -66,7 +66,7 @@ const heading = entry?.data.title ?? resolved.title;
           <li>
             <a
               href={withBase(`tyoryhmat/${item.slug}`)}
-              class:list={[{ current: item.slug === resolved.slug }]}
+              class:list={[`wg-${item.slug}`, { current: item.slug === resolved.slug }]}
               aria-current={item.slug === resolved.slug ? "page" : undefined}
               data-i18n={item.i18nKey}
             >
@@ -137,10 +137,42 @@ const heading = entry?.data.title ?? resolved.title;
   }
 
   .peers a {
-    color: var(--muted);
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    background: #b0b0b0;
+    color: #1c1a16;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    transition: filter 0.15s ease;
+  }
+
+  .peers a:hover {
+    filter: brightness(0.92);
+  }
+
+  .peers a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .peers a.wg-vakiointi {
+    background: #34decc;
+    color: #183858;
+  }
+
+  .peers a.wg-rajapinta {
+    background: #f14f4f;
+    color: #fff;
+  }
+
+  .peers a.wg-valutarvike {
+    background: #346de3;
+    color: #fff;
   }
 
   .peers a.current {
-    color: var(--ink);
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
   }
 </style>
