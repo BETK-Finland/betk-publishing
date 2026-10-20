@@ -12,13 +12,10 @@ const mediaHref = withBase("media");
 const TILE_SHAPES = [
   "full",
   "full",
-  "half",
-  "half",
-  "wide",
-  "half",
+  "full",
 ] as const;
 
-const recentMedia = (await listMedia()).slice(0, 6).map((post, index) => {
+const recentMedia = (await listMedia()).slice(0, 3).map((post, index) => {
   const excerpt = (post.body ?? "")
     .split("\n")
     .map((line) => line.trim())
@@ -354,8 +351,7 @@ const topics = [
     grid-auto-rows: calc((var(--full-h) - var(--gap)) / 2);
     grid-template-areas:
       "a a b b c c"
-      "a a b b d d"
-      "e e e e f f";
+      "a a b b c c";
     gap: var(--gap);
     list-style: none;
     margin: 0;
@@ -365,9 +361,6 @@ const topics = [
   .slot-0 { grid-area: a; }
   .slot-1 { grid-area: b; }
   .slot-2 { grid-area: c; }
-  .slot-3 { grid-area: d; }
-  .slot-4 { grid-area: e; }
-  .slot-5 { grid-area: f; }
 
   .media-cell {
     min-width: 0;
@@ -578,9 +571,7 @@ const topics = [
       grid-template-areas:
         "a a"
         "b b"
-        "c d"
-        "e e"
-        "f f";
+        "c c";
     }
 
     .media-tile {
