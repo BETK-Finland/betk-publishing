@@ -5,6 +5,6 @@ BETK on Rakennusteollisuus RT koordinoima kehityskokonaisuus, joka keskittyy til
 
 BETK-kehityskokonaisuuden alla toimii kaksi päätyöryhmää
 
-* [Vakiointi-työryhmä](#vakiointi) kehittää yhteisiä tietomäärittelyjä, ominaisuustietoja, käsitteitä ja tietomalleja, joiden avulla rakennustuotteiden tietosisällöt voidaan esittää yhdenmukaisesti.
-* [Rajapinta-työryhmä](#rajapinta) puolestaan kehittää näiden tietojen koneellista välittämistä organisaatioiden ja tietojärjestelmien välillä hyödyntäen standardoituja sanomia, rajapintoja ja tiedonvaihtomalleja.
+* [Vakiointi-työryhmä](/tyoryhmat/vakiointi) kehittää yhteisiä tietomäärittelyjä, ominaisuustietoja, käsitteitä ja tietomalleja, joiden avulla rakennustuotteiden tietosisällöt voidaan esittää yhdenmukaisesti.
+* [Rajapinta-työryhmä](/tyoryhmat/rajapinta) puolestaan kehittää näiden tietojen koneellista välittämistä organisaatioiden ja tietojärjestelmien välillä hyödyntäen standardoituja sanomia, rajapintoja ja tiedonvaihtomalleja.
 
