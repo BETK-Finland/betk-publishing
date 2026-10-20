@@ -3,6 +3,7 @@ title: Muutosloki
 ---
 ## 20.10.2026
 - Media-sivulle uusi julkaisu: **Rakennusalan Peppol-päivä 2027**, ilmoittautumislinkki.
+- Media-sivulle **Rakennusalan Peppol-päivä 21.1.2026** -tapahtuman tallenne.
 - Etusivun **BETK toiminnassa mukana** -osion alle **Osallistu toimintaan** -painike, joka avaa BETK-toimintaan ilmoittautumislomakkeen (fi/sv/en).
 - Etusivun **Ajankohtaista**-osiossa näytetään kolme uusinta julkaisua (aiemmin yhdeksän).
 - Yläpalkin **Työryhmät** avaa suoraan BETK-työryhmäsivun (ei enää alasvetovalikkoa). Sivulta linkit Vakiointi- ja Rajapinta-työryhmien sivuille.
