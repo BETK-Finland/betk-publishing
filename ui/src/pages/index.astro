@@ -106,6 +106,13 @@ const topics = [
           tiedonsiirtoon.
         </span>
       </p>
+      <a
+        class="join-cta"
+        href="https://forms.cloud.microsoft/e/hL7n2GmeC7"
+        target="_blank"
+        rel="noopener"
+        data-i18n="home.join"
+      >Osallistu toimintaan</a>
     </section>
 
     <section class="topics" id="what">
@@ -203,6 +210,15 @@ const topics = [
           ))
         }
       </ul>
+      <p class="partners-join">
+        <a
+          class="join-cta"
+          href="https://forms.cloud.microsoft/e/hL7n2GmeC7"
+          target="_blank"
+          rel="noopener"
+          data-i18n="home.join"
+        >Osallistu toimintaan</a>
+      </p>
     </section>
   </main>
 </Layout>
@@ -239,6 +255,29 @@ const topics = [
     flex-direction: column;
     gap: 0.12rem;
     margin: 0;
+  }
+
+  .join-cta {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    background: #31d5c3;
+    color: #183858;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .join-cta:hover {
+    background: #26bfae;
+  }
+
+  .join-cta:focus-visible {
+    outline: 2px solid #183858;
+    outline-offset: 3px;
   }
 
   .topics {
@@ -525,6 +564,11 @@ const topics = [
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .partners-join {
+    margin: 1.6rem 0 0;
+    text-align: center;
   }
 
   .partner-logo {

@@ -1,6 +1,9 @@
 ---
 title: Muutosloki
 ---
+## 20.10.2026
+- Etusivulle **Osallistu toimintaan** -painike johdannon alle ja **BETK toiminnassa mukana** -osion alle. Painike avaa BETK-toimintaan ilmoittautumislomakkeen (fi/sv/en).
+
 ## 19.10.2026 
 - Tilavuus, sisäkuori-ominaisuuden tietotyypin korjaus
 
