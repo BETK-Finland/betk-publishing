@@ -4,6 +4,7 @@ title: Muutosloki
 ## 20.10.2026
 - Etusivun **BETK toiminnassa mukana** -osion alle **Osallistu toimintaan** -painike, joka avaa BETK-toimintaan ilmoittautumislomakkeen (fi/sv/en).
 - Etusivun **Ajankohtaista**-osiossa näytetään kolme uusinta julkaisua (aiemmin yhdeksän).
+- Yläpalkin **Työryhmät** avaa suoraan BETK-työryhmäsivun (ei enää alasvetovalikkoa). Sivulta linkit Vakiointi- ja Rajapinta-työryhmien sivuille.
 
 ## 19.10.2026 
 - Tilavuus, sisäkuori-ominaisuuden tietotyypin korjaus

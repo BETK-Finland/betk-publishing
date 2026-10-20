@@ -1,5 +1,4 @@
 import { listDocs } from "./soveltamisohje-loader";
-import { workingGroups } from "./tyoryhmat";
 
 const base = import.meta.env.BASE_URL;
 
@@ -52,15 +51,7 @@ export const headlines: NavItem[] = [
       { href: withBase("peppol"), label: "Peppol", i18nKey: "nav.peppol" },
     ],
   },
-  {
-    label: "Työryhmät",
-    i18nKey: "nav.workingGroups",
-    children: workingGroups.map((group) => ({
-      href: withBase(`tyoryhmat/${group.slug}`),
-      label: group.label,
-      i18nKey: group.i18nKey,
-    })),
-  },
+  { href: withBase("tyoryhmat/betk"), label: "Työryhmät", i18nKey: "nav.workingGroups" },
 ];
 
 export const filesNav: NavLink = {
