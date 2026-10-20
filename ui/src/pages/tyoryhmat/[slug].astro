@@ -28,6 +28,19 @@ const hasBody = Boolean(entry?.body?.trim());
 const rendered = entry && hasBody ? await render(entry) : null;
 const Content = rendered?.Content;
 const heading = entry?.data.title ?? resolved.title;
+
+// BETK page: other groups open as dropdowns with their page text below.
+const subgroups = isBetk
+  ? await Promise.all(
+      workingGroups
+        .filter((item) => item.slug !== "betk")
+        .map(async (item) => {
+          const sub = entries.find((e) => e.id === item.slug);
+          const subRendered = sub?.body?.trim() ? await render(sub) : null;
+          return { ...item, Content: subRendered?.Content };
+        }),
+    )
+  : [];
 ---
 
 <Layout title={`${resolved.title} — BETK`} description={resolved.lead}>
@@ -60,24 +73,56 @@ const heading = entry?.data.title ?? resolved.title;
         <Content />
       </div>
     )}
-    <ul class="peers">
-      {
-        workingGroups.map((item) => (
-          <li>
-            <a
-              href={withBase(`tyoryhmat/${item.slug}`)}
-              class:list={[`wg-${item.slug}`, { current: item.slug === resolved.slug }]}
-              aria-current={item.slug === resolved.slug ? "page" : undefined}
-              data-i18n={item.i18nKey}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    {
+      isBetk ? (
+        <div class="subgroups">
+          {subgroups.map((item) => (
+            <details class={`subgroup wg-${item.slug}`} id={item.slug}>
+              <summary data-i18n={item.i18nKey}>{item.label}</summary>
+              <div class="sov-prose subgroup-body">
+                {item.Content ? (
+                  <item.Content />
+                ) : (
+                  <p data-i18n="comingSoon">{item.lead}</p>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      ) : (
+        <ul class="peers">
+          {
+            workingGroups.map((item) => (
+              <li>
+                <a
+                  href={withBase(`tyoryhmat/${item.slug}`)}
+                  class:list={[`wg-${item.slug}`, { current: item.slug === resolved.slug }]}
+                  aria-current={item.slug === resolved.slug ? "page" : undefined}
+                  data-i18n={item.i18nKey}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      )
+    }
   </main>
 </Layout>
+
+<script>
+  const openFromHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id ? document.getElementById(id) : null;
+    if (el instanceof HTMLDetailsElement) {
+      el.open = true;
+      el.scrollIntoView({ block: "start" });
+    }
+  };
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
+</script>
 
 <style>
   main {
@@ -135,6 +180,86 @@ const heading = entry?.data.title ?? resolved.title;
     padding: 0.9rem 0 0;
     border-top: 1px solid var(--line);
   }
+
+  .subgroups {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin: 2rem 0 0;
+    padding: 1.1rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .subgroup {
+    scroll-margin-top: 4.6rem;
+  }
+
+  .subgroup summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    background: #b0b0b0;
+    color: #1c1a16;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    transition: filter 0.15s ease;
+  }
+
+  .subgroup summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .subgroup summary::after {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.15rem) rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+
+  .subgroup[open] summary::after {
+    transform: translateY(0.1rem) rotate(-135deg);
+  }
+
+  .subgroup summary:hover {
+    filter: brightness(0.92);
+  }
+
+  .subgroup summary:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .subgroup.wg-vakiointi summary {
+    background: #34decc;
+    color: #183858;
+  }
+
+  .subgroup.wg-rajapinta summary {
+    background: #f14f4f;
+    color: #fff;
+  }
+
+  .subgroup.wg-valutarvike summary {
+    background: #346de3;
+    color: #fff;
+  }
+
+  .subgroup-body {
+    padding: 1rem 0 0.4rem 1rem;
+    border-left: 3px solid var(--line);
+    margin: 0.8rem 0 0 0.4rem;
+  }
+
+  .subgroup.wg-vakiointi .subgroup-body { border-left-color: #34decc; }
+  .subgroup.wg-rajapinta .subgroup-body { border-left-color: #f14f4f; }
+  .subgroup.wg-valutarvike .subgroup-body { border-left-color: #346de3; }
 
   .peers a {
     display: inline-block;
