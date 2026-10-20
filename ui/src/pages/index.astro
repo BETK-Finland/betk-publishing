@@ -16,12 +16,9 @@ const TILE_SHAPES = [
   "half",
   "wide",
   "half",
-  "small",
-  "small",
-  "wide",
 ] as const;
 
-const recentMedia = (await listMedia()).slice(0, 9).map((post, index) => {
+const recentMedia = (await listMedia()).slice(0, 6).map((post, index) => {
   const excerpt = (post.body ?? "")
     .split("\n")
     .map((line) => line.trim())
@@ -358,8 +355,7 @@ const topics = [
     grid-template-areas:
       "a a b b c c"
       "a a b b d d"
-      "e e e e f f"
-      "g h i i i i";
+      "e e e e f f";
     gap: var(--gap);
     list-style: none;
     margin: 0;
@@ -372,9 +368,6 @@ const topics = [
   .slot-3 { grid-area: d; }
   .slot-4 { grid-area: e; }
   .slot-5 { grid-area: f; }
-  .slot-6 { grid-area: g; }
-  .slot-7 { grid-area: h; }
-  .slot-8 { grid-area: i; }
 
   .media-cell {
     min-width: 0;
@@ -587,8 +580,7 @@ const topics = [
         "b b"
         "c d"
         "e e"
-        "f g"
-        "h i";
+        "f f";
     }
 
     .media-tile {
