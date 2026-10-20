@@ -19,85 +19,41 @@ if (!resolved) {
   return Astro.redirect(withBase("tyoryhmat/betk"));
 }
 
-const isBetk = resolved.slug === "betk";
 const managerLine = managers.join(", ");
 
+// Every page renders all groups; the sidebar buttons switch between them
+// without a reload. Each button is a real link, so it works without JS too.
 const entries = await getCollection("tyoryhmat");
-const entry = entries.find((item) => item.id === resolved.slug);
-const hasBody = Boolean(entry?.body?.trim());
-const rendered = entry && hasBody ? await render(entry) : null;
-const Content = rendered?.Content;
-const heading = entry?.data.title ?? resolved.title;
-
-// BETK page: other groups open as dropdowns with their page text below.
-const subgroups = isBetk
-  ? await Promise.all(
-      workingGroups
-        .filter((item) => item.slug !== "betk")
-        .map(async (item) => {
-          const sub = entries.find((e) => e.id === item.slug);
-          const subRendered = sub?.body?.trim() ? await render(sub) : null;
-          return { ...item, Content: subRendered?.Content };
-        }),
-    )
-  : [];
+const panels = await Promise.all(
+  workingGroups.map(async (item) => {
+    const entry = entries.find((e) => e.id === item.slug);
+    const hasBody = Boolean(entry?.body?.trim());
+    const rendered = entry && hasBody ? await render(entry) : null;
+    return {
+      ...item,
+      href: withBase(`tyoryhmat/${item.slug}`),
+      heading: entry?.data.title ?? item.title,
+      hasBody,
+      Content: rendered?.Content,
+    };
+  }),
+);
 ---
 
 <Layout title={`${resolved.title} — BETK`} description={resolved.lead}>
-  <main id="main">
-    <p class="mark">
-      <span data-i18n="nav.workingGroups">Työryhmät</span>
-      · {resolved.label}
-    </p>
-    <h1>{heading}</h1>
-    {!hasBody && <p class="lead" data-i18n="comingSoon">{resolved.lead}</p>}
-    {
-      isBetk && (
-        <div class="people">
-          <p>
-            <span data-i18n="footer.managers">Projektipäälliköt</span>: {managerLine}
-          </p>
-          <p data-i18n="footer.leads">Työryhmien vetäjät</p>
-          <ul>
-            {leads.map((person) => (
-              <li>
-                {person.name} ({person.group})
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-    {Content && (
-      <div class="sov-prose">
-        <Content />
-      </div>
-    )}
-    {
-      isBetk ? (
-        <div class="subgroups">
-          {subgroups.map((item) => (
-            <details class={`subgroup wg-${item.slug}`} id={item.slug}>
-              <summary data-i18n={item.i18nKey}>{item.label}</summary>
-              <div class="sov-prose subgroup-body">
-                {item.Content ? (
-                  <item.Content />
-                ) : (
-                  <p data-i18n="comingSoon">{item.lead}</p>
-                )}
-              </div>
-            </details>
-          ))}
-        </div>
-      ) : (
-        <ul class="peers">
+  <main id="main" class="sov-layout">
+    <aside class="sov-sidebar">
+      <nav class="wg-nav" aria-label="Työryhmät">
+        <p class="sidebar-heading" data-i18n="nav.workingGroups">Työryhmät</p>
+        <ul>
           {
-            workingGroups.map((item) => (
+            panels.map((item) => (
               <li>
                 <a
-                  href={withBase(`tyoryhmat/${item.slug}`)}
-                  class:list={[`wg-${item.slug}`, { current: item.slug === resolved.slug }]}
+                  href={item.href}
+                  class:list={["wg-button", `wg-${item.slug}`, { current: item.slug === resolved.slug }]}
                   aria-current={item.slug === resolved.slug ? "page" : undefined}
+                  data-wg={item.slug}
                   data-i18n={item.i18nKey}
                 >
                   {item.label}
@@ -106,31 +62,84 @@ const subgroups = isBetk
             ))
           }
         </ul>
-      )
-    }
+      </nav>
+    </aside>
+
+    <article class="sov-document">
+      {
+        panels.map((item) => (
+          <section class="wg-panel" data-wg-panel={item.slug} hidden={item.slug !== resolved.slug}>
+            <p class="mark">
+              <span data-i18n="nav.workingGroups">Työryhmät</span>
+              · {item.label}
+            </p>
+            <h1>{item.heading}</h1>
+            {!item.hasBody && <p class="lead" data-i18n="comingSoon">{item.lead}</p>}
+            {item.slug === "betk" && (
+              <div class="people">
+                <p>
+                  <span data-i18n="footer.managers">Projektipäälliköt</span>: {managerLine}
+                </p>
+                <p data-i18n="footer.leads">Työryhmien vetäjät</p>
+                <ul>
+                  {leads.map((person) => (
+                    <li>
+                      {person.name} ({person.group})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {item.Content && (
+              <div class="sov-prose">
+                <item.Content />
+              </div>
+            )}
+          </section>
+        ))
+      }
+    </article>
   </main>
 </Layout>
 
 <script>
-  const openFromHash = () => {
-    const id = decodeURIComponent(location.hash.slice(1));
-    const el = id ? document.getElementById(id) : null;
-    if (el instanceof HTMLDetailsElement) {
-      el.open = true;
-      el.scrollIntoView({ block: "start" });
-    }
+  const buttons = Array.from(document.querySelectorAll<HTMLAnchorElement>("a[data-wg]"));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-wg-panel]"));
+  const titleBase = " — BETK";
+
+  const show = (slug: string) => {
+    const button = buttons.find((b) => b.dataset.wg === slug);
+    if (!button) return false;
+    panels.forEach((p) => (p.hidden = p.dataset.wgPanel !== slug));
+    buttons.forEach((b) => {
+      const on = b === button;
+      b.classList.toggle("current", on);
+      if (on) b.setAttribute("aria-current", "page");
+      else b.removeAttribute("aria-current");
+    });
+    const h1 = panels.find((p) => p.dataset.wgPanel === slug)?.querySelector("h1");
+    if (h1) document.title = h1.textContent?.trim() + titleBase;
+    return true;
   };
-  openFromHash();
-  window.addEventListener("hashchange", openFromHash);
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+      event.preventDefault();
+      if (show(button.dataset.wg ?? "")) {
+        history.pushState({ wg: button.dataset.wg }, "", button.href);
+        window.scrollTo({ top: 0 });
+      }
+    });
+  });
+
+  window.addEventListener("popstate", () => {
+    const slug = location.pathname.replace(/\/$/, "").split("/").pop() ?? "betk";
+    show(slug);
+  });
 </script>
 
 <style>
-  main {
-    max-width: 42rem;
-    margin: 0 auto;
-    padding: 3.2rem 1.25rem 4rem;
-  }
-
   .mark {
     margin: 0 0 0.35rem;
     font-size: 0.78rem;
@@ -171,99 +180,26 @@ const subgroups = isBetk
     margin: 0 0 0.75rem;
   }
 
-  .peers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.1rem;
-    list-style: none;
-    margin: 2rem 0 0;
-    padding: 0.9rem 0 0;
-    border-top: 1px solid var(--line);
+  .wg-panel {
+    max-width: 42rem;
   }
 
-  .subgroups {
+  .wg-nav {
+    padding: 4px;
+  }
+
+  .wg-nav ul {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
-    margin: 2rem 0 0;
-    padding: 1.1rem 0 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .subgroup {
-    scroll-margin-top: 4.6rem;
-  }
-
-  .subgroup summary {
-    display: inline-flex;
-    align-items: center;
     gap: 0.6rem;
-    padding: 0.7rem 1.5rem;
-    border-radius: 6px;
-    background: #b0b0b0;
-    color: #1c1a16;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    cursor: pointer;
     list-style: none;
-    transition: filter 0.15s ease;
+    margin: 0;
+    padding: 0;
   }
 
-  .subgroup summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .subgroup summary::after {
-    content: "";
-    width: 0.45rem;
-    height: 0.45rem;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: translateY(-0.15rem) rotate(45deg);
-    transition: transform 0.15s ease;
-  }
-
-  .subgroup[open] summary::after {
-    transform: translateY(0.1rem) rotate(-135deg);
-  }
-
-  .subgroup summary:hover {
-    filter: brightness(0.92);
-  }
-
-  .subgroup summary:focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 3px;
-  }
-
-  .subgroup.wg-vakiointi summary {
-    background: #34decc;
-    color: #183858;
-  }
-
-  .subgroup.wg-rajapinta summary {
-    background: #f14f4f;
-    color: #fff;
-  }
-
-  .subgroup.wg-valutarvike summary {
-    background: #346de3;
-    color: #fff;
-  }
-
-  .subgroup-body {
-    padding: 1rem 0 0.4rem 1rem;
-    border-left: 3px solid var(--line);
-    margin: 0.8rem 0 0 0.4rem;
-  }
-
-  .subgroup.wg-vakiointi .subgroup-body { border-left-color: #34decc; }
-  .subgroup.wg-rajapinta .subgroup-body { border-left-color: #f14f4f; }
-  .subgroup.wg-valutarvike .subgroup-body { border-left-color: #346de3; }
-
-  .peers a {
-    display: inline-block;
-    padding: 0.7rem 1.5rem;
+  .wg-button {
+    display: block;
+    padding: 0.7rem 1.1rem;
     border-radius: 6px;
     background: #b0b0b0;
     color: #1c1a16;
@@ -273,31 +209,38 @@ const subgroups = isBetk
     transition: filter 0.15s ease;
   }
 
-  .peers a:hover {
+  .wg-button:hover {
     filter: brightness(0.92);
   }
 
-  .peers a:focus-visible {
+  .wg-button:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: 3px;
   }
 
-  .peers a.wg-vakiointi {
+  .wg-button.wg-vakiointi {
     background: #34decc;
     color: #183858;
   }
 
-  .peers a.wg-rajapinta {
+  .wg-button.wg-rajapinta {
     background: #f14f4f;
     color: #fff;
   }
 
-  .peers a.wg-valutarvike {
+  .wg-button.wg-valutarvike {
     background: #346de3;
     color: #fff;
   }
 
-  .peers a.current {
+  .wg-button.current {
     box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
+  }
+
+  @media screen and (max-width: 640px) {
+    .wg-nav ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
   }
 </style>
