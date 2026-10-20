@@ -6,6 +6,7 @@ title: Muutosloki
 - Etusivun **Ajankohtaista**-osiossa näytetään kolme uusinta julkaisua (aiemmin yhdeksän).
 - Yläpalkin **Työryhmät** avaa suoraan BETK-työryhmäsivun (ei enää alasvetovalikkoa). Sivulta linkit Vakiointi- ja Rajapinta-työryhmien sivuille.
 - Työryhmäsivuilla vasen sivupalkki, jossa BETK-, Vakiointi-, Rajapinta- ja Valutarvike-painikkeet BETK-logon väreissä. Painike vaihtaa työryhmän tekstin sivun pääalueelle.
+- Työryhmäsivujen alareunaan **Osallistu toimintaan** -painike.
 
 ## 19.10.2026 
 - Tilavuus, sisäkuori-ominaisuuden tietotyypin korjaus

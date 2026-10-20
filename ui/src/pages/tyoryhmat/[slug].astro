@@ -98,6 +98,15 @@ const panels = await Promise.all(
           </section>
         ))
       }
+      <p class="join">
+        <a
+          class="join-cta"
+          href="https://forms.cloud.microsoft/e/hL7n2GmeC7"
+          target="_blank"
+          rel="noopener"
+          data-i18n="home.join"
+        >Osallistu toimintaan</a>
+      </p>
     </article>
   </main>
 </Layout>
@@ -182,6 +191,36 @@ const panels = await Promise.all(
 
   .wg-panel {
     max-width: 42rem;
+  }
+
+  .join {
+    max-width: 42rem;
+    margin: 2rem 0 0;
+    padding: 1.4rem 0 0;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .join-cta {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    background: #31d5c3;
+    color: #183858;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .join-cta:hover {
+    background: #26bfae;
+  }
+
+  .join-cta:focus-visible {
+    outline: 2px solid #183858;
+    outline-offset: 3px;
   }
 
   .wg-nav {
