@@ -2,6 +2,9 @@
 title: Muutosloki
 ---
 ## 22.10.2026
+- Media-sivulle Tom Partasen esitys **BEC ja BETK – Betonielementin tunnistus** LBD-F-kickoffista: videotallenne ja esitysaineisto (PDF).
+
+## 22.10.2026
 - Etusivun **BETK toiminnassa mukana** -osioon päivitetty Twinbasen logo.
 
 ## 20.10.2026
