@@ -1,6 +1,9 @@
 ---
 title: Muutosloki
 ---
+## 22.10.2026
+- Etusivun **BETK toiminnassa mukana** -osioon päivitetty Twinbasen logo.
+
 ## 20.10.2026
 - BETK-työryhmäsivulle **Työryhmien kokoukset**: Vakiointi- ja Rajapinta-työryhmien neljä seuraavaa kokousta sekä kuukausikalenteri, jossa kokoukset näkyvät elokuusta 2026 helmikuuhun 2027.
 - Etusivun **Ajankohtaista**-osion julkaisuissa näytetään julkaisun kuva tai videon esikatselukuva.
