@@ -2,7 +2,7 @@
 title: Muutosloki
 ---
 ## 25.10.2026
-- Etusivun **BETK toiminnassa mukana** -osioon Rambollin ja WhatsBuiltin logot.
+- Etusivun **BETK toiminnassa mukana** -osioon Rakennustiedon, Rambollin ja WhatsBuiltin logot.
 
 ## 22.10.2026
 - Media-sivulle Tom Partasen esitys **BEC ja BETK – Betonielementin tunnistus** LBD-F-kickoffista: videotallenne ja esitysaineisto (PDF).
