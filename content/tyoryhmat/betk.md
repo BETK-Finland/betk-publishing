@@ -15,11 +15,11 @@ ETO-tuotteiden toimitusketju kootaan jokaiseen hankkeeseen erikseen. Rakennesuun
 
 Yhteentoimivuus edellyttää sopimista kahdella tasolla. Ensimmäinen taso koskee sitä, mitä tieto tarkoittaa ja missä muodossa se esitetään. Toinen taso koskee sitä, miten tieto siirretään järjestelmästä toiseen. Työ on jaettu työryhmiin näiden tasojen mukaan.
 
-| Työryhmä | Yhteentoimivuuden taso | Vastuualue |
-|---|---|---|
-| [Vakiointi](/tyoryhmat/vakiointi) | Semanttinen ja syntaktinen | Tietomallipohjaisen suunnittelutiedon sisällöt: ominaisuudet, sallitut arvot, käsitteet ja tietomallit |
-| [Rajapinta](/tyoryhmat/rajapinta) | Teknologinen | Tiedonsiirto osapuolten välillä: sanomat, tunnisteet ja tapahtumatieto |
-| [Valutarvike](/tyoryhmat/valutarvike) | Semanttinen ja syntaktinen (tuotetaso) | Elementteihin valettavien osien nimikkeistö ja tietosisältö |
+| Työryhmä | Vetäjä | Yhteentoimivuuden taso | Vastuualue |
+|---|---|---|---|
+| [Vakiointi](/tyoryhmat/vakiointi) | Antti Pekkala | Semanttinen ja syntaktinen | Tietomallipohjaisen suunnittelutiedon sisällöt: ominaisuudet, sallitut arvot, käsitteet ja tietomallit |
+| [Rajapinta](/tyoryhmat/rajapinta) | Tom Partanen | Teknologinen | Tiedonsiirto osapuolten välillä: sanomat, tunnisteet ja tapahtumatieto |
+| [Valutarvike](/tyoryhmat/valutarvike) | Eetu Lahtinen | Semanttinen ja syntaktinen (tuotetaso) | Elementteihin valettavien osien nimikkeistö ja tietosisältö |
 
 Työryhmät voivat perustaa rajattuja pienryhmiä. Pienryhmät käsittelevät aiheita, jotka koskevat useampaa työryhmää tai vaativat tiivistä valmistelua.
 
@@ -55,11 +55,11 @@ Leveranskedjan för ETO-produkter sätts samman på nytt för varje projekt. Kon
 
 Interoperabilitet kräver överenskommelser på två nivåer. Den första nivån gäller vad informationen betyder och i vilken form den presenteras. Den andra nivån gäller hur informationen överförs från ett system till ett annat. Arbetet är fördelat på arbetsgrupper enligt dessa nivåer.
 
-| Arbetsgrupp | Interoperabilitetsnivå | Ansvarsområde |
-|---|---|---|
-| [Standardisering (Vakiointi)](/tyoryhmat/vakiointi) | Semantisk och syntaktisk | Informationsinnehållet i modellbaserad projekteringsinformation: egenskaper, tillåtna värden, begrepp och informationsmodeller |
-| [Gränssnitt (Rajapinta)](/tyoryhmat/rajapinta) | Teknologisk | Informationsöverföring mellan parterna: meddelanden, identifierare och händelseinformation |
-| [Ingjutningsdetaljer (Valutarvike)](/tyoryhmat/valutarvike) | Semantisk och syntaktisk (produktnivå) | Nomenklatur och informationsinnehåll för detaljer som gjuts in i element |
+| Arbetsgrupp | Ledare | Interoperabilitetsnivå | Ansvarsområde |
+|---|---|---|---|
+| [Standardisering (Vakiointi)](/tyoryhmat/vakiointi) | Antti Pekkala | Semantisk och syntaktisk | Informationsinnehållet i modellbaserad projekteringsinformation: egenskaper, tillåtna värden, begrepp och informationsmodeller |
+| [Gränssnitt (Rajapinta)](/tyoryhmat/rajapinta) | Tom Partanen | Teknologisk | Informationsöverföring mellan parterna: meddelanden, identifierare och händelseinformation |
+| [Ingjutningsdetaljer (Valutarvike)](/tyoryhmat/valutarvike) | Eetu Lahtinen | Semantisk och syntaktisk (produktnivå) | Nomenklatur och informationsinnehåll för detaljer som gjuts in i element |
 
 Arbetsgrupperna kan bilda avgränsade mindre grupper. De mindre grupperna behandlar frågor som berör flera arbetsgrupper eller som kräver intensiv beredning.
 
@@ -95,11 +95,11 @@ The supply chain for ETO products is assembled anew for every project. The struc
 
 Interoperability requires agreement at two levels. The first level is what the data means and in what form it is presented. The second level is how the data is transferred from one system to another. The work is divided among working groups according to these levels.
 
-| Working group | Interoperability level | Scope |
-|---|---|---|
-| [Standardisation (Vakiointi)](/tyoryhmat/vakiointi) | Semantic and syntactic | Content of model-based design information: properties, permitted values, concepts and information models |
-| [Interface (Rajapinta)](/tyoryhmat/rajapinta) | Technological | Data exchange between parties: messages, identifiers and event data |
-| [Cast-in items (Valutarvike)](/tyoryhmat/valutarvike) | Semantic and syntactic (product level) | Nomenclature and information content of items cast into precast elements |
+| Working group | Lead | Interoperability level | Scope |
+|---|---|---|---|
+| [Standardisation (Vakiointi)](/tyoryhmat/vakiointi) | Antti Pekkala | Semantic and syntactic | Content of model-based design information: properties, permitted values, concepts and information models |
+| [Interface (Rajapinta)](/tyoryhmat/rajapinta) | Tom Partanen | Technological | Data exchange between parties: messages, identifiers and event data |
+| [Cast-in items (Valutarvike)](/tyoryhmat/valutarvike) | Eetu Lahtinen | Semantic and syntactic (product level) | Nomenclature and information content of items cast into precast elements |
 
 The working groups can set up focused subgroups. Subgroups handle topics that concern more than one working group or that require intensive preparation.
 
