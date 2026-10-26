@@ -1,6 +1,11 @@
 ---
 title: Muutosloki
 ---
+## 26.10.2026
+- Soveltamisohjeiden käännökset: **Tarjousvaiheen tietomääritykset** englanniksi ja ruotsiksi sekä **Tuoteyksilöinnin ja -tunnistamisen yhteentoimivuus** ruotsiksi (englanninkielinen versio oli jo julkaistu).
+- Soveltamisohjeiden valikoissa näkyvät valitun kielen versiot. Kielivalinnan vaihto avaa saman ohjeen käännöksen.
+- Käännettyjen ohjeiden taulukoissa mallin suomenkielinen arvo omassa sarakkeessa käännetyn kuvauksen rinnalla. Otsikot, taulukoiden nimet ja muut kiinteät tekstit ohjeen kielellä.
+
 ## 25.10.2026
 - Etusivun **BETK toiminnassa mukana** -osioon Rakennustiedon, Rambollin ja WhatsBuiltin logot.
 

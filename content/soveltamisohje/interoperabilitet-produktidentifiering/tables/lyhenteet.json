@@ -1,0 +1,76 @@
+{
+  "termit": [
+    {
+      "termi": "Applikator",
+      "selite": "Anordning som skriver ut och fäster en RFID-tagg på produkten"
+    },
+    {
+      "termi": "Electronic Product Code, EPC",
+      "selite": "Elektronisk produktkod."
+    },
+    {
+      "termi": "EPC-minne",
+      "selite": "Det minne i RFID-taggen där den elektroniska produktkoden skrivs, det vill säga taggens grundminne"
+    },
+    {
+      "termi": "Engineer-To-Order, ETO",
+      "selite": "Termen avser tillverkningslogiken för produkter som projekteras på beställning."
+    },
+    {
+      "termi": "GS1 DataMatrix",
+      "selite": "2D-kod enligt GS1-standarden som kan innehålla mer data än en traditionell EAN-streckkod. ISO/IEC 16022"
+    },
+    {
+      "termi": "GS1 Application Identifier, AI",
+      "selite": "GS1-applikationsidentifierare är 2–4 siffror långa identifierare som används i streckkoderna GS1-128, GS1 DataMatrix och GS1 DataBar samt i EPC/RFID-taggar."
+    },
+    {
+      "termi": "Global Trade Item Number, GTIN",
+      "selite": "Termen avser GS1:s standard för produktidentifierare."
+    },
+    {
+      "termi": "GUID",
+      "selite": "GUID (Globally Unique IDentifier) är en unik identifierare för varje del som tilldelas av modelleringsprogrammet eller skapas på annat sätt. Kallas även UUID (Universally Unique IDentifier)."
+    },
+    {
+      "termi": "Make-To-Order, MTO",
+      "selite": "Termen avser orderstyrd produktion där produkterna tillverkas enligt kundorder utifrån färdiga produktritningar."
+    },
+    {
+      "termi": "Make-To-Stock, MTS",
+      "selite": "Termen avser tillverkningslogiken för lagerstyrda produkter."
+    },
+    {
+      "termi": "Radio Frequency Identification, RFID",
+      "selite": "Termen avser radiofrekventa fjärravläsbara taggar (innehåller antenn och mikrochip)."
+    },
+    {
+      "termi": "Serial Global Trade Item Number, SGTIN",
+      "selite": "Kombination av GTIN-nummer och serienummer med vilken identiska produktexemplar kan särskiljas."
+    },
+    {
+      "termi": "Tag",
+      "selite": "RFID-tagg som innehåller ett chip och en antenn. Används för unik identifiering av objekt."
+    },
+    {
+      "termi": "User memory",
+      "selite": "RFID-användarminne eller tilläggsminne"
+    },
+    {
+      "termi": "UHF-tagg",
+      "selite": "Högfrekvent (850–960 MHz) RFID-tagg"
+    },
+    {
+      "termi": "Uniform Resource Identifier, URI",
+      "selite": "En URI är en identifierare för information i ett datanät. En URL är alltid också en URI, men en URI är inte nödvändigtvis en URL. Till exempel https://rt.fi eller urn:ISBN:952-9842-34-1"
+    },
+    {
+      "termi": "Uniform Resource Locator, URL",
+      "selite": "En URL innehåller de uppgifter som behövs för att hämta informationen, såsom protokoll (t.ex. https) och server. Till exempel https://rt.fi"
+    },
+    {
+      "termi": "Domännamn",
+      "selite": "Ett domännamn är en teckensträng som på internet leds till en viss IP-adress, det vill säga en server. Till exempel www.iso.org"
+    }
+  ]
+}

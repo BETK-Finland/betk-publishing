@@ -1,11 +1,14 @@
 ---
 import type { DocumentMeta } from "../data/soveltamisohje-types";
+import { sovStrings } from "../data/soveltamisohje-i18n";
 
 interface Props {
   meta: DocumentMeta;
+  lang?: string;
 }
 
-const { meta } = Astro.props;
+const { meta, lang } = Astro.props;
+const t = sovStrings(lang);
 const { otsikko, alaotsikko, julkaisija, paivamaara, versio, status, versiohistoria, laatijat } = meta;
 ---
 
@@ -13,17 +16,17 @@ const { otsikko, alaotsikko, julkaisija, paivamaara, versio, status, versiohisto
   <h1 class="sov-title">{otsikko}</h1>
   <p class="sov-subtitle"><strong>{alaotsikko}</strong></p>
   <div class="sov-meta">
-    <p>Julkaisija: {julkaisija}</p>
-    <p>Päivämäärä: {paivamaara}</p>
-    <p>Versio: {versio} &middot; Status: {status}</p>
+    <p>{t.publisher}: {julkaisija}</p>
+    <p>{t.date}: {paivamaara}</p>
+    <p>{t.version}: {versio} &middot; {t.status}: {status}</p>
   </div>
   <p class="sov-print-date" aria-hidden="true"></p>
 
   <details class="sov-details">
-    <summary>Asiakirjan versio</summary>
+    <summary>{t.docVersion}</summary>
     <table class="sov-meta-table">
       <thead>
-        <tr><th>Versio</th><th>Päivämäärä</th><th>Tekijä</th><th>Muutoskuvaus</th></tr>
+        <tr><th>{t.version}</th><th>{t.date}</th><th>{t.author}</th><th>{t.change}</th></tr>
       </thead>
       <tbody>
         {versiohistoria.map(v => (
@@ -34,10 +37,10 @@ const { otsikko, alaotsikko, julkaisija, paivamaara, versio, status, versiohisto
   </details>
 
   <details class="sov-details">
-    <summary>Asiakirjan laatijat</summary>
+    <summary>{t.authors}</summary>
     <table class="sov-meta-table">
       <thead>
-        <tr><th>Nimi</th><th>Organisaatio</th></tr>
+        <tr><th>{t.name}</th><th>{t.organisation}</th></tr>
       </thead>
       <tbody>
         {laatijat.map(l => (

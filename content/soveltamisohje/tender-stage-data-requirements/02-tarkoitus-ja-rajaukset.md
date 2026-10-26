@@ -1,0 +1,6 @@
+---
+title: Purpose and scope of the guideline
+order: 2
+section: "2"
+---
+The guideline focuses on standardising the content of the information model produced by the designer at the tender stage. In the BETK project, the naming of the BEC2012 properties has also been updated, and the property data written to the IFC model has been specified per element type to improve the quality of data exchange. The property naming also aims to take into account the identification and standardisation of other building components and materials that may be developed in the future. Data exchange has further been standardised by adding lists of allowed values to the properties where using allowed values is possible and sensible. The properties also take into account the enrichment of the information model at the execution stage with data coming from the supply chain. The guideline is complemented by the other information model properties and property sets documented on the BETK publishing platform. It is also complemented by a separate guideline on identifying elements in the supply chain and by an example model in IFC format. This guideline may be updated later as standardisation progresses. This guideline does not address the other call-for-tender material.

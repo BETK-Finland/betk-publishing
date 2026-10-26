@@ -1,0 +1,23 @@
+{
+  "slug": "tender-stage-data-requirements",
+  "nav_title": "Tender-stage data requirements and execution-stage information model guidance for the supply chain",
+  "lang": "en",
+  "group": "tarjousvaihe",
+  "sections": [
+    { "kind": "prose", "content": "01-tausta", "anchor": "tausta" },
+    { "kind": "prose", "content": "02-tarkoitus-ja-rajaukset", "anchor": "tarkoitus" },
+    { "kind": "prose", "content": "03-tuotetiedot-intro", "anchor": "tuotetiedot" },
+    { "kind": "prose+table", "content": "03-kokoonpano-tyyppi", "table": "kokoonpano-tyypit", "anchor": "kokoonpano-tyyppi" },
+    { "kind": "prose+table", "content": "03-elementtityyppi", "table": "elementtityypit", "anchor": "elementtityyppi" },
+    { "kind": "prose+table", "content": "03-raudoitus", "table": "raudoitus", "anchor": "raudoitus" },
+    { "kind": "prose+pintakasittely", "content": "03-pintakasittely", "table": "pintakasittely", "anchor": "pintakasittely" },
+    { "kind": "prose+table", "content": "03-varibetoni", "table": "varibetoni", "anchor": "varibetoni" },
+    { "kind": "prose+table", "content": "03-vahahiilinen", "table": "vahahiilinen", "anchor": "vahahiilinen" },
+    { "kind": "prose+table", "content": "03-tyyppielementti", "table": "tyyppielementti", "anchor": "tyyppielementti" },
+    { "kind": "prose+table", "content": "03-kaantokivi", "table": "kaantokivi", "anchor": "kaantokivi" },
+    { "kind": "prose", "content": "04-toimintaohjeita", "anchor": "toimintaohjeita" },
+    { "kind": "glossary", "data": "lyhenteet", "anchor": "lyhenteet", "label": "Abbreviations", "heading": "Abbreviations and terminology" },
+    { "kind": "reinforcement-annex", "data": "raudoitus-esimerkit", "anchor": "liite-1", "label": "Annex 1: Reinforcement examples", "heading": "Annex 1: Examples of reinforcement data in a precast plant's tender calculation" },
+    { "kind": "prose", "content": "05-viittaukset", "anchor": "viittaukset" }
+  ]
+}

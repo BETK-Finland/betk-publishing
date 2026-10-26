@@ -1,0 +1,17 @@
+{
+  "taulukonNumero": 5,
+  "tietosisalto": "Koldioxidsnål",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Vähähiilinen",
+  "arvot": [
+    {
+      "koodi": "Nej",
+      "kuvaus": ""
+    },
+    {
+      "koodi": "Ja",
+      "kuvaus": "Beskrivning"
+    }
+  ]
+}

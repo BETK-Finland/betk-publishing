@@ -1,0 +1,29 @@
+{
+  "taulukonNumero": 1,
+  "tietosisalto": "Sammansättningstyp",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Tunnistetiedot ja luokittelu",
+  "ominaisuus": "Kokoonpanon tyyppi",
+  "arvot": [
+    {
+      "koodi": "BETONIELEMENTTI",
+      "kuvaus": "Betongelement"
+    },
+    {
+      "koodi": "PAIKALLAVALU",
+      "kuvaus": "Platsgjuten betong"
+    },
+    {
+      "koodi": "PUUKOKOONPANO",
+      "kuvaus": "Träsammansättning"
+    },
+    {
+      "koodi": "TERÄSKOKOONPANO",
+      "kuvaus": "Stålsammansättning"
+    },
+    {
+      "koodi": "EI ASETETTU",
+      "kuvaus": "Inte angivet"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "otsikko": "BETK tillämpningsanvisning: Datadefinitioner i anbudsskedet och anvisningar för informationsmodeller i genomförandeskedet för leveranskedjan",
+  "alaotsikko": "Byggprodukter som projekteras på beställning",
+  "julkaisija": "Rakennusteollisuus ry",
+  "paivamaara": "2025-12-17",
+  "versio": "1.0",
+  "status": "Utkast",
+  "versiohistoria": [
+    {
+      "versio": "0.1",
+      "paivamaara": "2024-12-30",
+      "tekija": "AnPekk",
+      "kuvaus": "Utkastskede"
+    },
+    {
+      "versio": "0.2",
+      "paivamaara": "2025-02-25",
+      "tekija": "AnPekk",
+      "kuvaus": "Textavsnitten kompletterade"
+    },
+    {
+      "versio": "0.3",
+      "paivamaara": "2025-05-30",
+      "tekija": "AnPekk",
+      "kuvaus": "Textavsnitten kompletterade"
+    },
+    {
+      "versio": "0.4",
+      "paivamaara": "2025-07-02",
+      "tekija": "AnPekk",
+      "kuvaus": "Kommentarer från YIT, NCC och Consolis beaktade"
+    },
+    {
+      "versio": "0.5",
+      "paivamaara": "2025-09-12",
+      "tekija": "AnPekk",
+      "kuvaus": "Förteckningen över elementtyper uppdaterad"
+    },
+    {
+      "versio": "0.6",
+      "paivamaara": "2025-10-22",
+      "tekija": "AnPekk",
+      "kuvaus": "Egenskapernas namn kontrollerade mot Excel-källan"
+    },
+    {
+      "versio": "0.7",
+      "paivamaara": "2025-12-05",
+      "tekija": "AnPekk",
+      "kuvaus": "Fälten för ytbehandling och färgad betong ändrade"
+    },
+    {
+      "versio": "1.0",
+      "paivamaara": "2025-12-17",
+      "tekija": "AnPekk",
+      "kuvaus": "Publicerad på GitHub"
+    }
+  ],
+  "laatijat": [
+    {
+      "nimi": "Antti Pekkala",
+      "organisaatio": "Fira Rakennus Oy"
+    },
+    {
+      "nimi": "Teemu Anttila",
+      "organisaatio": "Ramboll"
+    },
+    {
+      "nimi": "Janne Kihula",
+      "organisaatio": "Rakennustuoteteollisuus RTT ry"
+    },
+    {
+      "nimi": "Teemu Alaluusua",
+      "organisaatio": "Aalto-yliopisto"
+    },
+    {
+      "nimi": "Tom Partanen",
+      "organisaatio": "Consolis Parma Oy"
+    },
+    {
+      "nimi": "Eetu Lahtinen",
+      "organisaatio": "Consolis Parma Oy"
+    },
+    {
+      "nimi": "Satu Parikka",
+      "organisaatio": "Consolis Parma Oy"
+    },
+    {
+      "nimi": "Kari Turunen",
+      "organisaatio": "Lujabetoni Oy"
+    },
+    {
+      "nimi": "Markku Räisänen",
+      "organisaatio": "Betset Oy"
+    },
+    {
+      "nimi": "Jarkko Vitikainen",
+      "organisaatio": "Sitowise Oy"
+    },
+    {
+      "nimi": "Antti Taskinen",
+      "organisaatio": "Fira Rakennus Oy"
+    },
+    {
+      "nimi": "Riku Laiho",
+      "organisaatio": "NCC Suomi Oy"
+    },
+    {
+      "nimi": "Arto Nieminen",
+      "organisaatio": "NCC Suomi Oy"
+    },
+    {
+      "nimi": "Paula Valkonen",
+      "organisaatio": "Suutarinen / SBS Betoni Oy"
+    }
+  ]
+}

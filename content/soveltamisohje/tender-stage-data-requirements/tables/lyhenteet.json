@@ -1,0 +1,28 @@
+{
+  "termit": [
+    {
+      "termi": "Native format",
+      "selite": "The modelling software's own file format. Industry publications also use the synonyms native model and native file format."
+    },
+    {
+      "termi": "BIM",
+      "selite": "Building Information Modelling, or the building information model of a construction project."
+    },
+    {
+      "termi": "IFC",
+      "selite": "Industry Foundation Classes, the international standard for exchanging product data in building information modelling."
+    },
+    {
+      "termi": "UDA",
+      "selite": "User Defined Attribute: additional information (metadata) stored on model objects in design software."
+    },
+    {
+      "termi": "Property set",
+      "selite": "The term \"Property Set\" is commonly used in the construction industry. The Finnish original uses the Finnish term \"Ominaisuusryhmä\" to make the term easier to understand and to avoid a foreign-language term. Defining property sets precisely allows properties to be grouped into units that suit human readers. Using several property sets also avoids a long list of properties in a single \"catch-all\" property set."
+    },
+    {
+      "termi": "Property",
+      "selite": "The term \"Property\" is established in the construction industry. The Finnish original uses the Finnish term \"Ominaisuus\" to make the term easier to understand and to avoid a foreign-language term. Defining properties precisely enables a standardised data structure. A property is always attached to a property set."
+    }
+  ]
+}

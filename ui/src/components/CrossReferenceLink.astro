@@ -1,15 +1,20 @@
 ---
 import { elementTypeToProducts, propertySetToProperties } from "../data/soveltamisohje-loader";
 import { productAnchor, propertySetAnchor } from "../data/anchors";
+import { sovStrings } from "../data/soveltamisohje-i18n";
 
 interface Props {
   type: "element" | "propertySet";
   code: string;
   /** Display text; for elements the row's kuvaus, which also disambiguates shared codes. */
   label?: string;
+  /** Product name to match when label is a translation (the Finnish value). */
+  match?: string;
+  lang?: string;
 }
 
-const { type, code, label } = Astro.props;
+const { type, code, label, match, lang } = Astro.props;
+const t = sovStrings(lang);
 const base = import.meta.env.BASE_URL;
 
 // Render the text plus a button that opens the target in the BETK browser.
@@ -23,7 +28,7 @@ if (type === "element") {
   // Shared codes (e.g. MUU) carry several products; the row's kuvaus matches
   // the product name exactly and picks the right one.
   const product =
-    candidates.length === 1 ? candidates[0] : candidates.find((p) => p.name === label);
+    candidates.length === 1 ? candidates[0] : candidates.find((p) => p.name === (match ?? label));
   if (product && text) {
     href = `${base}properties#${productAnchor(product.name)}`;
   }
@@ -38,5 +43,5 @@ if (type === "element") {
 
 {type === "propertySet" ? <code>{text}</code> : text}
 {href && (
-  <a href={href} class="sov-xref-button" title="Avaa BETK-selaimessa">Avaa</a>
+  <a href={href} class="sov-xref-button" title={t.openTitle}>{t.open}</a>
 )}

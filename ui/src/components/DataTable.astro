@@ -1,35 +1,44 @@
 ---
 import type { ValueTable, PintakasittelyTable, PintakasittelyArvo } from "../data/soveltamisohje-types";
 import CrossReferenceLink from "./CrossReferenceLink.astro";
+import { sovStrings } from "../data/soveltamisohje-i18n";
 
 interface Props {
   table: ValueTable | PintakasittelyTable;
+  lang?: string;
 }
 
-const { table } = Astro.props;
+const { table, lang } = Astro.props;
+const t = sovStrings(lang);
 const isPintakasittely = table.arvot.length > 0 && "alavaihtoehdot" in table.arvot[0];
+// Translated guides carry the Finnish model value in `arvo`; show it in its own column.
+const hasArvo = table.arvot.some(
+  (a: any) => a.arvo || a.alavaihtoehdot?.some((s: any) => s.arvo),
+);
+const cols = hasArvo ? 3 : 2;
 ---
 
 <div class="sov-datatable">
   <div class="sov-datatable-header">
     <table class="sov-envelope">
       <tbody>
-        <tr><th>Tietosisältötarve</th><td>{table.tietosisalto}</td></tr>
-        <tr><th>Rajaukset</th><td>{table.rajaukset}</td></tr>
-        <tr><th>Ominaisuusjoukko</th><td>
-          <CrossReferenceLink type="propertySet" code={table.ominaisuusjoukko} />
+        <tr><th>{t.dataNeed}</th><td>{table.tietosisalto}</td></tr>
+        <tr><th>{t.limits}</th><td>{table.rajaukset}</td></tr>
+        <tr><th>{t.propertySet}</th><td>
+          <CrossReferenceLink type="propertySet" code={table.ominaisuusjoukko} lang={lang} />
         </td></tr>
-        <tr><th>Ominaisuus</th><td>{table.ominaisuus}</td></tr>
+        <tr><th>{t.property}</th><td>{table.ominaisuus}</td></tr>
       </tbody>
     </table>
   </div>
 
   <table class="sov-values-table">
-    <caption class="sr-only">Taulukko {table.taulukonNumero}. {table.tietosisalto} — sallitut arvot</caption>
+    <caption class="sr-only">{t.table} {table.taulukonNumero}. {table.tietosisalto} — {t.allowedValues}</caption>
     <thead>
       <tr>
-        <th>Koodi</th>
-        <th>Kuvaus</th>
+        <th>{t.code}</th>
+        <th>{t.description}</th>
+        {hasArvo && <th>{t.modelValue}</th>}
       </tr>
     </thead>
     <tbody>
@@ -37,27 +46,29 @@ const isPintakasittely = table.arvot.length > 0 && "alavaihtoehdot" in table.arv
         (table.arvot as PintakasittelyArvo[]).map(arvo => (
           <>
             <tr class="sov-pk-group">
-              <td colspan="2"><strong><code>{arvo.koodi}</code></strong> {arvo.kuvaus}</td>
+              <td colspan={cols}><strong><code>{arvo.koodi}</code></strong> {arvo.kuvaus}</td>
             </tr>
             {arvo.alavaihtoehdot?.map(sub => (
               <tr class="sov-pk-sub">
                 <td><code>{sub.koodi}</code></td>
                 <td>{sub.kuvaus}</td>
+                {hasArvo && <td lang="fi">{sub.arvo}</td>}
               </tr>
             ))}
           </>
         ))
       ) : (
-        (table.arvot as { koodi: string; kuvaus: string }[]).map(arvo => (
+        (table.arvot as { koodi: string; kuvaus: string; arvo?: string }[]).map(arvo => (
           <tr>
             <td><code>{arvo.koodi}</code></td>
             {/* Expression wrapper works around an Astro compiler bug: a component
                 as a direct child of <td> here garbles the compiled template. */}
-            <td>{<CrossReferenceLink type="element" code={arvo.koodi} label={arvo.kuvaus} />}</td>
+            <td>{<CrossReferenceLink type="element" code={arvo.koodi} label={arvo.kuvaus} match={arvo.arvo} lang={lang} />}</td>
+            {hasArvo && <td lang="fi">{arvo.arvo}</td>}
           </tr>
         ))
       )}
     </tbody>
   </table>
-  <p class="sov-table-number">Taulukko {table.taulukonNumero}.</p>
+  <p class="sov-table-number">{t.table} {table.taulukonNumero}.</p>
 </div>
