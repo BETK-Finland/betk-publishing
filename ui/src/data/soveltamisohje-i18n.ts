@@ -100,9 +100,9 @@ const strings = {
     open: "Open",
     openTitle: "Open in the BETK browser",
   },
-} as const;
+} satisfies Record<SovLang, Record<string, string>>;
 
-export type SovStrings = (typeof strings)["fi"];
+export type SovStrings = Record<keyof (typeof strings)["fi"], string>;
 
 export function sovLang(lang: string | undefined): SovLang {
   return (SOV_LANGS as string[]).includes(lang ?? "") ? (lang as SovLang) : "fi";
