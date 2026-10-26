@@ -59,7 +59,7 @@ const groupCurrent = (hrefs: string[]) => hrefs.some((href) => isCurrent(href));
               </button>
               <ul class="panel">
                 {item.children.map((child) => (
-                  <li data-sov-lang={child.lang}>
+                  <li data-sov-lang={child.lang} data-sov-fallback={child.fallback}>
                     <a
                       href={child.href}
                       class:list={[{ current: isCurrent(child.href) }]}

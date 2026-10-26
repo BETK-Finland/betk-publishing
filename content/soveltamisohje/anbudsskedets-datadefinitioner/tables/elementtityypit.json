@@ -1,0 +1,344 @@
+{
+  "taulukonNumero": 2,
+  "tietosisalto": "Elementtyp",
+  "rajaukset": "-",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Elementin tyyppi, koodi / Elementin tyyppi, kuvaus",
+  "arvot": [
+    {
+      "koodi": "A",
+      "kuvaus": "Sulelement",
+      "arvo": "Anturaelementti"
+    },
+    {
+      "koodi": "PH",
+      "kuvaus": "Pelarhylselement",
+      "arvo": "Pilariholkkielementti"
+    },
+    {
+      "koodi": "AN",
+      "kuvaus": "Sockelelement (icke-bärande)",
+      "arvo": "Sokkelielementti (ei-kantava)"
+    },
+    {
+      "koodi": "AS",
+      "kuvaus": "Sockelelement (bärande)",
+      "arvo": "Sokkelielementti (kantava)"
+    },
+    {
+      "koodi": "AK",
+      "kuvaus": "Sockelbalk",
+      "arvo": "Sokkelipalkki"
+    },
+    {
+      "koodi": "AR",
+      "kuvaus": "Sockelväggelement (jordtryck)",
+      "arvo": "Sokkeliruutuelementti (maanpaine)"
+    },
+    {
+      "koodi": "AV",
+      "kuvaus": "Sockelelement (ett skikt)",
+      "arvo": "Sokkelielementti (yksi kuori)"
+    },
+    {
+      "koodi": "MP",
+      "kuvaus": "Jordtrycksväggelement",
+      "arvo": "Maanpaineseinäelementti"
+    },
+    {
+      "koodi": "TKE",
+      "kuvaus": "Stödmurelement",
+      "arvo": "Tukimuurielementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat grundelement",
+      "arvo": "Muu perustuselementti"
+    },
+    {
+      "koodi": "P",
+      "kuvaus": "Pelare",
+      "arvo": "Pilari"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat pelarelement",
+      "arvo": "Muu pilarielementti"
+    },
+    {
+      "koodi": "V",
+      "kuvaus": "Innervägg",
+      "arvo": "Väliseinä"
+    },
+    {
+      "koodi": "VSP",
+      "kuvaus": "Innervägg (väggbalk)",
+      "arvo": "Väliseinä (seinämäinen palkki)"
+    },
+    {
+      "koodi": "S",
+      "kuvaus": "Sandwichväggelement (bärande)",
+      "arvo": "Ruutuelementti (kantava)"
+    },
+    {
+      "koodi": "R",
+      "kuvaus": "Sandwichväggelement (icke-bärande)",
+      "arvo": "Ruutuelementti (ei-kantava)"
+    },
+    {
+      "koodi": "SK",
+      "kuvaus": "Innerskivelement (bärande)",
+      "arvo": "Sisäkuorielementti (kantava)"
+    },
+    {
+      "koodi": "RK",
+      "kuvaus": "Innerskivelement (icke-bärande)",
+      "arvo": "Sisäkuorielementti (ei-kantava)"
+    },
+    {
+      "koodi": "SKE",
+      "kuvaus": "Innerskivelement (bärande, fabriksisolerat)",
+      "arvo": "Sisäkuorielementti (kantava, tehdaseriste)"
+    },
+    {
+      "koodi": "RKE",
+      "kuvaus": "Innerskivelement (icke-bärande, fabriksisolerat)",
+      "arvo": "Sisäkuorielementti (ei kantava, tehdaseriste)"
+    },
+    {
+      "koodi": "SKRO",
+      "kuvaus": "Tunnputsat element (bärande)",
+      "arvo": "Ohutrapattu elementti (kantava)"
+    },
+    {
+      "koodi": "RKRO",
+      "kuvaus": "Tunnputsat element (icke-bärande)",
+      "arvo": "Ohutrapattu elementti (ei-kantava)"
+    },
+    {
+      "koodi": "SKRP",
+      "kuvaus": "Tjockputsat element (bärande)",
+      "arvo": "Paksurapattu elementti (kantava)"
+    },
+    {
+      "koodi": "RKRP",
+      "kuvaus": "Tjockputsat element (icke-bärande)",
+      "arvo": "Paksurapattu elementti (ei-kantava)"
+    },
+    {
+      "koodi": "NK",
+      "kuvaus": "Bandelement (bärande)",
+      "arvo": "Nauhaelementti (kantava)"
+    },
+    {
+      "koodi": "N",
+      "kuvaus": "Bandelement (icke-bärande)",
+      "arvo": "Nauhaelementti (ei-kantava)"
+    },
+    {
+      "koodi": "KE",
+      "kuvaus": "Skalelement",
+      "arvo": "Kuorielementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat väggelement",
+      "arvo": "Muu seinäelementti"
+    },
+    {
+      "koodi": "K",
+      "kuvaus": "Balkelement (armerad betong)",
+      "arvo": "Palkkielementti (teräsbetoni)"
+    },
+    {
+      "koodi": "I",
+      "kuvaus": "Förspänd betongbalk (I-profil)",
+      "arvo": "Jännebetonipalkki (I-profiili)"
+    },
+    {
+      "koodi": "HI",
+      "kuvaus": "Förspänd betongbalk (HI-profil)",
+      "arvo": "Jännebetonipalkki (HI-profiili)"
+    },
+    {
+      "koodi": "JK",
+      "kuvaus": "Förspänd betongbalk (övriga profiler)",
+      "arvo": "Jännebetonipalkki (muut profiilit)"
+    },
+    {
+      "koodi": "JR",
+      "kuvaus": "Stagningsstång",
+      "arvo": "Jäykistesauva"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat balkelement",
+      "arvo": "Muu palkkielementti"
+    },
+    {
+      "koodi": "L",
+      "kuvaus": "Plattelement (massiv platta, mellanbjälklag)",
+      "arvo": "Laattaelementti (massiivilaatta, välipohja)"
+    },
+    {
+      "koodi": "LT",
+      "kuvaus": "Vilplansplatta (stålkonsoler)",
+      "arvo": "Lepotasolaatta (teräskonsolit)"
+    },
+    {
+      "koodi": "EL",
+      "kuvaus": "Bottenbjälklagsplatta (massiv platta, isolerad)",
+      "arvo": "Alapohjalaatta (massivilaatta, eristetty)"
+    },
+    {
+      "koodi": "JL",
+      "kuvaus": "Förspänt plattelement",
+      "arvo": "Jännitetty laattaelementti"
+    },
+    {
+      "koodi": "O",
+      "kuvaus": "Håldäck",
+      "arvo": "Ontelolaatta"
+    },
+    {
+      "koodi": "KL",
+      "kuvaus": "Plattbärlag",
+      "arvo": "Kuorilaatta"
+    },
+    {
+      "koodi": "SL",
+      "kuvaus": "Luja-Superlaatta-platta",
+      "arvo": "Luja-Superlaatta"
+    },
+    {
+      "koodi": "TT",
+      "kuvaus": "TT-platta",
+      "arvo": "TT-laatta"
+    },
+    {
+      "koodi": "TEK",
+      "kuvaus": "TEK-platta",
+      "arvo": "TEK-laatta"
+    },
+    {
+      "koodi": "STT",
+      "kuvaus": "SuperTT-platta",
+      "arvo": "SuperTT-laatta"
+    },
+    {
+      "koodi": "HTT",
+      "kuvaus": "HTT-platta",
+      "arvo": "HTT-laatta"
+    },
+    {
+      "koodi": "RL",
+      "kuvaus": "Ribbplatta",
+      "arvo": "Ripalaatta"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat plattelement",
+      "arvo": "Muu laattaelementti"
+    },
+    {
+      "koodi": "C",
+      "kuvaus": "Balkongelement",
+      "arvo": "Parveke-elementti"
+    },
+    {
+      "koodi": "CL",
+      "kuvaus": "Balkongplattelement",
+      "arvo": "Parvekelaattaelementti"
+    },
+    {
+      "koodi": "CP",
+      "kuvaus": "Balkongpelare",
+      "arvo": "Parvekepilari"
+    },
+    {
+      "koodi": "JCL",
+      "kuvaus": "Förspänt balkongplattelement",
+      "arvo": "Jännitetty parvekelaattaelementti"
+    },
+    {
+      "koodi": "UCL",
+      "kuvaus": "Konsolbalkongplatta",
+      "arvo": "Ulokeparvekelaatta"
+    },
+    {
+      "koodi": "M",
+      "kuvaus": "Balkongsidoväggelement",
+      "arvo": "Parvekepielielementti"
+    },
+    {
+      "koodi": "Z",
+      "kuvaus": "Balkongräckeselement",
+      "arvo": "Parvekekaide-elementti"
+    },
+    {
+      "koodi": "CX",
+      "kuvaus": "Balkongtakelement",
+      "arvo": "Parvekekattoelementti"
+    },
+    {
+      "koodi": "JCX",
+      "kuvaus": "Förspänt balkongtakelement",
+      "arvo": "Jännitetty parvekkeen kattoelementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat balkongelement",
+      "arvo": "Muu parveke-elementti"
+    },
+    {
+      "koodi": "T",
+      "kuvaus": "Trappelement",
+      "arvo": "Porraselementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat trappelement",
+      "arvo": "Muu porraselementti"
+    },
+    {
+      "koodi": "HK",
+      "kuvaus": "Hisschaktelement",
+      "arvo": "Hissikuiluelementti"
+    },
+    {
+      "koodi": "HKA",
+      "kuvaus": "Hisschaktets bottenelement",
+      "arvo": "Hissikuilun pohjaelementti"
+    },
+    {
+      "koodi": "HKL",
+      "kuvaus": "Hisschaktets takplatta",
+      "arvo": "Hissikuilun kattolaatta"
+    },
+    {
+      "koodi": "HKY",
+      "kuvaus": "Hisschaktets toppelement",
+      "arvo": "Hissikuilun yläpään elementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat hisschaktelement",
+      "arvo": "Muu hissikuilun elementti"
+    },
+    {
+      "koodi": "H",
+      "kuvaus": "Rökkanalelement",
+      "arvo": "Hormielementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Annat specialelement",
+      "arvo": "Muu erikoiselementti"
+    },
+    {
+      "koodi": "Ei asetettu",
+      "kuvaus": "Inte angivet",
+      "arvo": "Ei asetettu"
+    }
+  ]
+}

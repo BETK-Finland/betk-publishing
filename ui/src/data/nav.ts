@@ -1,4 +1,4 @@
-import { listDocs } from "./soveltamisohje-loader";
+import { listDocs, fallbackLangs } from "./soveltamisohje-loader";
 
 const base = import.meta.env.BASE_URL;
 
@@ -12,6 +12,8 @@ export type NavLink = {
   label: string;
   i18nKey?: string;
   lang?: string;
+  /** Guides only: other site languages this guide is listed under (no translation yet). */
+  fallback?: string;
 };
 
 export type NavItem =
@@ -33,6 +35,7 @@ const guides: NavLink[] = listDocs()
     href: withBase(`soveltamisohje/${doc.slug}`),
     label: doc.manifest.nav_title,
     lang: doc.manifest.lang ?? "fi",
+    fallback: fallbackLangs(doc.slug).join(" "),
   }));
 
 export const headlines: NavItem[] = [

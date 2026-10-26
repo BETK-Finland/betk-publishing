@@ -68,7 +68,10 @@ const logo = withBase("betk-logo.svg");
     document.querySelectorAll("[data-sov-lang]").forEach(el => {
       const docLang = el.getAttribute("data-sov-lang");
       if (!docLang) return;
-      const show = lang === "en" ? docLang === "en" : docLang !== "en";
+      // A guide is listed in its own language, and under the languages it
+      // has no translation for (data-sov-fallback, Finnish originals only).
+      const fallback = (el.getAttribute("data-sov-fallback") || "").split(" ");
+      const show = docLang === lang || fallback.includes(lang);
       /** @type {HTMLElement} */ (el).style.display = show ? "" : "none";
     });
   }

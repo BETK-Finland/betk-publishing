@@ -8,7 +8,8 @@ import ProseSection from "../../components/ProseSection.astro";
 import DataTable from "../../components/DataTable.astro";
 import ReinforcementTable from "../../components/ReinforcementTable.astro";
 import GenericDataTable from "../../components/GenericDataTable.astro";
-import { getDoc, listDocs } from "../../data/soveltamisohje-loader";
+import { getDoc, listDocs, translationsOf, fallbackLangs } from "../../data/soveltamisohje-loader";
+import { sovLang, sovStrings, dateLocale } from "../../data/soveltamisohje-i18n";
 import type {
   ValueTable,
   PintakasittelyTable,
@@ -27,6 +28,12 @@ const doc = getDoc(slug!);
 const { meta, manifest, tables } = doc;
 const allDocs = listDocs();
 const base = import.meta.env.BASE_URL;
+const lang = sovLang(manifest.lang);
+const t = sovStrings(lang);
+// lang -> URL of this guide's translations, used to follow the site language switch.
+const translationUrls = Object.fromEntries(
+  Object.entries(translationsOf(slug!)).map(([l, s]) => [l, `${base}soveltamisohje/${s}`]),
+);
 
 // Collection entries for this doc; entry ids are "<slug>/<filename-without-ext>".
 const allEntries = await getCollection("soveltamisohje");
@@ -78,8 +85,8 @@ type Rendered =
       Content: any;
       data: GenericTaulukot;
     }
-  | { kind: "glossary"; anchor: string; label: string; data: Lyhenteet }
-  | { kind: "reinforcement-annex"; anchor: string; label: string; data: RaudoitusEsimerkit };
+  | { kind: "glossary"; anchor: string; label: string; heading: string; data: Lyhenteet }
+  | { kind: "reinforcement-annex"; anchor: string; label: string; heading: string; data: RaudoitusEsimerkit };
 
 async function resolveSection(section: typeof manifest.sections[number]): Promise<Rendered | null> {
   if (section.kind === "prose" || section.kind === "prose+table" || section.kind === "prose+pintakasittely" || section.kind === "prose+gs1tables" || section.kind === "prose+generictables") {
@@ -115,12 +122,14 @@ async function resolveSection(section: typeof manifest.sections[number]): Promis
   if (section.kind === "glossary") {
     const data = tables[section.data!] as Lyhenteet | undefined;
     if (!data) return null;
-    return { kind: "glossary", anchor: section.anchor, label: section.label ?? "Lyhenteet", data };
+    const label = section.label ?? t.glossary;
+    return { kind: "glossary", anchor: section.anchor, label, heading: section.heading ?? label, data };
   }
   if (section.kind === "reinforcement-annex") {
     const data = tables[section.data!] as RaudoitusEsimerkit | undefined;
     if (!data) return null;
-    return { kind: "reinforcement-annex", anchor: section.anchor, label: section.label ?? "Liite", data };
+    const label = section.label ?? t.annex;
+    return { kind: "reinforcement-annex", anchor: section.anchor, label, heading: section.heading ?? label, data };
   }
   return null;
 }
@@ -143,11 +152,11 @@ const tocItems = resolved.flatMap(r => {
 <Layout title={`BETK — ${meta.otsikko}`} description={meta.alaotsikko ?? meta.otsikko}>
   <main id="main" class="sov-layout">
     <div class="sov-sidebar">
-      <nav class="sov-doc-nav" aria-label="Dokumentit">
+      <nav class="sov-doc-nav" aria-label={t.documents}>
         <p class="sidebar-heading" data-i18n="docs.heading">DOKUMENTIT</p>
         <ul class="sov-toc-list">
           {allDocs.map(d => (
-            <li data-sov-lang={d.manifest.lang ?? "fi"}>
+            <li data-sov-lang={d.manifest.lang ?? "fi"} data-sov-fallback={fallbackLangs(d.slug).join(" ")}>
               <a
                 href={`${base}soveltamisohje/${d.slug}`}
                 class={`sov-toc-link${d.slug === slug ? " active" : ""}`}
@@ -156,11 +165,11 @@ const tocItems = resolved.flatMap(r => {
           ))}
         </ul>
       </nav>
-      <SoveltamisohjeToc items={tocItems} />
+      <SoveltamisohjeToc items={tocItems} label={t.toc} />
     </div>
-    <article class="sov-document">
-      <SoveltamisohjeHeader meta={meta} />
-      <PrintToc sections={tocItems} />
+    <article class="sov-document" lang={lang} data-sov-translations={JSON.stringify(translationUrls)} data-sov-doc-lang={lang} data-sov-printed={t.printed} data-sov-locale={dateLocale[lang]}>
+      <SoveltamisohjeHeader meta={meta} lang={lang} />
+      <PrintToc sections={tocItems} heading={t.toc} />
 
       {resolved.map(r => {
         if (r.kind === "prose") {
@@ -176,7 +185,7 @@ const tocItems = resolved.flatMap(r => {
               <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
                 <r.Content />
               </ProseSection>
-              <DataTable table={r.table} />
+              <DataTable table={r.table} lang={lang} />
             </div>
           );
         }
@@ -186,20 +195,20 @@ const tocItems = resolved.flatMap(r => {
               <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
                 <r.Content />
               </ProseSection>
-              {r.data.taulukot.map(t => (
+              {r.data.taulukot.map(tb => (
                 <div class="sov-gs1-table">
-                  <p class="sov-table-number">Taulukko {t.taulukonNumero}. {t.otsikko}</p>
+                  <p class="sov-table-number">{t.table} {tb.taulukonNumero}. {tb.otsikko}</p>
                   <table class="sov-values-table">
-                    <caption class="sr-only">Taulukko {t.taulukonNumero}. {t.otsikko}</caption>
+                    <caption class="sr-only">{t.table} {tb.taulukonNumero}. {tb.otsikko}</caption>
                     <thead>
                       <tr>
-                        <th>Sovellustunnus (AI)</th>
-                        <th>Tieto</th>
-                        <th>Esimerkki</th>
+                        <th>{t.ai}</th>
+                        <th>{t.data}</th>
+                        <th>{t.example}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {t.rivit.map(r => (
+                      {tb.rivit.map(r => (
                         <tr>
                           <td><code>{r.ai}</code></td>
                           <td>{r.tieto}</td>
@@ -219,14 +228,14 @@ const tocItems = resolved.flatMap(r => {
               <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
                 <r.Content />
               </ProseSection>
-              <GenericDataTable data={r.data} />
+              <GenericDataTable data={r.data} lang={lang} />
             </div>
           );
         }
         if (r.kind === "glossary") {
           return (
             <section id={r.anchor} class="sov-section">
-              <h2>Lyhenteet ja terminologia</h2>
+              <h2>{r.heading}</h2>
               <table class="sov-glossary-table">
                 <tbody>
                   {r.data.termit.map(t => (
@@ -243,7 +252,8 @@ const tocItems = resolved.flatMap(r => {
         if (r.kind === "reinforcement-annex") {
           return (
             <section id={r.anchor} class="sov-section">
-              <h2>Liite 1: Esimerkkejä raudoitustiedosta betonielementti tehtaan tarjouslaskennassa</h2>
+              <h2>{r.heading}</h2>
+              {r.data.selite && <p class="sov-prose">{r.data.selite}</p>}
               {r.data.taulukot.map(t => (
                 <ReinforcementTable table={t} />
               ))}
@@ -259,11 +269,31 @@ const tocItems = resolved.flatMap(r => {
 
 <script>
   // Print date stamp — set on beforeprint, visible only in print CSS
+  const article = document.querySelector<HTMLElement>(".sov-document");
   const el = document.querySelector(".sov-print-date");
-  if (el) {
+  if (el && article) {
+    const printed = article.dataset.sovPrinted ?? "Tulostettu";
+    const locale = article.dataset.sovLocale ?? "fi-FI";
     window.addEventListener("beforeprint", () => {
-      el.textContent = `Tulostettu: ${new Date().toLocaleDateString("fi-FI")}`;
+      el.textContent = `${printed}: ${new Date().toLocaleDateString(locale)}`;
     });
+  }
+
+  // Follow the site language: open this guide's translation when one exists.
+  // On load only when the visitor has chosen a language, so a shared link to
+  // a translation still opens as-is for first-time visitors.
+  if (article) {
+    const urls: Record<string, string> = JSON.parse(article.dataset.sovTranslations ?? "{}");
+    const docLang = article.dataset.sovDocLang;
+    const go = (lang: string | null) => {
+      if (lang && lang !== docLang && urls[lang]) {
+        location.replace(urls[lang] + location.hash);
+      }
+    };
+    let stored: string | null = null;
+    try { stored = localStorage.getItem("betk-lang"); } catch {}
+    go(stored);
+    window.addEventListener("betk-lang-change", e => go((e as CustomEvent).detail));
   }
   // Force all <details> open before print
   window.addEventListener("beforeprint", () => {

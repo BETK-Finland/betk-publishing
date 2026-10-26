@@ -27,12 +27,15 @@ export interface DocumentMeta {
 export interface TaulukkoArvo {
   koodi: string;
   kuvaus: string;
+  /** Translated guides only: the Finnish value written to the model, when kuvaus is a translation. */
+  arvo?: string;
 }
 
 export interface PintakasittelyArvo {
   koodi: string;
   kuvaus: string;
   alavaihtoehdot?: TaulukkoArvo[];
+  arvo?: string;
 }
 
 export interface ValueTable {
@@ -75,6 +78,7 @@ export interface EsimerkkiTaulukko {
 }
 
 export interface RaudoitusEsimerkit {
+  selite?: string; // optional note shown above the tables
   taulukot: EsimerkkiTaulukko[];
 }
 

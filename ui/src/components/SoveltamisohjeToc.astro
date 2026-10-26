@@ -6,12 +6,13 @@ interface TocItem {
 
 interface Props {
   items: TocItem[];
+  label?: string;
 }
 
-const { items } = Astro.props;
+const { items, label = "Sisällysluettelo" } = Astro.props;
 ---
 
-<nav class="sov-toc" aria-label="Sisällysluettelo">
+<nav class="sov-toc" aria-label={label}>
   <p class="sidebar-heading" data-i18n="toc.heading">SISÄLLYSLUETTELO</p>
   <ul class="sov-toc-list">
     {items.map(s => (

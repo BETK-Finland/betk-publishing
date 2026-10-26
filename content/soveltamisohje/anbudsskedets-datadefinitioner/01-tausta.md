@@ -1,0 +1,18 @@
+---
+title: Bakgrund
+order: 1
+section: "1"
+---
+*Detta är en svensk översättning av det finska originalet. Vid avvikelser gäller den finska versionen.*
+
+Informationsmodeller är i dag en vanlig del av byggprojektens anbudsförfrågningar och av mängd- och kostnadsberäkningen. Byggföretag och elementleverantörer använder de informationsmodeller som konstruktörerna tagit fram bland annat i mängd- och anbudskalkylering samt i planering och tidsplanering av projektets genomförande. De standardiserade egenskaperna, modelleringsanvisningen och modelleringsverktygen som skapades i [BEC2012-projektet](https://www.elementtisuunnittelu.fi/suunnitteluprosessi/mallintava-suunnittelu) används allmänt i branschen. BEC-anvisningarna möjliggör dock inte maskinläsbar dataöverföring, eftersom många saker enligt anvisningarna ska avtalas projektvis och inga tillåtna värden har angetts för egenskaperna. Uppgifterna finns i informationsmodellerna, men det krävs en människa som kan läsa modellen och samtidigt projektets övriga projekteringsdokument. Ett exempel på ett sådant användningsfall är hur man i projektets informationsmodell identifierar sandwichelement (SW) med tegelplattyta och hur de kan särskiljas från modellens övriga element. I projekten används ofta också projektspecifikt avtalade siffer- eller bokstavskombinationer i elementtypbeteckningen för att precisera ytbehandling eller placering, till exempel `V1-A`. Detta leder till att elementtyper inte kan identifieras maskinläsbart från ett projekt till ett annat. I dag kan identifieringen inte göras automatiskt. Lösningen för identifiering av elementtyper som beskrivs i denna anvisning bygger på de [elementtypbeteckningar](https://www.elementtisuunnittelu.fi/runkorakenteet/elementtitunnukset) som allmänt används i branschen, till exempel `V`, `R` och `S`. Dessa uppgifter kompletteras bland annat med standardiserade uppgifter om ytbehandling.
+
+I IFC-standarden för informationsmodeller kan objekt tilldelas IFC-klasser, till exempel *IfcWall*, för att identifiera byggdelar. Många IFC-klasser har dessutom egenskapen *PredefinedType*, som preciserar klassens typ. Klassen *IfcWall* kan till exempel ha *PredefinedType*-värden som `ELEMENTEDWALL` eller `SOLIDWALL`. Noggrannheten i standardens klassificeringar räcker för en grov klassificering, men möjliggör inte en tillräckligt exakt identifiering för mängd- och kostnadsberäkning. Därför behövs ytterligare attribut för att informationsmodellen ska nå den noggrannhet som krävs. Av lösningen som beskrivs i anvisningen har även en exempelmodell gjorts i Tekla Structures och en IFC-fil exporterats från modellen, vilket visar att lösningen kan genomföras med dagens programvaror.
+
+Denna tillämpningsanvisning har tagits fram av BETK-arbetsgruppen som en del av Rakennusteollisuus RT:s (Byggnadsindustrin RT) utvecklingsprojekt för digitalisering av produktdata och leveranskedjan. Utvecklingsprojektets främsta mål är att föra hanteringen av byggprodukternas leveranskedjor från manuellt och ostrukturerat informationsutbyte till helt strukturerat och maskinläsbart informationsutbyte. Dokumentet uppdateras kontinuerligt och utvecklas vidare utifrån iakttagelserna i RT:s utvecklingsprojekt. Anvisningen kompletteras av de övriga publikationerna på BETK-projektets publiceringsplattform:
+
+- [BETK tillämpningsanvisning: Interoperabilitet för produktidentifiering och -igenkänning](/soveltamisohje/interoperabilitet-produktidentifiering)
+- Exempelmodell i IFC4x3-format
+- Webbläsaren för egenskaper och egenskapsgrupper på publiceringsplattformen
+- Diskussionsunderlag om lägesinformation i betongelementens leveranskedja
+- Tillämpningsanvisning om användning av händelsedata (GS1 EPCIS) [under arbete]

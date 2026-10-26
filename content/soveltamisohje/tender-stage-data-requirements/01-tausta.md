@@ -1,0 +1,18 @@
+---
+title: Background
+order: 1
+section: "1"
+---
+*This is an English translation of the Finnish original. If the versions differ, the Finnish version prevails.*
+
+Building information models are now a common part of construction project calls for tenders and of the related quantity take-off and cost estimating. Contractors and precast element suppliers use the models produced by designers for, among other things, quantity and tender calculation, construction planning and scheduling. The standardised properties, modelling guideline and modelling tools created in the [BEC2012 project](https://www.elementtisuunnittelu.fi/suunnitteluprosessi/mallintava-suunnittelu) are widely used in the industry. However, the BEC guidance does not enable machine-readable data exchange, because many items are left to be agreed project by project and no allowed values have been specified for the properties. The information can be obtained from the models, but this requires a person who can read the model together with the project's other design documents. One example of such a use case is how to identify brick-tile-faced sandwich (SW) elements in a project's model and how to distinguish them from the other elements in the model. Projects often also add project-specific number or letter combinations to the element type code to specify surface treatment or location, for example `V1-A`. As a result, element types cannot be identified in a machine-readable way from one project to the next. At present, identification cannot be automated. The solution for identifying element types described in this guideline is based on the [element type codes](https://www.elementtisuunnittelu.fi/runkorakenteet/elementtitunnukset) commonly used in the industry, such as `V`, `R` and `S`. This information is supplemented with, among other things, standardised surface treatment data.
+
+In the IFC information model standard, IFC classes such as *IfcWall* can be assigned to objects to identify building components. Many IFC classes also have a *PredefinedType* attribute that refines the type of the class. For example, the *IfcWall* class can have *PredefinedType* values such as `ELEMENTEDWALL` or `SOLIDWALL`. The level of detail of the classifications defined in the standard is sufficient for coarse classification, but it does not allow identification that is accurate enough for quantity take-off and cost estimating. Additional attributes are therefore needed for the model to reach the required level of detail. An example model of the solution described in this guideline has also been made in Tekla Structures, with an IFC file exported from it, which shows that the solution can be implemented with current software.
+
+This guideline has been prepared by the BETK working group as part of the Confederation of Finnish Construction Industries RT's development project on digitalising product data and the supply chain. The primary goal of the development project is to move the management of construction product supply chains from manual and unstructured data exchange to fully structured, machine-readable data exchange. The document is continuously updated and will be developed further based on the findings of the RT development project. This guideline is complemented by the other publications on the BETK publishing platform:
+
+- [BETK implementation guideline: Unique product identification and data carrier interoperability](/soveltamisohje/upid-aidc-eto-products)
+- Example model in IFC4x3 format
+- The property and property set browser on the publishing platform
+- Discussion paper on location data in the precast concrete element supply chain
+- Implementation guideline on the use of event data (GS1 EPCIS) [in progress]

@@ -1,0 +1,344 @@
+{
+  "taulukonNumero": 2,
+  "tietosisalto": "Element type",
+  "rajaukset": "-",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Elementin tyyppi, koodi / Elementin tyyppi, kuvaus",
+  "arvot": [
+    {
+      "koodi": "A",
+      "kuvaus": "Footing element",
+      "arvo": "Anturaelementti"
+    },
+    {
+      "koodi": "PH",
+      "kuvaus": "Column socket element",
+      "arvo": "Pilariholkkielementti"
+    },
+    {
+      "koodi": "AN",
+      "kuvaus": "Plinth element (non-load-bearing)",
+      "arvo": "Sokkelielementti (ei-kantava)"
+    },
+    {
+      "koodi": "AS",
+      "kuvaus": "Plinth element (load-bearing)",
+      "arvo": "Sokkelielementti (kantava)"
+    },
+    {
+      "koodi": "AK",
+      "kuvaus": "Plinth beam",
+      "arvo": "Sokkelipalkki"
+    },
+    {
+      "koodi": "AR",
+      "kuvaus": "Plinth wall panel (earth pressure)",
+      "arvo": "Sokkeliruutuelementti (maanpaine)"
+    },
+    {
+      "koodi": "AV",
+      "kuvaus": "Plinth element (single leaf)",
+      "arvo": "Sokkelielementti (yksi kuori)"
+    },
+    {
+      "koodi": "MP",
+      "kuvaus": "Earth-retaining wall element",
+      "arvo": "Maanpaineseinäelementti"
+    },
+    {
+      "koodi": "TKE",
+      "kuvaus": "Retaining wall element",
+      "arvo": "Tukimuurielementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other foundation element",
+      "arvo": "Muu perustuselementti"
+    },
+    {
+      "koodi": "P",
+      "kuvaus": "Column",
+      "arvo": "Pilari"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other column element",
+      "arvo": "Muu pilarielementti"
+    },
+    {
+      "koodi": "V",
+      "kuvaus": "Internal wall",
+      "arvo": "Väliseinä"
+    },
+    {
+      "koodi": "VSP",
+      "kuvaus": "Internal wall (wall beam)",
+      "arvo": "Väliseinä (seinämäinen palkki)"
+    },
+    {
+      "koodi": "S",
+      "kuvaus": "Sandwich wall panel (load-bearing)",
+      "arvo": "Ruutuelementti (kantava)"
+    },
+    {
+      "koodi": "R",
+      "kuvaus": "Sandwich wall panel (non-load-bearing)",
+      "arvo": "Ruutuelementti (ei-kantava)"
+    },
+    {
+      "koodi": "SK",
+      "kuvaus": "Inner-leaf element (load-bearing)",
+      "arvo": "Sisäkuorielementti (kantava)"
+    },
+    {
+      "koodi": "RK",
+      "kuvaus": "Inner-leaf element (non-load-bearing)",
+      "arvo": "Sisäkuorielementti (ei-kantava)"
+    },
+    {
+      "koodi": "SKE",
+      "kuvaus": "Inner-leaf element (load-bearing, factory-insulated)",
+      "arvo": "Sisäkuorielementti (kantava, tehdaseriste)"
+    },
+    {
+      "koodi": "RKE",
+      "kuvaus": "Inner-leaf element (non-load-bearing, factory-insulated)",
+      "arvo": "Sisäkuorielementti (ei kantava, tehdaseriste)"
+    },
+    {
+      "koodi": "SKRO",
+      "kuvaus": "Thin-rendered element (load-bearing)",
+      "arvo": "Ohutrapattu elementti (kantava)"
+    },
+    {
+      "koodi": "RKRO",
+      "kuvaus": "Thin-rendered element (non-load-bearing)",
+      "arvo": "Ohutrapattu elementti (ei-kantava)"
+    },
+    {
+      "koodi": "SKRP",
+      "kuvaus": "Thick-rendered element (load-bearing)",
+      "arvo": "Paksurapattu elementti (kantava)"
+    },
+    {
+      "koodi": "RKRP",
+      "kuvaus": "Thick-rendered element (non-load-bearing)",
+      "arvo": "Paksurapattu elementti (ei-kantava)"
+    },
+    {
+      "koodi": "NK",
+      "kuvaus": "Spandrel element (load-bearing)",
+      "arvo": "Nauhaelementti (kantava)"
+    },
+    {
+      "koodi": "N",
+      "kuvaus": "Spandrel element (non-load-bearing)",
+      "arvo": "Nauhaelementti (ei-kantava)"
+    },
+    {
+      "koodi": "KE",
+      "kuvaus": "Shell element",
+      "arvo": "Kuorielementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other wall element",
+      "arvo": "Muu seinäelementti"
+    },
+    {
+      "koodi": "K",
+      "kuvaus": "Beam element (reinforced concrete)",
+      "arvo": "Palkkielementti (teräsbetoni)"
+    },
+    {
+      "koodi": "I",
+      "kuvaus": "Prestressed concrete beam (I-section)",
+      "arvo": "Jännebetonipalkki (I-profiili)"
+    },
+    {
+      "koodi": "HI",
+      "kuvaus": "Prestressed concrete beam (HI-section)",
+      "arvo": "Jännebetonipalkki (HI-profiili)"
+    },
+    {
+      "koodi": "JK",
+      "kuvaus": "Prestressed concrete beam (other sections)",
+      "arvo": "Jännebetonipalkki (muut profiilit)"
+    },
+    {
+      "koodi": "JR",
+      "kuvaus": "Bracing member",
+      "arvo": "Jäykistesauva"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other beam element",
+      "arvo": "Muu palkkielementti"
+    },
+    {
+      "koodi": "L",
+      "kuvaus": "Slab element (solid slab, intermediate floor)",
+      "arvo": "Laattaelementti (massiivilaatta, välipohja)"
+    },
+    {
+      "koodi": "LT",
+      "kuvaus": "Landing slab (steel corbels)",
+      "arvo": "Lepotasolaatta (teräskonsolit)"
+    },
+    {
+      "koodi": "EL",
+      "kuvaus": "Ground floor slab (solid slab, insulated)",
+      "arvo": "Alapohjalaatta (massivilaatta, eristetty)"
+    },
+    {
+      "koodi": "JL",
+      "kuvaus": "Prestressed slab element",
+      "arvo": "Jännitetty laattaelementti"
+    },
+    {
+      "koodi": "O",
+      "kuvaus": "Hollow-core slab",
+      "arvo": "Ontelolaatta"
+    },
+    {
+      "koodi": "KL",
+      "kuvaus": "Filigree slab",
+      "arvo": "Kuorilaatta"
+    },
+    {
+      "koodi": "SL",
+      "kuvaus": "Luja-Superlaatta slab",
+      "arvo": "Luja-Superlaatta"
+    },
+    {
+      "koodi": "TT",
+      "kuvaus": "TT slab",
+      "arvo": "TT-laatta"
+    },
+    {
+      "koodi": "TEK",
+      "kuvaus": "TEK slab",
+      "arvo": "TEK-laatta"
+    },
+    {
+      "koodi": "STT",
+      "kuvaus": "SuperTT slab",
+      "arvo": "SuperTT-laatta"
+    },
+    {
+      "koodi": "HTT",
+      "kuvaus": "HTT slab",
+      "arvo": "HTT-laatta"
+    },
+    {
+      "koodi": "RL",
+      "kuvaus": "Ribbed slab",
+      "arvo": "Ripalaatta"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other slab element",
+      "arvo": "Muu laattaelementti"
+    },
+    {
+      "koodi": "C",
+      "kuvaus": "Balcony element",
+      "arvo": "Parveke-elementti"
+    },
+    {
+      "koodi": "CL",
+      "kuvaus": "Balcony slab element",
+      "arvo": "Parvekelaattaelementti"
+    },
+    {
+      "koodi": "CP",
+      "kuvaus": "Balcony column",
+      "arvo": "Parvekepilari"
+    },
+    {
+      "koodi": "JCL",
+      "kuvaus": "Prestressed balcony slab element",
+      "arvo": "Jännitetty parvekelaattaelementti"
+    },
+    {
+      "koodi": "UCL",
+      "kuvaus": "Cantilever balcony slab",
+      "arvo": "Ulokeparvekelaatta"
+    },
+    {
+      "koodi": "M",
+      "kuvaus": "Balcony side wall element",
+      "arvo": "Parvekepielielementti"
+    },
+    {
+      "koodi": "Z",
+      "kuvaus": "Balcony balustrade element",
+      "arvo": "Parvekekaide-elementti"
+    },
+    {
+      "koodi": "CX",
+      "kuvaus": "Balcony roof element",
+      "arvo": "Parvekekattoelementti"
+    },
+    {
+      "koodi": "JCX",
+      "kuvaus": "Prestressed balcony roof element",
+      "arvo": "Jännitetty parvekkeen kattoelementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other balcony element",
+      "arvo": "Muu parveke-elementti"
+    },
+    {
+      "koodi": "T",
+      "kuvaus": "Stair element",
+      "arvo": "Porraselementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other stair element",
+      "arvo": "Muu porraselementti"
+    },
+    {
+      "koodi": "HK",
+      "kuvaus": "Lift shaft element",
+      "arvo": "Hissikuiluelementti"
+    },
+    {
+      "koodi": "HKA",
+      "kuvaus": "Lift shaft pit element",
+      "arvo": "Hissikuilun pohjaelementti"
+    },
+    {
+      "koodi": "HKL",
+      "kuvaus": "Lift shaft roof slab",
+      "arvo": "Hissikuilun kattolaatta"
+    },
+    {
+      "koodi": "HKY",
+      "kuvaus": "Lift shaft top element",
+      "arvo": "Hissikuilun yläpään elementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other lift shaft element",
+      "arvo": "Muu hissikuilun elementti"
+    },
+    {
+      "koodi": "H",
+      "kuvaus": "Flue element",
+      "arvo": "Hormielementti"
+    },
+    {
+      "koodi": "MUU",
+      "kuvaus": "Other special element",
+      "arvo": "Muu erikoiselementti"
+    },
+    {
+      "koodi": "Ei asetettu",
+      "kuvaus": "Not set",
+      "arvo": "Ei asetettu"
+    }
+  ]
+}
