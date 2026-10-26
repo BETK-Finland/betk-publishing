@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { workingGroupBySlug, workingGroups } from "../../data/tyoryhmat";
 import { withBase } from "../../data/nav";
-import { leads, managers } from "../../data/people";
+import { managers } from "../../data/people";
 import WorkingGroupMeetings from "../../components/WorkingGroupMeetings.astro";
 
 export function getStaticPaths() {
@@ -81,14 +81,6 @@ const panels = await Promise.all(
                 <p>
                   <span data-i18n="footer.managers">Projektipäälliköt</span>: {managerLine}
                 </p>
-                <p data-i18n="footer.leads">Työryhmien vetäjät</p>
-                <ul>
-                  {leads.map((person) => (
-                    <li>
-                      {person.name} ({person.group})
-                    </li>
-                  ))}
-                </ul>
               </div>
             )}
             {item.Content && (
