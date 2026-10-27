@@ -45,6 +45,8 @@ Työryhmät voivat perustaa rajattuja pienryhmiä. Pienryhmät käsittelevät ai
 
 Työryhmät valmistelevat määritykset ja soveltamisohjeet. Työryhmien vetäjät ja projektipäälliköt hyväksyvät ne julkaistaviksi, tarvittaessa ohjausryhmän käsittelyn jälkeen. Julkaisualustalla luonnokset, julkaistut versiot ja arkistoidut versiot pidetään erillään.
 
+## Osallistu toimintaan
+
 Osallistuminen on maksutonta ja korvauksetonta, ja toiminnassa noudatetaan kilpailulainsäädäntöä. Palautetta ja muutosehdotuksia voi antaa julkaisualustan kautta.
 
 </div>
@@ -93,6 +95,8 @@ Arbetsgrupperna kan bilda avgränsade mindre grupper. De mindre grupperna behand
 
 Arbetsgrupperna bereder specifikationer och tillämpningsanvisningar. Arbetsgruppernas ledare och projektledarna godkänner dem för publicering, vid behov efter behandling i styrgruppen. På publiceringsplattformen hålls utkast, publicerade versioner och arkiverade versioner åtskilda.
 
+## Delta i verksamheten
+
 Deltagandet är avgiftsfritt och oavlönat, och verksamheten följer konkurrenslagstiftningen. Respons och ändringsförslag kan lämnas via publiceringsplattformen.
 
 </div>
@@ -140,6 +144,8 @@ The working groups can set up focused subgroups. Subgroups handle topics that co
 ## Approval and maintenance of results
 
 The working groups prepare specifications and implementation guidelines. The working group leads and project managers approve them for publication, after review by the steering group where needed. The publishing platform keeps drafts, published versions and archived versions separate.
+
+## Get involved
 
 Participation is free of charge and unpaid, and all activities comply with competition law. Feedback and change proposals can be submitted through the publishing platform.
 
