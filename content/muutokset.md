@@ -1,6 +1,10 @@
 ---
 title: Muutosloki
 ---
+## 27.10.2026
+- BETK-työryhmäsivulle uusi osio **Yhteentoimivuuden tasot**: eurooppalaisen yhteentoimivuuskehyksen (EIF) neljä tasoa ja hallinta sekä se, miten BETK edistää kutakin. Työryhmätaulukossa yhteentoimivuuden tason tilalla työryhmän painopiste.
+- BETK-työryhmäsivun termit tarkennettu: tekstissä erotetaan data ja informaatio. Osallistumista koskeva teksti siirretty tulosten hyväksymisen yhteyteen, ja osallistujaryhmien luettelo poistettu. Sivu suomeksi, ruotsiksi ja englanniksi.
+
 ## 26.10.2026
 - BETK-työryhmäsivun teksti uudistettu: tehtävä, tausta, työryhmät ja niiden yhteentoimivuuden tasot (Vakiointi, Rajapinta, Valutarvike), toimintaperiaatteet, tulosten hyväksyminen ja ylläpito sekä osallistuminen. Sivu suomeksi, ruotsiksi ja englanniksi kielivalinnan mukaan.
 - BETK-työryhmäsivun työryhmätaulukkoon sarake työryhmän vetäjästä. Sivun yläosan erillinen Työryhmien vetäjät -lista poistettu.
