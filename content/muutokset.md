@@ -1,6 +1,10 @@
 ---
 title: Muutosloki
 ---
+## 28.10.2026
+- Vakiointi-työryhmäsivun teksti uudistettu: tehtävä ja yhteentoimivuuden tasot, tausta (BIM, IFC, BEC-mallinnusohje ja BETK:n laajennus), toiminta-alue, tuotokset ja julkaisupaikat (BETK-julkaisualusta, bSDD, Suomi.fi), toimintaperiaatteet, yhteistyö sekä **Osallistu toimintaan**. Sivu suomeksi, ruotsiksi ja englanniksi.
+- Vakiointi-työryhmäsivulta poistettu ajankohtaissisältö: tavoitetilan vaiheet, BEC–BETK-yhteensovituksen aikataulu, sijaintitieto, syksyn 2026 painopisteet ja keskeiset käsitteet.
+
 ## 27.10.2026
 - BETK-työryhmäsivulle uusi osio **Yhteentoimivuuden tasot**: eurooppalaisen yhteentoimivuuskehyksen (EIF) neljä tasoa ja hallinta sekä se, miten BETK edistää kutakin. Työryhmätaulukossa yhteentoimivuuden tason tilalla työryhmän painopiste.
 - BETK-työryhmäsivun termit tarkennettu: tekstissä erotetaan data ja informaatio. Osallistumista koskeva teksti omana **Osallistu toimintaan** -osionaan, osallistujaryhmien luettelo poistettu. Sivu suomeksi, ruotsiksi ja englanniksi.
