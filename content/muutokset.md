@@ -3,6 +3,7 @@ title: Muutosloki
 ---
 ## 28.10.2026
 - Rajapinta-työryhmäsivulle kuvaus (aiemmin ”Tulossa pian”): tehtävä ja toimitusketjun kokonaisarkkitehtuuri, tausta (Peppol-sanomat ja data-avaruudet), toiminta-alue, tuotokset, toimintaperiaatteet, yhteistyö sekä **Osallistu toimintaan**. Sivu suomeksi, ruotsiksi ja englanniksi.
+- Työryhmäsivujen kuvaus hakukoneille ja linkkien esikatseluun: ”Tulossa pian” korvattu kunkin työryhmän lyhyellä kuvauksella.
 - Vakiointi-työryhmäsivun ruotsin- ja englanninkieliset linkit tarjousvaiheen soveltamisohjeeseen avaavat ohjeen käännöksen.
 - Vakiointi-työryhmäsivun teksti uudistettu: tehtävä ja yhteentoimivuuden tasot, tausta (BIM, IFC, BEC-mallinnusohje ja BETK:n laajennus), toiminta-alue, tuotokset ja julkaisupaikat (BETK-julkaisualusta, bSDD, Suomi.fi), toimintaperiaatteet, yhteistyö sekä **Osallistu toimintaan**. Sivu suomeksi, ruotsiksi ja englanniksi.
 - Vakiointi-työryhmäsivulta poistettu ajankohtaissisältö: tavoitetilan vaiheet, BEC–BETK-yhteensovituksen aikataulu, sijaintitieto, syksyn 2026 painopisteet ja keskeiset käsitteet.
