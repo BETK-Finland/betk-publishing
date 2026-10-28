@@ -107,7 +107,7 @@ Specifikationerna publiceras öppet med permanenta webbadresser (URI), så att m
 
 | Publiceringsplats | Vad som publiceras där |
 |---|---|
-| [BETK:s publiceringsplattform](/) | [Egenskapsspecifikationer](/properties) i människo- och maskinläsbar form, IDS-filer, [tillämpningsanvisningar](/soveltamisohje/tarjousvaiheen-tietomaaritykset), [exempelmodeller](/esimerkkimallit) och IFC-exportinställningar, [ordlista](/sanasto) samt diskussionsunderlag |
+| [BETK:s publiceringsplattform](/) | [Egenskapsspecifikationer](/properties) i människo- och maskinläsbar form, IDS-filer, [tillämpningsanvisningar](/soveltamisohje/anbudsskedets-datadefinitioner), [exempelmodeller](/esimerkkimallit) och IFC-exportinställningar, [ordlista](/sanasto) samt diskussionsunderlag |
 | [bSDD](https://search.bsdd.buildingsmart.org) (*buildingSMART Data Dictionary*) | Egenskaper, tillåtna värden och klassifikationer. bSDD är buildingSMARTs internationella webbtjänst, från vilken projekteringsprogram kan hämta specifikationerna direkt |
 | Interoperabilitetsplattformen Suomi.fi ([sanastot.suomi.fi](https://sanastot.suomi.fi), [koodistot.suomi.fi](https://koodistot.suomi.fi)) | Begrepp med definitioner (terminologier) och förteckningar över tillåtna värden (kodlistor) för nationellt bruk, även för andra branscher och den offentliga förvaltningen |
 
@@ -170,7 +170,7 @@ Specifications are published openly with persistent web addresses (URIs), so tha
 
 | Publication channel | What is published there |
 |---|---|
-| [BETK publishing platform](/) | [Property specifications](/properties) in human- and machine-readable form, IDS files, [implementation guidelines](/soveltamisohje/tarjousvaiheen-tietomaaritykset), [example models](/esimerkkimallit) and IFC export settings, the [glossary](/sanasto) and discussion papers |
+| [BETK publishing platform](/) | [Property specifications](/properties) in human- and machine-readable form, IDS files, [implementation guidelines](/soveltamisohje/tender-stage-data-requirements), [example models](/esimerkkimallit) and IFC export settings, the [glossary](/sanasto) and discussion papers |
 | [bSDD](https://search.bsdd.buildingsmart.org) (*buildingSMART Data Dictionary*) | Properties, permitted values and classifications. bSDD is buildingSMART's international web service from which design software can retrieve the specifications directly |
 | Finnish Interoperability Platform Suomi.fi ([sanastot.suomi.fi](https://sanastot.suomi.fi), [koodistot.suomi.fi](https://koodistot.suomi.fi)) | Concepts with definitions (terminologies) and lists of permitted values (code lists) for national use, including other sectors and public administration |
 
