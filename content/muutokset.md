@@ -1,6 +1,9 @@
 ---
 title: Muutosloki
 ---
+## 3.11.2026
+Raudoitusarvio ominaisuudet lisätty (Issue #13)
+
 ## 28.10.2026
 - Rajapinta-työryhmäsivulle kuvaus (aiemmin ”Tulossa pian”): tehtävä ja toimitusketjun kokonaisarkkitehtuuri, tausta (Peppol-sanomat ja data-avaruudet), toiminta-alue, tuotokset, toimintaperiaatteet, yhteistyö sekä **Osallistu toimintaan**. Sivu suomeksi, ruotsiksi ja englanniksi.
 - Työryhmäsivujen kuvaus hakukoneille ja linkkien esikatseluun: ”Tulossa pian” korvattu kunkin työryhmän lyhyellä kuvauksella.
