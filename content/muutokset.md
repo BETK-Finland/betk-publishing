@@ -1,6 +1,10 @@
 ---
 title: Muutosloki
 ---
+## 13.11 
+
+BETK-Materiaali ominaisuusjoukon ominaisuuksia päivitetty. Tekla-muuttujat tarkistettu. Requirement-ominaisuuksiin lisätty hankevaiheet.
+
 ## 3.11.2026
 Raudoitusarvio ominaisuudet lisätty (Issue #13)
 
