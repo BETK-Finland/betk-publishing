@@ -163,7 +163,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "ccb1c15e-3f7d-49e6-afee-38fe58ad7217",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Natiiviohjelmasta tulevan kokoonpanon Guid"
   },
@@ -177,7 +177,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "3CiS5UFtr9vg$kEFvOhN8N",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Natiiviohjelmasta tuotetun IFC-malliin tuleva kokoonpanon Guid"
   },
@@ -247,7 +247,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "V-1001",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Suunnittelijan antama tunnus elementille"
   },
@@ -261,7 +261,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "P27-5X-402",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Ontelo- ja kuorilaatan tunnus. Tunnus tulee tuoteosatoimittajalta"
   },
@@ -289,7 +289,7 @@
     "dataType": "Number",
     "unit": "",
     "exampleValue": "123",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Suunnitteluohjelmistossa syötettävä erillinen numero elementille"
   },
@@ -303,7 +303,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "V-1001",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Tietokenttä jos halutaan tunnus koostaa useammasta tiedosta"
   },
@@ -318,8 +318,8 @@
     "unit": "",
     "exampleValue": "UUSI",
     "requirement": "",
-    "allowedValues": "PURETTAVA; SÄILYVÄ; SIIRRETTÄVÄ; KUNNOSTETTAVA; UUSI; VÄLIAIKAINEN",
-    "description": "Korjauskohteissa käytettävä tieto rakenneosalla"
+    "allowedValues": "PURETTAVA; SÄILYVÄ; SIIRRETTÄVÄ; KUNNOSTETTAVA; UUSI; VÄLIAIKAINEN;UUDELLEEN KÄYTETTÄVÄ",
+    "description": "Korjauskohteissa käytettävä tieto rakenneosalla. Voidaan käyttää myös jos rakenneosa on uudelleen käytettävä"
   },
   {
     "id": "Ominaisuus-BETK-024",
@@ -333,7 +333,7 @@
     "exampleValue": "16.5.2025",
     "requirement": "",
     "allowedValues": "",
-    "description": "Korjauskohteissa käytettävä tieto rakenneosalla"
+    "description": "Korjauskohteissa käytettävä tieto rakenneosalla. Voidaan käyttää myös jos rakenneosa on uudelleen käytettävä"
   },
   {
     "id": "Ominaisuus-BETK-025",
@@ -347,7 +347,7 @@
     "exampleValue": "",
     "requirement": "",
     "allowedValues": "",
-    "description": "Korjauskohteissa käytettävä tieto rakenneosalla"
+    "description": "Korjauskohteissa käytettävä tieto rakenneosalla. Voidaan käyttää myös jos rakenneosa on uudelleen käytettävä"
   },
   {
     "id": "Ominaisuus-BETK-026",
@@ -359,7 +359,7 @@
     "dataType": "Number",
     "unit": "",
     "exampleValue": "0",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Tekla Structures-ohjelmiston antama arvo kokoonpanon hierarkiatasosta. Betonielementillä arvo yleensä 0"
   },
@@ -387,7 +387,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "CC2",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "CC1; CC2; CC3",
     "description": "Rakennusosan seuraamusluokka"
   },
@@ -401,7 +401,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Seuraamusluokan mahdollinen selite"
   },
@@ -415,7 +415,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "RC2",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "RC1; RC2; RC3",
     "description": "Rakennusosan luotettavuusluokka"
   },
@@ -429,7 +429,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Luotettavuusluokan mahdollinen selite"
   },
@@ -515,7 +515,7 @@
     "exampleValue": "PLA24",
     "requirement": "",
     "allowedValues": "",
-    "description": "Elementin valutarvikkeen tilaustieto"
+    "description": "Elementin valutarvikkeen tilaustieto, kirjoitetaan vain valutarvikkeelle"
   },
   {
     "id": "Ominaisuus-BETK-038",
@@ -529,7 +529,7 @@
     "exampleValue": "Nostoankkkuri",
     "requirement": "",
     "allowedValues": "",
-    "description": "Elementin valutarvikkeen tuotekuvaus"
+    "description": "Elementin valutarvikkeen tuotekuvaus, kirjoitetaan vain valutarvikkeelle"
   },
   {
     "id": "Ominaisuus-BETK-039",
@@ -543,7 +543,7 @@
     "exampleValue": "",
     "requirement": "",
     "allowedValues": "",
-    "description": "Elemenin valutarvikkeen valmistojan tuotekoodi"
+    "description": "Elemenin valutarvikkeen valmistojan tuotekoodi, kirjoitetaan vain valutarvikkeelle"
   },
   {
     "id": "Ominaisuus-BETK-040",
@@ -863,7 +863,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "V-1001",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Liittyvän piirustuksen nimi"
   },
@@ -1633,7 +1633,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "A4",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Työmaalta tuleva asennuslohko tieto"
   },
@@ -1647,7 +1647,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "A5",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Työmaalta tuleva asennuslohko tieto"
   },
@@ -1717,7 +1717,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "V-1001",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
     "description": "Valutarvikkeelle kirjoittettava tieto"
   },
@@ -1731,7 +1731,7 @@
     "dataType": "Text",
     "unit": "",
     "exampleValue": "ELEMENTTI",
-    "requirement": "002 Valmistus",
+    "requirement": "002_Valmistus",
     "allowedValues": "IRRALLINEN; ELEMENTTI; PAIKALLAVALU",
     "description": "Valutarvikkeelle kirjoittettava tieto"
   },
@@ -1800,15 +1800,15 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "CONCRETE",
     "requirement": "001_Tarjousvaihe",
     "allowedValues": "",
-    "description": "Yhdestä osasta koostuvan elementin materiaali"
+    "description": "Yhdestä osasta koostuvan elementin materiaalin tyyppi"
   },
   {
     "id": "Ominaisuus-BETK-130",
     "version": "0.1",
-    "label": "Pääosan materiaali",
+    "label": "Materiaali, pääosa",
     "becProperty": "Elementin pääosan materiaalin tyyppi",
     "group": "BETK-Materiaali",
     "ifcPropertyType": "IfcLabel",
@@ -1817,18 +1817,18 @@
     "exampleValue": "CONCRETE",
     "requirement": "001_Tarjousvaihe",
     "allowedValues": "STEEL; CONCRETE; TIMBER; MISCELLANEOUS",
-    "description": "Useammasta osasta koostuvan elementin pääosan materiaali. Pääosa usein tilavuudeltaan suurin osa"
+    "description": "Elementin pääosan materiaalin tyyppi"
   },
   {
     "id": "Ominaisuus-BETK-131",
     "version": "0.1",
-    "label": "Materiaali, sisäkuori",
-    "becProperty": "Seinäelementti, sisäkuoren materiaali",
+    "label": "Materiaali, laatu",
+    "becProperty": "<Uusi>",
     "group": "BETK-Materiaali",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "C30/37",
+    "exampleValue": "CONCRETE",
     "requirement": "001_Tarjousvaihe",
     "allowedValues": "",
     "description": "Sandwich-tyypisen elementin sisäkuoren materiaali"
@@ -1842,7 +1842,7 @@
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "PUR",
     "requirement": "001_Tarjousvaihe",
     "allowedValues": "",
     "description": "Lämmöneristeen materiaali"
@@ -1873,80 +1873,108 @@
     "exampleValue": "C30/37",
     "requirement": "001_Tarjousvaihe",
     "allowedValues": "",
-    "description": "Sandwich-tyypisen elementin ulkokuoren materiaali"
+    "description": "Sandwich-tyypisen elementin ulkokuoren materiaalin tyyppi"
   },
   {
     "id": "Ominaisuus-BETK-135",
     "version": "0.1",
-    "label": "Raudoitusarvio RST, kuvaus",
+    "label": "GWP-luokka",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
+    "group": "BETK-Materiaali",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "B600XA",
-    "requirement": "001_Tarjousvaihe",
+    "exampleValue": "GWP.70",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
-    "description": "Raudoitusarvio RST, kuvaus"
+    "description": "Vähähiilisyysluokka"
   },
   {
     "id": "Ominaisuus-BETK-136",
     "version": "0.1",
-    "label": "Raudoitusarvio RST, käyttäjän syöte",
+    "label": "GWP-luokka 2",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
-    "ifcPropertyType": "IfcInteger",
-    "dataType": "Number",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
     "unit": "",
-    "exampleValue": "15",
-    "requirement": "001_Tarjousvaihe",
+    "exampleValue": "GWP.70",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
-    "description": "Raudoitusarvio RST, käyttäjän syöte"
+    "description": "Vähähiilisyysluokka"
   },
   {
     "id": "Ominaisuus-BETK-137",
     "version": "0.1",
-    "label": "Raudoitusarvio RST, massa",
+    "label": "GWP-luokka ulkokuori",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
-    "ifcPropertyType": "IfcMassMeasure",
-    "dataType": "Number",
-    "unit": "kg",
-    "exampleValue": "12,0kg",
-    "requirement": "001_Tarjousvaihe",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "GWP.70",
+    "requirement": "002_Valmistus",
     "allowedValues": "",
-    "description": "Raudoitusarvio RST, massa"
+    "description": "Vähähiilisyysluokka, ulkokuori"
   },
   {
     "id": "Ominaisuus-BETK-138",
     "version": "0.1",
-    "label": "Raudoitusarvio RST, menetelmä",
+    "label": "Lujuus",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
+    "group": "BETK-Materiaali",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "kg/m",
+    "exampleValue": "C30/37",
     "requirement": "001_Tarjousvaihe",
-    "allowedValues": "User given kg/m multiplied by cast unit's length of concrete part's;User given numerical mass",
-    "description": "Raudoitusarvio RST, menetelmä"
+    "allowedValues": "",
+    "description": "Lujuus"
   },
   {
     "id": "Ominaisuus-BETK-139",
     "version": "0.1",
-    "label": "Raudoitusarvio RST, yksikkö",
+    "label": "Lujuus, pääosa",
     "becProperty": "<Uusi>",
-    "group": "BETK-Määrät ja geometria",
+    "group": "BETK-Materiaali",
     "ifcPropertyType": "IfcLabel",
     "dataType": "Text",
     "unit": "",
-    "exampleValue": "",
+    "exampleValue": "C30/37",
     "requirement": "001_Tarjousvaihe",
-    "allowedValues": "kg;kg/m",
-    "description": "Raudoitusarvio RST, yksikkö"
+    "allowedValues": "",
+    "description": "Lujuus, pääosa"
   },
   {
     "id": "Ominaisuus-BETK-140",
+    "version": "0.1",
+    "label": "Lujuus, sisäkuori",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "C30/37",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "",
+    "description": "Lujuus, sisäkuoro"
+  },
+  {
+    "id": "Ominaisuus-BETK-141",
+    "version": "0.1",
+    "label": "Lujuus, ulkokuori",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "C30/37",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "",
+    "description": "Lujuus, ulkokuori"
+  },
+  {
+    "id": "Ominaisuus-BETK-142",
     "version": "0.1",
     "label": "Raudoitusarvio, kuvaus",
     "becProperty": "<Uusi>",
@@ -1960,7 +1988,7 @@
     "description": "Raudoitusarvio, kuvaus"
   },
   {
-    "id": "Ominaisuus-BETK-141",
+    "id": "Ominaisuus-BETK-143",
     "version": "0.1",
     "label": "Raudoitusarvio, käyttäjän syöte",
     "becProperty": "<Uusi>",
@@ -1974,7 +2002,7 @@
     "description": "Raudoitusarvio, käyttäjän syöte"
   },
   {
-    "id": "Ominaisuus-BETK-142",
+    "id": "Ominaisuus-BETK-144",
     "version": "0.1",
     "label": "Raudoitusarvio, massa",
     "becProperty": "<Uusi>",
@@ -1984,11 +2012,11 @@
     "unit": "kg",
     "exampleValue": "kg/m³",
     "requirement": "001_Tarjousvaihe",
-    "allowedValues": "User given kg/m multiplied by cast unit's length of concrete part's;User given numerical mass",
+    "allowedValues": "",
     "description": "Raudoitusarvio, massa"
   },
   {
-    "id": "Ominaisuus-BETK-143",
+    "id": "Ominaisuus-BETK-145",
     "version": "0.1",
     "label": "Raudoitusarvio, menetelmä",
     "becProperty": "<Uusi>",
@@ -1998,11 +2026,11 @@
     "unit": "",
     "exampleValue": "",
     "requirement": "001_Tarjousvaihe",
-    "allowedValues": "kg;kg/m³",
+    "allowedValues": "User given kg/m multiplied by cast unit's length of concrete part's;User given numerical mass",
     "description": "Raudoitusarvio, menetelmä"
   },
   {
-    "id": "Ominaisuus-BETK-144",
+    "id": "Ominaisuus-BETK-146",
     "version": "0.1",
     "label": "Raudoitusarvio, yksikkö",
     "becProperty": "<Uusi>",
@@ -2012,7 +2040,77 @@
     "unit": "",
     "exampleValue": "",
     "requirement": "001_Tarjousvaihe",
-    "allowedValues": "",
+    "allowedValues": "kg;kg/m",
     "description": "Raudoitusarvio, yksikkö"
+  },
+  {
+    "id": "Ominaisuus-BETK-147",
+    "version": "0.1",
+    "label": "Rasitusluokka",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "XC1",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "X0, XC1, XC2, XC3, XC3;XF1, XC3,4;XF1, XC3,4;XF3, XC4;XF3, XC3;XD1, XC3;XF2;XD1, XC4;XF2;XD1, XC3,4;XF2;XD1, XC3;XF4;XD2, XC4;XF4;XD2, XC3,4;XF4;XD2, XC2;XS2, XC3,4;XF4;XS3, Muu",
+    "description": "Rasitusluokka, sisäkuori tai yksiosainen elementti"
+  },
+  {
+    "id": "Ominaisuus-BETK-148",
+    "version": "0.1",
+    "label": "Rasitusluokka 2",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "XC1",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "X0, XC1, XC2, XC3, XC3;XF1, XC3,4;XF1, XC3,4;XF3, XC4;XF3, XC3;XD1, XC3;XF2;XD1, XC4;XF2;XD1, XC3,4;XF2;XD1, XC3;XF4;XD2, XC4;XF4;XD2, XC3,4;XF4;XD2, XC2;XS2, XC3,4;XF4;XS3, Muu",
+    "description": "Rasitusluokka, jos samalle osalle tarpeen antaa toinen arvo"
+  },
+  {
+    "id": "Ominaisuus-BETK-149",
+    "version": "0.1",
+    "label": "Rasitusluokka, ulkokuori",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "XC1",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "X0, XC1, XC2, XC3, XC3;XF1, XC3,4;XF1, XC3,4;XF3, XC4;XF3, XC3;XD1, XC3;XF2;XD1, XC4;XF2;XD1, XC3,4;XF2;XD1, XC3;XF4;XD2, XC4;XF4;XD2, XC3,4;XF4;XD2, XC2;XS2, XC3,4;XF4;XS3, Muu",
+    "description": "Rasitusluokka, ulkokuori"
+  },
+  {
+    "id": "Ominaisuus-BETK-150",
+    "version": "0.1",
+    "label": "Rasitusluokka ulkokuori, kuvaus",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "XC1",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "Ei asetettu;Ei korroosioriskiä;Raudoitettu rakenne kuivissa sisätiloissa;Maanalainen rakenne, pysyy erittäin kosteana;Sateelta suojattu ulkorakenne, ei pakkasrasitusta;Sateelta suojattu pystyrakenne, pakkasrasitus;Osittain sateelta suojattu pystyrakenne, pakkasrasitus;Sateelta osittain tai kokonaan suojaamaton vaakarakenne, pakkasrasitus;Sateelle altis suojaamaton vaakarakenne, pakkasrasitus;Kloridirasitettu rakenne sisätiloissa;Sateelta suojattu rakenne, kloridirasitus ja lievä pakkas-suolarasitus;Sateelta suojaaamaton rakenne, kloridirasitus ja lievä pakkas-suolarasitus;Osittain sateelta suojattu rakenne, kloridirasitus ja lievä pakkas-suolarasitus;Sateelta suojattu rakenne, kloridirasitus ja ankara pakkas-suolarasitus;Sateelta suojaaamaton rakenne, kloridirasitus ja ankara pakkas-suolarasitus;Osittain sateelta suojattu rakenne, kloridirasitus ja ankara pakkas-suolarasitus;Merivedenalainen rakenne;Meren rannalla, roiskevyöhykkeessä oleva rakenne;Muu rasitusluokkayhdistelmä",
+    "description": "Rasitusluokka ulkokuori, kuvaus"
+  },
+  {
+    "id": "Ominaisuus-BETK-150",
+    "version": "0.1",
+    "label": "Rasitusluokka, kuvaus",
+    "becProperty": "<Uusi>",
+    "group": "BETK-Materiaali",
+    "ifcPropertyType": "IfcLabel",
+    "dataType": "Text",
+    "unit": "",
+    "exampleValue": "XC1",
+    "requirement": "001_Tarjousvaihe",
+    "allowedValues": "Ei asetettu;Ei korroosioriskiä;Raudoitettu rakenne kuivissa sisätiloissa;Maanalainen rakenne, pysyy erittäin kosteana;Sateelta suojattu ulkorakenne, ei pakkasrasitusta;Sateelta suojattu pystyrakenne, pakkasrasitus;Osittain sateelta suojattu pystyrakenne, pakkasrasitus;Sateelta osittain tai kokonaan suojaamaton vaakarakenne, pakkasrasitus;Sateelle altis suojaamaton vaakarakenne, pakkasrasitus;Kloridirasitettu rakenne sisätiloissa;Sateelta suojattu rakenne, kloridirasitus ja lievä pakkas-suolarasitus;Sateelta suojaaamaton rakenne, kloridirasitus ja lievä pakkas-suolarasitus;Osittain sateelta suojattu rakenne, kloridirasitus ja lievä pakkas-suolarasitus;Sateelta suojattu rakenne, kloridirasitus ja ankara pakkas-suolarasitus;Sateelta suojaaamaton rakenne, kloridirasitus ja ankara pakkas-suolarasitus;Osittain sateelta suojattu rakenne, kloridirasitus ja ankara pakkas-suolarasitus;Merivedenalainen rakenne;Meren rannalla, roiskevyöhykkeessä oleva rakenne;Muu rasitusluokkayhdistelmä",
+    "description": "Rasitusluokka, kuvaus"
   }
 ]
