@@ -1,0 +1,17 @@
+{
+  "taulukonNumero": 7,
+  "tietosisalto": "Element som vänds på byggplatsen",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Asennus",
+  "ominaisuus": "Nosto, pystyyn kääntäen",
+  "arvot": [
+    {
+      "koodi": "Nej",
+      "kuvaus": ""
+    },
+    {
+      "koodi": "Ja",
+      "kuvaus": "Beskrivning"
+    }
+  ]
+}

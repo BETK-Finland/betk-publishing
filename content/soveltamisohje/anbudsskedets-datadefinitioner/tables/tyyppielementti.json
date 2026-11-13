@@ -1,0 +1,17 @@
+{
+  "taulukonNumero": 6,
+  "tietosisalto": "Typelement",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Onko tyyppielementti",
+  "arvot": [
+    {
+      "koodi": "Nej",
+      "kuvaus": ""
+    },
+    {
+      "koodi": "Ja",
+      "kuvaus": "Beskrivning"
+    }
+  ]
+}

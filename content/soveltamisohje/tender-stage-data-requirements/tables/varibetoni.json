@@ -1,0 +1,53 @@
+{
+  "taulukonNumero": 5,
+  "tietosisalto": "Coloured concrete",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Väribetoni",
+  "arvot": [
+    {
+      "koodi": "01",
+      "kuvaus": "Grey, pigmented",
+      "arvo": "Harmaa, värjätty"
+    },
+    {
+      "koodi": "02",
+      "kuvaus": "MUS – black",
+      "arvo": "MUS-Musta"
+    },
+    {
+      "koodi": "03",
+      "kuvaus": "VAL – white",
+      "arvo": "VAL-Valkoinen"
+    },
+    {
+      "koodi": "04",
+      "kuvaus": "PUN – red",
+      "arvo": "PUN-Punainen"
+    },
+    {
+      "koodi": "05",
+      "kuvaus": "SIN – blue",
+      "arvo": "SIN-Sininen"
+    },
+    {
+      "koodi": "06",
+      "kuvaus": "RUS – brown",
+      "arvo": "RUS-Ruskea"
+    },
+    {
+      "koodi": "07",
+      "kuvaus": "VIH – green",
+      "arvo": "VIH-Vihreä"
+    },
+    {
+      "koodi": "08",
+      "kuvaus": "KEL – yellow",
+      "arvo": "KEL-Keltainen"
+    },
+    {
+      "koodi": "Muu",
+      "kuvaus": "Other"
+    }
+  ]
+}

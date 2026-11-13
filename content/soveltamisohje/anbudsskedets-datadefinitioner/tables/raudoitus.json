@@ -1,0 +1,49 @@
+{
+  "taulukonNumero": 3,
+  "tietosisalto": "Armeringsmängd",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Raudoitus 1, koodi / Raudoitus 1, kuvaus / Raudoitus 2, koodi / Raudoitus 2, kuvaus",
+  "arvot": [
+    {
+      "koodi": "R1",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R2",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R3",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R4",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R5",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R6",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R7",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R8",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "R9",
+      "kuvaus": "Beskrivning"
+    },
+    {
+      "koodi": "Ei asetettu",
+      "kuvaus": "Inte angivet"
+    }
+  ]
+}

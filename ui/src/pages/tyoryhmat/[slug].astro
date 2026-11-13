@@ -3,7 +3,8 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { workingGroupBySlug, workingGroups } from "../../data/tyoryhmat";
 import { withBase } from "../../data/nav";
-import { leads, managers } from "../../data/people";
+import { managers } from "../../data/people";
+import WorkingGroupMeetings from "../../components/WorkingGroupMeetings.astro";
 
 export function getStaticPaths() {
   return workingGroups.map((group) => ({
@@ -19,73 +20,129 @@ if (!resolved) {
   return Astro.redirect(withBase("tyoryhmat/betk"));
 }
 
-const isBetk = resolved.slug === "betk";
 const managerLine = managers.join(", ");
 
+// Every page renders all groups; the sidebar buttons switch between them
+// without a reload. Each button is a real link, so it works without JS too.
 const entries = await getCollection("tyoryhmat");
-const entry = entries.find((item) => item.id === resolved.slug);
-const hasBody = Boolean(entry?.body?.trim());
-const rendered = entry && hasBody ? await render(entry) : null;
-const Content = rendered?.Content;
-const heading = entry?.data.title ?? resolved.title;
+const panels = await Promise.all(
+  workingGroups.map(async (item) => {
+    const entry = entries.find((e) => e.id === item.slug);
+    const hasBody = Boolean(entry?.body?.trim());
+    const rendered = entry && hasBody ? await render(entry) : null;
+    return {
+      ...item,
+      href: withBase(`tyoryhmat/${item.slug}`),
+      heading: entry?.data.title ?? item.title,
+      hasBody,
+      Content: rendered?.Content,
+    };
+  }),
+);
 ---
 
 <Layout title={`${resolved.title} — BETK`} description={resolved.lead}>
-  <main id="main">
-    <p class="mark">
-      <span data-i18n="nav.workingGroups">Työryhmät</span>
-      · {resolved.label}
-    </p>
-    <h1>{heading}</h1>
-    {!hasBody && <p class="lead" data-i18n="comingSoon">{resolved.lead}</p>}
-    {
-      isBetk && (
-        <div class="people">
-          <p>
-            <span data-i18n="footer.managers">Projektipäälliköt</span>: {managerLine}
-          </p>
-          <p data-i18n="footer.leads">Työryhmien vetäjät</p>
-          <ul>
-            {leads.map((person) => (
+  <main id="main" class="sov-layout">
+    <aside class="sov-sidebar">
+      <nav class="wg-nav" aria-label="Työryhmät">
+        <p class="sidebar-heading" data-i18n="nav.workingGroups">Työryhmät</p>
+        <ul>
+          {
+            panels.map((item) => (
               <li>
-                {person.name} ({person.group})
+                <a
+                  href={item.href}
+                  class:list={["wg-button", `wg-${item.slug}`, { current: item.slug === resolved.slug }]}
+                  aria-current={item.slug === resolved.slug ? "page" : undefined}
+                  data-wg={item.slug}
+                  data-i18n={item.i18nKey}
+                >
+                  {item.label}
+                </a>
               </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-    {Content && (
-      <div class="sov-prose">
-        <Content />
-      </div>
-    )}
-    <ul class="peers">
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="sov-document">
       {
-        workingGroups.map((item) => (
-          <li>
-            <a
-              href={withBase(`tyoryhmat/${item.slug}`)}
-              class:list={[{ current: item.slug === resolved.slug }]}
-              aria-current={item.slug === resolved.slug ? "page" : undefined}
-              data-i18n={item.i18nKey}
-            >
-              {item.label}
-            </a>
-          </li>
+        panels.map((item) => (
+          <section class="wg-panel" data-wg-panel={item.slug} hidden={item.slug !== resolved.slug}>
+            <p class="mark">
+              <span data-i18n="nav.workingGroups">Työryhmät</span>
+              · {item.label}
+            </p>
+            <h1>{item.heading}</h1>
+            {!item.hasBody && <p class="lead" data-i18n="comingSoon">Tulossa pian.</p>}
+            {item.slug === "betk" && (
+              <div class="people">
+                <p>
+                  <span data-i18n="footer.managers">Projektipäälliköt</span>: {managerLine}
+                </p>
+              </div>
+            )}
+            {item.Content && (
+              <div class="sov-prose">
+                <item.Content />
+              </div>
+            )}
+            {item.slug === "betk" && <WorkingGroupMeetings />}
+          </section>
         ))
       }
-    </ul>
+      <p class="join">
+        <a
+          class="join-cta"
+          href="https://forms.cloud.microsoft/e/hL7n2GmeC7"
+          target="_blank"
+          rel="noopener"
+          data-i18n="home.join"
+        >Osallistu toimintaan</a>
+      </p>
+    </article>
   </main>
 </Layout>
 
-<style>
-  main {
-    max-width: 42rem;
-    margin: 0 auto;
-    padding: 3.2rem 1.25rem 4rem;
-  }
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLAnchorElement>("a[data-wg]"));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-wg-panel]"));
+  const titleBase = " — BETK";
 
+  const show = (slug: string) => {
+    const button = buttons.find((b) => b.dataset.wg === slug);
+    if (!button) return false;
+    panels.forEach((p) => (p.hidden = p.dataset.wgPanel !== slug));
+    buttons.forEach((b) => {
+      const on = b === button;
+      b.classList.toggle("current", on);
+      if (on) b.setAttribute("aria-current", "page");
+      else b.removeAttribute("aria-current");
+    });
+    const h1 = panels.find((p) => p.dataset.wgPanel === slug)?.querySelector("h1");
+    if (h1) document.title = h1.textContent?.trim() + titleBase;
+    return true;
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+      event.preventDefault();
+      if (show(button.dataset.wg ?? "")) {
+        history.pushState({ wg: button.dataset.wg }, "", button.href);
+        window.scrollTo({ top: 0 });
+      }
+    });
+  });
+
+  window.addEventListener("popstate", () => {
+    const slug = location.pathname.replace(/\/$/, "").split("/").pop() ?? "betk";
+    show(slug);
+  });
+</script>
+
+<style>
   .mark {
     margin: 0 0 0.35rem;
     font-size: 0.78rem;
@@ -126,21 +183,97 @@ const heading = entry?.data.title ?? resolved.title;
     margin: 0 0 0.75rem;
   }
 
-  .peers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.1rem;
-    list-style: none;
+  .wg-panel {
+    max-width: 42rem;
+  }
+
+  .join {
+    max-width: 42rem;
     margin: 2rem 0 0;
-    padding: 0.9rem 0 0;
+    padding: 1.4rem 0 0;
     border-top: 1px solid var(--line);
+    text-align: center;
   }
 
-  .peers a {
-    color: var(--muted);
+  .join-cta {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    background: #31d5c3;
+    color: #183858;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
   }
 
-  .peers a.current {
-    color: var(--ink);
+  .join-cta:hover {
+    background: #26bfae;
+  }
+
+  .join-cta:focus-visible {
+    outline: 2px solid #183858;
+    outline-offset: 3px;
+  }
+
+  .wg-nav {
+    padding: 4px;
+  }
+
+  .wg-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wg-button {
+    display: block;
+    padding: 0.7rem 1.1rem;
+    border-radius: 6px;
+    background: #b0b0b0;
+    color: #1c1a16;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    transition: filter 0.15s ease;
+  }
+
+  .wg-button:hover {
+    filter: brightness(0.92);
+  }
+
+  .wg-button:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .wg-button.wg-vakiointi {
+    background: #34decc;
+    color: #183858;
+  }
+
+  .wg-button.wg-rajapinta {
+    background: #f14f4f;
+    color: #fff;
+  }
+
+  .wg-button.wg-valutarvike {
+    background: #346de3;
+    color: #fff;
+  }
+
+  .wg-button.current {
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
+  }
+
+  @media screen and (max-width: 640px) {
+    .wg-nav ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
   }
 </style>

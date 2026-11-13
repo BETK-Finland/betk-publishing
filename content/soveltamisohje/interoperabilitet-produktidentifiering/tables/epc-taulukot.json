@@ -1,0 +1,123 @@
+{
+  "taulukot": [
+    {
+      "taulukonNumero": 9,
+      "otsikko": "EPC-binärkodningsscheman som används och deras begränsningar. Vilken metod som tillämpas avgörs av behovet av antalet numeriska eller alfanumeriska tecken.",
+      "sarakkeet": [
+        "EPC-schema",
+        "EPC-binärkodningsschema",
+        "EPC + antal filterbitar",
+        "Innehåller filtervärde",
+        "Begränsning för serienummer"
+      ],
+      "rivit": [
+        {
+          "cells": [
+            "sgtin",
+            "<code>sgtin-96</code>",
+            "96",
+            "Ja",
+            "Endast siffror; inga inledande nollor, decimalvärde under 2³⁸ (dvs. decimaltal högst 274 877 906 943)."
+          ]
+        },
+        {
+          "cells": [
+            "sgtin",
+            "<code>sgtin-198</code>",
+            "198",
+            "Ja",
+            "Alla värden som tillåts enligt GS1 General Specifications (högst 20 alfanumeriska tecken)."
+          ]
+        }
+      ]
+    },
+    {
+      "taulukonNumero": 10,
+      "otsikko": "Tillämpad metod SGTIN-96. I standarden TDS 2.1 (EPC Tag Data Standard) finns även andra metoder, bl.a. SGTIN-198, som kan användas om det till exempel finns behov av ett längre serienummer (eller ett som utöver siffror även innehåller bokstäver).",
+      "sarakkeet": [
+        "EPC SGTIN-96",
+        "Värde",
+        "Kommentar"
+      ],
+      "rivit": [
+        {
+          "cells": [
+            "Rubrik (Header)",
+            "<code>48</code>",
+            "Nummer för SGTIN-96"
+          ]
+        },
+        {
+          "cells": [
+            "Filtervärde (Filter value)",
+            "<code>0</code>",
+            "0 = Lämpligt värde för en produkt som inte läses vid kassan"
+          ]
+        },
+        {
+          "cells": [
+            "Partitionsvärde",
+            "<code>1</code>",
+            "1 = 11-siffrigt GS1-företagsprefix och 2 siffror för artikelreferens + indikatorsiffra"
+          ]
+        },
+        {
+          "cells": [
+            "Partitionsvärde",
+            "<code>2</code>",
+            "2 = 10-siffrigt GS1-företagsprefix och 3 siffror för artikelreferens + indikatorsiffra"
+          ]
+        },
+        {
+          "cells": [
+            "Partitionsvärde",
+            "<code>3</code>",
+            "3 = 9-siffrigt GS1-företagsprefix och 4 siffror för artikelreferens + indikatorsiffra"
+          ]
+        },
+        {
+          "cells": [
+            "Partitionsvärde",
+            "<code>4</code>",
+            "4 = 8-siffrigt GS1-företagsprefix och 5 siffror för artikelreferens + indikatorsiffra"
+          ]
+        },
+        {
+          "cells": [
+            "Partitionsvärde",
+            "<code>5</code>",
+            "5 = 7-siffrigt GS1-företagsprefix och 6 siffror för artikelreferens + indikatorsiffra"
+          ]
+        },
+        {
+          "cells": [
+            "Partitionsvärde",
+            "<code>6</code>",
+            "6 = 6-siffrigt GS1-företagsprefix och 7 siffror för artikelreferens + indikatorsiffra"
+          ]
+        },
+        {
+          "cells": [
+            "GS1-företagsprefix (GS1 GCP)",
+            "<code>N…11</code>",
+            "GS1-företagsprefix: 6, 7, 8, 9, 10 eller 11 siffror"
+          ]
+        },
+        {
+          "cells": [
+            "Artikelreferens",
+            "<code>N…7</code>",
+            "1–7 siffror beroende på GS1-företagsprefixets längd"
+          ]
+        },
+        {
+          "cells": [
+            "Serienummer",
+            "<code>N…12</code>",
+            "Högst 12 siffror (största tillåtna värde = 274 877 906 943). Serienumret behöver inte vara exakt 12 siffror. Inledande nolla är inte tillåten."
+          ]
+        }
+      ]
+    }
+  ]
+}

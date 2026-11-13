@@ -1,0 +1,29 @@
+{
+  "taulukonNumero": 1,
+  "tietosisalto": "Assembly type",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Tunnistetiedot ja luokittelu",
+  "ominaisuus": "Kokoonpanon tyyppi",
+  "arvot": [
+    {
+      "koodi": "BETONIELEMENTTI",
+      "kuvaus": "Precast concrete element"
+    },
+    {
+      "koodi": "PAIKALLAVALU",
+      "kuvaus": "Cast-in-place concrete"
+    },
+    {
+      "koodi": "PUUKOKOONPANO",
+      "kuvaus": "Timber assembly"
+    },
+    {
+      "koodi": "TERÄSKOKOONPANO",
+      "kuvaus": "Steel assembly"
+    },
+    {
+      "koodi": "EI ASETETTU",
+      "kuvaus": "Not set"
+    }
+  ]
+}

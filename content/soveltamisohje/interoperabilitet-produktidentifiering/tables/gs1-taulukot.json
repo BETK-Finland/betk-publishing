@@ -1,0 +1,46 @@
+{
+  "taulukot": [
+    {
+      "taulukonNumero": 1,
+      "otsikko": "Minimikrav på information för byggprodukter som projekteras på beställning (ETO) som ska läggas till i databäraren.",
+      "rivit": [
+        {
+          "ai": "(03)",
+          "tieto": "MTO GTIN-nummer",
+          "esimerkki": "06400001000247"
+        },
+        {
+          "ai": "(242)",
+          "tieto": "MTO-variantnummer",
+          "esimerkki": "123456"
+        },
+        {
+          "ai": "(21)",
+          "tieto": "Serienummer",
+          "esimerkki": "12345678910"
+        }
+      ]
+    },
+    {
+      "taulukonNumero": 2,
+      "otsikko": "Valfria tilläggsuppgifter som läggs till i databäraren.",
+      "rivit": [
+        {
+          "ai": "(91)",
+          "tieto": "Elementbeteckning",
+          "esimerkki": "V1001"
+        },
+        {
+          "ai": "(92)",
+          "tieto": "GUID",
+          "esimerkki": "ba34cf17-0c4b-4c6f-9295-cae05aa74ad4"
+        },
+        {
+          "ai": "(99)",
+          "tieto": "Domännamn",
+          "esimerkki": "id.rt.fi"
+        }
+      ]
+    }
+  ]
+}

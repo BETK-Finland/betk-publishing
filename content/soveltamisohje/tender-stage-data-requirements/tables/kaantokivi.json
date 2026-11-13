@@ -1,0 +1,17 @@
+{
+  "taulukonNumero": 7,
+  "tietosisalto": "Element turned on site",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Asennus",
+  "ominaisuus": "Nosto, pystyyn kääntäen",
+  "arvot": [
+    {
+      "koodi": "No",
+      "kuvaus": ""
+    },
+    {
+      "koodi": "Yes",
+      "kuvaus": "Description"
+    }
+  ]
+}

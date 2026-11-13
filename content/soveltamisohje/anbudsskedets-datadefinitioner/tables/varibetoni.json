@@ -1,0 +1,53 @@
+{
+  "taulukonNumero": 5,
+  "tietosisalto": "Färgad betong",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Väribetoni",
+  "arvot": [
+    {
+      "koodi": "01",
+      "kuvaus": "Grå, infärgad",
+      "arvo": "Harmaa, värjätty"
+    },
+    {
+      "koodi": "02",
+      "kuvaus": "MUS – svart",
+      "arvo": "MUS-Musta"
+    },
+    {
+      "koodi": "03",
+      "kuvaus": "VAL – vit",
+      "arvo": "VAL-Valkoinen"
+    },
+    {
+      "koodi": "04",
+      "kuvaus": "PUN – röd",
+      "arvo": "PUN-Punainen"
+    },
+    {
+      "koodi": "05",
+      "kuvaus": "SIN – blå",
+      "arvo": "SIN-Sininen"
+    },
+    {
+      "koodi": "06",
+      "kuvaus": "RUS – brun",
+      "arvo": "RUS-Ruskea"
+    },
+    {
+      "koodi": "07",
+      "kuvaus": "VIH – grön",
+      "arvo": "VIH-Vihreä"
+    },
+    {
+      "koodi": "08",
+      "kuvaus": "KEL – gul",
+      "arvo": "KEL-Keltainen"
+    },
+    {
+      "koodi": "Muu",
+      "kuvaus": "Annan"
+    }
+  ]
+}

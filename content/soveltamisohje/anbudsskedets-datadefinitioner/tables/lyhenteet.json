@@ -1,0 +1,28 @@
+{
+  "termit": [
+    {
+      "termi": "Ursprungsformat",
+      "selite": "Modelleringsprogrammets eget filformat. I branschens publikationer används även synonymerna nativ modell och nativt format."
+    },
+    {
+      "termi": "BIM",
+      "selite": "Byggnadsinformationsmodell eller informationsmodellering, förkortning av det engelska begreppet Building Information Modeling."
+    },
+    {
+      "termi": "IFC",
+      "selite": "Internationell standard för överföring av produktdata vid modellering av byggnader, förkortning av det engelska begreppet Industry Foundation Classes."
+    },
+    {
+      "termi": "UDA",
+      "selite": "Tilläggsinformation (metadata) som lagras på modellens objekt i projekteringsprogram, förkortning av det engelska begreppet User Defined Attribute."
+    },
+    {
+      "termi": "Egenskapsgrupp",
+      "selite": "I byggbranschen används allmänt termen \"Property Set\". I det finska originalet används termen \"Ominaisuusryhmä\" (egenskapsgrupp) för att termen ska vara lättare att förstå och för att undvika en främmande term. En noggrann definition av egenskapsgrupperna gör det möjligt att gruppera egenskaperna i helheter som passar människor. Med flera egenskapsgrupper undviker man också en lång lista av egenskaper i en enda \"allomfattande\" egenskapsgrupp."
+    },
+    {
+      "termi": "Egenskap",
+      "selite": "I byggbranschen har termen \"Property\" etablerats. I det finska originalet används termen \"Ominaisuus\" (egenskap) för att termen ska vara lättare att förstå och för att undvika en främmande term. En noggrann definition av egenskaperna möjliggör en standardiserad datastruktur. En egenskap hör alltid till någon egenskapsgrupp."
+    }
+  ]
+}

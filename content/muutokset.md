@@ -1,6 +1,56 @@
 ---
 title: Muutosloki
 ---
+## 13.11.2026
+
+BETK-Materiaali ominaisuusjoukon ominaisuuksia päivitetty. Tekla-muuttujat tarkistettu. Requirement-ominaisuuksiin lisätty hankevaiheet. Tarkennuksia Kuvaus-kirjauksiin.
+
+## 3.11.2026
+Raudoitusarvio ominaisuudet lisätty (Issue #13)
+
+## 28.10.2026
+- Rajapinta-työryhmäsivulle kuvaus (aiemmin ”Tulossa pian”): tehtävä ja toimitusketjun kokonaisarkkitehtuuri, tausta (Peppol-sanomat ja data-avaruudet), toiminta-alue, tuotokset, toimintaperiaatteet, yhteistyö sekä **Osallistu toimintaan**. Sivu suomeksi, ruotsiksi ja englanniksi.
+- Työryhmäsivujen kuvaus hakukoneille ja linkkien esikatseluun: ”Tulossa pian” korvattu kunkin työryhmän lyhyellä kuvauksella.
+- Vakiointi-työryhmäsivun ruotsin- ja englanninkieliset linkit tarjousvaiheen soveltamisohjeeseen avaavat ohjeen käännöksen.
+- Vakiointi-työryhmäsivun teksti uudistettu: tehtävä ja yhteentoimivuuden tasot, tausta (BIM, IFC, BEC-mallinnusohje ja BETK:n laajennus), toiminta-alue, tuotokset ja julkaisupaikat (BETK-julkaisualusta, bSDD, Suomi.fi), toimintaperiaatteet, yhteistyö sekä **Osallistu toimintaan**. Sivu suomeksi, ruotsiksi ja englanniksi.
+- Vakiointi-työryhmäsivulta poistettu ajankohtaissisältö: tavoitetilan vaiheet, BEC–BETK-yhteensovituksen aikataulu, sijaintitieto, syksyn 2026 painopisteet ja keskeiset käsitteet.
+
+## 27.10.2026
+- BETK-työryhmäsivulle uusi osio **Yhteentoimivuuden tasot**: eurooppalaisen yhteentoimivuuskehyksen (EIF) neljä tasoa ja hallinta sekä se, miten BETK edistää kutakin. Työryhmätaulukossa yhteentoimivuuden tason tilalla työryhmän painopiste.
+- BETK-työryhmäsivun termit tarkennettu: tekstissä erotetaan data ja informaatio. Osallistumista koskeva teksti omana **Osallistu toimintaan** -osionaan, osallistujaryhmien luettelo poistettu. Sivu suomeksi, ruotsiksi ja englanniksi.
+
+## 26.10.2026
+- BETK-työryhmäsivun teksti uudistettu: tehtävä, tausta, työryhmät ja niiden yhteentoimivuuden tasot (Vakiointi, Rajapinta, Valutarvike), toimintaperiaatteet, tulosten hyväksyminen ja ylläpito sekä osallistuminen. Sivu suomeksi, ruotsiksi ja englanniksi kielivalinnan mukaan.
+- BETK-työryhmäsivun työryhmätaulukkoon sarake työryhmän vetäjästä. Sivun yläosan erillinen Työryhmien vetäjät -lista poistettu.
+- Soveltamisohjeiden käännökset: **Tarjousvaiheen tietomääritykset** englanniksi ja ruotsiksi sekä **Tuoteyksilöinnin ja -tunnistamisen yhteentoimivuus** ruotsiksi (englanninkielinen versio oli jo julkaistu).
+- Soveltamisohjeiden valikoissa näkyvät valitun kielen versiot. Kielivalinnan vaihto avaa saman ohjeen käännöksen.
+- Käännettyjen ohjeiden taulukoissa mallin suomenkielinen arvo omassa sarakkeessa käännetyn kuvauksen rinnalla. Otsikot, taulukoiden nimet ja muut kiinteät tekstit ohjeen kielellä.
+- Esimerkki ifc-tiedosto päivitetty
+
+## 25.10.2026
+- Etusivun **BETK toiminnassa mukana** -osioon Rakennustiedon, Rambollin ja WhatsBuiltin logot.
+
+## 22.10.2026
+- Media-sivulle Tom Partasen esitys **BEC ja BETK – Betonielementin tunnistus** LBD-F-kickoffista: videotallenne ja esitysaineisto (PDF).
+- Etusivun **BETK toiminnassa mukana** -osioon päivitetty Twinbasen logo.
+
+## 20.10.2026
+- BETK-työryhmäsivulle **Työryhmien kokoukset**: Vakiointi- ja Rajapinta-työryhmien neljä seuraavaa kokousta sekä kuukausikalenteri, jossa kokoukset näkyvät elokuusta 2026 helmikuuhun 2027.
+- Etusivun **Ajankohtaista**-osion julkaisuissa näytetään julkaisun kuva tai videon esikatselukuva.
+- Media-sivulle uusi julkaisu: **Rakennusalan Peppol-päivä 2027** (ke 27.1.2027), tapahtuman kuva ja ilmoittautumislinkki.
+- Media-sivulle **Rakennusalan Peppol-päivä 21.1.2026** -tapahtuman tallenne.
+- Etusivun **BETK toiminnassa mukana** -osion alle **Osallistu toimintaan** -painike, joka avaa BETK-toimintaan ilmoittautumislomakkeen (fi/sv/en).
+- Etusivun **Ajankohtaista**-osiossa näytetään kolme uusinta julkaisua (aiemmin yhdeksän).
+- Yläpalkin **Työryhmät** avaa suoraan BETK-työryhmäsivun (ei enää alasvetovalikkoa). Sivulta linkit Vakiointi- ja Rajapinta-työryhmien sivuille.
+- Työryhmäsivuilla vasen sivupalkki, jossa BETK-, Vakiointi-, Rajapinta- ja Valutarvike-painikkeet BETK-logon väreissä. Painike vaihtaa työryhmän tekstin sivun pääalueelle.
+- Työryhmäsivujen alareunaan **Osallistu toimintaan** -painike.
+
+## 19.10.2026 
+- Tilavuus, sisäkuori-ominaisuuden tietotyypin korjaus
+
+## 18.10.2026 
+- Täydennetty puuttuvat IFC Property Typet, koordinaattien tietotyypit korjattu
+
 ## 30.9.2026 
 - Täydennetty puuttuvat IFC Property Typet (Kuuluu, Tyyppi, Yksikkö)
 

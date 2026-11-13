@@ -1,0 +1,17 @@
+{
+  "taulukonNumero": 5,
+  "tietosisalto": "Low-carbon",
+  "rajaukset": "–",
+  "ominaisuusjoukko": "BETK-Hankinta",
+  "ominaisuus": "Vähähiilinen",
+  "arvot": [
+    {
+      "koodi": "No",
+      "kuvaus": ""
+    },
+    {
+      "koodi": "Yes",
+      "kuvaus": "Description"
+    }
+  ]
+}

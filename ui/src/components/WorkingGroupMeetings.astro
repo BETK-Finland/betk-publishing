@@ -1,0 +1,495 @@
+---
+import { meetings, helsinkiOffset } from "../data/kokoukset";
+
+// Build-time fallback for "next four". The script below recomputes it in the
+// browser from today's date in Helsinki, so the list stays current between builds.
+const todayKey = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Helsinki",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
+
+const WEEKDAYS = ["su", "ma", "ti", "ke", "to", "pe", "la"];
+const groupName = { vakiointi: "Vakiointi", rajapinta: "Rajapinta" } as const;
+
+const items = meetings.map((m) => {
+  const [y, mo, d] = m.date.split("-").map(Number);
+  const wd = WEEKDAYS[new Date(Date.UTC(y, mo - 1, d)).getUTCDay()];
+  return {
+    ...m,
+    dateLabel: `${wd} ${d}.${mo}.${y}`,
+    timeLabel: `${m.start}–${m.end} (${helsinkiOffset(m.date)})`,
+    name: groupName[m.group],
+  };
+});
+
+const upcomingAtBuild = new Set(items.filter((m) => m.date >= todayKey).slice(0, 4).map((m) => m.date + m.group));
+const calendarData = JSON.stringify(
+  items.map((m) => ({ date: m.date, group: m.group, name: m.name, title: m.title, time: m.timeLabel })),
+);
+---
+
+<section class="meetings" aria-labelledby="meetings-heading">
+  <h2 id="meetings-heading" data-i18n="wg.meetings">Työryhmien kokoukset</h2>
+  <p class="meetings-sub" data-i18n="wg.meetingsLead">
+    Vakiointi- ja Rajapinta-työryhmät kokoontuvat Teamsissa perjantaisin neljän viikon välein.
+  </p>
+
+  <h3 class="meetings-label" data-i18n="wg.nextMeetings">Seuraavat kokoukset</h3>
+  <ul class="next-list" data-next-list>
+    {
+      items.map((m) => (
+        <li
+          class:list={["next-item", `g-${m.group}`]}
+          data-date={m.date}
+          hidden={!upcomingAtBuild.has(m.date + m.group)}
+        >
+          <span class="next-date">
+            {m.dateLabel}
+            <strong>{m.timeLabel}</strong>
+          </span>
+          <span class="next-body">
+            <span class="next-title">{m.title}</span>
+            <span class="next-place">Teams-kokous</span>
+          </span>
+          <span class="next-tag">{m.name}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="cal" data-cal>
+    <div class="cal-nav">
+      <button type="button" data-cal-prev aria-label="Edellinen kuukausi">&larr;</button>
+      <span class="cal-month" data-cal-month></span>
+      <button type="button" data-cal-next aria-label="Seuraava kuukausi">&rarr;</button>
+    </div>
+    <div class="cal-weekdays" aria-hidden="true">
+      <span>ma</span><span>ti</span><span>ke</span><span>to</span><span>pe</span><span>la</span><span>su</span>
+    </div>
+    <div class="cal-grid" data-cal-grid></div>
+    <div class="cal-legend">
+      <span class="g-vakiointi"><i></i>Vakiointi</span>
+      <span class="g-rajapinta"><i></i>Rajapinta</span>
+    </div>
+  </div>
+
+  <script type="application/json" data-cal-data set:html={calendarData} />
+</section>
+
+<script>
+  type CalMeeting = { date: string; group: string; name: string; title: string; time: string };
+
+  const MONTHS = [
+    "tammikuu", "helmikuu", "maaliskuu", "huhtikuu", "toukokuu", "kesäkuu",
+    "heinäkuu", "elokuu", "syyskuu", "lokakuu", "marraskuu", "joulukuu",
+  ];
+
+  function helsinkiToday(): string {
+    try {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Europe/Helsinki",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date());
+    } catch {
+      const n = new Date();
+      return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`;
+    }
+  }
+
+  function key(y: number, m: number, d: number): string {
+    return `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+  }
+
+  function init(root: HTMLElement) {
+    const dataEl = root.querySelector<HTMLScriptElement>("[data-cal-data]");
+    const grid = root.querySelector<HTMLElement>("[data-cal-grid]");
+    const label = root.querySelector<HTMLElement>("[data-cal-month]");
+    const prev = root.querySelector<HTMLButtonElement>("[data-cal-prev]");
+    const next = root.querySelector<HTMLButtonElement>("[data-cal-next]");
+    if (!dataEl || !grid || !label || !prev || !next) return;
+
+    const meetings = JSON.parse(dataEl.textContent ?? "[]") as CalMeeting[];
+    if (!meetings.length) return;
+    const today = helsinkiToday();
+
+    // Next four meetings from today
+    const items = Array.from(root.querySelectorAll<HTMLElement>("[data-next-list] > li"));
+    let shown = 0;
+    items.forEach((li) => {
+      const upcoming = (li.dataset.date ?? "") >= today && shown < 4;
+      if (upcoming) shown += 1;
+      li.hidden = !upcoming;
+    });
+
+    const ym = (d: string) => Number(d.slice(0, 4)) * 12 + Number(d.slice(5, 7)) - 1;
+    const minYM = ym(meetings[0].date);
+    const maxYM = ym(meetings[meetings.length - 1].date);
+    let view = Math.min(Math.max(ym(today), minYM), maxYM);
+
+    const render = () => {
+      const year = Math.floor(view / 12);
+      const month = view % 12;
+      label.textContent = `${MONTHS[month]} ${year}`;
+      prev.disabled = view <= minYM;
+      next.disabled = view >= maxYM;
+
+      grid.replaceChildren();
+      const offset = (new Date(year, month, 1).getDay() + 6) % 7;
+      const days = new Date(year, month + 1, 0).getDate();
+      const cells = Math.ceil((offset + days) / 7) * 7;
+
+      for (let i = 0; i < cells; i++) {
+        const date = new Date(year, month, 1 - offset + i);
+        const k = key(date.getFullYear(), date.getMonth(), date.getDate());
+        const cell = document.createElement("div");
+        cell.className = "cal-day";
+        if (date.getMonth() !== month) cell.classList.add("outside");
+        if (k === today) cell.classList.add("today");
+
+        const num = document.createElement("span");
+        num.className = "cal-num";
+        num.textContent = String(date.getDate());
+        cell.append(num);
+
+        meetings
+          .filter((m) => m.date === k)
+          .forEach((m) => {
+            const chip = document.createElement("span");
+            chip.className = `cal-chip g-${m.group}`;
+            if (m.date < today) chip.classList.add("past");
+            chip.textContent = m.name;
+            chip.title = `${m.title}, ${m.time}`;
+            cell.append(chip);
+          });
+
+        grid.append(cell);
+      }
+    };
+
+    prev.addEventListener("click", () => {
+      view = Math.max(view - 1, minYM);
+      render();
+    });
+    next.addEventListener("click", () => {
+      view = Math.min(view + 1, maxYM);
+      render();
+    });
+    render();
+  }
+
+  document.querySelectorAll<HTMLElement>(".meetings").forEach(init);
+</script>
+
+<style>
+  .meetings {
+    --vak: #34decc;
+    --vak-ink: #183858;
+    --vak-soft: #34decc2e;
+    --raj: #f14f4f;
+    --raj-ink: #a32121;
+    --raj-soft: #f14f4f1f;
+    margin: 2rem 0 0;
+    padding: 1.4rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0 0 0.3rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .meetings-sub {
+    margin: 0 0 1.1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .meetings-label {
+    margin: 0 0 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .g-vakiointi {
+    --gc: var(--vak);
+    --gi: var(--vak-ink);
+    --gs: var(--vak-soft);
+  }
+
+  .g-rajapinta {
+    --gc: var(--raj);
+    --gi: var(--raj-ink);
+    --gs: var(--raj-soft);
+  }
+
+  .next-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0 0 1.4rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .next-item {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gc);
+    border-radius: 6px;
+    background: var(--surface-raised);
+  }
+
+  .next-item[hidden] {
+    display: none;
+  }
+
+  .next-date {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    line-height: 1.45;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .next-date strong {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .next-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .next-title {
+    font-size: 0.86rem;
+    font-weight: 600;
+  }
+
+  .next-place {
+    font-size: 0.74rem;
+    color: var(--muted);
+  }
+
+  .next-tag {
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: var(--gs);
+    color: var(--gi);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .cal {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface-raised);
+  }
+
+  .cal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cal-nav button {
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: none;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .cal-nav button:hover:not(:disabled) {
+    border-color: var(--ink);
+  }
+
+  .cal-nav button:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .cal-nav button:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .cal-month {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .cal-weekdays,
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .cal-weekdays {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cal-weekdays span {
+    padding: 0.3rem 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cal-grid :global(.cal-day) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    min-height: 3.6rem;
+    padding: 0.3rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+  }
+
+  .cal-grid :global(.cal-day:nth-child(7n)) {
+    border-right: none;
+  }
+
+  .cal-grid :global(.cal-day:nth-last-child(-n + 7)) {
+    border-bottom: none;
+  }
+
+  .cal-grid :global(.cal-day.outside) {
+    background: var(--bg);
+    opacity: 0.55;
+  }
+
+  .cal-grid :global(.cal-num) {
+    font-size: 0.66rem;
+    color: var(--ink);
+  }
+
+  .cal-grid :global(.cal-day.today .cal-num) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .cal-grid :global(.cal-chip) {
+    display: block;
+    overflow: hidden;
+    padding: 0.1rem 0.3rem;
+    border-left: 3px solid var(--gc);
+    border-radius: 3px;
+    background: var(--gs);
+    color: var(--gi);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .cal-grid :global(.cal-chip.g-vakiointi) {
+    --gc: var(--vak);
+    --gi: var(--vak-ink);
+    --gs: var(--vak-soft);
+  }
+
+  .cal-grid :global(.cal-chip.g-rajapinta) {
+    --gc: var(--raj);
+    --gi: var(--raj-ink);
+    --gs: var(--raj-soft);
+  }
+
+  .cal-grid :global(.cal-chip.past) {
+    opacity: 0.45;
+  }
+
+  .cal-legend {
+    display: flex;
+    gap: 1rem;
+    padding: 0.45rem 0.7rem;
+    border-top: 1px solid var(--line);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.66rem;
+    color: var(--muted);
+  }
+
+  .cal-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .cal-legend i {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 2px;
+    background: var(--gc);
+  }
+
+  @media screen and (max-width: 640px) {
+    .next-item {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .next-date {
+      grid-column: 1 / -1;
+    }
+
+    .next-date strong {
+      display: inline;
+      margin-left: 0.4rem;
+    }
+
+    .cal-grid :global(.cal-day) {
+      min-height: 2.8rem;
+      padding: 0.2rem;
+    }
+
+    .cal-grid :global(.cal-chip) {
+      height: 0.4rem;
+      padding: 0;
+      border-left: none;
+      background: var(--gc);
+      font-size: 0;
+    }
+  }
+
+  @media print {
+    .cal {
+      display: none;
+    }
+  }
+</style>

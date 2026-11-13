@@ -96,6 +96,18 @@
     "Ominaisuus-BETK-027": {
       "tekla": "R_FIRE_CLASS"
     },
+    "Ominaisuus-BETK-028": {
+      "tekla": "CONSEQ_CLASS"
+    },
+    "Ominaisuus-BETK-029": {
+      "tekla": "CONSEQ_CLASS_D"
+    },
+    "Ominaisuus-BETK-030": {
+      "tekla": "RELIAB_CLASS"
+    },
+    "Ominaisuus-BETK-031": {
+      "tekla": "RELIAB_CLASS_D"
+    },
     "Ominaisuus-BETK-032": {
       "tekla": "LIFE_EXP_YEARS_1"
     },
@@ -119,6 +131,9 @@
     },
     "Ominaisuus-BETK-039": {
       "tekla": "CUSTOM.EMBED.PRODUCT_CODE"
+    },
+    "Ominaisuus-BETK-040": {
+      "tekla": "SURFC_TREAT_CLASS"
     },
     "Ominaisuus-BETK-041": {
       "tekla": "CUSTOM.ELEMENT_TYPE"
@@ -170,6 +185,9 @@
     },
     "Ominaisuus-BETK-057": {
       "tekla": "RUB_SURF_DESCR_2"
+    },
+    "Ominaisuus-BETK-058": {
+      "tekla": "COLORED_CONCRETE"
     },
     "Ominaisuus-BETK-059": {
       "tekla": "IS_LOW_CARBON"
@@ -327,6 +345,15 @@
     "Ominaisuus-BETK-110": {
       "tekla": "CUSTOM.SURFACE_TREATMENT_NAME_3"
     },
+    "Ominaisuus-BETK-111": {
+      "tekla": "LIFTING_ANGLE"
+    },
+    "Ominaisuus-BETK-112": {
+      "tekla": "EVEN_4_POINT_LIFT"
+    },
+    "Ominaisuus-BETK-113": {
+      "tekla": "DYNAMIC_FACTOR"
+    },
     "Ominaisuus-BETK-114": {
       "tekla": "CUSTOM.BUILDING | CUSTOM.EMBED.BUILDING"
     },
@@ -335,6 +362,12 @@
     },
     "Ominaisuus-BETK-116": {
       "tekla": "CUSTOM.FLOOR | CUSTOM.EMBED.FLOOR"
+    },
+    "Ominaisuus-BETK-117": {
+      "tekla": "CUSTOM.SECTION"
+    },
+    "Ominaisuus-BETK-118": {
+      "tekla": "CUSTOM.SECTION"
     },
     "Ominaisuus-BETK-119": {
       "tekla": "CUSTOM.ASSEMBLY.CENTER_OF_GRAVITY.PROJECT_BASEPOINT.EAST"
@@ -383,6 +416,54 @@
     },
     "Ominaisuus-BETK-134": {
       "tekla": "CUSTOM.OUTER_PANEL_MATERIAL"
+    },
+    "Ominaisuus-BETK-135": {
+      "tekla": "GWP_CLASS"
+    },
+    "Ominaisuus-BETK-136": {
+      "tekla": "GWP_CLASS_2"
+    },
+    "Ominaisuus-BETK-137": {
+      "tekla": "GWP_CLASS_2"
+    },
+    "Ominaisuus-BETK-138": {
+      "tekla": "MAINPART.MATERIAL"
+    },
+    "Ominaisuus-BETK-139": {
+      "tekla": "MAINPART.MATERIAL"
+    },
+    "Ominaisuus-BETK-140": {
+      "tekla": "CUSTOM.INNER_PANEL_MATERIAL"
+    },
+    "Ominaisuus-BETK-141": {
+      "tekla": "CUSTOM.OUTER_PANEL_MATERIAL"
+    },
+    "Ominaisuus-BETK-142": {
+      "tekla": "REBAR_ESTIMATE"
+    },
+    "Ominaisuus-BETK-143": {
+      "tekla": "REBAR_ESTIMATE"
+    },
+    "Ominaisuus-BETK-144": {
+      "tekla": "CUSTOM.REBAR_ESTIMATE_1"
+    },
+    "Ominaisuus-BETK-145": {
+      "tekla": "CUSTOM.REBAR_ESTIMATE_1.METHOD"
+    },
+    "Ominaisuus-BETK-146": {
+      "tekla": "REBAR_ESTIMATE_Q"
+    },
+    "Ominaisuus-BETK-147": {
+      "tekla": "CUSTOM.EXPOSURE_CLASS_1"
+    },
+    "Ominaisuus-BETK-148": {
+      "tekla": "CUSTOM.EXPOSURE_CLASS_2"
+    },
+    "Ominaisuus-BETK-149": {
+      "tekla": "CUSTOM.EXPOSURE_CLASS_2"
+    },
+    "Ominaisuus-BETK-150": {
+      "tekla": "CUSTOM.EXPOSURE_CLASS_1.DESCRIPTION"
     }
   }
 }

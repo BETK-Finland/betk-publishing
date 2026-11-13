@@ -13,28 +13,28 @@ export const workingGroups: WorkingGroup[] = [
     slug: "betk",
     label: "BETK",
     title: "BETK-työryhmä",
-    lead: "Tulossa pian.",
+    lead: "BETK kehittää informaation kulkua tilauksesta suunniteltavien rakennustuotteiden, ensisijaisesti betonielementtien, toimitusketjussa suunnittelusta ylläpitoon.",
   },
   {
     slug: "vakiointi",
     label: "Vakiointi",
     i18nKey: "wg.content",
     title: "Vakiointi",
-    lead: "Tulossa pian.",
+    lead: "Vakiointi-työryhmä edistää betonielementtien yhtenäistä kuvaamista rakennuksen tietomallissa (BIM, IFC), jotta data on koneluettavaa ja koneymmärrettävää.",
   },
   {
     slug: "rajapinta",
     label: "Rajapinta",
     i18nKey: "wg.transfer",
     title: "Rajapinta",
-    lead: "Tulossa pian.",
+    lead: "Rajapinta-työryhmä edistää toimitusketjun kokonaisarkkitehtuuria ja datan koneellista siirtoa yritysten välillä Peppol-sanomin ja GS1-tunnistein.",
   },
   {
     slug: "valutarvike",
     label: "Valutarvike",
     i18nKey: "wg.valutarvike",
     title: "Valutarvike",
-    lead: "Tulossa pian.",
+    lead: "Valutarvike-työryhmä kehittää yhtenäistä tapaa nimetä ja kuvata betonielementeissä käytettäviä valutarvikkeita koneluettavasti koko toimitusketjussa.",
   },
 ];
 

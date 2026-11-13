@@ -36,12 +36,14 @@ export interface ManifestSection {
   data?: string;    // JSON filename without .json, for glossary / reinforcement-annex
   anchor: string;
   label?: string;   // TOC label for non-prose kinds; prose kinds derive from frontmatter
+  heading?: string; // section heading for non-prose kinds; defaults to label
 }
 
 export interface Manifest {
   slug: string;
   nav_title: string;
   lang?: string;   // "fi" | "en" | "sv" — defaults to "fi" if omitted
+  group?: string;  // shared by translations of the same guide
   sections: ManifestSection[];
 }
 
@@ -125,6 +127,29 @@ export function listDocs(): Array<{ slug: string; meta: DocumentMeta; manifest: 
   return Object.values(docs)
     .filter(d => d.manifest)
     .map(d => ({ slug: d.slug, meta: d.meta, manifest: d.manifest }));
+}
+
+// Translations of a guide: lang -> slug, for every doc sharing its manifest `group`.
+// A doc without a group is only its own translation.
+export function translationsOf(slug: string): Record<string, string> {
+  const doc = getDoc(slug);
+  const group = doc.manifest.group;
+  const out: Record<string, string> = {};
+  for (const d of listDocs()) {
+    if (d.slug === slug || (group && d.manifest.group === group)) {
+      out[d.manifest.lang ?? "fi"] = d.slug;
+    }
+  }
+  return out;
+}
+
+// Site languages this doc should also be listed under because its group has
+// no version in that language. Only the Finnish original acts as fallback.
+export function fallbackLangs(slug: string): string[] {
+  const doc = getDoc(slug);
+  if ((doc.manifest.lang ?? "fi") !== "fi") return [];
+  const have = translationsOf(slug);
+  return ["sv", "en"].filter(l => !have[l]);
 }
 
 // --- Cross-reference maps (product-scoped, not doc-scoped) ---
