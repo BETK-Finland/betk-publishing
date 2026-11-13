@@ -1,0 +1,21 @@
+{
+  "slug": "advanced-despatch-advice-fi",
+  "nav_title": "[LUONNOS] Peppol Advanced Despatch Advice (lähetysilmoitus)",
+  "lang": "fi",
+  "hidden": true,
+  "sections": [
+    { "kind": "prose", "content": "01-johdanto", "anchor": "johdanto" },
+    { "kind": "prose", "content": "02-muutostenhallinta", "anchor": "muutostenhallinta" },
+    { "kind": "prose", "content": "03-katetut-sanomat", "anchor": "katetut-sanomat" },
+    { "kind": "prose", "content": "04-otsikkotaso", "anchor": "otsikkotaso" },
+    { "kind": "prose", "content": "05-osapuolet", "anchor": "osapuolet" },
+    { "kind": "prose", "content": "06-lahetys-ja-toimitus", "anchor": "lahetys-ja-toimitus" },
+    { "kind": "prose", "content": "07-toimitusrivit", "anchor": "toimitusrivit" },
+    { "kind": "prose", "content": "08-kayttotapaukset", "anchor": "kayttotapaukset" },
+    { "kind": "prose", "content": "09-liite-a-yksikot", "anchor": "liite-a-yksikot" },
+    { "kind": "prose", "content": "10-liite-b-ominaisuudet", "anchor": "liite-b-ominaisuudet" },
+    { "kind": "prose", "content": "11-liite-c-mitat", "anchor": "liite-c-mitat" },
+    { "kind": "prose", "content": "12-esimerkkitiedostot", "anchor": "esimerkkitiedostot" },
+    { "kind": "prose", "content": "13-liite-d-viitteet", "anchor": "liite-d-viitteet" }
+  ]
+}

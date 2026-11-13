@@ -1,0 +1,19 @@
+{
+  "otsikko": "[LUONNOS] Peppol-soveltamisohje: Advanced Despatch Advice (lähetysilmoitus)",
+  "alaotsikko": "Suomen rakennusala — Betonielementit, valmisbetoni ja logistiikka",
+  "julkaisija": "Rakennusteollisuus ry (BETK) — Luonnos",
+  "paivamaara": "2026-11-13",
+  "versio": "0.1",
+  "status": "LUONNOS",
+  "versiohistoria": [
+    {
+      "versio": "0.1",
+      "paivamaara": "2026-11-13",
+      "tekija": "BETK",
+      "kuvaus": "Alustava LUONNOS-runko Peppol-soveltamisohjepohjan pohjalta"
+    }
+  ],
+  "laatijat": [
+    { "nimi": "TODO: Työryhmän laatijat", "organisaatio": "BETK / Rakennusteollisuus ry" }
+  ]
+}
