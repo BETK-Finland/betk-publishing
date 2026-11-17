@@ -837,11 +837,13 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   padding: 12px;
   margin: 14px 0 18px;
   width: 100%;
+  height: 480px;
   min-height: 420px;
   overflow: hidden;
   position: relative;
 }
 
+.sov-prose .bpmn-container .bjs-container,
 .sov-prose .bpmn-container svg {
   display: block;
   width: 100%;
