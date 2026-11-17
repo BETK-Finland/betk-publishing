@@ -844,10 +844,18 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
 }
 
 .sov-prose .bpmn-container .bjs-container,
-.sov-prose .bpmn-container svg {
+.sov-prose .bpmn-container .djs-container > svg {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.sov-prose .bpmn-container .bjs-powered-by {
+  bottom: 4px;
+  right: 6px;
+  transform: scale(0.6);
+  transform-origin: bottom right;
+  opacity: 0.55;
 }
 
 /* Data tables */
