@@ -889,14 +889,14 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   position: absolute !important;
   bottom: 6px !important;
   right: 12px !important;
-  transform: scale(0.55);
+  transform: scale(0.65);
   transform-origin: bottom right;
-  opacity: 0.45;
+  opacity: 0.85;
   transition: opacity 150ms ease;
 }
 
 .sov-prose .bpmn-container .bjs-powered-by:hover {
-  opacity: 0.85;
+  opacity: 1;
 }
 
 /* Data tables */
