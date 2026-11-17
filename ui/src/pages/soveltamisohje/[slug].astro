@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const doc = getDoc(slug!);
-const { meta, manifest, tables } = doc;
+const { meta, manifest, tables, bpmn } = doc;
 const allDocs = listDocs();
 const base = import.meta.env.BASE_URL;
 const lang = sovLang(manifest.lang);
@@ -185,7 +185,7 @@ const tocItems = resolved.flatMap(r => {
       </nav>
       <SoveltamisohjeToc items={tocItems} label={t.toc} />
     </div>
-    <article class="sov-document" lang={lang} data-sov-translations={JSON.stringify(translationUrls)} data-sov-doc-lang={lang} data-sov-printed={t.printed} data-sov-locale={dateLocale[lang]}>
+    <article class="sov-document" lang={lang} data-sov-translations={JSON.stringify(translationUrls)} data-sov-doc-lang={lang} data-sov-printed={t.printed} data-sov-locale={dateLocale[lang]} data-sov-bpmn={Object.keys(bpmn).length > 0 ? JSON.stringify(bpmn) : undefined}>
       <SoveltamisohjeHeader meta={meta} lang={lang} />
       <PrintToc sections={tocItems} heading={t.toc} />
 
@@ -373,5 +373,34 @@ const tocItems = resolved.flatMap(r => {
       .catch(() => {
         // Keep raw code block visible if offline or CDN blocked
       });
+  }
+
+  const bpmnContainers = document.querySelectorAll(".sov-prose [data-bpmn]");
+  if (bpmnContainers.length > 0) {
+    const docEl = document.querySelector(".sov-document");
+    const bpmnMap = JSON.parse(docEl?.getAttribute("data-sov-bpmn") ?? "{}");
+    import("https://cdn.jsdelivr.net/npm/bpmn-js@18.6.1/lib/Viewer/+esm")
+      .then(async ({ default: BpmnViewer }) => {
+        const viewers = [];
+        for (const el of bpmnContainers) {
+          const name = el.getAttribute("data-bpmn");
+          const xml = name ? bpmnMap[name] : null;
+          if (!xml) continue;
+          const viewer = new BpmnViewer({ container: el });
+          await viewer.importXML(xml);
+          const canvas = viewer.get("canvas");
+          canvas.zoom("fit-viewport", "auto");
+          const viewbox = canvas.viewbox();
+          if (viewbox && viewbox.inner && viewbox.inner.height) {
+            el.style.height = `${Math.max(420, Math.ceil(viewbox.inner.height + 40))}px`;
+            canvas.zoom("fit-viewport", "auto");
+          }
+          viewers.push(canvas);
+        }
+        const refit = () => viewers.forEach((c) => c.zoom("fit-viewport", "auto"));
+        window.addEventListener("resize", refit);
+        window.addEventListener("beforeprint", refit);
+      })
+      .catch(() => {});
   }
 </script>

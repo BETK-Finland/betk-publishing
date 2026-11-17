@@ -65,6 +65,10 @@ const dataModules = import.meta.glob<unknown>(
   "../../../content/soveltamisohje/*/tables/*.json",
   { eager: true, import: "default" },
 );
+const bpmnModules = import.meta.glob<string>(
+  "../../../content/soveltamisohje/*/*.bpmn",
+  { eager: true, query: "?raw", import: "default" },
+);
 
 function slugFromPath(path: string): string {
   // Captures <slug> from any path containing soveltamisohje/<slug>/...
@@ -85,6 +89,7 @@ interface DocRecord {
   meta: DocumentMeta;
   manifest: Manifest;
   tables: Record<string, ValueTable | PintakasittelyTable | Lyhenteet | RaudoitusEsimerkit>;
+  bpmn: Record<string, string>;
 }
 
 const docs: Record<string, DocRecord> = {};
@@ -94,9 +99,10 @@ for (const [path, meta] of Object.entries(metaModules)) {
   docs[slug] = {
     slug,
     meta,
-    // Manifest and tables filled in below.
+    // Manifest, tables, and bpmn diagrams filled in below.
     manifest: undefined as unknown as Manifest,
     tables: {},
+    bpmn: {},
   };
 }
 
@@ -112,6 +118,14 @@ for (const [path, data] of Object.entries(dataModules)) {
   const name = basenameFromPath(path);
   if (docs[slug]) {
     docs[slug].tables[name] = data as ValueTable | PintakasittelyTable | Lyhenteet | RaudoitusEsimerkit;
+  }
+}
+
+for (const [path, xml] of Object.entries(bpmnModules)) {
+  const slug = slugFromPath(path);
+  const file = path.split("/").pop()!;
+  if (docs[slug]) {
+    docs[slug].bpmn[file] = xml;
   }
 }
 

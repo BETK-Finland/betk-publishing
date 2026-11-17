@@ -19,4 +19,4 @@ Lähettäjälle ilmoitetaan sanoman ja tavaroiden saapumissesta. Vastaus-sanomal
 
 `cbc:ReceiptAdviceTypeCode` `S` = Kun tavarat on vastaanotettu ja tarkastettu. Sanoman voi lähettää useaan otteeseen.
 
-> **TODO:** Lisää prosessikaavio lähettäjän, Peppol-verkoston ja työmaan rooleista.
+<div class="bpmn-container" data-bpmn="03-prosessi.bpmn" role="img" aria-label="Prosessikaavio: Lähettäjä, Kuljetusliike ja Vastaanottaja / Työmaa (T120 ja T128)"></div>
