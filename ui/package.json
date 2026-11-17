@@ -12,14 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.0",
     "astro": "^6.1.6",
-    "bpmn-js": "^18.6.1",
-    "three": "0.186.1"
+    "@astrojs/mdx": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
-    "@types/three": "0.186.0",
     "typescript": "^5.9.3"
   }
 }

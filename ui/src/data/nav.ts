@@ -52,7 +52,6 @@ export const headlines: NavItem[] = [
       { href: withBase("properties"), label: "Ominaisuudet", i18nKey: "nav.properties" },
       { href: withBase("sanasto"), label: "Sanasto", i18nKey: "nav.glossary" },
       { href: withBase("peppol"), label: "Peppol", i18nKey: "nav.peppol" },
-      { href: withBase("tietovirrat"), label: "Tietovirrat (3D)", i18nKey: "nav.tietovirrat" },
     ],
   },
   { href: withBase("tyoryhmat/betk"), label: "Työryhmät", i18nKey: "nav.workingGroups" },

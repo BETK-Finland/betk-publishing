@@ -7,13 +7,7 @@ import {
 	defaultDesignApplication,
 } from "../data/loader";
 import { propertySetAnchor } from "../data/anchors";
-import { withBase } from "../data/nav";
-import { getTietovirratPayload } from "../data/tietovirrat";
 import DesignAppHeader from "./DesignAppHeader.astro";
-
-const traceByGroup = new Map(
-	getTietovirratPayload().propertySetTraces.map((t) => [t.group, t]),
-);
 ---
 
 <div
@@ -25,23 +19,12 @@ const traceByGroup = new Map(
 		<section class="node discipline-node open" data-node="discipline">
 			<h2 class="catalog-heading">{disc.label}</h2>
 			<div class="node-body">
-				{disc.sets.map((set) => {
-					const trace = traceByGroup.get(set.group);
-					return (
+				{disc.sets.map((set) => (
 					<section class="node" data-node="propertyset" id={propertySetAnchor(disc.discipline, set.group)}>
 						<header class="node-header propertyset-header" role="button" tabindex="0" aria-expanded="false">
 							<span class="caret" aria-hidden="true"></span>
 							<h3>{set.group}</h3>
 							<span class="count">{set.properties.length}</span>
-							{trace && (
-								<a
-									href={withBase(`tietovirrat?pset=${trace.id}`)}
-									class="pset-trace-link"
-									title={`Seuraa ominaisuusryhmää "${set.group}" 3D-tietovirtamallissa`}
-								>
-									3D-tietovirta →
-								</a>
-							)}
 						</header>
 						<div class="node-body">
 							<table class="product-table property-set-table">
@@ -96,8 +79,7 @@ const traceByGroup = new Map(
 							</table>
 						</div>
 					</section>
-					);
-				})}
+				))}
 			</div>
 		</section>
 	))}
@@ -117,53 +99,12 @@ const traceByGroup = new Map(
 	}
 
 	document.querySelectorAll<HTMLElement>(".property-set-list .propertyset-header").forEach((header) => {
-		header.addEventListener("click", (event) => {
-			if ((event.target as HTMLElement).closest(".pset-trace-link")) {
-				return;
-			}
-			toggleNode(header);
-		});
+		header.addEventListener("click", () => toggleNode(header));
 		header.addEventListener("keydown", (event) => {
-			if ((event.target as HTMLElement).closest(".pset-trace-link")) {
-				return;
-			}
 			if (event.key === "Enter" || event.key === " ") {
 				event.preventDefault();
 				toggleNode(header);
 			}
 		});
 	});
-
-	function openTargetHash() {
-		const hashId = decodeURIComponent(location.hash.slice(1));
-		if (!hashId.startsWith("pset-")) return;
-		const targetNode = document.getElementById(hashId);
-		if (!targetNode) return;
-		targetNode.classList.add("open");
-		targetNode
-			.querySelector(":scope > .propertyset-header")
-			?.setAttribute("aria-expanded", "true");
-	}
-
-	openTargetHash();
-	window.addEventListener("hashchange", openTargetHash);
 </script>
-
-<style>
-	.pset-trace-link {
-		margin-left: auto;
-		padding: 2px 8px;
-		border-radius: 4px;
-		border: 1px solid var(--line, #cbd5e1);
-		font-size: 0.75rem;
-		font-weight: 600;
-		color: var(--accent-teal, #0284c7);
-		text-decoration: none;
-		white-space: nowrap;
-	}
-
-	.pset-trace-link:hover {
-		background: var(--surface-raised, rgba(2, 132, 199, 0.08));
-		text-decoration: underline;
-	}
-</style>
