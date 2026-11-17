@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
-                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
-                  id="Definitions_DespatchAdvice"
-                  targetNamespace="http://betk.fi/bpmn/despatch-advice">
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_DespatchAdvice" targetNamespace="http://betk.fi/bpmn/despatch-advice">
   <bpmn:collaboration id="Collaboration_Despatch">
     <bpmn:participant id="Participant_Sender" name="Lähettäjä" processRef="Process_Sender" />
     <bpmn:participant id="Participant_Carrier" name="Kuljetusliike" processRef="Process_Carrier" />
     <bpmn:participant id="Participant_Receiver" name="Vastaanottaja / Työmaa" processRef="Process_Receiver" />
-    <bpmn:messageFlow id="MsgFlow_T120_1" name="T120 (TypeCode 1)" sourceRef="Task_SendT120_1" targetRef="Task_ReceivePreAdvice" />
-    <bpmn:messageFlow id="MsgFlow_T128_D" name="T128 (TypeCode D, valinnainen)" sourceRef="Task_ReceivePreAdvice" targetRef="Task_SendT120_1" />
-    <bpmn:messageFlow id="MsgFlow_CarrierLoad" name="Kuorma" sourceRef="Task_LoadAndDispatch" targetRef="Task_Pickup" />
-    <bpmn:messageFlow id="MsgFlow_T120_2" name="T120 (TypeCode 2)" sourceRef="Task_LoadAndDispatch" targetRef="Task_ReceiveDispatch" />
-    <bpmn:messageFlow id="MsgFlow_Delivery" name="Toimitus" sourceRef="Task_Transport" targetRef="Task_InspectGoods" />
-    <bpmn:messageFlow id="MsgFlow_T128_S" name="T128 (TypeCode S, valinnainen)" sourceRef="Task_InspectGoods" targetRef="Task_ReceiveConfirm" />
+    <bpmn:messageFlow id="MsgFlow_CarrierLoad" sourceRef="Task_LoadAndDispatch" targetRef="Task_Pickup" />
+    <bpmn:messageFlow id="MsgFlow_T120_2" sourceRef="Task_LoadAndDispatch" targetRef="Task_ReceiveDispatch" />
+    <bpmn:messageFlow id="MsgFlow_Delivery" sourceRef="Task_Transport" targetRef="Task_InspectGoods" />
+    <bpmn:messageFlow id="MsgFlow_T128_S" sourceRef="Task_InspectGoods" targetRef="Task_ReceiveConfirm" />
+    <bpmn:messageFlow id="MsgFlow_T128_D" sourceRef="Task_ReceivePreAdvice" targetRef="Task_SendT120_1" />
+    <bpmn:messageFlow id="MsgFlow_T120_1" sourceRef="Task_SendT120_1" targetRef="Task_ReceivePreAdvice" />
+    <bpmn:messageFlow id="Flow_1ko6j2h" sourceRef="Task_SendT120_1" targetRef="Task_Pickup" />
   </bpmn:collaboration>
   <bpmn:process id="Process_Sender" isExecutable="false">
-    <bpmn:startEvent id="StartEvent_OrderReady" name="Toimitus valmis">
+    <bpmn:startEvent id="StartEvent_OrderReady" name="Kuorma suunniteltu">
       <bpmn:outgoing>Flow_S1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Task_SendT120_1" name="Lähetä ennakkoilmoitus (T120 TypeCode 1)">
+    <bpmn:task id="Task_SendT120_1" name="Lähetä ennakkoilmoitus">
       <bpmn:incoming>Flow_S1</bpmn:incoming>
       <bpmn:outgoing>Flow_S2</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_LoadAndDispatch" name="Lastaa kuorma ja lähetä toimitusilmoitus (T120 TypeCode 2)">
+    <bpmn:task id="Task_LoadAndDispatch" name="Kuorman teko">
       <bpmn:incoming>Flow_S2</bpmn:incoming>
       <bpmn:outgoing>Flow_S3</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_ReceiveConfirm" name="Vastaanota kuittaus (T128)">
+    <bpmn:task id="Task_ReceiveConfirm" name="Vastaanottokuittaus">
       <bpmn:incoming>Flow_S3</bpmn:incoming>
       <bpmn:outgoing>Flow_S4</bpmn:outgoing>
     </bpmn:task>
@@ -42,84 +37,61 @@
     <bpmn:sequenceFlow id="Flow_S4" sourceRef="Task_ReceiveConfirm" targetRef="EndEvent_SenderDone" />
   </bpmn:process>
   <bpmn:process id="Process_Carrier" isExecutable="false">
-    <bpmn:task id="Task_Pickup" name="Nouda ja lastaa kuorma tehtaalta">
-      <bpmn:outgoing>Flow_C1</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Task_Transport" name="Kuljeta ja toimita työmaalle">
+    <bpmn:task id="Task_Transport" name="Kuljetus">
       <bpmn:incoming>Flow_C1</bpmn:incoming>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_C1" sourceRef="Task_Pickup" targetRef="Task_Transport" />
+    <bpmn:task id="Task_Pickup" name="Nouda ja lastaa kuorma tehtaalta">
+      <bpmn:outgoing>Flow_C1</bpmn:outgoing>
+    </bpmn:task>
   </bpmn:process>
   <bpmn:process id="Process_Receiver" isExecutable="false">
-    <bpmn:task id="Task_ReceivePreAdvice" name="Vastaanota ennakkoilmoitus ja varaa purku (T128 TypeCode D valinnainen)">
-      <bpmn:outgoing>Flow_R1</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:task id="Task_ReceiveDispatch" name="Seuraa saapuvaa toimitusta">
       <bpmn:incoming>Flow_R1</bpmn:incoming>
       <bpmn:outgoing>Flow_R2</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_InspectGoods" name="Vastaanota ja tarkasta tavarat (T128 TypeCode S valinnainen)">
+    <bpmn:task id="Task_InspectGoods" name="Vastaanotto ja tarkastus">
       <bpmn:incoming>Flow_R2</bpmn:incoming>
       <bpmn:outgoing>Flow_R3</bpmn:outgoing>
     </bpmn:task>
     <bpmn:endEvent id="EndEvent_ReceiverDone" name="Toimitus vastaanotettu">
       <bpmn:incoming>Flow_R3</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_R1" sourceRef="Task_ReceivePreAdvice" targetRef="Task_ReceiveDispatch" />
     <bpmn:sequenceFlow id="Flow_R2" sourceRef="Task_ReceiveDispatch" targetRef="Task_InspectGoods" />
     <bpmn:sequenceFlow id="Flow_R3" sourceRef="Task_InspectGoods" targetRef="EndEvent_ReceiverDone" />
+    <bpmn:task id="Task_ReceivePreAdvice" name="Vastaanota ennakkoilmoitus">
+      <bpmn:outgoing>Flow_R1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_R1" sourceRef="Task_ReceivePreAdvice" targetRef="Task_ReceiveDispatch" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Despatch">
     <bpmndi:BPMNPlane id="BPMNPlane_Despatch" bpmnElement="Collaboration_Despatch">
       <bpmndi:BPMNShape id="Participant_Sender_di" bpmnElement="Participant_Sender" isHorizontal="true">
         <dc:Bounds x="120" y="60" width="980" height="160" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_OrderReady_di" bpmnElement="StartEvent_OrderReady">
         <dc:Bounds x="180" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="160" y="165" width="76" height="14" />
+          <dc:Bounds x="172" y="165" width="54" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_SendT120_1_di" bpmnElement="Task_SendT120_1">
         <dc:Bounds x="260" y="100" width="180" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_LoadAndDispatch_di" bpmnElement="Task_LoadAndDispatch">
         <dc:Bounds x="520" y="100" width="190" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_ReceiveConfirm_di" bpmnElement="Task_ReceiveConfirm">
         <dc:Bounds x="790" y="100" width="160" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_SenderDone_di" bpmnElement="EndEvent_SenderDone">
         <dc:Bounds x="1010" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1010" y="165" width="36" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_Carrier_di" bpmnElement="Participant_Carrier" isHorizontal="true">
-        <dc:Bounds x="120" y="260" width="980" height="140" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Pickup_di" bpmnElement="Task_Pickup">
-        <dc:Bounds x="480" y="290" width="180" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Transport_di" bpmnElement="Task_Transport">
-        <dc:Bounds x="720" y="290" width="180" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_Receiver_di" bpmnElement="Participant_Receiver" isHorizontal="true">
-        <dc:Bounds x="120" y="440" width="980" height="160" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_ReceivePreAdvice_di" bpmnElement="Task_ReceivePreAdvice">
-        <dc:Bounds x="260" y="480" width="190" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_ReceiveDispatch_di" bpmnElement="Task_ReceiveDispatch">
-        <dc:Bounds x="520" y="480" width="170" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_InspectGoods_di" bpmnElement="Task_InspectGoods">
-        <dc:Bounds x="770" y="480" width="190" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_ReceiverDone_di" bpmnElement="EndEvent_ReceiverDone">
-        <dc:Bounds x="1010" y="502" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="992" y="545" width="72" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_S1_di" bpmnElement="Flow_S1">
@@ -138,10 +110,40 @@
         <di:waypoint x="950" y="140" />
         <di:waypoint x="1010" y="140" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_Carrier_di" bpmnElement="Participant_Carrier" isHorizontal="true">
+        <dc:Bounds x="120" y="260" width="980" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Transport_di" bpmnElement="Task_Transport">
+        <dc:Bounds x="720" y="290" width="180" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Pickup_di" bpmnElement="Task_Pickup">
+        <dc:Bounds x="460" y="290" width="180" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_C1_di" bpmnElement="Flow_C1">
-        <di:waypoint x="660" y="330" />
+        <di:waypoint x="640" y="330" />
         <di:waypoint x="720" y="330" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_Receiver_di" bpmnElement="Participant_Receiver" isHorizontal="true">
+        <dc:Bounds x="120" y="440" width="980" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReceivePreAdvice_di" bpmnElement="Task_ReceivePreAdvice">
+        <dc:Bounds x="260" y="480" width="190" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReceiveDispatch_di" bpmnElement="Task_ReceiveDispatch">
+        <dc:Bounds x="520" y="480" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InspectGoods_di" bpmnElement="Task_InspectGoods">
+        <dc:Bounds x="770" y="480" width="190" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_ReceiverDone_di" bpmnElement="EndEvent_ReceiverDone">
+        <dc:Bounds x="1010" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="992" y="545" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_R1_di" bpmnElement="Flow_R1">
         <di:waypoint x="450" y="520" />
         <di:waypoint x="520" y="520" />
@@ -157,44 +159,32 @@
       <bpmndi:BPMNEdge id="MsgFlow_T120_1_di" bpmnElement="MsgFlow_T120_1">
         <di:waypoint x="315" y="180" />
         <di:waypoint x="315" y="480" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="225" y="232" width="84" height="27" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MsgFlow_T128_D_di" bpmnElement="MsgFlow_T128_D">
-        <di:waypoint x="395" y="480" />
-        <di:waypoint x="395" y="180" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="402" y="232" width="86" height="27" />
-        </bpmndi:BPMNLabel>
+        <di:waypoint x="380" y="480" />
+        <di:waypoint x="380" y="180" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MsgFlow_CarrierLoad_di" bpmnElement="MsgFlow_CarrierLoad">
-        <di:waypoint x="570" y="180" />
-        <di:waypoint x="570" y="290" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="518" y="232" width="44" height="14" />
-        </bpmndi:BPMNLabel>
+        <di:waypoint x="550" y="180" />
+        <di:waypoint x="550" y="290" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MsgFlow_T120_2_di" bpmnElement="MsgFlow_T120_2">
-        <di:waypoint x="645" y="180" />
-        <di:waypoint x="645" y="480" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="652" y="412" width="84" height="27" />
-        </bpmndi:BPMNLabel>
+        <di:waypoint x="670" y="180" />
+        <di:waypoint x="670" y="480" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MsgFlow_Delivery_di" bpmnElement="MsgFlow_Delivery">
         <di:waypoint x="810" y="370" />
         <di:waypoint x="810" y="480" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="756" y="412" width="46" height="14" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MsgFlow_T128_S_di" bpmnElement="MsgFlow_T128_S">
-        <di:waypoint x="895" y="480" />
-        <di:waypoint x="895" y="180" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="902" y="232" width="86" height="27" />
-        </bpmndi:BPMNLabel>
+        <di:waypoint x="920" y="480" />
+        <di:waypoint x="920" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ko6j2h_di" bpmnElement="Flow_1ko6j2h">
+        <di:waypoint x="420" y="180" />
+        <di:waypoint x="420" y="235" />
+        <di:waypoint x="480" y="235" />
+        <di:waypoint x="480" y="290" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
