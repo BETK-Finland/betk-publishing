@@ -1,10 +1,10 @@
 ---
-title: "Muutostenhallinta"
+title: Muutostenhallinta
 order: 2
 section: "2"
-draft: true
+draft: false
 ---
 
-Luonnostellaan BETK-työryhmän ja Suomen Peppol-viranomaisen (Valtiokonttori, `peppol@valtiokonttori.fi`) yhteistyönä.
+Luonnostellaan BETK-työryhmän ja Suomen Peppol-viranomaisen (Patentti- ja rekisterihallitus, `peppol@prh.fi`) yhteistyönä.
 
-> **TODO:** Vahvista päivitysvastuu ja hallintamalli.
+Peppol-viranomainen toimii yhteytenä kunnes rakennusalan virallinen malli on päätetty.

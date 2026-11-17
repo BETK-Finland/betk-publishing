@@ -1,0 +1,1378 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getTietovirratPayload } from "../data/tietovirrat";
+import { withBase } from "../data/nav";
+
+const payload = getTietovirratPayload();
+const defaultNode =
+  payload.nodes.find((n) => n.id === "bim-malli") ??
+  payload.nodes.find((n) => n.id === "e-bom-osaluettelot") ??
+  payload.nodes[0];
+---
+
+<Layout
+  title="BETK — 3D ETO Tietovirrat"
+  description="Betonielementtien toimitusketjun 3D ETO -tietovirta-arkkitehtuuri"
+  bodyClass="tietovirrat-page"
+>
+  <main class="morko-shell">
+    <!-- Left / Center 3D Viewport + Floating HUD -->
+    <section class="morko-stage-wrap" aria-label="3D Tietovirtanäkymä">
+      <div id="betk-canvas-container" class="morko-canvas-container"></div>
+
+      <!-- Top-Left Collapsible Controls HUD (collapsed by default so canvas stays clear) -->
+      <div class="morko-hud morko-hud-top is-collapsed" id="morko-filter-hud">
+        <div class="morko-hud-bar">
+          <span class="morko-hud-bar-title">SUODATTIMET &amp; TASOT</span>
+          <button
+            type="button"
+            id="morko-toggle-hud"
+            class="morko-hud-collapse-btn"
+            aria-expanded="false"
+            aria-controls="morko-hud-body"
+          >
+            Näytä
+          </button>
+        </div>
+
+        <div id="morko-hud-body" class="morko-hud-body">
+          <div class="morko-hud-group">
+            <span class="morko-hud-title">KERROKSET (Y)</span>
+            <div class="morko-chip-row">
+              {payload.layers.map((layer) => (
+                <label class="morko-toggle-chip">
+                  <input
+                    type="checkbox"
+                    checked
+                    data-layer-toggle={layer.id}
+                  />
+                  <span>K{layer.id}: {layer.label.replace(/^Kerros \d+:\s*/, "")}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div class="morko-hud-group">
+            <span class="morko-hud-title">POHJAPIIRUSTUKSET (SVG)</span>
+            <div class="morko-chip-row">
+              {payload.layers
+                .filter((l) => l.referenceDrawing != null)
+                .map((layer) => (
+                  <label class="morko-toggle-chip">
+                    <input
+                      type="checkbox"
+                      checked={layer.referenceDrawing!.visibleByDefault}
+                      data-drawing-toggle={layer.id}
+                    />
+                    <span>K{layer.id} Pohjakaavio</span>
+                  </label>
+                ))}
+            </div>
+          </div>
+
+          <div class="morko-hud-group">
+            <span class="morko-hud-title">TIETOVIRTAKANAVAT</span>
+            <div class="morko-chip-row">
+              {Object.entries(payload.channels).map(([key, ch]) => (
+                <label class="morko-toggle-chip" style={`--chip-color: ${ch.color}`}>
+                  <input
+                    type="checkbox"
+                    checked
+                    data-channel-toggle={key}
+                  />
+                  <span class="morko-dot" style={`background:${ch.color}`}></span>
+                  <span>{ch.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top-Right Property Set Trace Selector HUD -->
+      {payload.propertySetTraces.length > 0 && (
+        <div class="morko-hud morko-hud-trace" id="morko-trace-hud">
+          <div class="morko-hud-bar">
+            <span class="morko-hud-bar-title">SEURAA OMINAISUUSRYHMÄÄ (PROPERTY SET)</span>
+            <a
+              href={withBase("properties#pset-precast-betk-tunnistetiedot-ja-luokittelu")}
+              id="morko-trace-browser-link"
+              class="morko-trace-ext-link"
+            >
+              Ominaisuusselain →
+            </a>
+          </div>
+          <div class="morko-trace-chip-row" role="group" aria-label="Valitse seurattava ominaisuusryhmä">
+            <button
+              type="button"
+              class="morko-trace-btn is-active"
+              data-trace-id=""
+              aria-pressed="true"
+            >
+              Kaikki tietovirrat
+            </button>
+            {payload.propertySetTraces.map((trace) => (
+              <button
+                type="button"
+                class="morko-trace-btn"
+                data-trace-id={trace.id}
+                style={`--trace-color: ${trace.color}`}
+                aria-pressed="false"
+                title={`${trace.label} (${trace.propertyCount} ominaisuutta, ${trace.edgeCount} tietovirtaa)`}
+              >
+                <span class="morko-dot" style={`background:${trace.color}`}></span>
+                <span>{trace.label}</span>
+                <span class="morko-trace-count">{trace.propertyCount}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Bottom-Left Camera & Open Data Bar -->
+      <div class="morko-hud morko-hud-bottom">
+        <button type="button" id="morko-reset-camera" class="morko-btn">
+          Palauta kamera
+        </button>
+        <button type="button" id="morko-top-view" class="morko-btn">
+          Ylhäältä
+        </button>
+        <div class="morko-open-data">
+          <span>Avoin data:</span>
+          <a href={withBase("tietovirrat/layer.json")} target="_blank" rel="noopener">layer.json</a>
+          <a href={withBase("tietovirrat/nodes.json")} target="_blank" rel="noopener">nodes.json</a>
+          <a href={withBase("tietovirrat/graph.json")} target="_blank" rel="noopener">graph.json</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right-Hand Inspector Panel -->
+    <aside class="morko-inspector" id="morko-inspector" aria-live="polite">
+      <!-- Active Property Set Trace Card (hidden when "Kaikki tietovirrat" is active) -->
+      <div id="insp-active-trace" class="morko-trace-card" hidden>
+        <div class="morko-trace-card-head">
+          <span class="morko-trace-pill">AKTIIVINEN TIETOVIRTASEURANTA</span>
+          <button type="button" id="insp-clear-trace" class="morko-trace-clear-btn">
+            Tyhjennä ✕
+          </button>
+        </div>
+        <h2 id="insp-trace-title" class="morko-trace-card-title"></h2>
+        <p id="insp-trace-desc" class="morko-trace-card-desc"></p>
+        <div class="morko-trace-stats">
+          <span id="insp-trace-stat-nodes"></span>
+          <span>•</span>
+          <span id="insp-trace-stat-edges"></span>
+          <span>•</span>
+          <a id="insp-trace-link" href={withBase("properties")} class="morko-trace-ext-link">
+            Avaa ominaisuusselaimessa →
+          </a>
+        </div>
+        <details class="morko-trace-props-details">
+          <summary id="insp-trace-props-summary">Ominaisuudet ryhmässä (0)</summary>
+          <ul id="insp-trace-props-list" class="morko-trace-props-list"></ul>
+        </details>
+      </div>
+
+      <div class="morko-inspector-header">
+        <span id="insp-layer-badge" class="morko-layer-badge">
+          KERROS {defaultNode.layer}
+        </span>
+        <h1 id="insp-title" class="morko-inspector-title">{defaultNode.label}</h1>
+        <p id="insp-desc" class="morko-inspector-desc">{defaultNode.description}</p>
+      </div>
+
+      <div class="morko-inspector-section">
+        <h2>Ominaisuusryhmät solmussa (<span id="insp-pset-count">{defaultNode.propertySets.length}</span>)</h2>
+        <p class="morko-section-hint">Klikkaa ominaisuusryhmää seurataksesi sen kulkua koko prosessin läpi:</p>
+        <div id="insp-psets" class="morko-tag-list"></div>
+      </div>
+
+      <div class="morko-inspector-section">
+        <h2>Järjestelmät &amp; Toiminnot</h2>
+        <div id="insp-systems" class="morko-tag-list">
+          {defaultNode.systems.map((sys) => (
+            <span class="morko-tag">{sys}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="morko-inspector-section">
+        <h2>Tiedostot, Sanomat &amp; Artefaktit</h2>
+        <div id="insp-artifacts" class="morko-tag-list">
+          {defaultNode.artifacts.map((art) => (
+            <span class="morko-tag morko-tag-artifact">{art}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="morko-inspector-section">
+        <h2>Saapuvat tietovirrat (<span id="insp-in-count">{defaultNode.inputs.length}</span>)</h2>
+        <ul id="insp-inputs" class="morko-flow-list"></ul>
+      </div>
+
+      <div class="morko-inspector-section">
+        <h2>Lähtevät tietovirrat (<span id="insp-out-count">{defaultNode.outputs.length}</span>)</h2>
+        <ul id="insp-outputs" class="morko-flow-list"></ul>
+      </div>
+    </aside>
+  </main>
+
+  <script
+    type="application/json"
+    id="tietovirrat-payload"
+    set:html={JSON.stringify(payload)}
+  />
+</Layout>
+
+<script>
+  import type {
+    ResolvedNode,
+    ResolvedPropertySetTrace,
+    TietovirratPayload,
+  } from "../data/tietovirrat";
+  import { TietovirratSceneManager } from "../scripts/tietovirrat/scene-manager";
+
+  let manager: TietovirratSceneManager | null = null;
+
+  function initTietovirrat() {
+    const container = document.getElementById("betk-canvas-container");
+    const payloadEl = document.getElementById("tietovirrat-payload");
+    if (!container || !payloadEl || !payloadEl.textContent) {
+      return;
+    }
+
+    const payload: TietovirratPayload = JSON.parse(payloadEl.textContent);
+    const nodesById = new Map<string, ResolvedNode>(
+      payload.nodes.map((n) => [n.id, n]),
+    );
+    const tracesById = new Map<string, ResolvedPropertySetTrace>(
+      (payload.propertySetTraces ?? []).map((t) => [t.id, t]),
+    );
+
+    const badgeEl = document.getElementById("insp-layer-badge")!;
+    const titleEl = document.getElementById("insp-title")!;
+    const descEl = document.getElementById("insp-desc")!;
+    const psetCountEl = document.getElementById("insp-pset-count")!;
+    const psetsEl = document.getElementById("insp-psets")!;
+    const systemsEl = document.getElementById("insp-systems")!;
+    const artifactsEl = document.getElementById("insp-artifacts")!;
+    const inCountEl = document.getElementById("insp-in-count")!;
+    const outCountEl = document.getElementById("insp-out-count")!;
+    const inputsEl = document.getElementById("insp-inputs")!;
+    const outputsEl = document.getElementById("insp-outputs")!;
+
+    const activeTraceCardEl = document.getElementById("insp-active-trace")!;
+    const traceTitleEl = document.getElementById("insp-trace-title")!;
+    const traceDescEl = document.getElementById("insp-trace-desc")!;
+    const traceStatNodesEl = document.getElementById("insp-trace-stat-nodes")!;
+    const traceStatEdgesEl = document.getElementById("insp-trace-stat-edges")!;
+    const traceLinkEl = document.getElementById(
+      "insp-trace-link",
+    ) as HTMLAnchorElement | null;
+    const traceBrowserLinkEl = document.getElementById(
+      "morko-trace-browser-link",
+    ) as HTMLAnchorElement | null;
+    const tracePropsSummaryEl = document.getElementById(
+      "insp-trace-props-summary",
+    )!;
+    const tracePropsListEl = document.getElementById("insp-trace-props-list")!;
+    const clearTraceBtn = document.getElementById("insp-clear-trace");
+
+    let currentSelectedNode: ResolvedNode | null = null;
+
+    function syncTraceButtons(activeTraceId: string | null) {
+      const targetId = activeTraceId ?? "";
+      document
+        .querySelectorAll<HTMLButtonElement>("[data-trace-id]")
+        .forEach((btn) => {
+          const isMatch = (btn.dataset.traceId ?? "") === targetId;
+          btn.classList.toggle("is-active", isMatch);
+          btn.setAttribute("aria-pressed", String(isMatch));
+        });
+
+      const url = new URL(window.location.href);
+      if (activeTraceId) {
+        url.searchParams.set("pset", activeTraceId);
+      } else {
+        url.searchParams.delete("pset");
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+
+    function updateTraceUI(activeTraceId: string | null) {
+      syncTraceButtons(activeTraceId);
+
+      const trace = activeTraceId ? tracesById.get(activeTraceId) : undefined;
+      if (!trace) {
+        activeTraceCardEl.hidden = true;
+        if (traceBrowserLinkEl) {
+          traceBrowserLinkEl.href = "/properties#pset-precast-betk-tunnistetiedot-ja-luokittelu";
+        }
+        if (currentSelectedNode) {
+          updateInspector(currentSelectedNode);
+        }
+        return;
+      }
+
+      activeTraceCardEl.hidden = false;
+      activeTraceCardEl.style.setProperty("--trace-color", trace.color);
+      traceTitleEl.textContent = trace.label;
+      traceDescEl.textContent = trace.description;
+      traceStatNodesEl.textContent = `${trace.nodeCount} solmua`;
+      traceStatEdgesEl.textContent = `${trace.edgeCount} tietovirtaa`;
+
+      const targetHref = `/properties#${trace.anchor}`;
+      if (traceLinkEl) {
+        traceLinkEl.href = targetHref;
+      }
+      if (traceBrowserLinkEl) {
+        traceBrowserLinkEl.href = targetHref;
+      }
+
+      tracePropsSummaryEl.textContent = `Ominaisuudet ryhmässä (${trace.propertyCount})`;
+      tracePropsListEl.innerHTML = "";
+      for (const prop of trace.properties) {
+        const li = document.createElement("li");
+        li.className = "morko-trace-prop-item";
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "morko-trace-prop-label";
+        nameSpan.textContent = prop.label;
+        li.appendChild(nameSpan);
+
+        if (prop.becProperty) {
+          const becSpan = document.createElement("span");
+          becSpan.className = "morko-trace-prop-bec";
+          becSpan.textContent = prop.becProperty;
+          li.appendChild(becSpan);
+        }
+
+        const metaParts = [prop.dataType, prop.unit].filter(Boolean);
+        if (metaParts.length > 0) {
+          const metaSpan = document.createElement("span");
+          metaSpan.className = "morko-trace-prop-meta";
+          metaSpan.textContent = metaParts.join(" · ");
+          li.appendChild(metaSpan);
+        }
+
+        tracePropsListEl.appendChild(li);
+      }
+
+      if (currentSelectedNode) {
+        updateInspector(currentSelectedNode);
+      }
+    }
+
+    function renderNodePropertySets(node: ResolvedNode) {
+      psetsEl.innerHTML = "";
+      psetCountEl.textContent = String(node.propertySets.length);
+      const activeTraceId = manager?.getPropertySetTrace() ?? null;
+
+      if (node.propertySets.length === 0) {
+        const empty = document.createElement("span");
+        empty.className = "morko-flow-empty";
+        empty.textContent = "Ei kytkettyjä ominaisuusryhmiä.";
+        psetsEl.appendChild(empty);
+        return;
+      }
+
+      for (const psId of node.propertySets) {
+        const trace = tracesById.get(psId);
+        if (!trace) continue;
+
+        const wrap = document.createElement("div");
+        wrap.className = "morko-pset-chip-group";
+        wrap.style.setProperty("--trace-color", trace.color);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "morko-pset-chip-btn";
+        if (activeTraceId === trace.id) {
+          btn.classList.add("is-active");
+        }
+
+        const dot = document.createElement("span");
+        dot.className = "morko-dot";
+        dot.style.background = trace.color;
+        btn.appendChild(dot);
+
+        const text = document.createElement("span");
+        text.textContent = trace.label;
+        btn.appendChild(text);
+
+        btn.title =
+          activeTraceId === trace.id
+            ? "Poista ominaisuusryhmän suodatus"
+            : `Seuraa ominaisuusryhmää "${trace.label}" läpi prosessin`;
+
+        btn.addEventListener("click", () => {
+          const nextId =
+            manager?.getPropertySetTrace() === trace.id ? null : trace.id;
+          manager?.setPropertySetTrace(nextId);
+        });
+
+        const link = document.createElement("a");
+        link.href = `/properties#${trace.anchor}`;
+        link.className = "morko-pset-chip-link";
+        link.title = `Avaa ${trace.label} ominaisuusselaimessa`;
+        link.textContent = "↗";
+
+        wrap.appendChild(btn);
+        wrap.appendChild(link);
+        psetsEl.appendChild(wrap);
+      }
+    }
+
+    function renderFlowList(
+      listEl: HTMLElement,
+      edges: ResolvedNode["inputs"],
+      direction: "in" | "out",
+    ) {
+      listEl.innerHTML = "";
+      const activeTraceId = manager?.getPropertySetTrace() ?? null;
+      const filteredEdges = activeTraceId
+        ? edges.filter((e) => e.propertySets?.includes(activeTraceId))
+        : edges;
+
+      if (filteredEdges.length === 0) {
+        const empty = document.createElement("li");
+        empty.className = "morko-flow-empty";
+        empty.textContent = activeTraceId
+          ? "Ei valitun ominaisuusryhmän tietovirtoja tässä suunnassa."
+          : "Ei kytkettyjä tietovirtoja.";
+        listEl.appendChild(empty);
+        return;
+      }
+
+      for (const edge of filteredEdges) {
+        const peerId = direction === "in" ? edge.from : edge.to;
+        const peer = nodesById.get(peerId);
+        const channel = payload.channels[edge.channel];
+        const activeTrace = activeTraceId
+          ? tracesById.get(activeTraceId)
+          : undefined;
+
+        const li = document.createElement("li");
+        li.className = "morko-flow-card";
+        li.style.setProperty(
+          "--flow-color",
+          activeTrace?.color ?? channel?.color ?? "#94a3b8",
+        );
+
+        const top = document.createElement("div");
+        top.className = "morko-flow-card-top";
+
+        const peerBtn = document.createElement("button");
+        peerBtn.type = "button";
+        peerBtn.className = "morko-flow-peer-btn";
+        peerBtn.textContent =
+          direction === "in"
+            ? `← ${peer?.shortLabel ?? peerId}`
+            : `→ ${peer?.shortLabel ?? peerId}`;
+        peerBtn.addEventListener("click", () => {
+          manager?.selectNode(peerId);
+        });
+        top.appendChild(peerBtn);
+
+        if (edge.protocol) {
+          const proto = document.createElement("span");
+          proto.className = "morko-flow-proto";
+          proto.textContent = edge.protocol;
+          top.appendChild(proto);
+        }
+
+        const label = document.createElement("div");
+        label.className = "morko-flow-label";
+        label.textContent = edge.label;
+
+        li.appendChild(top);
+        li.appendChild(label);
+
+        if (edge.propertySets && edge.propertySets.length > 0) {
+          const psetRow = document.createElement("div");
+          psetRow.className = "morko-flow-psets";
+          for (const psId of edge.propertySets) {
+            const tr = tracesById.get(psId);
+            if (!tr) continue;
+            const psChip = document.createElement("button");
+            psChip.type = "button";
+            psChip.className = "morko-flow-pset-badge";
+            if (activeTraceId === tr.id) {
+              psChip.classList.add("is-active");
+            }
+            psChip.style.setProperty("--pset-color", tr.color);
+            psChip.textContent = tr.label;
+            psChip.title = `Seuraa ominaisuusryhmää: ${tr.label}`;
+            psChip.addEventListener("click", () => {
+              const nextId =
+                manager?.getPropertySetTrace() === tr.id ? null : tr.id;
+              manager?.setPropertySetTrace(nextId);
+            });
+            psetRow.appendChild(psChip);
+          }
+          li.appendChild(psetRow);
+        }
+
+        // If peer is a bridge (K1 data-hub or K0 tuotetietokanta), show the connected upstream/downstream endpoints
+        const isPeerBridge =
+          peer?.resolvedShape === "data-hub" || peer?.id === "tuotetietokanta";
+        if (peer && isPeerBridge) {
+          const rawSecondHops =
+            direction === "in"
+              ? peer.inputs.filter((e) => e.from !== edge.to)
+              : peer.outputs.filter((e) => e.to !== edge.from);
+
+          const secondHopEdges = activeTraceId
+            ? rawSecondHops.filter((e) => e.propertySets?.includes(activeTraceId))
+            : rawSecondHops;
+
+          if (secondHopEdges.length > 0) {
+            const chainWrap = document.createElement("div");
+            chainWrap.className = "morko-flow-chain";
+
+            const chainLabel = document.createElement("span");
+            chainLabel.className = "morko-flow-chain-prefix";
+            chainLabel.textContent =
+              direction === "in" ? "Lähteet:" : "Vastaanottajat:";
+            chainWrap.appendChild(chainLabel);
+
+            const seenPeers = new Set<string>();
+            for (const hop of secondHopEdges) {
+              const hopPeerId = direction === "in" ? hop.from : hop.to;
+              if (seenPeers.has(hopPeerId)) continue;
+              seenPeers.add(hopPeerId);
+
+              const hopPeer = nodesById.get(hopPeerId);
+              const hopBtn = document.createElement("button");
+              hopBtn.type = "button";
+              hopBtn.className = "morko-flow-hop-chip";
+              hopBtn.textContent = hopPeer?.shortLabel ?? hopPeerId;
+              hopBtn.title = hop.label;
+              hopBtn.addEventListener("click", () => {
+                manager?.selectNode(hopPeerId);
+              });
+              chainWrap.appendChild(hopBtn);
+            }
+
+            li.appendChild(chainWrap);
+          }
+        }
+
+        listEl.appendChild(li);
+      }
+    }
+
+    function updateInspector(node: ResolvedNode | null) {
+      currentSelectedNode = node;
+      if (!node) {
+        badgeEl.textContent = "YLEISNÄKYMÄ";
+        titleEl.textContent = "Valitse solmu 3D-mallista";
+        descEl.textContent =
+          "Klikkaa mitä tahansa prosessia (Kerros 0), tiedonsiirtopistettä (Kerros 1) tai viranomaisrekisteriä (Kerros 2) tarkastellaksesi sen järjestelmiä ja kytkettyjä tietovirtoja.";
+        psetCountEl.textContent = "0";
+        psetsEl.innerHTML = "";
+        systemsEl.innerHTML = "";
+        artifactsEl.innerHTML = "";
+        inCountEl.textContent = "0";
+        outCountEl.textContent = "0";
+        inputsEl.innerHTML = "";
+        outputsEl.innerHTML = "";
+        return;
+      }
+
+      badgeEl.textContent = `KERROS ${node.layer}`;
+      badgeEl.style.setProperty("--badge-color", node.color);
+      titleEl.textContent = node.label;
+      descEl.textContent = node.description;
+
+      renderNodePropertySets(node);
+
+      systemsEl.innerHTML = "";
+      for (const s of node.systems) {
+        const span = document.createElement("span");
+        span.className = "morko-tag";
+        span.textContent = s;
+        systemsEl.appendChild(span);
+      }
+
+      artifactsEl.innerHTML = "";
+      for (const a of node.artifacts) {
+        const span = document.createElement("span");
+        span.className = "morko-tag morko-tag-artifact";
+        span.textContent = a;
+        artifactsEl.appendChild(span);
+      }
+
+      const activeTraceId = manager?.getPropertySetTrace() ?? null;
+      const visibleInputs = activeTraceId
+        ? node.inputs.filter((e) => e.propertySets?.includes(activeTraceId))
+        : node.inputs;
+      const visibleOutputs = activeTraceId
+        ? node.outputs.filter((e) => e.propertySets?.includes(activeTraceId))
+        : node.outputs;
+
+      inCountEl.textContent = String(visibleInputs.length);
+      outCountEl.textContent = String(visibleOutputs.length);
+      renderFlowList(inputsEl, node.inputs, "in");
+      renderFlowList(outputsEl, node.outputs, "out");
+    }
+
+    manager = new TietovirratSceneManager(container, payload, {
+      onSelectNode: updateInspector,
+      onSelectTrace: updateTraceUI,
+    });
+
+    // Check URL parameters for initial node or property set trace (?pset=...)
+    const params = new URLSearchParams(window.location.search);
+    const initialPset = params.get("pset");
+    const initialNodeParam = params.get("node");
+
+    if (initialPset && tracesById.has(initialPset)) {
+      manager.selectNode(
+        initialNodeParam && nodesById.has(initialNodeParam)
+          ? initialNodeParam
+          : null,
+      );
+      manager.setPropertySetTrace(initialPset);
+    } else {
+      const initialNode =
+        (initialNodeParam ? nodesById.get(initialNodeParam) : undefined) ??
+        nodesById.get("bim-malli") ??
+        nodesById.get("e-bom-osaluettelot") ??
+        payload.nodes[0] ??
+        null;
+      if (initialNode) {
+        manager.selectNode(initialNode.id);
+      }
+    }
+
+    // Bind Property Set Trace HUD buttons
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-trace-id]")
+      .forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const rawId = btn.dataset.traceId ?? "";
+          const currentId = manager?.getPropertySetTrace() ?? "";
+          if (rawId === "") {
+            manager?.setPropertySetTrace(null);
+          } else {
+            // Selecting a trace from the top bar shows the full process flow for that property set
+            const nextId = currentId === rawId ? null : rawId;
+            if (nextId !== null) {
+              manager?.selectNode(null);
+            }
+            manager?.setPropertySetTrace(nextId);
+          }
+        });
+      });
+
+    clearTraceBtn?.addEventListener("click", () => {
+      manager?.setPropertySetTrace(null);
+    });
+
+    // Bind layer toggles
+    document
+      .querySelectorAll<HTMLInputElement>("[data-layer-toggle]")
+      .forEach((input) => {
+        input.addEventListener("change", () => {
+          const layerId = Number(input.dataset.layerToggle);
+          manager?.setLayerActive(layerId, input.checked);
+        });
+      });
+
+    // Bind SVG reference drawing toggles
+    document
+      .querySelectorAll<HTMLInputElement>("[data-drawing-toggle]")
+      .forEach((input) => {
+        input.addEventListener("change", () => {
+          const layerId = Number(input.dataset.drawingToggle);
+          manager?.setReferenceDrawingVisible(layerId, input.checked);
+        });
+      });
+
+    // Bind channel toggles
+    document
+      .querySelectorAll<HTMLInputElement>("[data-channel-toggle]")
+      .forEach((input) => {
+        input.addEventListener("change", () => {
+          const channelKey = input.dataset.channelToggle!;
+          manager?.setChannelActive(channelKey, input.checked);
+        });
+      });
+
+    // Bind reset camera & top view
+    document
+      .getElementById("morko-reset-camera")
+      ?.addEventListener("click", () => {
+        manager?.resetCamera();
+      });
+
+    document
+      .getElementById("morko-top-view")
+      ?.addEventListener("click", () => {
+        manager?.setTopView();
+      });
+
+    // Bind collapsible filter HUD toggle
+    const filterHud = document.getElementById("morko-filter-hud");
+    const toggleHudBtn = document.getElementById("morko-toggle-hud");
+    toggleHudBtn?.addEventListener("click", () => {
+      if (!filterHud) return;
+      const collapsed = filterHud.classList.toggle("is-collapsed");
+      toggleHudBtn.setAttribute("aria-expanded", String(!collapsed));
+      toggleHudBtn.textContent = collapsed ? "Näytä" : "Piilota";
+    });
+  }
+
+  initTietovirrat();
+
+  document.addEventListener("astro:before-swap", () => {
+    manager?.dispose();
+    manager = null;
+  });
+</script>
+
+<style is:global>
+  .morko-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+    height: calc(100vh - 68px);
+    min-height: 640px;
+    background: #0b1120;
+    color: #f8fafc;
+    overflow: hidden;
+  }
+
+  @media (max-width: 1024px) {
+    .morko-shell {
+      grid-template-columns: 1fr;
+      grid-template-rows: 60vh auto;
+      height: auto;
+    }
+  }
+
+  .morko-stage-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .morko-canvas-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .morko-label-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .morko-node-label {
+    pointer-events: auto;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid var(--node-accent, #64748b);
+    color: #f1f5f9;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .morko-node-label.is-selected {
+    background: var(--node-accent, #2563eb);
+    color: #ffffff;
+    box-shadow: 0 0 14px var(--node-accent, #2563eb);
+  }
+
+  .morko-node-label.is-dimmed {
+    opacity: 0.22;
+  }
+
+  .morko-hud {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    max-width: calc(100% - 32px);
+  }
+
+  .morko-hud-top {
+    top: 16px;
+    left: 16px;
+  }
+
+  .morko-hud-trace {
+    top: 16px;
+    right: 16px;
+    max-width: min(620px, calc(100% - 280px));
+  }
+
+  @media (max-width: 1180px) {
+    .morko-hud-trace {
+      top: 64px;
+      left: 16px;
+      right: auto;
+      max-width: calc(100% - 32px);
+    }
+  }
+
+  .morko-trace-ext-link {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #38bdf8;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .morko-trace-ext-link:hover {
+    text-decoration: underline;
+  }
+
+  .morko-trace-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .morko-trace-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 9px;
+    border-radius: 6px;
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    background: rgba(30, 41, 59, 0.85);
+    color: #e2e8f0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .morko-trace-btn:hover {
+    background: rgba(51, 65, 85, 0.92);
+    border-color: var(--trace-color, #38bdf8);
+  }
+
+  .morko-trace-btn.is-active {
+    background: rgba(15, 23, 42, 0.96);
+    border-color: var(--trace-color, #38bdf8);
+    color: #ffffff;
+    box-shadow: 0 0 0 1px var(--trace-color, #38bdf8), 0 0 12px rgba(56, 189, 248, 0.25);
+  }
+
+  .morko-trace-count {
+    font-size: 0.65rem;
+    font-family: monospace;
+    padding: 1px 5px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.75);
+    color: #94a3b8;
+  }
+
+  .morko-trace-card {
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid var(--trace-color, #38bdf8);
+    box-shadow: inset 3px 0 0 var(--trace-color, #38bdf8);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .morko-trace-card[hidden] {
+    display: none;
+  }
+
+  .morko-trace-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .morko-trace-pill {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--trace-color, #38bdf8);
+  }
+
+  .morko-trace-clear-btn {
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.75);
+    color: #cbd5e1;
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .morko-trace-clear-btn:hover {
+    color: #ffffff;
+    border-color: #f8fafc;
+  }
+
+  .morko-trace-card-title {
+    margin: 0;
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #f8fafc;
+  }
+
+  .morko-trace-card-desc {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: #cbd5e1;
+  }
+
+  .morko-trace-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+
+  .morko-trace-props-details {
+    margin-top: 4px;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+    padding-top: 6px;
+  }
+
+  .morko-trace-props-details summary {
+    font-size: 0.73rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .morko-trace-props-list {
+    list-style: none;
+    margin: 6px 0 0 0;
+    padding: 0;
+    max-height: 190px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .morko-trace-prop-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 4px 7px;
+    border-radius: 4px;
+    background: rgba(15, 23, 42, 0.65);
+    font-size: 0.72rem;
+  }
+
+  .morko-trace-prop-label {
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+
+  .morko-trace-prop-bec {
+    font-family: monospace;
+    font-size: 0.68rem;
+    color: #38bdf8;
+  }
+
+  .morko-trace-prop-meta {
+    font-family: monospace;
+    font-size: 0.66rem;
+    color: #94a3b8;
+  }
+
+  .morko-section-hint {
+    margin: -4px 0 8px 0;
+    font-size: 0.73rem;
+    color: #64748b;
+  }
+
+  .morko-pset-chip-group {
+    display: inline-flex;
+    align-items: stretch;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: #1e293b;
+  }
+
+  .morko-pset-chip-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    color: #e2e8f0;
+    font-size: 0.73rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .morko-pset-chip-btn:hover {
+    background: rgba(51, 65, 85, 0.8);
+  }
+
+  .morko-pset-chip-btn.is-active {
+    background: rgba(15, 23, 42, 0.95);
+    color: #ffffff;
+    box-shadow: inset 0 0 0 1px var(--trace-color, #38bdf8);
+  }
+
+  .morko-pset-chip-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 7px;
+    border-left: 1px solid rgba(148, 163, 184, 0.22);
+    color: #38bdf8;
+    font-size: 0.72rem;
+    text-decoration: none;
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  .morko-pset-chip-link:hover {
+    background: rgba(56, 189, 248, 0.2);
+    color: #ffffff;
+  }
+
+  .morko-flow-psets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 3px;
+  }
+
+  .morko-flow-pset-badge {
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--pset-color, #64748b);
+    background: rgba(15, 23, 42, 0.65);
+    color: #cbd5e1;
+    font-size: 0.65rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .morko-flow-pset-badge:hover,
+  .morko-flow-pset-badge.is-active {
+    background: var(--pset-color, #38bdf8);
+    color: #0b1120;
+  }
+
+  .morko-hud-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .morko-hud-bar-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #cbd5e1;
+  }
+
+  .morko-hud-collapse-btn {
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(30, 41, 59, 0.9);
+    color: #38bdf8;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .morko-hud-collapse-btn:hover {
+    background: #334155;
+  }
+
+  .morko-hud-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+  }
+
+  .morko-hud.is-collapsed .morko-hud-body {
+    display: none;
+  }
+
+  .morko-hud-bottom {
+    bottom: 16px;
+    left: 16px;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .morko-hud-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .morko-hud-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+  }
+
+  .morko-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .morko-toggle-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    font-size: 0.74rem;
+    color: #e2e8f0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .morko-toggle-chip input {
+    margin: 0;
+    accent-color: #38bdf8;
+  }
+
+  .morko-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    display: inline-block;
+  }
+
+  .morko-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: #1e293b;
+    color: #f8fafc;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .morko-btn:hover {
+    background: #334155;
+  }
+
+  .morko-open-data {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.74rem;
+    color: #94a3b8;
+  }
+
+  .morko-open-data a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-family: monospace;
+  }
+
+  .morko-open-data a:hover {
+    text-decoration: underline;
+  }
+
+  /* Inspector Panel */
+  .morko-inspector {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 20px;
+    background: #0f172a;
+    border-left: 1px solid rgba(148, 163, 184, 0.2);
+    overflow-y: auto;
+  }
+
+  .morko-layer-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--badge-color, #2563eb);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .morko-inspector-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #f8fafc;
+    line-height: 1.3;
+  }
+
+  .morko-inspector-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  .morko-inspector-section h2 {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin: 0 0 8px 0;
+  }
+
+  .morko-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .morko-tag {
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: #1e293b;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    font-size: 0.75rem;
+    color: #e2e8f0;
+  }
+
+  .morko-tag-artifact {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #bae6fd;
+    font-family: monospace;
+  }
+
+  .morko-flow-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .morko-flow-empty {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-style: italic;
+  }
+
+  .morko-flow-card {
+    padding: 9px 11px;
+    border-radius: 6px;
+    background: #1e293b;
+    border-left: 3px solid var(--flow-color, #38bdf8);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .morko-flow-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .morko-flow-peer-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #38bdf8;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .morko-flow-peer-btn:hover {
+    text-decoration: underline;
+  }
+
+  .morko-flow-proto {
+    font-size: 0.68rem;
+    font-family: monospace;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(15, 23, 42, 0.7);
+    color: #cbd5e1;
+  }
+
+  .morko-flow-label {
+    font-size: 0.8rem;
+    color: #e2e8f0;
+  }
+
+  .morko-flow-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.2);
+  }
+
+  .morko-flow-chain-prefix {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-right: 2px;
+  }
+
+  .morko-flow-hop-chip {
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: rgba(15, 23, 42, 0.75);
+    color: #bae6fd;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .morko-flow-hop-chip:hover {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+  }
+</style>

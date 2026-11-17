@@ -8,6 +8,11 @@ export default defineConfig({
 	base: '/',
 	trailingSlash: 'ignore',
 	integrations: [mdx()],
+	markdown: {
+		shikiConfig: {
+			theme: 'github-light',
+		},
+	},
 	vite: {
 		server: {
 			fs: {

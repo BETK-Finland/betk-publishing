@@ -20,7 +20,7 @@ import type {
 } from "../../data/soveltamisohje-types";
 
 export async function getStaticPaths() {
-  return listDocs().map(d => ({ params: { slug: d.slug } }));
+  return listDocs(true).map(d => ({ params: { slug: d.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -51,6 +51,7 @@ type Rendered =
       anchor: string;
       sectionNumber: string;
       title: string;
+      isDraft: boolean;
       Content: any;
     }
   | {
@@ -58,6 +59,7 @@ type Rendered =
       anchor: string;
       sectionNumber: string;
       title: string;
+      isDraft: boolean;
       Content: any;
       table: ValueTable;
     }
@@ -66,6 +68,7 @@ type Rendered =
       anchor: string;
       sectionNumber: string;
       title: string;
+      isDraft: boolean;
       Content: any;
       table: PintakasittelyTable;
     }
@@ -74,6 +77,7 @@ type Rendered =
       anchor: string;
       sectionNumber: string;
       title: string;
+      isDraft: boolean;
       Content: any;
       data: Gs1AiTaulukot;
     }
@@ -82,6 +86,7 @@ type Rendered =
       anchor: string;
       sectionNumber: string;
       title: string;
+      isDraft: boolean;
       Content: any;
       data: GenericTaulukot;
     }
@@ -97,6 +102,7 @@ async function resolveSection(section: typeof manifest.sections[number]): Promis
       anchor: section.anchor,
       sectionNumber: entry.data.section,
       title: entry.data.title,
+      isDraft: entry.data.draft ?? false,
       Content,
     };
     if (section.kind === "prose") return { kind: "prose", ...base };
@@ -151,7 +157,19 @@ const tocItems = resolved.flatMap(r => {
 
 <Layout title={`BETK — ${meta.otsikko}`} description={meta.alaotsikko ?? meta.otsikko}>
   <main id="main" class="sov-layout">
-    <div class="sov-sidebar">
+    <div class="sov-sidebar" id="sov-sidebar">
+      <button
+        type="button"
+        class="sov-sidebar-toggle"
+        id="sov-sidebar-toggle"
+        aria-expanded="true"
+        aria-controls="sov-sidebar"
+        aria-label="Toggle sidebar"
+      >
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="10 3 5 8 10 13" />
+        </svg>
+      </button>
       <nav class="sov-doc-nav" aria-label={t.documents}>
         <p class="sidebar-heading" data-i18n="docs.heading">DOKUMENTIT</p>
         <ul class="sov-toc-list">
@@ -174,7 +192,7 @@ const tocItems = resolved.flatMap(r => {
       {resolved.map(r => {
         if (r.kind === "prose") {
           return (
-            <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+            <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title} isDraft={r.isDraft}>
               <r.Content />
             </ProseSection>
           );
@@ -182,7 +200,7 @@ const tocItems = resolved.flatMap(r => {
         if (r.kind === "prose+table" || r.kind === "prose+pintakasittely") {
           return (
             <div>
-              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title} isDraft={r.isDraft}>
                 <r.Content />
               </ProseSection>
               <DataTable table={r.table} lang={lang} />
@@ -192,7 +210,7 @@ const tocItems = resolved.flatMap(r => {
         if (r.kind === "prose+gs1tables") {
           return (
             <div>
-              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title} isDraft={r.isDraft}>
                 <r.Content />
               </ProseSection>
               {r.data.taulukot.map(tb => (
@@ -225,7 +243,7 @@ const tocItems = resolved.flatMap(r => {
         if (r.kind === "prose+generictables") {
           return (
             <div>
-              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title}>
+              <ProseSection id={r.anchor} sectionNumber={r.sectionNumber} title={r.title} isDraft={r.isDraft}>
                 <r.Content />
               </ProseSection>
               <GenericDataTable data={r.data} lang={lang} />
@@ -299,4 +317,61 @@ const tocItems = resolved.flatMap(r => {
   window.addEventListener("beforeprint", () => {
     document.querySelectorAll("details").forEach(d => d.setAttribute("open", ""));
   });
+
+  // Sidebar collapse toggle
+  const layout = document.querySelector<HTMLElement>(".sov-layout");
+  const toggleBtn = document.getElementById("sov-sidebar-toggle");
+  if (layout && toggleBtn) {
+    const applyCollapsed = (collapsed: boolean) => {
+      layout.classList.toggle("is-collapsed", collapsed);
+      toggleBtn.setAttribute("aria-expanded", String(!collapsed));
+    };
+    try {
+      if (localStorage.getItem("betk-sov-sidebar-collapsed") === "1") {
+        applyCollapsed(true);
+      }
+    } catch {}
+    toggleBtn.addEventListener("click", () => {
+      const next = !layout.classList.contains("is-collapsed");
+      applyCollapsed(next);
+      try {
+        localStorage.setItem("betk-sov-sidebar-collapsed", next ? "1" : "0");
+      } catch {}
+    });
+  }
+</script>
+
+<script is:inline type="module">
+  // Render ```mermaid blocks on demand using site parchment palette
+  const mermaidBlocks = document.querySelectorAll('.sov-prose pre[data-language="mermaid"]');
+  if (mermaidBlocks.length > 0) {
+    import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs")
+      .then(async ({ default: mermaid }) => {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "base",
+          themeVariables: {
+            background: "#faf8f3",
+            primaryColor: "#fffdf8",
+            primaryBorderColor: "#cfc8bb",
+            primaryTextColor: "#1c1a16",
+            lineColor: "#5c574e",
+            secondaryColor: "#f4f1ea",
+            tertiaryColor: "#faf8f3",
+          },
+        });
+        const nodes = [];
+        mermaidBlocks.forEach((pre) => {
+          const container = document.createElement("div");
+          container.className = "mermaid";
+          container.textContent = pre.textContent ?? "";
+          pre.replaceWith(container);
+          nodes.push(container);
+        });
+        await mermaid.run({ nodes });
+      })
+      .catch(() => {
+        // Keep raw code block visible if offline or CDN blocked
+      });
+  }
 </script>

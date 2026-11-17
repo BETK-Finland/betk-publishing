@@ -517,6 +517,11 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   padding: 2.6rem 1.5rem 5rem;
 }
 
+.sov-layout.is-collapsed {
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
 .sov-sidebar {
   position: sticky;
   top: 4.6rem;
@@ -525,6 +530,54 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   gap: 12px;
   max-height: calc(100vh - 6rem);
   overflow-y: auto;
+}
+
+.sov-sidebar-toggle {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--separator);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 120ms, border-color 120ms, background 120ms;
+}
+
+.sov-sidebar-toggle:hover {
+  color: var(--text-strong);
+  border-color: var(--text-muted);
+}
+
+.sov-layout.is-collapsed .sov-sidebar {
+  width: 2rem;
+  min-height: calc(100vh - 7.2rem);
+  background: var(--surface);
+  border: 1px solid var(--separator);
+  border-radius: 6px;
+  padding: 4px 0;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sov-layout.is-collapsed .sov-sidebar-toggle {
+  align-self: center;
+  border: none;
+  background: transparent;
+}
+
+.sov-layout.is-collapsed .sov-sidebar-toggle svg {
+  transform: rotate(180deg);
+}
+
+.sov-layout.is-collapsed .sov-doc-nav,
+.sov-layout.is-collapsed .sov-toc {
+  display: none;
 }
 
 .sov-doc-nav {
@@ -660,6 +713,10 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   line-height: 1.65;
 }
 
+.sov-prose--draft {
+  color: #6b2218;
+}
+
 .sov-prose p {
   margin: 0 0 12px;
 }
@@ -736,6 +793,41 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   border: 1px solid var(--separator);
   border-radius: 3px;
   padding: 1px 5px;
+}
+
+.sov-prose pre {
+  background-color: var(--surface-raised) !important;
+  color: var(--ink) !important;
+  padding: 14px 16px;
+  border: 1px solid var(--separator);
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 12px 0 18px;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.sov-prose pre code {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+.sov-prose pre.github-dark span {
+  color: var(--ink) !important;
+}
+
+.sov-prose .mermaid {
+  background: var(--surface);
+  border: 1px solid var(--separator);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin: 14px 0 18px;
+  overflow-x: auto;
+  text-align: center;
 }
 
 /* Data tables */
@@ -911,6 +1003,11 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
     grid-template-columns: 200px 1fr;
     gap: 16px;
   }
+
+  .sov-layout.is-collapsed {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 16px;
+  }
 }
 
 /* Responsive: mobile (≤ 640px) --------------------------------------------- */
@@ -927,14 +1024,28 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   }
 
   /* Soveltamisohje: single column */
-  .sov-layout {
+  .sov-layout,
+  .sov-layout.is-collapsed {
     grid-template-columns: 1fr;
   }
 
-  .sov-sidebar {
+  .sov-sidebar,
+  .sov-layout.is-collapsed .sov-sidebar {
     position: static;
+    width: auto;
+    min-height: 0;
     max-height: none;
     overflow-y: visible;
+    align-items: flex-start;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  .sov-layout.is-collapsed .sov-sidebar-toggle {
+    align-self: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--separator);
   }
 
   .sov-document {
@@ -973,6 +1084,7 @@ body.hide-col-propVersion :is(th, td)[data-column="propVersion"] {
   /* Hide interactive elements */
   .sov-toc,
   .sov-doc-nav,
+  .sov-sidebar-toggle,
   .sov-xref-button,
   .sidebar,
   .issue-ticket {

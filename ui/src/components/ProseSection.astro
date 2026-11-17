@@ -3,8 +3,9 @@ interface Props {
   id: string;
   sectionNumber: string;
   title: string;
+  isDraft?: boolean;
 }
-const { id, sectionNumber, title } = Astro.props;
+const { id, sectionNumber, title, isDraft = false } = Astro.props;
 const headingTag = sectionNumber.includes(".") ? "h4" : "h2";
 ---
 
@@ -14,7 +15,7 @@ const headingTag = sectionNumber.includes(".") ? "h4" : "h2";
   ) : (
     <h4>{sectionNumber} {title}</h4>
   ))}
-  <div class="sov-prose">
+  <div class={`sov-prose${isDraft ? " sov-prose--draft" : ""}`}>
     <slot />
   </div>
 </section>

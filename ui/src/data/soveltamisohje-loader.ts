@@ -44,6 +44,7 @@ export interface Manifest {
   nav_title: string;
   lang?: string;   // "fi" | "en" | "sv" — defaults to "fi" if omitted
   group?: string;  // shared by translations of the same guide
+  hidden?: boolean;
   sections: ManifestSection[];
 }
 
@@ -123,9 +124,9 @@ export function getDoc(slug: string): DocRecord {
   return doc;
 }
 
-export function listDocs(): Array<{ slug: string; meta: DocumentMeta; manifest: Manifest }> {
+export function listDocs(includeHidden = false): Array<{ slug: string; meta: DocumentMeta; manifest: Manifest }> {
   return Object.values(docs)
-    .filter(d => d.manifest)
+    .filter(d => d.manifest && (includeHidden || !d.manifest.hidden))
     .map(d => ({ slug: d.slug, meta: d.meta, manifest: d.manifest }));
 }
 
@@ -135,7 +136,7 @@ export function translationsOf(slug: string): Record<string, string> {
   const doc = getDoc(slug);
   const group = doc.manifest.group;
   const out: Record<string, string> = {};
-  for (const d of listDocs()) {
+  for (const d of listDocs(!!doc.manifest.hidden)) {
     if (d.slug === slug || (group && d.manifest.group === group)) {
       out[d.manifest.lang ?? "fi"] = d.slug;
     }

@@ -7,6 +7,7 @@ const soveltamisohje = defineCollection({
     title: z.string(),
     order: z.number(),
     section: z.string(),
+    draft: z.boolean().optional().default(false),
   }),
 });
 

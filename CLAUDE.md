@@ -8,6 +8,7 @@ Live URL: `https://betk.fi` (GitHub Pages). BEC 1.0 is legacy and not this site.
 ## Stack
 
 - Astro 6 + TypeScript. App lives in `ui/`.
+- Diagrams & BPMN: `bpmn-js` (bpmn.io).
 - Node `>= 22.12`. Dependencies: `ui/package.json`. Install with `npm ci` from `ui/`.
 - Deploy: `.github/workflows/deploy.yml` on push to `main`.
 - Do not install npm/python/cargo packages unless the user says so.
@@ -23,12 +24,13 @@ Live URL: `https://betk.fi` (GitHub Pages). BEC 1.0 is legacy and not this site.
 | `content/tyoryhmat/` | Work-group pages — `betk.md`, `vakiointi.md`, `rajapinta.md`, `valutarvike.md` |
 | `content/muutokset.md` | Site changelog (dated headings, no versions) |
 | `ui/src/pages/` | Routes |
-| `ui/src/data/` | Catalog JSON this UI reads, plus loaders |
+| `ui/src/data/` | Catalog JSON (`precast*.json`, `valutarvike*.json`), `designApplications.json` overlay, plus loaders |
 | `.pages.yml` | Pages CMS schema for soveltamisohje, media, and työryhmät |
+| `.project/` | Local specs, handover, and Excel helper scripts (gitignored; never commit) |
 
-Routes: `/`, `/properties`, `/propertysets`, `/soveltamisohje/<slug>`, `/peppol`, `/sanasto`, `/esimerkkimallit`, `/media`, `/media/<slug>`, `/tyoryhmat/<slug>`, `/muutokset`.
+Routes: `/`, `/properties` (`/propertysets` redirects here), `/soveltamisohje/<slug>`, `/peppol`, `/sanasto`, `/esimerkkimallit` (nav label: Tiedostot), `/media` (`/blogi` redirects here), `/media/<slug>`, `/tyoryhmat/<slug>` (`/tyoryhmat` redirects to `/tyoryhmat/betk`), `/muutokset`.
 
-Catalog JSON is consumed from `ui/src/data/` (`precast.json`, `precastProperties.json`, `valutarvike*.json`). Do not add a parser or Excel pipeline here.
+Catalog JSON is consumed from `ui/src/data/` (`precast.json`, `precastProperties.json`, `valutarvike*.json`), alongside `designApplications.json` (experimental Tekla/Revit property name mapping keyed by property ID). Do not add a parser or Excel pipeline to the repo.
 
 `astro.config.mjs`: `site: 'https://betk.fi'`, `base: '/'`. Do not put `/betk-publishing/` back in asset URLs.
 
