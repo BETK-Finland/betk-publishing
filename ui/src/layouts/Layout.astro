@@ -30,6 +30,14 @@ const logo = withBase("betk-logo.svg");
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
+		<script is:inline>
+			try {
+				const stored = localStorage.getItem("betk-theme");
+				if (stored === "dark" || stored === "light") {
+					document.documentElement.dataset.theme = stored;
+				}
+			} catch {}
+		</script>
 	</head>
 	<body class={bodyClass || undefined}>
 		<SiteHeader />
@@ -90,4 +98,42 @@ const logo = withBase("betk-logo.svg");
 
   window.betkSetLang = setLang;
   window.betkGetLang = getLang;
+
+  const THEME_STORAGE_KEY = "betk-theme";
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function betkGetTheme() {
+    const explicit = document.documentElement.dataset.theme;
+    if (explicit === "dark" || explicit === "light") return explicit;
+    return mq.matches ? "dark" : "light";
+  }
+
+  function syncThemeButtons() {
+    const pressed = String(betkGetTheme() === "dark");
+    document.querySelectorAll(".theme-btn").forEach(btn => {
+      btn.setAttribute("aria-pressed", pressed);
+    });
+  }
+
+  function betkSetTheme(theme) {
+    if (theme !== "dark" && theme !== "light") return;
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {}
+    document.documentElement.dataset.theme = theme;
+    syncThemeButtons();
+    window.dispatchEvent(new CustomEvent("betk-theme-change", { detail: theme }));
+  }
+
+  mq.addEventListener("change", () => {
+    if (!document.documentElement.dataset.theme) {
+      syncThemeButtons();
+      window.dispatchEvent(new CustomEvent("betk-theme-change", { detail: betkGetTheme() }));
+    }
+  });
+
+  syncThemeButtons();
+
+  window.betkGetTheme = betkGetTheme;
+  window.betkSetTheme = betkSetTheme;
 </script>

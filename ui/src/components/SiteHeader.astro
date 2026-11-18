@@ -82,6 +82,22 @@ const groupCurrent = (hrefs: string[]) => hrefs.some((href) => isCurrent(href));
         <button class="lang-btn" type="button" data-lang="sv">SV</button>
         <button class="lang-btn" type="button" data-lang="en">EN</button>
       </div>
+      <button
+        type="button"
+        id="theme-toggle"
+        class="theme-btn"
+        aria-label="Vaihda väriteema"
+        title="Vaihda väriteema"
+        aria-pressed="false"
+      >
+        <svg class="icon-sun" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="8" cy="8" r="3" />
+          <path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1" />
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M13.2 9.8A5.5 5.5 0 0 1 6.2 2.8a5.5 5.5 0 1 0 7 7z" />
+        </svg>
+      </button>
       <a
         class:list={["aside", { current: isCurrent(filesNav.href) }]}
         href={filesNav.href}
@@ -130,7 +146,7 @@ const groupCurrent = (hrefs: string[]) => hrefs.some((href) => isCurrent(href));
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    background: color-mix(in srgb, var(--bg-header) 86%, transparent);
     backdrop-filter: blur(14px);
   }
 
@@ -226,7 +242,7 @@ const groupCurrent = (hrefs: string[]) => hrefs.some((href) => isCurrent(href));
     min-width: 14rem;
     max-width: 22rem;
     padding: 0.45rem 0;
-    background: var(--bg);
+    background: var(--bg-panel);
     border: 1px solid var(--line);
   }
 
@@ -294,6 +310,52 @@ const groupCurrent = (hrefs: string[]) => hrefs.some((href) => isCurrent(href));
     background: color-mix(in srgb, var(--accent) 10%, transparent);
   }
 
+  .theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 6px;
+    font-family: var(--font-sans);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--muted);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 120ms, border-color 120ms, background 120ms;
+  }
+
+  .theme-btn:hover {
+    color: var(--ink);
+    border-color: var(--muted);
+  }
+
+  .theme-btn .icon-sun {
+    display: none;
+  }
+
+  .theme-btn .icon-moon {
+    display: block;
+  }
+
+  :global(:root[data-theme="dark"]) .theme-btn .icon-sun {
+    display: block;
+  }
+
+  :global(:root[data-theme="dark"]) .theme-btn .icon-moon {
+    display: none;
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .theme-btn .icon-sun {
+      display: block;
+    }
+
+    :global(:root:not([data-theme="light"])) .theme-btn .icon-moon {
+      display: none;
+    }
+  }
+
   @media (max-width: 768px) {
     .site-inner {
       grid-template-columns: 1fr auto;
@@ -359,5 +421,16 @@ const groupCurrent = (hrefs: string[]) => hrefs.some((href) => isCurrent(href));
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
+  });
+
+  declare global {
+    interface Window {
+      betkGetTheme?: () => "dark" | "light";
+      betkSetTheme?: (theme: "dark" | "light") => void;
+    }
+  }
+
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    window.betkSetTheme?.(window.betkGetTheme?.() === "dark" ? "light" : "dark");
   });
 </script>

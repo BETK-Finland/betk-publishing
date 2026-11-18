@@ -342,15 +342,36 @@ const tocItems = resolved.flatMap(r => {
 </script>
 
 <script is:inline type="module">
-  // Render ```mermaid blocks on demand using site parchment palette
+  // Render ```mermaid blocks on demand using the active site theme palette
   const mermaidBlocks = document.querySelectorAll('.sov-prose pre[data-language="mermaid"]');
   if (mermaidBlocks.length > 0) {
     import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs")
       .then(async ({ default: mermaid }) => {
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: "base",
-          themeVariables: {
+        const getMermaidVars = () => {
+          let theme;
+          if (window.betkGetTheme) {
+            theme = window.betkGetTheme();
+          } else if (
+            document.documentElement.dataset.theme === "dark" ||
+            (!document.documentElement.dataset.theme &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {
+            theme = "dark";
+          } else {
+            theme = "light";
+          }
+          if (theme === "dark") {
+            return {
+              background: "#16161D",
+              primaryColor: "#2A2A37",
+              primaryBorderColor: "#363646",
+              primaryTextColor: "#C5C9C5",
+              lineColor: "#9A9E9A",
+              secondaryColor: "#1F1F28",
+              tertiaryColor: "#2A2A37",
+            };
+          }
+          return {
             background: "#faf8f3",
             primaryColor: "#fffdf8",
             primaryBorderColor: "#cfc8bb",
@@ -358,17 +379,37 @@ const tocItems = resolved.flatMap(r => {
             lineColor: "#5c574e",
             secondaryColor: "#f4f1ea",
             tertiaryColor: "#faf8f3",
-          },
-        });
+          };
+        };
+
         const nodes = [];
-        mermaidBlocks.forEach((pre) => {
+        for (const pre of mermaidBlocks) {
+          const source = pre.textContent ?? "";
           const container = document.createElement("div");
           container.className = "mermaid";
-          container.textContent = pre.textContent ?? "";
+          container.dataset.mermaidSrc = source;
+          container.textContent = source;
           pre.replaceWith(container);
           nodes.push(container);
+        }
+
+        const renderMermaid = async () => {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: "base",
+            themeVariables: getMermaidVars(),
+          });
+          for (const el of nodes) {
+            el.removeAttribute("data-processed");
+            el.textContent = el.dataset.mermaidSrc ?? "";
+          }
+          await mermaid.run({ nodes });
+        };
+
+        await renderMermaid();
+        window.addEventListener("betk-theme-change", () => {
+          void renderMermaid();
         });
-        await mermaid.run({ nodes });
       })
       .catch(() => {
         // Keep raw code block visible if offline or CDN blocked

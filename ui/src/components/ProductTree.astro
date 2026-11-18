@@ -20,45 +20,48 @@ const { tree } = Astro.props;
 			data-view={koodisto.name}
 		>
 			<div class="node-body">
-				{koodisto.paaryhmat.map((paa) => (
-					<section class="paaryhma node" data-node="paaryhma">
-						<header class="node-header paaryhma-header" role="button" tabindex="0" aria-expanded="false">
-							<span class="caret" aria-hidden="true"></span>
-							<h3>{paa.name}</h3>
-						</header>
-						<div class="node-body">
-							{paa.alaryhmat.map((ala) => (
-								<section class="alaryhma node" data-node="alaryhma">
-									<header class="node-header alaryhma-header" role="button" tabindex="0" aria-expanded="false">
-										<span class="caret" aria-hidden="true"></span>
-										<h4>{ala.name}</h4>
-										<span class="count">{ala.products.length}</span>
-									</header>
-									<div class="node-body">
-										<table class="product-table">
-											<thead>
-												<tr>
-													<th data-column="name">Tuoteosan nimi</th>
-													<th data-column="generalId">Tunnus</th>
-													<th data-column="version">Versio</th>
-													<th data-column="id">ID</th>
-													<th data-column="uri">Linkki</th>
-													<th data-column="description">Kuvaus</th>
-													<th class="th-actions">Tiedot</th>
-												</tr>
-											</thead>
-											<tbody>
-												{ala.products.map((product) => (
-													<ProductRow product={product} />
-												))}
-											</tbody>
-										</table>
-									</div>
-								</section>
-							))}
-						</div>
-					</section>
-				))}
+				{koodisto.paaryhmat.map((paa) => {
+					const defaultOpen = koodisto.name === "BETONIELEMENTIT";
+					return (
+						<section class:list={["paaryhma", "node", { open: defaultOpen }]} data-node="paaryhma">
+							<header class="node-header paaryhma-header" role="button" tabindex="0" aria-expanded={defaultOpen ? "true" : "false"}>
+								<span class="caret" aria-hidden="true"></span>
+								<h3>{paa.name}</h3>
+							</header>
+							<div class="node-body">
+								{paa.alaryhmat.map((ala) => (
+									<section class="alaryhma node" data-node="alaryhma">
+										<header class="node-header alaryhma-header" role="button" tabindex="0" aria-expanded="false">
+											<span class="caret" aria-hidden="true"></span>
+											<h4>{ala.name}</h4>
+											<span class="count">{ala.products.length}</span>
+										</header>
+										<div class="node-body">
+											<table class="product-table">
+												<thead>
+													<tr>
+														<th data-column="name">Tuoteosan nimi</th>
+														<th data-column="generalId">Tunnus</th>
+														<th data-column="version">Versio</th>
+														<th data-column="id">ID</th>
+														<th data-column="uri">Linkki</th>
+														<th data-column="description">Kuvaus</th>
+														<th class="th-actions">Tiedot</th>
+													</tr>
+												</thead>
+												<tbody>
+													{ala.products.map((product) => (
+														<ProductRow product={product} />
+													))}
+												</tbody>
+											</table>
+										</div>
+									</section>
+								))}
+							</div>
+						</section>
+					);
+				})}
 			</div>
 		</section>
 	))}

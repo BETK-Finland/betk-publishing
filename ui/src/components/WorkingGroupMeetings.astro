@@ -487,6 +487,24 @@ const calendarData = JSON.stringify(
     }
   }
 
+  @media screen {
+    :global(:root[data-theme="dark"]) .meetings {
+      --vak-ink: #8CECE2;
+      --vak-soft: rgba(52, 222, 204, 0.16);
+      --raj-ink: #FF9494;
+      --raj-soft: rgba(241, 79, 79, 0.18);
+    }
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .meetings {
+      --vak-ink: #8CECE2;
+      --vak-soft: rgba(52, 222, 204, 0.16);
+      --raj-ink: #FF9494;
+      --raj-soft: rgba(241, 79, 79, 0.18);
+    }
+  }
+
   @media print {
     .cal {
       display: none;

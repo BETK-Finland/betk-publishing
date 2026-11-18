@@ -173,4 +173,70 @@ const issueUrl = `https://github.com/${repo}/issues/new`;
     background: #0969da;
     cursor: pointer;
   }
+
+  @media screen {
+    :global(:root[data-theme="dark"]) .issue-ticket__open {
+      background: var(--bg-elevated);
+      color: var(--text-strong);
+      border: 1px solid var(--line);
+    }
+
+    :global(:root[data-theme="dark"]) .issue-ticket__dialog {
+      background: var(--bg-elevated);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    :global(:root[data-theme="dark"]) .issue-ticket__close {
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+    }
+
+    :global(:root[data-theme="dark"]) .issue-ticket__form input,
+    :global(:root[data-theme="dark"]) .issue-ticket__form select,
+    :global(:root[data-theme="dark"]) .issue-ticket__form textarea {
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    :global(:root[data-theme="dark"]) .issue-ticket__submit {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .issue-ticket__open {
+      background: var(--bg-elevated);
+      color: var(--text-strong);
+      border: 1px solid var(--line);
+    }
+
+    :global(:root:not([data-theme="light"])) .issue-ticket__dialog {
+      background: var(--bg-elevated);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    :global(:root:not([data-theme="light"])) .issue-ticket__close {
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+    }
+
+    :global(:root:not([data-theme="light"])) .issue-ticket__form input,
+    :global(:root:not([data-theme="light"])) .issue-ticket__form select,
+    :global(:root:not([data-theme="light"])) .issue-ticket__form textarea {
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    :global(:root:not([data-theme="light"])) .issue-ticket__submit {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
 </style>

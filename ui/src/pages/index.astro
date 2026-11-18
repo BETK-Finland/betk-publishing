@@ -736,4 +736,36 @@ const topics = [
       -webkit-line-clamp: 5;
     }
   }
+
+  @media screen {
+    :global(:root[data-theme="dark"]) .arch-frame {
+      background: #ECE8DF;
+    }
+
+    :global(:root[data-theme="dark"]) .partner-logo {
+      background: #ECE8DF;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    :global(:root[data-theme="dark"]) .join-cta:focus-visible {
+      outline-color: var(--ink);
+    }
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .arch-frame {
+      background: #ECE8DF;
+    }
+
+    :global(:root:not([data-theme="light"])) .partner-logo {
+      background: #ECE8DF;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    :global(:root:not([data-theme="light"])) .join-cta:focus-visible {
+      outline-color: var(--ink);
+    }
+  }
 </style>
