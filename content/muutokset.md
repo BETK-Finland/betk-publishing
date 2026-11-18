@@ -1,6 +1,13 @@
 ---
 title: Muutosloki
 ---
+## 18.11.2026
+- Sivustolle lisätty tumma teema, joka seuraa käyttöjärjestelmän asetusta ja on vaihdettavissa yläpalkin painikkeesta.
+- **Ominaisuudet**-sivun vasen sivupalkki on nyt piilotettavissa, ja **ELE-KOODISTOT** (**BETONIELEMENTIT**) aukeaa oletuksena pääryhmä avattuna (**VALUOSAKOODISTOT** ja **OMINAISUUSRYHMÄT** pysyvät suljettuina).
+
+## 17.11.2026
+- **Soveltamisohjeet**-sivujen vasen sivupalkki on piilotettavissa.
+
 ## 13.11.2026
 
 BETK-Materiaali ominaisuusjoukon ominaisuuksia päivitetty. Tekla-muuttujat tarkistettu. Requirement-ominaisuuksiin lisätty hankevaiheet. Tarkennuksia Kuvaus-kirjauksiin.
