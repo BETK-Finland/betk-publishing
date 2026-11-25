@@ -17,15 +17,15 @@ Advanced Despatch Advice -sanoman koko syntaksi on kuvattu Peppolin sivustolla (
 
 `cbc:IssueDate` ja `cbc:IssueTime` ovat lähetysilmoituksen laatimispäivä ja -aika. Vain päivämäärä on pakollinen. Päivämäärän muoto on `YYYY-MM-DD` ja kellonajan `HH:MM:SS`.
 
-`cbc:DocumentStatusCode` kertoo sanoman tilan, esimerkiksi alkuperäinen ilmoitus. `TODO`: vahvista sallitut koodit.
+`cbc:DocumentStatusCode` kertoo sanoman tilan, esimerkiksi alkuperäinen ilmoitus. `TODO`: vahvista sallitut koodi
 
-`cbc:DespatchAdviceTypeCode` erottaa toimitustyypit. Arvo `1` tarkoittaa tavara- ja elementtitoimitusta, arvo `2` palvelu- tai massatoimitusta, kuten valmisbetonia tai pumppausta. `TODO`: vahvista koodiston käyttö.
+`cbc:DespatchAdviceTypeCode` erottaa toimitustyypit. Arvo `1` tarkoittaa tavara- ja elementtitoimitusta, arvo `2` palvelu- tai massatoimitusta, kuten valmisbetonia tai pumppausta.
 
 `cbc:Note` on vapaa tekstikenttä tiedoille, joilla ei ole omaa paikkaa sanomassa, esimerkiksi työmaan purkuohjeille.
 
-`cac:OrderReference` / `cbc:ID` viittaa ostajan tilaukseen, johon lähetys perustuu. `cbc:SalesOrderID` viittaa myyjän myyntitilaukseen. Viittaus on betonielementtitoimituksissa tärkeä, koska työmaa kohdistaa lähetyksen sen avulla oikeaan tilaukseen.
+`cac:OrderReference` viittaa ostajan tilaukseen, johon lähetys perustuu. `cbc:SalesOrderID` viittaa myyjän myyntitilaukseen. Viittaus on betonielementtitoimituksissa tärkeä, koska työmaa kohdistaa lähetyksen sen avulla oikeaan tilaukseen.
 
-`cac:AdditionalDocumentReference` / `cbc:ID` välittää muut viitteet. Kun `cbc:DocumentType` on `ProjectReference`, tunniste on hankkeen tai työmaan tunnus.
+`cac:AdditionalDocumentReference` välittää muut viitteet. Kun `cbc:DocumentType` on `ProjectReference`, tunniste on hankkeen tai työmaan tunnus.
 
 **Esimerkki – otsikkotaso**
 
@@ -39,11 +39,11 @@ Advanced Despatch Advice -sanoman koko syntaksi on kuvattu Peppolin sivustolla (
 <cbc:DespatchAdviceTypeCode>1</cbc:DespatchAdviceTypeCode>
 <cbc:Note>Purku nosturilla, sisäänajo pohjoisportista</cbc:Note>
 <cac:OrderReference>
-  <cbc:ID>TIL-10025</cbc:ID>
+  <cbc:ID>VALMISTAJAN PROJEKTINUMERO</cbc:ID>
   <cbc:SalesOrderID>MT-5541</cbc:SalesOrderID>
 </cac:OrderReference>
 <cac:AdditionalDocumentReference>
-  <cbc:ID>PRJ-8840</cbc:ID>
+  <cbc:ID>TYÖMAAN PROJEKTINUMERO</cbc:ID>
   <cbc:DocumentType>ProjectReference</cbc:DocumentType>
 </cac:AdditionalDocumentReference>
 ```

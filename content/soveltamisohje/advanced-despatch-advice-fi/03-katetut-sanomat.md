@@ -1,11 +1,10 @@
 ---
-title: "Katetut sanomamääritykset (BIS)"
+title: Katetut sanomamääritykset (BIS)
 order: 3
 section: "3"
-draft: true
+draft: false
 ---
-
-Tämä soveltamisohje kattaa Peppol Logistics **Advanced Despatch Advice** **T120**-sanomamäärityksen. 
+Tämä soveltamisohje kattaa Peppol Logistics **Advanced Despatch Advice** **T120**-sanomamäärityksen, sekä vastaussanoman **Receipt Advice T128**.
 
 Sanomalla ilmoitetaan vastaanottajalle tulevasta tai toteutuneesta toimituksesta. Advanced despatch advicellä on kaksi profiilia peppolissa. Advanced despatch advice only ei vaadi vastaanottosanomaa.
 
